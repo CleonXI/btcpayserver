@@ -282,37 +282,31 @@ document.addEventListener("DOMContentLoaded", () => {
     initLabelManagers();
 
     function updateTimeAgo(){
-        const timeagoElements = $("[data-timeago-unixms]");
-        timeagoElements.each(function () {
-            const elem = $(this);
-            elem.text(moment(elem.data("timeago-unixms")).fromNow());
+        document.querySelectorAll("[data-timeago-unixms]").forEach(el => {
+            el.textContent = moment(parseInt(el.dataset.timeagoUnixms)).fromNow();
         });
         setTimeout(updateTimeAgo, 1000);
     }
     updateTimeAgo();
 
     // intializing date time pickers
-    $(".flatdtpicker").each(function () {
-        const element = $(this);
-        const fdtp = element.attr("data-fdtp");
+    document.querySelectorAll(".flatdtpicker").forEach(el => {
+        const fdtp = el.getAttribute("data-fdtp");
 
         // support for initializing with special options per instance
         if (fdtp) {
             const parsed = JSON.parse(fdtp);
-            flatpickrInstances.push(element.flatpickr(parsed));
+            flatpickrInstances.push(flatpickr(el, parsed));
         } else {
-            const min = element.attr("min");
-            const max = element.attr("max");
-            const defaultDate = element.attr("value");
-            flatpickrInstances.push(element.flatpickr({
+            flatpickrInstances.push(flatpickr(el, {
                 enableTime: true,
                 enableSeconds: true,
                 dateFormat: 'Z',
                 altInput: true,
                 altFormat: 'Y-m-d H:i:S',
-                minDate: min,
-                maxDate: max,
-                defaultDate: defaultDate,
+                minDate: el.getAttribute("min"),
+                maxDate: el.getAttribute("max"),
+                defaultDate: el.value,
                 time_24hr: true,
                 defaultHour: 0,
                 static: true
@@ -334,36 +328,43 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    $(".input-group-clear").on("click", function () {
-        const input = $(this).parents(".input-group").find("input");
-        const event = new CustomEvent('input-group-clear-input-value-cleared', { detail: input });
-        input.val(null);
-        document.dispatchEvent(event);
-        handleInputGroupClearButtonDisplay(this);
-    });
-
-    $(".input-group-clear").each(function () {
-        const inputGroupClearBtn = this;
-        handleInputGroupClearButtonDisplay(inputGroupClearBtn);
-        $(this).parents(".input-group").find("input").on("change input", function () {
-            handleInputGroupClearButtonDisplay(inputGroupClearBtn);
-        });
-    });
-
-    $('[data-bs-toggle="tooltip"]').tooltip();
-
-    function handleInputGroupClearButtonDisplay(element) {
-        const inputs = $(element).parents(".input-group").find("input");
-
-        $(element).hide();
-        for (let i = 0; i < inputs.length; i++) {
-            const el = inputs.get(i);
-            if ($(el).val() || el.attributes.value) {
-                $(element).show();
+    function handleInputGroupClearButtonDisplay(clearBtn) {
+        const group = clearBtn.closest(".input-group");
+        if (!group) return;
+        const inputs = group.querySelectorAll("input");
+        clearBtn.style.display = 'none';
+        for (const input of inputs) {
+            if (input.value || input.hasAttribute('value')) {
+                clearBtn.style.display = '';
                 break;
             }
         }
     }
+
+    document.querySelectorAll(".input-group-clear").forEach(clearBtn => {
+        handleInputGroupClearButtonDisplay(clearBtn);
+        const group = clearBtn.closest(".input-group");
+        if (group) {
+            group.querySelectorAll("input").forEach(input => {
+                input.addEventListener("change", () => handleInputGroupClearButtonDisplay(clearBtn));
+                input.addEventListener("input", () => handleInputGroupClearButtonDisplay(clearBtn));
+            });
+        }
+    });
+
+    delegate('click', '.input-group-clear', e => {
+        const clearBtn = e.target.closest('.input-group-clear');
+        const group = clearBtn.closest(".input-group");
+        if (!group) return;
+        const inputs = group.querySelectorAll("input");
+        inputs.forEach(input => { input.value = ''; });
+        document.dispatchEvent(new CustomEvent('input-group-clear-input-value-cleared', { detail: inputs }));
+        handleInputGroupClearButtonDisplay(clearBtn);
+    });
+
+    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+        new bootstrap.Tooltip(el);
+    });
 
     delegate('click', '[data-toggle-password]', async e => {
         const $button = e.target.closest('[data-toggle-password]')
