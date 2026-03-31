@@ -4,7 +4,7 @@ async function login(makeAssertionOptions) {
 
     // fix escaping. Change this to coerce
     makeAssertionOptions.allowCredentials.forEach(function (listItem) {
-        var fixedId = listItem.id.replace(/\_/g, "/").replace(/\-/g, "+");
+        const fixedId = listItem.id.replace(/\_/g, "/").replace(/\-/g, "+");
         listItem.id = Uint8Array.from(atob(fixedId), c => c.charCodeAt(0));
     });
 

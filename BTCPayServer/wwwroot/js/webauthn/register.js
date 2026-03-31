@@ -21,7 +21,7 @@ async function register(makeCredentialOptions) {
             publicKey: makeCredentialOptions
         });
     } catch (e) {
-        var msg = "Could not create credentials in browser. Probably because the username is already registered with your authenticator. Please change username or authenticator."
+        const msg = "Could not create credentials in browser. Probably because the username is already registered with your authenticator. Please change username or authenticator."
         showErrorAlert(msg, e);
         return;
     }

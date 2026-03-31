@@ -282,9 +282,9 @@ document.addEventListener("DOMContentLoaded", () => {
     initLabelManagers();
 
     function updateTimeAgo(){
-        var timeagoElements = $("[data-timeago-unixms]");
+        const timeagoElements = $("[data-timeago-unixms]");
         timeagoElements.each(function () {
-            var elem = $(this);
+            const elem = $(this);
             elem.text(moment(elem.data("timeago-unixms")).fromNow());
         });
         setTimeout(updateTimeAgo, 1000);
@@ -293,17 +293,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // intializing date time pickers
     $(".flatdtpicker").each(function () {
-        var element = $(this);
-        var fdtp = element.attr("data-fdtp");
+        const element = $(this);
+        const fdtp = element.attr("data-fdtp");
 
         // support for initializing with special options per instance
         if (fdtp) {
-            var parsed = JSON.parse(fdtp);
+            const parsed = JSON.parse(fdtp);
             flatpickrInstances.push(element.flatpickr(parsed));
         } else {
-            var min = element.attr("min");
-            var max = element.attr("max");
-            var defaultDate = element.attr("value");
+            const min = element.attr("min");
+            const max = element.attr("max");
+            const defaultDate = element.attr("value");
             flatpickrInstances.push(element.flatpickr({
                 enableTime: true,
                 enableSeconds: true,
@@ -343,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     $(".input-group-clear").each(function () {
-        var inputGroupClearBtn = this;
+        const inputGroupClearBtn = this;
         handleInputGroupClearButtonDisplay(inputGroupClearBtn);
         $(this).parents(".input-group").find("input").on("change input", function () {
             handleInputGroupClearButtonDisplay(inputGroupClearBtn);
@@ -353,11 +353,11 @@ document.addEventListener("DOMContentLoaded", () => {
     $('[data-bs-toggle="tooltip"]').tooltip();
 
     function handleInputGroupClearButtonDisplay(element) {
-        var inputs = $(element).parents(".input-group").find("input");
+        const inputs = $(element).parents(".input-group").find("input");
 
         $(element).hide();
-        for (var i = 0; i < inputs.length; i++) {
-            var el = inputs.get(i);
+        for (let i = 0; i < inputs.length; i++) {
+            const el = inputs.get(i);
             if ($(el).val() || el.attributes.value) {
                 $(element).show();
                 break;
