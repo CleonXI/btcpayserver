@@ -147,42 +147,31 @@ app = new Vue({
     methods: {
         updateComputed: function () {
             if (this.srvModel.endDate) {
-                var endDateM = moment(this.srvModel.endDate);
-                this.endDate = endDateM.format('MMMM Do YYYY');
-                this.ended = endDateM.isBefore(moment());
-
+                this.endDate = formatLongDate(this.srvModel.endDate);
+                this.ended = new Date(this.srvModel.endDate) < new Date();
                 }else{
                 this.ended = false;
                 this.endDate = null;
             }
 
             if (this.srvModel.startDate) {
-                var startDateM = moment(this.srvModel.startDate);
-                this.startDate = startDateM.format('MMMM Do YYYY');
-                this.started = startDateM.isBefore(moment());
+                this.startDate = formatLongDate(this.srvModel.startDate);
+                this.started = new Date(this.srvModel.startDate) < new Date();
                 }else{
                 this.started = true;
                 this.startDate = null;
             }
                 if(this.started && !this.ended && this.srvModel.endDate){
-                    var mDiffD =  moment(this.srvModel.endDate).diff(moment(), "days");
-                    var mDiffH =  moment(this.srvModel.endDate).diff(moment(), "hours");
-                    var mDiffM =  moment(this.srvModel.endDate).diff(moment(), "minutes");
-                    var mDiffS =  moment(this.srvModel.endDate).diff(moment(), "seconds");
-                    this.endDiff =  mDiffD > 0? mDiffD + " days" : mDiffH> 0? mDiffH + " hours" : mDiffM> 0? mDiffM+ " minutes" : mDiffS> 0? mDiffS + " seconds": "";
+                    this.endDiff = timeDiffString(this.srvModel.endDate);
                 }else{
                 this.endDiff = null;
             }
                 if(!this.started && this.srvModel.startDate){
-                    var mDiffD =  moment(this.srvModel.startDate).diff(moment(), "days");
-                    var mDiffH =  moment(this.srvModel.startDate).diff(moment(), "hours");
-                    var mDiffM =  moment(this.srvModel.startDate).diff(moment(), "minutes");
-                    var mDiffS =  moment(this.srvModel.startDate).diff(moment(), "seconds");
-                    this.startDiff =  mDiffD > 0? mDiffD + " days" : mDiffH> 0? mDiffH + " hours" : mDiffM> 0? mDiffM+ " minutes" : mDiffS> 0? mDiffS + " seconds": "";
+                    this.startDiff = timeDiffString(this.srvModel.startDate);
                 }else {
                 this.startDiff = null;
             }
-            this.lastUpdated = moment(this.srvModel.info.lastUpdated).calendar();
+            this.lastUpdated = calendarDate(this.srvModel.info.lastUpdated);
             this.active = this.started && !this.ended;
             setTimeout(this.updateComputed, 1000);
         },

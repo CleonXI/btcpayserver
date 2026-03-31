@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateTimeAgo(){
         document.querySelectorAll("[data-timeago-unixms]").forEach(el => {
-            el.textContent = moment(parseInt(el.dataset.timeagoUnixms)).fromNow();
+            el.textContent = timeAgo(parseInt(el.dataset.timeagoUnixms));
         });
         setTimeout(updateTimeAgo, 1000);
     }

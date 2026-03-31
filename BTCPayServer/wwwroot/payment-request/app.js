@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded",function (ev) {
                 return this.srvModel.amountDue <= 0;
             },
             lastUpdated: function () {
-                return this.srvModel.lastUpdated && moment(this.srvModel.lastUpdated).calendar();
+                return this.srvModel.lastUpdated && calendarDate(this.srvModel.lastUpdated);
             },
             lastUpdatedDate: function () {
-                return this.srvModel.lastUpdated && moment(this.srvModel.lastUpdated).format('MMMM Do YYYY, h:mm:ss a');
+                return this.srvModel.lastUpdated && formatFullDateTime(this.srvModel.lastUpdated);
             },
             active: function () {
                 return !this.ended;
@@ -40,9 +40,8 @@ document.addEventListener("DOMContentLoaded",function (ev) {
         methods: {
             updateComputed: function () {
                 if (this.srvModel.expiryDate) {
-                    var endDateM = moment(this.srvModel.expiryDate);
-                    this.endDate = endDateM.format('MMMM Do YYYY');
-                    this.ended = endDateM.isBefore(moment());
+                    this.endDate = formatLongDate(this.srvModel.expiryDate);
+                    this.ended = new Date(this.srvModel.expiryDate) < new Date();
                 } else {
                     this.ended = false;
                     this.endDate = null;
@@ -50,11 +49,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
                 }
 
                 if (!this.ended && this.srvModel.expiryDate) {
-                    var mDiffD = moment(this.srvModel.expiryDate).diff(moment(), "days");
-                    var mDiffH = moment(this.srvModel.expiryDate).diff(moment(), "hours");
-                    var mDiffM = moment(this.srvModel.expiryDate).diff(moment(), "minutes");
-                    var mDiffS = moment(this.srvModel.expiryDate).diff(moment(), "seconds");
-                    this.endDiff = mDiffD > 0 ? mDiffD + " days" : mDiffH > 0 ? mDiffH + " hours" : mDiffM > 0 ? mDiffM + " minutes" : mDiffS > 0 ? mDiffS + " seconds" : "";
+                    this.endDiff = timeDiffString(this.srvModel.expiryDate);
                 }
 
                 setTimeout(this.updateComputed, 1000);
@@ -83,7 +78,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
                 eventAggregator.$emit("cancel-invoice", amount);
             },
             formatDate: function (date) {
-                return moment(date).format('L h:mm A')
+                return formatShortDateTime(date);
             },
             submitCustomAmountForm: function(e) {
                 if (e) {
