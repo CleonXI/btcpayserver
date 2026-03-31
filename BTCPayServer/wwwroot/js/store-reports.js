@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let to = new Date();
     let from = new Date(to.getTime() - 1000 * 60 * 60 * 24 * 30);
-    var urlParams = new URLSearchParams(new URL(window.location).search);
+    const urlParams = new URLSearchParams(new URL(window.location).search);
     if (urlParams.has("from")) {
         from = new Date(parseInt(urlParams.get("from")) * 1000);
     }
@@ -202,7 +202,7 @@ function downloadCSV() {
 }
 
 let fetchPromise = null;
-var abortFetching = new AbortController()
+let abortFetching = new AbortController()
 
 function setLoading(val)
 {
@@ -238,7 +238,7 @@ async function fetchStoreReports(abort) {
 
             // Dates from API are UTC, convert them to local time
             modifyFields(srv.result.fields, srv.result.data, 'datetime', a => a ? new Date(a).toISOString() : a);
-            var urlParams = new URLSearchParams(new URL(window.location).search);
+            const urlParams = new URLSearchParams(new URL(window.location).search);
             urlParams.set("viewName", srv.request.viewName);
             urlParams.set("from", srv.request.timePeriod.from);
             urlParams.set("to", srv.request.timePeriod.to);
@@ -275,7 +275,7 @@ window.getInvoiceUrl = getInvoiceUrl;
 function getExplorerUrl(tx_id, cryptoCode) {
     if (!tx_id || !cryptoCode)
         return null;
-    var explorer = srv.explorerTemplateUrls[cryptoCode];
+    const explorer = srv.explorerTemplateUrls[cryptoCode];
     if (!explorer)
         return null;
     return explorer.replace("TX_ID", tx_id);

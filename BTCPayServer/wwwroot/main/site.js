@@ -390,7 +390,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const response = await fetch(`${baseUrl}/invoices/${invoiceId}/changestate/${newState}`, { method: 'POST' })
         if (response.ok) {
             const { statusString } = await response.json()
-            $badge.outerHTML = `<div class="badge badge-${newState}" data-invoice-state-badge="${invoiceId}">${statusString}</div>`
+            const newBadge = document.createElement('div');
+            newBadge.className = `badge badge-${newState}`;
+            newBadge.setAttribute('data-invoice-state-badge', invoiceId);
+            newBadge.setAttribute('tabindex', '-1');
+            newBadge.textContent = statusString;
+            $badge.replaceWith(newBadge);
+            newBadge.focus();
         } else {
             $badge.classList.remove('pe-none');
             alert("Invoice state update failed");
