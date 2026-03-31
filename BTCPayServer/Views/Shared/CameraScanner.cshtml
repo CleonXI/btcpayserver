@@ -70,7 +70,7 @@
 function initCameraScanningApp(title, onDataSubmit, modalId, submitOnScan = false) {
 	const isModal = !!modalId;
 
-	Vue.component('scanner-wrap', {
+	const scannerWrap = {
 		props: ["modalId", "title", "decoder"],
 		template: "#camera-qr-scanner-wrap",
 		methods: {
@@ -78,10 +78,9 @@ function initCameraScanningApp(title, onDataSubmit, modalId, submitOnScan = fals
 				this.$emit('close');
 			}
 		}
-  	});
+  	};
 
-    const app = new Vue({
-		el: '#camera-qr-scanner-modal-app',
+    const app = Vue.createApp({
 		data() {
 			return {
 				isModal,
@@ -271,6 +270,6 @@ function initCameraScanningApp(title, onDataSubmit, modalId, submitOnScan = fals
 				})
 			}
 		}
-	});
+	}).component('scanner-wrap', scannerWrap).mount('#camera-qr-scanner-modal-app');
 }
 </script>

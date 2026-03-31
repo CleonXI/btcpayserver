@@ -21,17 +21,6 @@ function unesc(input) {
         .replace(/&gt;/g, '>')
 }
 
-Vue.use(VeeValidate);
-var dictionary = {
-    en: {
-        attributes: {
-            price: 'Price', checkoutDesc: 'Checkout Description', orderId: 'Order Id',
-            serverIpn: 'Server IPN', notifyEmail: 'Send Email Notifications', browserRedirect: 'Browser Redirect',
-            payButtonImageUrl: "Pay Button Image Url"
-        }
-    }
-};
-VeeValidate.Validator.localize(dictionary);
 
 function getStyles (styles) {
     return document.getElementById(styles).innerHTML.replace(/\s{2}/g, '').trim() + '\n'

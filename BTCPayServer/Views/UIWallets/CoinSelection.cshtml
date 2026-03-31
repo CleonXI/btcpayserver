@@ -148,25 +148,39 @@ document.addEventListener("DOMContentLoaded", function () {
         return parseFloat(newnumber);
     }
 
-    Vue.directive('tooltip', function(el, binding) {
-        new bootstrap.Tooltip(el, {
-            title: binding.value,
-            placement: binding.arg || "auto",
-            trigger: 'hover'
-        });
-    });
+    const tooltipDirective = {
+        mounted(el, binding) {
+            new bootstrap.Tooltip(el, {
+                title: binding.value,
+                placement: binding.arg || "auto",
+                trigger: 'hover'
+            });
+        },
+        updated(el, binding) {
+            const tooltip = bootstrap.Tooltip.getInstance(el);
+            if (tooltip) {
+                tooltip.dispose();
+            }
+            new bootstrap.Tooltip(el, {
+                title: binding.value,
+                placement: binding.arg || "auto",
+                trigger: 'hover'
+            });
+        }
+    };
 
-    new Vue({
-        el: '#coin-selection-app',
-        data: {
-            filter: "",
-            items: @Safe.Json(Model.InputsAvailable),
-            selectedInputs: $("#SelectedInputs").val(),
-            page: 0,
-            pageSize: 10,
-            showSelectedOnly: false,
-            showUnconfirmedOnly: false,
-            sortOrder: 'amount-desc'
+    const app = Vue.createApp({
+        data() {
+            return {
+                filter: "",
+                items: @Safe.Json(Model.InputsAvailable),
+                selectedInputs: $("#SelectedInputs").val(),
+                page: 0,
+                pageSize: 10,
+                showSelectedOnly: false,
+                showUnconfirmedOnly: false,
+                sortOrder: 'amount-desc'
+            };
         },
         watch: {
             filter: function() {
@@ -367,6 +381,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+    app.directive('tooltip', tooltipDirective);
+    app.mount('#coin-selection-app');
 });
 </script>
 

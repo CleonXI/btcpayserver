@@ -47,11 +47,7 @@
 </style>
 <script>
 function initQRShow(data) {
- 	return new Vue({
- 		el: '#scan-qr-modal-app',
- 		components: {
- 			qrcode: VueQrcode
- 		},
+ 	const app = Vue.createApp({
  		data() {
              const res = Object.assign({}, {
                  title: "Scan QR",
@@ -73,15 +69,15 @@ function initQRShow(data) {
                      }
                  }
              }, data || {});
-             
+
              if (!Object.values(res.modes || {}).length) {
                  res.modes = { default: { title: 'Default', fragments: [res.data] } };
              }
-             
+
              if (!res.mode) {
                 res.mode = Object.keys(res.modes)[0];
              }
-   
+
              return res;
  		},
  		computed: {
@@ -96,9 +92,9 @@ function initQRShow(data) {
              }
  		},
  		mounted() {
- 			$(`#${this.modalId}`)
- 				.on("shown.bs.modal", () => { this.start(); })
- 				.on("hide.bs.modal", () => { this.active = false; });
+ 			const modalEl = document.getElementById(this.modalId);
+ 			modalEl.addEventListener("shown.bs.modal", () => { this.start(); });
+ 			modalEl.addEventListener("hide.bs.modal", () => { this.active = false; });
  		},
  		methods: {
  			start() {
@@ -108,7 +104,7 @@ function initQRShow(data) {
  			},
  			playNext() {
                  if (!this.active) return;
-                 
+
                  this.index++;
                  if (this.index > (this.fragments.length - 1)) {
                      this.index = 0;
@@ -122,9 +118,12 @@ function initQRShow(data) {
                 this.show();
             },
             show() {
-                $(`#${this.modalId}`).modal("show");
+                const modalEl = document.getElementById(this.modalId);
+                bootstrap.Modal.getOrCreateInstance(modalEl).show();
             }
  		}
  	});
+ 	app.component('qrcode', VueQrcode);
+ 	return app.mount('#scan-qr-modal-app');
  }
  </script>
