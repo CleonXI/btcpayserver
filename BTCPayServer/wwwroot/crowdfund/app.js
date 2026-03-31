@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             }
         },
         methods: {
+            noExponents: noExponents,
             onContributeFormSubmit: function (e) {
                 if (e) {
                     e.preventDefault();
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
                 if(typeof amount === "string"){
             amount = parseFloat(amount);
         }
-                this.amount = this.perk.priceType === "Topup"? null : (amount || 0).noExponents();
+                this.amount = this.perk.priceType === "Topup"? null : noExponents(amount || 0);
         this.expanded = false;
     }
         },
@@ -258,7 +259,7 @@ app = new Vue({
             if (self.animation) {
                 fireworks();
             }
-            amount = parseFloat(amount).noExponents();
+            amount = noExponents(parseFloat(amount));
             if (onChain) {
                 Vue.toasted.show('New payment of ' + amount + " " + currency + " " + prettyPMI, {
                     iconPack: "fontawesome",
@@ -301,7 +302,6 @@ app = new Vue({
             })();
         }
         eventAggregator.$on("info-updated", function (model) {
-            console.warn("UPDATED", self.srvModel, arguments);
             self.srvModel = model;
         });
         eventAggregator.$on("connection-pending", function () {

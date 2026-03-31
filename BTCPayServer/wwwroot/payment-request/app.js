@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             }
         },
         mounted: function () {
-            this.customAmount = (this.srvModel.amountDue || 0).noExponents();
+            this.customAmount = noExponents(this.srvModel.amountDue || 0);
             hubListener.connect();
             var self = this;
             var toastOptions = {
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             });
             eventAggregator.$on("payment-received", function (amount, currency, prettyPMI, pmi) {
                 var onChain = pmi.endsWith('-CHAIN');
-                var amountFormatted = parseFloat(amount).noExponents();
+                var amountFormatted = noExponents(parseFloat(amount));
                 var icon = onChain ? "plus" : "bolt";
                 var title = "New payment of " + amountFormatted + " " + currency + " " + prettyPMI;
                 Vue.toasted.success(title, Object.assign({}, toastOptions), { icon });

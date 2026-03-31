@@ -304,7 +304,7 @@
             </div>
             <form v-on:submit="onContributeFormSubmit" class="mb-0">
                 <input type="hidden" :value="perk.id" id="choiceKey" />
-                <img v-if="perk.image && perk.image != 'null'" class="card-img-top" :src="perk.image" />
+                <img v-if="perk.image && perk.image != 'null'" class="card-img-top" :src="perk.image" loading="lazy" />
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between" :class="{ 'mb-0': !perk.description }">
                         <span class="h5" :class="{ 'mb-0': !perk.description }">{{perk.title ? perk.title : perk.id}}</span>
@@ -313,7 +313,7 @@
                                 Free
                             </template>
                             <template v-else-if="amount">
-                                {{formatAmount(perk.price.noExponents(), srvModel.currencyData.divisibility)}}
+                                {{formatAmount(noExponents(perk.price), srvModel.currencyData.divisibility)}}
                                 {{targetCurrency}}
                                 <template v-if="perk.price.type === 'Minimum'" text-translate="true">or more</template>
                             </template>

@@ -15,7 +15,7 @@
             }
             @if (!string.IsNullOrEmpty(item.Image))
             {
-                <img class="card-img-top" src="@item.Image" alt="@item.Title" asp-append-version="true" />
+                <img class="card-img-top" src="@item.Image" alt="@item.Title" asp-append-version="true" loading="lazy" />
             }
             <div class="card-body">
                 <div class="card-title d-flex align-items-center justify-content-between mb-1">

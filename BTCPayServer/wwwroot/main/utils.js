@@ -16,6 +16,24 @@ function debounce(key, fn, delay = 250) {
     DEBOUNCE_TIMERS[key] = setTimeout(fn, delay)
 }
 
+function noExponents(value) {
+    const data = String(value).split(/[eE]/);
+    if (data.length === 1) return data[0];
+
+    let z = '', sign = value < 0 ? '-' : '',
+        str = data[0].replace('.', ''),
+        mag = Number(data[1]) + 1;
+
+    if (mag < 0) {
+        z = sign + '0.';
+        while (mag++) z += '0';
+        return z + str.replace(/^-/, '');
+    }
+    mag -= str.length;
+    while (mag--) z += '0';
+    return str + z;
+}
+
 function formatDateTimes(format, root) {
     root = root || document;
     // select only elements which haven't been initialized before, those without data-localized

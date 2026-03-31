@@ -61,7 +61,7 @@
                         <div v-for="(item, index) in items" :id="'card_' + item.id" class="col posItem posItem--displayed" :class="{ 'posItem--inStock': inStock(index) }" :data-index="index" :data-search="item.search" :data-categories='item.categories ? JSON.stringify(item.categories) : null'>
                             <div class="tile card" v-on:click="addToCart(index, 1)">
                                 <div v-if="item.hasImage" class="img d-sm-block">
-                                    <img class="card-img-top" :src="item.image" :alt="item.title" />
+                                    <img class="card-img-top" :src="item.image" :alt="item.title" loading="lazy" />
                                 </div>
 
                                 <div class="card-body d-flex flex-column gap-2 mb-auto">

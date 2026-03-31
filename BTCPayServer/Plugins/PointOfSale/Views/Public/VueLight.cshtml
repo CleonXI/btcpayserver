@@ -149,7 +149,7 @@
                     :title="item.disabled ? notAvailable : null">
                     <div class="d-flex align-items-start w-100 gap-3">
                         <div v-if="item.hasImage" class="img d-none d-sm-block">
-                            <img :src="item.image" :alt="item.title" />
+                            <img :src="item.image" :alt="item.title" loading="lazy" />
                         </div>
                         <div class="d-flex flex-column gap-2">
                             <h5 class="card-title m-0">{{ item.title }}</h5>
