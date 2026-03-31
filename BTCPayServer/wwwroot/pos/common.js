@@ -431,7 +431,7 @@ const posCommon = {
             }
             const adjustCategories = () => {
                 const navWidth = getInnerNavWidth();
-                Vue.set(this, 'categoriesScrollable', this.$refs.categories.clientWidth <= navWidth);
+                this.categoriesScrollable = this.$refs.categories.clientWidth <= navWidth;
                 const activeEl = document.querySelector('#Categories .btcpay-pills input:checked + label')
                 if (activeEl) activeEl.scrollIntoView({ block: 'end', inline: 'center' })
             }

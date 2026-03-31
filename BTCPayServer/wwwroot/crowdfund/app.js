@@ -1,20 +1,20 @@
-var app = null;
-var eventAggregator = new Vue();
+let app = null;
+const eventAggregator = createEventBus();
 
 document.addEventListener("DOMContentLoaded",function (ev) {
-    Vue.use(Toasted);
+    const { createApp } = Vue;
 
-    Vue.component('contribute', {
+    const Contribute = {
         props: ["targetCurrency", "active", "perks", "inModal", "displayPerksRanking", "perksValue", "loading"],
         template: "#contribute-template"
-    });
+    };
 
-    Vue.component('perks', {
+    const Perks = {
         props: ["perks", "targetCurrency", "active", "inModal","displayPerksRanking", "perksValue", "loading"],
         template: "#perks-template"
-    });
+    };
 
-    Vue.component('perk', {
+    const Perk = {
         props: ["perk", "targetCurrency", "active", "inModal", "displayPerksRanking", "perksValue", "index", "loading"],
         template:  "#perk-template",
         components: {
@@ -75,10 +75,9 @@ document.addEventListener("DOMContentLoaded",function (ev) {
         }
     }
 }
-    });
+    };
 
-app = new Vue({
-    el: '#app',
+app = createApp({
         data: function(){
         return {
             srvModel: window.srvModel,
@@ -112,11 +111,11 @@ app = new Vue({
             return this.srvModel.targetCurrency.toUpperCase();
         },
             paymentStats: function(){
-            var keys = Object.keys(this.srvModel.info.paymentStats);
-            var result = [];
-            for (var i = 0; i < keys.length; i++) {
-                var value = this.srvModel.info.paymentStats[keys[i]].percent.toFixed(2) + '%';
-                var newItem = { key: keys[i], value: value, label: this.srvModel.info.paymentStats[keys[i]].label};
+            const keys = Object.keys(this.srvModel.info.paymentStats);
+            const result = [];
+            for (let i = 0; i < keys.length; i++) {
+                const value = this.srvModel.info.paymentStats[keys[i]].percent.toFixed(2) + '%';
+                const newItem = { key: keys[i], value: value, label: this.srvModel.info.paymentStats[keys[i]].label};
                 newItem.lightning = this.srvModel.info.paymentStats[keys[i]].isLightning;
                 result.push(newItem);
             }
@@ -188,7 +187,8 @@ app = new Vue({
             if (!this.active || this.loading) return;
 
             if (this.hasPerks) {
-                this.contributeModalOpen = true
+                this.contributeModalOpen = true;
+                if (this._contributeModal) this._contributeModal.show();
             } else {
                 if (this.srvModel.formUrl) {
                     window.location.href = this.srvModel.formUrl;
@@ -200,14 +200,20 @@ app = new Vue({
         }
     },
     mounted: function () {
+        const modalEl = this.$refs.modalContribute;
+        if (modalEl) {
+            this._contributeModal = new bootstrap.Modal(modalEl);
+            modalEl.addEventListener('hidden.bs.modal', () => { this.contributeModalOpen = false; });
+        }
         hubListener.connect();
-        var self = this;
+        const self = this;
         this.sound = this.srvModel.soundsEnabled;
         this.animation = this.srvModel.animationsEnabled;
         eventAggregator.$on("invoice-created", function (invoiceId) {
             btcpay.appendAndShowInvoiceFrame(invoiceId);
 
             self.contributeModalOpen = false;
+            if (self._contributeModal) self._contributeModal.hide();
             self.setLoading(false);
         });
 
@@ -221,7 +227,7 @@ app = new Vue({
             eventAggregator.$on("invoice-error", function(error){
 
             self.setLoading(false);
-            var msg = "";
+            let msg = "";
                 if(typeof error === "string"){
                 msg = error;
                 }else if(!error){
@@ -230,18 +236,10 @@ app = new Vue({
                 msg = JSON.stringify(error);
             }
 
-            Vue.toasted.show("Error creating invoice: " + msg, {
-                iconPack: "fontawesome",
-                icon: "exclamation-triangle",
-                fullWidth: false,
-                theme: "bubble",
-                type: "error",
-                position: "top-center",
-                duration: 10000
-            });
+            showToast("Error creating invoice: " + msg, { type: 'error' });
         });
         eventAggregator.$on("payment-received", function (amount, currency, prettyPMI, pmi) {
-            var onChain = pmi.endsWith("-CHAIN");
+            const onChain = pmi.endsWith("-CHAIN");
             if (self.sound) {
                 playRandomSound();
             }
@@ -249,41 +247,22 @@ app = new Vue({
                 fireworks();
             }
             amount = noExponents(parseFloat(amount));
-            if (onChain) {
-                Vue.toasted.show('New payment of ' + amount + " " + currency + " " + prettyPMI, {
-                    iconPack: "fontawesome",
-                    icon: "plus",
-                    duration: 10000
-                });
-            } else {
-                Vue.toasted.show('New payment of ' + amount + " " + cryptoCode + " " + prettyPMI, {
-                    iconPack: "fontawesome",
-                    icon: "bolt",
-                    duration: 10000
-                });
-            }
-
-
+            showToast('New payment of ' + amount + " " + currency + " " + prettyPMI, { type: 'success' });
         });
         if (srvModel.disqusEnabled) {
             window.disqus_config = function () {
-                // Replace PAGE_URL with your page's canonical URL variable
                 this.page.url = window.location.href;
-
-                // Replace PAGE_IDENTIFIER with your page's unique identifier variable
                 this.page.identifier = self.srvModel.appId;
             };
 
-            (function () {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
-                var d = document, s = d.createElement('script');
-
-                // IMPORTANT: Replace EXAMPLE with your forum shortname!
+            (function () {
+                const d = document, s = d.createElement('script');
                 s.src = "https://" + self.srvModel.disqusShortname + ".disqus.com/embed.js";
                 s.async = true;
                 s.setAttribute('data-timestamp', +new Date());
                 (d.head || d.body).appendChild(s);
 
-                var s2 = d.createElement('script');
+                const s2 = d.createElement('script');
                 s2.src = "//" + self.srvModel.disqusShortname + ".disqus.com/count.js";
                 s2.async = true;
                 s.setAttribute('data-timestamp', +new Date());
@@ -305,16 +284,13 @@ app = new Vue({
         this.updateComputed();
     }
 });
+
+app.component('contribute', Contribute);
+app.component('perks', Perks);
+app.component('perk', Perk);
+app.mount('#app');
 });
 
-/**
- * Formats input string as a number according to browser locale
- * with correctly displayed fraction amount (e.g. 0.012345 for BTC instead of just 0.0123)
- * 
- * @param {number | string} amount Amount to format
- * @param {number} divisibility Currency divisibility (e.g., 8 for BTC)
- * @returns String formatted as a number according to current browser locale and correct fraction amount
- */
 function formatAmount(amount, divisibility) {
     return new Intl.NumberFormat(undefined, {
         minimumFractionDigits: divisibility,

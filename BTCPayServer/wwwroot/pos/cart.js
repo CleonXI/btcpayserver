@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded",function () {
-    new Vue({
-        el: '#PosCart',
+    const { createApp } = Vue;
+    createApp({
         mixins: [posCommon],
         data () {
             return {
@@ -26,5 +26,5 @@ document.addEventListener("DOMContentLoaded",function () {
         mounted() {
             this.$cart = new bootstrap.Offcanvas(this.$refs.cart, { backdrop: false })
         }
-    });
+    }).mount('#PosCart');
 });

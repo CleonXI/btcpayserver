@@ -30,7 +30,8 @@
 </template>
 
 <script>
-	Vue.component(@Safe.Json(BitcoinCheckoutModelExtension.CheckoutBodyComponentName), {
+	window.__checkoutComponents = window.__checkoutComponents || {};
+	window.__checkoutComponents[@Safe.Json(BitcoinCheckoutModelExtension.CheckoutBodyComponentName)] = {
 		props: ['model', 'nfcSupported', 'nfcScanning', 'nfcErrorMessage', 'nfcWarningMessage'],
 		template: @Safe.Json("#" + BitcoinCheckoutModelExtension.CheckoutBodyComponentName),
         components: {
@@ -49,5 +50,5 @@
                 return match ? match[1].toLowerCase() : null;
             }
         }
-    });
+    };
 </script>

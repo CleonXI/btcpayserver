@@ -70,11 +70,38 @@ function asNumber(val) {
     return val && parseFloat(val.toString().replace(/\s/g, '')); // e.g. sats are formatted with spaces: 1 000 000
 }
 
-Vue.use(VueI18next);
-
 const fallbackLanguage = 'en';
 const startingLanguage = computeStartingLanguage();
-const i18n = new VueI18next(i18next);
+
+const i18nextVuePlugin = {
+    install(app) {
+        const reactiveI18n = Vue.reactive({ loadedAt: Date.now() });
+        i18next.on('loaded', () => { reactiveI18n.loadedAt = Date.now(); });
+        i18next.on('languageChanged', () => { reactiveI18n.loadedAt = Date.now(); });
+        app.config.globalProperties.$t = (key, opts) => {
+            void reactiveI18n.loadedAt;
+            if (typeof key === 'object' && key.path) {
+                return i18next.t(key.path, key.args || {});
+            }
+            return i18next.t(key, opts);
+        };
+        app.config.globalProperties.$i18n = reactiveI18n;
+        app.directive('t', {
+            mounted(el, binding) {
+                const key = typeof binding.value === 'object' ? binding.value.path : binding.value;
+                const args = typeof binding.value === 'object' ? binding.value.args : {};
+                el.textContent = i18next.t(key, args);
+            },
+            updated(el, binding) {
+                const key = typeof binding.value === 'object' ? binding.value.path : binding.value;
+                const args = typeof binding.value === 'object' ? binding.value.args : {};
+                el.textContent = i18next.t(key, args);
+            }
+        });
+    }
+};
+
+window.__checkoutNfcBus = typeof createEventBus === 'function' ? createEventBus() : null;
 
 const PaymentDetails = {
     template: '#payment-details',
@@ -86,11 +113,6 @@ const PaymentDetails = {
         paid: Number,
         due: Number
     },
-    mounted() {
-        if (this.$i18n) {
-            this.$watch(() => this.$i18n.i18nLoadedAt, () => this.$forceUpdate());
-        }
-    },
     methods: {
         asNumber
     }
@@ -98,12 +120,8 @@ const PaymentDetails = {
 
 function initApp() {
     updateLanguageDir(i18next.language);
-    return new Vue({
-        i18n,
-        el: '#Checkout',
-        components: {
-            'payment-details': PaymentDetails,
-        },
+    const { createApp } = Vue;
+    const app = createApp({
         data () {
             const srvModel = initialSrvModel;
             return {
@@ -264,7 +282,7 @@ function initApp() {
 
             window.parent.postMessage('loaded', '*');
         },
-        beforeDestroy () {
+        beforeUnmount () {
             if (this.nfc.readerAbortController) {
                 this.nfc.readerAbortController.abort()
             }
@@ -403,7 +421,7 @@ function initApp() {
             },
             async setupNFC () {
                 try {
-                    this.$set(this.nfc, 'permissionGranted', navigator.permissions && (await navigator.permissions.query({ name: 'nfc' })).state === 'granted');
+                    this.nfc.permissionGranted = navigator.permissions && (await navigator.permissions.query({ name: 'nfc' })).state === 'granted';
                 } catch (e) {}
                 if (this.nfc.permissionGranted) {
                     await this.startNFCScan();
@@ -411,13 +429,13 @@ function initApp() {
             },
             async startNFCScan () {
                 if (this.nfc.scanning) return;
-                this.$set(this.nfc, 'scanning', true);
+                this.nfc.scanning = true;
                 try {
                     const inModal = window.self !== window.top;
                     const ndef = inModal ? new NDEFReaderWrapper() : new NDEFReader();
                     this.nfc.readerAbortController = new AbortController()
                     this.nfc.readerAbortController.signal.onabort = () => {
-                        this.$set(this.nfc, 'scanning', false);
+                        this.nfc.scanning = false;
                     };
 
                     await ndef.scan({ signal: this.nfc.readerAbortController.signal })
@@ -427,7 +445,7 @@ function initApp() {
                         if (record && record.data) {
                             const textDecoder = new TextDecoder('utf-8')
                             const decoded = textDecoder.decode(record.data)
-                            this.$emit('read-nfc-data', decoded)
+                            if (window.__checkoutNfcBus) window.__checkoutNfcBus.$emit('read-nfc-data', decoded)
                         } else {
                             this.handleNFCError('Could not read NFC tag: No data')
                         }
@@ -452,28 +470,28 @@ function initApp() {
                     }
 
                     // we came here, so the user must have allowed NFC access
-                    this.$set(this.nfc, 'permissionGranted', true);
+                    this.nfc.permissionGranted = true;
                 } catch (error) {
                     this.handleNFCError(`NFC scan failed: ${error}`);
                 }
             },
             handleNFCData() { // child component reports it is handling the data
                 this.playSound('nfcRead');
-                this.$set(this.nfc, 'submitting', true);
-                this.$set(this.nfc, 'errorMessage', null);
-                this.$set(this.nfc, 'warningMessage', null);
+                this.nfc.submitting = true;
+                this.nfc.errorMessage = null;
+                this.nfc.warningMessage = null;
             },
             handleNFCResult(message) { // child component reports result for handling the data
-                this.$set(this.nfc, 'submitting', false);
+                this.nfc.submitting = false;
                 if (message) {
-                    this.$set(this.nfc, 'warningMessage', message);
+                    this.nfc.warningMessage = message;
                 }
             },
             handleNFCError(message) {
                 // internal or via child component reporting failure of handling the data
                 this.playSound('error');
-                this.$set(this.nfc, 'submitting', false);
-                this.$set(this.nfc, 'errorMessage', message);
+                this.nfc.submitting = false;
+                this.nfc.errorMessage = message;
                 const $nfc = document.getElementById('NFC');
                 if ($nfc) {
                     $nfc.scrollIntoView({ block: 'end', inline: 'center', behavior: 'smooth' });
@@ -481,6 +499,14 @@ function initApp() {
             }
         }
     });
+
+    app.use(i18nextVuePlugin);
+    app.component('payment-details', PaymentDetails);
+    Object.entries(window.__checkoutComponents || {}).forEach(([name, component]) => {
+        app.component(name, component);
+    });
+    if (typeof registerCollapsibleDirective === 'function') registerCollapsibleDirective(app);
+    app.mount('#Checkout');
 }
 
 i18next

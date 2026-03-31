@@ -35,11 +35,10 @@
 <html lang="en" @(Env.IsDeveloping ? " data-devenv" : "") id="PaymentRequest-@Model.Id">
 <head>
     <partial name="LayoutHead"/>
-    <link href="~/vendor/bootstrap-vue/bootstrap-vue.min.css" asp-append-version="true" rel="stylesheet"/>
     <script>var srvModel = @Safe.Json(Model);</script>
-    <script src="~/vendor/vuejs/vue.min.js" asp-append-version="true"></script>
-    <script src="~/vendor/vue-toasted/vue-toasted.min.js" asp-append-version="true"></script>
-    <script src="~/vendor/bootstrap-vue/bootstrap-vue.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/vuejs/vue.global.prod.js" asp-append-version="true"></script>
+    <script src="~/js/event-bus.js" asp-append-version="true"></script>
+    <script src="~/js/toast-utils.js" asp-append-version="true"></script>
     <script src="~/vendor/signalr/signalr.js" asp-append-version="true"></script>
     <script src="~/vendor/animejs/anime.min.js" asp-append-version="true"></script>
     <script src="~/js/vue-utils.js" asp-append-version="true"></script>

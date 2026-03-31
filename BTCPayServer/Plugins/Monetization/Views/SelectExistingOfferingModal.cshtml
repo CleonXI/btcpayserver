@@ -46,10 +46,10 @@
 </div>
 
 <script>
-    var model = @Safe.Json(Model);
+    const model = @Safe.Json(Model);
     document.addEventListener('DOMContentLoaded', function () {
-        var app = new Vue({
-            el: '#selectExistingOffering-form',
+        const { createApp } = Vue;
+        const app = createApp({
             data() {
                 return {
                     model: model,
@@ -81,7 +81,7 @@
                     this.selectedPlanId = null;
                 }
             }
-        });
+        }).mount('#selectExistingOffering-form');
     });
 </script>
 

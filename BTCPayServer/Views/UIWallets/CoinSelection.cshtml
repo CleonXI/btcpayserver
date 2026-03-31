@@ -143,6 +143,11 @@
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    function roundNumber(number, decimals) {
+        var newnumber = new Number(number + '').toFixed(parseInt(decimals));
+        return parseFloat(newnumber);
+    }
+
     Vue.directive('tooltip', function(el, binding) {
         new bootstrap.Tooltip(el, {
             title: binding.value,
@@ -150,11 +155,6 @@ document.addEventListener("DOMContentLoaded", function () {
             trigger: 'hover'
         });
     });
-
-    function roundNumber(number, decimals) {
-        var newnumber = new Number(number + '').toFixed(parseInt(decimals));
-        return parseFloat(newnumber);
-    }
 
     new Vue({
         el: '#coin-selection-app',

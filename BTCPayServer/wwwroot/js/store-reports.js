@@ -127,14 +127,13 @@ document.addEventListener("DOMContentLoaded", () => {
     srv.request.timePeriod.from = toUnix(from);
     srv.request.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     srv.result = {fields: [], values: []};
-    searchBtnApp = new Vue({
-        el: '#searchGroup',
+    const { createApp } = Vue;
+    searchBtnApp = createApp({
         data() {
             return { loading: false, error: "" };
         },
-    });
-    app = new Vue({
-        el: '#app',
+    }).mount('#searchGroup');
+    app = createApp({
         data() {
             return {srv, loading: false};
         },
@@ -150,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
             displayValue,
             displayDate
         }
-    });
+    }).mount('#app');
     updateUIDateRange();
     fetchStoreReports();
 });

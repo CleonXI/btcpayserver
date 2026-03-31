@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const $config = document.getElementById('FormConfig')
     let config = parseConfig($config.value) || {}
-    
+
     const specialFieldTypeOptions = ['fieldset', 'textarea', 'select', 'mirror']
     const inputFieldTypeOptions = ['text', 'number', 'password', 'email', 'url', 'tel', 'date', 'datetime-local', 'color', 'checkbox', 'hidden']
     const fieldTypeOptions = inputFieldTypeOptions.concat(specialFieldTypeOptions)
 
     const getFieldComponent = type => `field-type-${specialFieldTypeOptions.includes(type) ? type : 'input'}`
-    
+
     const fieldProps = {
         type: String,
         name: String,
@@ -27,42 +27,41 @@ document.addEventListener('DOMContentLoaded', () => {
         fields: Array,
         validationErrors: Array
     }
-    
+
     const fieldTypeBase = {
         props: {
-            // internal
             path: Array,
-            // field config
             ...fieldProps
         }
     }
 
-    const FieldTypeInput = Vue.extend({
+    const FieldTypeInput = {
         mixins: [fieldTypeBase],
         name: 'field-type-input',
         template: '#field-type-input'
-    })
+    }
 
-    const FieldTypeTextarea = Vue.extend({
+    const FieldTypeTextarea = {
         mixins: [fieldTypeBase],
         name: 'field-type-textarea',
         template: '#field-type-textarea'
-    })
+    }
 
-    const FieldTypeSelect = Vue.extend({
+    const FieldTypeSelect = {
         mixins: [fieldTypeBase],
         name: 'field-type-select',
         template: '#field-type-select',
         props: {
             options: Array
         }
-    })
-    const FieldTypeMirror = Vue.extend({
+    }
+
+    const FieldTypeMirror = {
         mixins: [fieldTypeBase],
         name: 'field-type-mirror',
         template: '#field-type-mirror'
-    })
-    
+    }
+
     const components = {
         FieldTypeInput,
         FieldTypeSelect,
@@ -70,8 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         FieldTypeMirror
     }
 
-    // register fields-editor and field-type-fieldset globally in order to use them recursively
-    Vue.component('field-type-fieldset', {
+    const FieldTypeFieldset = {
         mixins: [fieldTypeBase],
         template: '#field-type-fieldset',
         components,
@@ -79,9 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
             fields: Array,
             selectedField: fieldProps
         }
-    })
+    }
 
-    Vue.component('fields-editor', {
+    const FieldsEditor = {
         template: '#fields-editor',
         components,
         props: {
@@ -92,9 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
         methods: {
             getFieldComponent
         }
-    })
+    }
 
-    Vue.component('field-editor', {
+    const FieldEditor = {
         template: '#field-editor',
         components,
         data () {
@@ -115,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         methods: {
             getFieldComponent,
             addOption (event) {
-                if (!this.field.options) this.$set(this.field, 'options', [])
+                if (!this.field.options) this.field.options = []
                 const index = this.field.options.length + 1
                 this.field.options.push({ value: `newOption${index}`, text: `New option ${index}` })
             },
@@ -127,27 +125,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.field.options.splice(newIndex, 0, this.field.options.splice(oldIndex, 1)[0])
             },
             addValueMap (event) {
-                if (!this.field.valuemap) this.$set(this.field, 'valuemap', {})
+                if (!this.field.valuemap) this.field.valuemap = {}
                 const index = Object.keys(this.field.valuemap).length + 1;
-                this.$set(this.field.valuemap, `valuemap_${index}`, '')
+                this.field.valuemap[`valuemap_${index}`] = ''
             },
             updateValueMap(oldK, newK, newV) {
                 if (oldK !== newK) {
-                    Vue.delete(this.field.valuemap, oldK);
+                    delete this.field.valuemap[oldK];
                 }
-                Vue.set(this.field.valuemap, newK, newV);
+                this.field.valuemap[newK] = newV;
             },
             removeValueMap(event, k) {
-                Vue.delete(this.field.valuemap, k);
+                delete this.field.valuemap[k];
             },
         }
-    })
+    }
 
-    Vue.use(vSortable)
-    Vue.use(VueSanitizeDirective.default)
-
-    new Vue({
-        el: '#FormEditor',
+    const { createApp } = Vue;
+    const app = createApp({
         name: 'form-editor',
         data () {
             return {
@@ -211,12 +206,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 fields.splice(newIndex, 0, fields.splice(oldIndex, 1)[0])
             },
             getFieldsForPath (path) {
-                if (!this.config.fields) this.$set(this.config, 'fields', [])
+                if (!this.config.fields) this.config.fields = []
                 let fields = this.config.fields
                 while (path.length) {
                     const name = path.shift()
                     const field = fields.find(field => field.name === name)
-                    if (!field.fields) this.$set(field, 'fields', [])
+                    if (!field.fields) field.fields = []
                     fields = field.fields
                 }
                 return fields
@@ -236,5 +231,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             this.editorOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(this.$refs.editorOffcanvas);
         }
-    })
+    });
+
+    app.component('field-type-fieldset', FieldTypeFieldset);
+    app.component('fields-editor', FieldsEditor);
+    app.component('field-editor', FieldEditor);
+
+    registerSortableDirective(app);
+    if (typeof VueSanitizeDirective !== 'undefined') {
+        const sanitizeDir = VueSanitizeDirective.default || VueSanitizeDirective;
+        if (sanitizeDir.install) {
+            app.use(sanitizeDir);
+        } else {
+            app.directive('sanitize', sanitizeDir);
+        }
+    }
+    app.mount('#FormEditor');
 })

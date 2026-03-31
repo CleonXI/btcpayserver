@@ -106,17 +106,19 @@
 }
 
 @section PageFootContent {
-    <script src="~/vendor/vuejs/vue.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/vuejs/vue.global.prod.js" asp-append-version="true"></script>
     <script src="~/modal/btcpay.js" asp-append-version="true" async></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            new Vue({
-                el: '#reserved-addresses',
-                data: {
-                    addresses: @Safe.Json(Model.Addresses),
-                    page: 0,
-                    pageSize: 10,
-                    filter: "@Context.Request.Query["filter"]".toLowerCase(),
+            const { createApp } = Vue;
+            createApp({
+                data() {
+                    return {
+                        addresses: @Safe.Json(Model.Addresses),
+                        page: 0,
+                        pageSize: 10,
+                        filter: "@Context.Request.Query["filter"]".toLowerCase(),
+                    };
                 },
                 computed: {
                     pageStart() {
@@ -155,7 +157,7 @@
                             if (!targetAddress) return;
 
                             const next = (newLabels || []).map(text => ({ text }));
-                            this.$set(targetAddress, "labels", next);
+                            targetAddress.labels = next;
                         });
                     });
                 },
@@ -172,7 +174,7 @@
                         });
                     }
                 }
-            });
+            }).mount('#reserved-addresses');
         });
     </script>
 }

@@ -17,7 +17,6 @@
 <html lang="@Model.HtmlLang" class="h-100" @(Env.IsDeveloping ? " data-devenv" : "") id="Crowdfund-@Model.AppId">
 <head>
     <partial name="LayoutHead" />
-    <link href="~/vendor/bootstrap-vue/bootstrap-vue.min.css" asp-append-version="true" rel="stylesheet" />
     <link href="~/crowdfund/styles/main.css" asp-append-version="true" rel="stylesheet" />
     <style>
         #app { --wrap-max-width: 1320px; }
@@ -71,20 +70,20 @@
                     {
                         <span v-if="srvModel.resetEvery !== 'Never'"
                               class="h5 ms-2"
-                              v-b-tooltip
+                              data-bs-toggle="tooltip"
                               :title="'Goal resets every ' + srvModel.resetEveryAmount + ' ' + srvModel.resetEvery + ((srvModel.resetEveryAmount>1)?'s': '')" text-translate="true">
                             Dynamic
                         </span>
                     }
                     @if (Model.EnforceTargetAmount)
                     {
-                        <span v-if="srvModel.enforceTargetAmount" class="h5 ms-2" v-b-tooltip title=@StringLocalizer["No contributions allowed after the goal has been reached"] text-translate="true">
+                        <span v-if="srvModel.enforceTargetAmount" class="h5 ms-2" data-bs-toggle="tooltip" title=@StringLocalizer["No contributions allowed after the goal has been reached"] text-translate="true">
                             Hardcap Goal
                         </span>
                     }
                     else
                     {
-                        <span v-if="!srvModel.enforceTargetAmount" class="h5 ms-2" v-b-tooltip title=@StringLocalizer["Contributions allowed even after goal is reached"] text-translate="true">
+                        <span v-if="!srvModel.enforceTargetAmount" class="h5 ms-2" data-bs-toggle="tooltip" title=@StringLocalizer["Contributions allowed even after goal is reached"] text-translate="true">
                             Softcap Goal
                         </span>
                     }
@@ -92,19 +91,19 @@
             }
             @if (!Model.Started && Model.StartDate.HasValue)
             {
-                <h6 class="text-muted fst-italic mt-3" v-if="!started && srvModel.startDate" v-b-tooltip :title="startDate" v-text="`Starts in ${startDiff}`" data-test="time-state">
+                <h6 class="text-muted fst-italic mt-3" v-if="!started && srvModel.startDate" data-bs-toggle="tooltip" :title="startDate" v-text="`Starts in ${startDiff}`" data-test="time-state">
                     @StringLocalizer["Starts {0}", TimeZoneInfo.ConvertTimeFromUtc(Model.StartDate.Value, TimeZoneInfo.Local)]
                 </h6>
             }
             else if (Model.Started && !Model.Ended && Model.EndDate.HasValue)
             {
-                <h6 class="text-muted fst-italic mt-3" v-if="started && !ended && srvModel.endDate" v-b-tooltip :title="endDate" v-text="`Ends in ${endDiff}`" data-test="time-state">
+                <h6 class="text-muted fst-italic mt-3" v-if="started && !ended && srvModel.endDate" data-bs-toggle="tooltip" :title="endDate" v-text="`Ends in ${endDiff}`" data-test="time-state">
                     @StringLocalizer["Ends {0}", TimeZoneInfo.ConvertTimeFromUtc(Model.EndDate.Value, TimeZoneInfo.Local)]
                 </h6>
             }
             else if (Model.Started && !Model.Ended && !Model.EndDate.HasValue)
             {
-                <h6 class="text-muted fst-italic mt-3" v-if="started && !ended && !srvModel.endDate" v-b-tooltip title="No set end date" data-test="time-state" text-translate="true">
+                <h6 class="text-muted fst-italic mt-3" v-if="started && !ended && !srvModel.endDate" data-bs-toggle="tooltip" title="No set end date" data-test="time-state" text-translate="true">
                     Currently active!
                 </h6>
             }
@@ -120,7 +119,7 @@
                      v-bind:style="{ width: srvModel.info.progressPercentage + '%' }"
                      aria-valuemin="0"
                      id="crowdfund-progress-bar-confirmed-bar"
-                     v-b-tooltip
+                     data-bs-toggle="tooltip"
                      :title="parseFloat(srvModel.info.progressPercentage).toFixed(2) + '% contributions'"
                      aria-valuemax="100">
                 </div>
@@ -130,7 +129,7 @@
                      style="width:@(Model.Info.PendingProgressPercentage + "%")"
                      :aria-valuenow="srvModel.info.pendingProgressPercentage"
                      v-bind:style="{ width: srvModel.info.pendingProgressPercentage + '%' }"
-                     v-b-tooltip
+                     data-bs-toggle="tooltip"
                      :title="parseFloat(srvModel.info.pendingProgressPercentage).toFixed(2) + '% contributions pending confirmation'"
                      aria-valuemin="0"
                      aria-valuemax="100">
@@ -142,21 +141,17 @@
             <div class="col-sm border-end p-3 text-center" id="crowdfund-body-raised-amount">
                 <h3 v-text="`${raisedAmount} ${targetCurrency}`">@Math.Round(Model.Info.CurrentAmount + Model.Info.CurrentPendingAmount, Model.CurrencyData.Divisibility) @Model.TargetCurrency</h3>
                 <h5 class="text-muted fst-italic mb-0">Raised</h5>
-                <b-tooltip target="crowdfund-body-raised-amount" v-if="paymentStats && paymentStats.length > 0" class="only-for-js">
-                    <ul class="p-0 text-uppercase">
-                        <li v-for="stat of paymentStats" class="list-unstyled">
-                            {{stat.label}} <span v-if="stat.lightning"><vc:icon symbol="lightning" /></span> {{stat.value}}
-                        </li>
-                    </ul>
-                </b-tooltip>
+                <div v-if="paymentStats && paymentStats.length > 0" class="only-for-js visually-hidden" id="crowdfund-raised-stats">
+                    <span v-for="stat of paymentStats">{{stat.label}} {{stat.value}} </span>
+                </div>
             </div>
 
             <div class="col-sm border-end p-3 text-center" id="crowdfund-body-goal-raised">
                 <h3 v-text="`${percentageRaisedAmount}%`">@Math.Round(Model.Info.PendingProgressPercentage.GetValueOrDefault(0) + Model.Info.ProgressPercentage.GetValueOrDefault(0))%</h3>
                 <h5 class="text-muted fst-italic mb-0">Of Goal</h5>
-                <b-tooltip target="crowdfund-body-goal-raised" v-if="srvModel.resetEvery !== 'Never'" class="only-for-js">
+                <div v-if="srvModel.resetEvery !== 'Never'" class="only-for-js visually-hidden" id="crowdfund-goal-reset-info">
                     Goal resets every {{srvModel.resetEveryAmount}} {{srvModel.resetEvery}} {{srvModel.resetEveryAmount>1?'s': ''}}
-                </b-tooltip>
+                </div>
             </div>
 
             <div class="col-sm border-end p-3 text-center" id="crowdfund-body-total-contributors">
@@ -187,22 +182,10 @@
                             <h3 class="mb-0" text-translate="true">Campaign not active</h3>
                         </div>
                     }
-                    <b-tooltip v-if="startDate || endDate" target="crowdfund-body-campaign-dates" class="only-for-js">
-                        <ul class="p-0">
-                            @if (Model.StartDate.HasValue)
-                            {
-                                <li v-if="startDate" class="list-unstyled">
-                                    {{started ? "Started" : "Starts"}} {{startDate}}
-                                </li>
-                            }
-                            @if (Model.EndDate.HasValue)
-                            {
-                                <li v-if="endDate" class="list-unstyled">
-                                    {{ended ? "Ended" : "Ends"}} {{endDate}}
-                                </li>
-                            }
-                        </ul>
-                    </b-tooltip>
+                    <div v-if="startDate || endDate" class="only-for-js visually-hidden" id="crowdfund-campaign-dates-info">
+                        <span v-if="startDate">{{started ? "Started" : "Starts"}} {{startDate}}</span>
+                        <span v-if="endDate">{{ended ? "Ended" : "Ends"}} {{endDate}}</span>
+                    </div>
                 </div>
             }
         </div>
@@ -214,15 +197,22 @@
         <div class="row mt-4 justify-content-between gap-5">
             <div :class="{ 'col-lg-7 col-sm-12': hasPerks, 'col-12': !hasPerks }" id="crowdfund-body-description-container">
                 <template v-if="srvModel.disqusEnabled && srvModel.disqusShortname">
-                    <b-tabs>
-                        <b-tab title="Details" active>
-                            <div class="overflow-hidden pt-3" v-html="srvModel.description" id="crowdfund-body-description">
-                            </div>
-                        </b-tab>
-                        <b-tab title="Discussion">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-details" type="button" role="tab" text-translate="true">Details</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-discussion" type="button" role="tab" text-translate="true">Discussion</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-details" role="tabpanel">
+                            <div class="overflow-hidden pt-3" v-html="srvModel.description" id="crowdfund-body-description"></div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-discussion" role="tabpanel">
                             <div id="disqus_thread" class="mt-4"></div>
-                        </b-tab>
-                    </b-tabs>
+                        </div>
+                    </div>
                 </template>
                 <template v-else>
                     <div class="overflow-hidden" v-html="srvModel.description" id="crowdfund-body-description">
@@ -250,15 +240,28 @@
                 </div>
             </div>
         </noscript>
-        <b-modal title="Contribute" v-model="contributeModalOpen" size="lg" ok-only="true" ok-variant="secondary" ok-title="@StringLocalizer["Close"]" ref="modalContribute">
-            <contribute v-if="contributeModalOpen"
-                        :target-currency="srvModel.targetCurrency"
-                        :active="active"
-                        :perks="srvModel.perks"
-                        :loading="loading"
-                        :in-modal="true">
-            </contribute>
-        </b-modal>
+        <div class="modal fade" id="contributeModal" tabindex="-1" aria-labelledby="contributeModalLabel" aria-hidden="true" ref="modalContribute">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contributeModalLabel" text-translate="true">Contribute</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@StringLocalizer["Close"]"></button>
+                    </div>
+                    <div class="modal-body">
+                        <contribute v-if="contributeModalOpen"
+                                    :target-currency="srvModel.targetCurrency"
+                                    :active="active"
+                                    :perks="srvModel.perks"
+                                    :loading="loading"
+                                    :in-modal="true">
+                        </contribute>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@StringLocalizer["Close"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <footer class="store-footer">
             <p class="text-muted" v-text="`Updated ${lastUpdated}`">Updated @Model.Info.LastUpdated</p>
             <a class="store-powered-by" href="https://btcpayserver.org" target="_blank" rel="noreferrer noopener">
@@ -372,10 +375,10 @@
     @if (!Model.SimpleDisplay)
     {
         <script>var srvModel = @Safe.Json(Model);</script>
-        <script src="~/vendor/vuejs/vue.min.js" asp-append-version="true"></script>
+        <script src="~/vendor/vuejs/vue.global.prod.js" asp-append-version="true"></script>
         <script src="~/vendor/vue-qrcode/vue-qrcode.min.js" asp-append-version="true"></script>
-        <script src="~/vendor/vue-toasted/vue-toasted.min.js" asp-append-version="true"></script>
-        <script src="~/vendor/bootstrap-vue/bootstrap-vue.min.js" asp-append-version="true"></script>
+        <script src="~/js/event-bus.js" asp-append-version="true"></script>
+        <script src="~/js/toast-utils.js" asp-append-version="true"></script>
         <script src="~/vendor/signalr/signalr.js" asp-append-version="true"></script>
         <script src="~/vendor/animejs/anime.min.js" asp-append-version="true"></script>
         <script src="~/crowdfund/app.js" asp-append-version="true"></script>

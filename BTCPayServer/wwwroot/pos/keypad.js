@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded",function () {
 
     const displayFontSize = 64;
-    new Vue({
-        el: '#app',
+    const { createApp } = Vue;
+    createApp({
         mixins: [posCommon],
         data () {
             return {
@@ -104,14 +104,14 @@ document.addEventListener("DOMContentLoaded",function () {
                             this.amounts.pop();
                         } else {
                             // clear latest value
-                            Vue.set(this.amounts, lastIndex, null);
+                            this.amounts[lastIndex] = null;
                         }
                     } else if (key === '+' && parseFloat(lastAmount || '0')) {
                         this.amounts.push(null);
                     } else { // Is a digit
                         const { divisibility } = this.currencyInfo;
                         const value = this.applyKeyToValue(key, lastAmount, divisibility);
-                        Vue.set(this.amounts, lastIndex, value);
+                        this.amounts[lastIndex] = value;
                     }
                 } else {
                     if (key === 'C') {
@@ -140,6 +140,6 @@ document.addEventListener("DOMContentLoaded",function () {
             // We need to unset state in case user clicks the browser back button
             window.addEventListener('pagehide', () => { this.payButtonLoading = false })
         }
-    });
+    }).mount('#app');
 });
 

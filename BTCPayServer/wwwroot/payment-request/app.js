@@ -1,11 +1,10 @@
 let app = null;
-const eventAggregator = new Vue();
+const eventAggregator = createEventBus();
 
 document.addEventListener("DOMContentLoaded",function (ev) {
-    Vue.use(Toasted);
+    const { createApp } = Vue;
 
-    app = new Vue({
-        el: '#app',
+    app = createApp({
         data: function () {
             return {
                 srvModel: window.srvModel,
@@ -111,20 +110,15 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             },
             toggleDetails(invoiceId) {
                 if (this.detailsShown[invoiceId])
-                    Vue.delete(this.detailsShown, invoiceId);
+                    delete this.detailsShown[invoiceId];
                 else
-                    Vue.set(this.detailsShown, invoiceId, true);
+                    this.detailsShown[invoiceId] = true;
             }
         },
         mounted: function () {
             this.customAmount = noExponents(this.srvModel.amountDue || 0);
             hubListener.connect();
             const self = this;
-            const toastOptions = {
-                iconPack: "fontawesome",
-                theme: "bubble",
-                duration: 10000
-            };
 
             eventAggregator.$on("invoice-created", function (invoiceId) {
                 self.setLoading(false);
@@ -132,15 +126,11 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             });
             eventAggregator.$on("invoice-cancelled", function (){
                 self.setLoading(false);
-                Vue.toasted.info('Payment cancelled', Object.assign({}, toastOptions), {
-                    icon: "check"
-                });
+                showToast('Payment cancelled', { type: 'info' });
             });
             eventAggregator.$on("cancel-invoice-error", function () {
                 self.setLoading(false);
-                Vue.toasted.error("Error cancelling payment", Object.assign({}, toastOptions), {
-                    icon: "exclamation-triangle"
-                });
+                showToast("Error cancelling payment", { type: 'error' });
             });
             eventAggregator.$on("invoice-error", function (error) {
                 self.setLoading(false);
@@ -152,16 +142,12 @@ document.addEventListener("DOMContentLoaded",function (ev) {
                 } else {
                     msg = JSON.stringify(error);
                 }
-                Vue.toasted.error("Error creating invoice: " + msg, Object.assign({}, toastOptions), {
-                    icon: "exclamation-triangle"
-                });
+                showToast("Error creating invoice: " + msg, { type: 'error' });
             });
             eventAggregator.$on("payment-received", function (amount, currency, prettyPMI, pmi) {
-                const onChain = pmi.endsWith('-CHAIN');
                 const amountFormatted = noExponents(parseFloat(amount));
-                const icon = onChain ? "plus" : "bolt";
                 const title = "New payment of " + amountFormatted + " " + currency + " " + prettyPMI;
-                Vue.toasted.success(title, Object.assign({}, toastOptions), { icon });
+                showToast(title, { type: 'success' });
             });
             eventAggregator.$on("info-updated", function (model) {
                 self.srvModel = model;
@@ -178,5 +164,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             this.updateComputed();
         }
     });
-});
 
+    registerCollapsibleDirective(app);
+    app.mount('#app');
+});

@@ -77,17 +77,20 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var selectablePlans = @Safe.Json(Model);
+        const selectablePlans = @Safe.Json(Model);
         if (!selectablePlans.length) { return; }
-        var newSubscriberApp = new Vue({
-            el: '#newSubscriberModal',
+        const { createApp } = Vue;
+        function initialData() {
+            return {
+                plans: selectablePlans,
+                selectedPlanId: selectablePlans[0].id,
+                isTrial: false,
+                canEditPlan: false
+            };
+        }
+        const newSubscriberApp = createApp({
             data() {
-                return {
-                    plans: selectablePlans,
-                    selectedPlanId: selectablePlans[0].id,
-                    isTrial: false,
-                    canEditPlan: false
-                };
+                return initialData();
             },
             computed: {
                 selectedPlan() {
@@ -97,7 +100,7 @@
                     return !!(this.selectedPlan && this.selectedPlan.hasTrial);
                 }
             }
-        });
+        }).mount('#newSubscriberModal');
 
         (function () {
             const modalEl = document.getElementById('newSubscriberModal');
@@ -106,8 +109,7 @@
                 if (!trigger) return;
                 const tr = trigger.closest('tr');
 
-                Object.assign(newSubscriberApp.$data, newSubscriberApp.$options.data.call(this));
-
+                Object.assign(newSubscriberApp, initialData());
 
                 if (tr) {
                     newSubscriberApp.selectedPlanId = tr.getAttribute('data-plan-id');

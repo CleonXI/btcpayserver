@@ -20,15 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
         categories: Array
     }
 
-    const Item = Vue.extend({
+    const Item = {
         name: 'item',
         template: '#item',
         props: {
             ...itemProps
         }
-    })
+    }
 
-    const ItemEditorUpload = Vue.component('item-editor-upload', {
+    const ItemEditorUpload = {
         template: '#item-editor-upload',
         props: {
             uploadUrl: {
@@ -76,9 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-    })
+    }
 
-    const ItemEditor = Vue.component('item-editor', {
+    const ItemEditor = {
         template: '#item-editor',
         components: {
             Item,
@@ -112,61 +112,58 @@ document.addEventListener('DOMContentLoaded', () => {
                 const $input = e.target;
                 $input.classList.toggle('is-invalid', !$input.checkValidity())
                 if (!$input.checkValidity()) {
-                    Vue.set(this.errors, 'title', 'Title is required')
+                    this.errors.title = 'Title is required'
                 } else if (this.editingItem.title.startsWith('-')){
-                    Vue.set(this.errors, 'title', 'Title cannot start with "-"')
+                    this.errors.title = 'Title cannot start with "-"'
                 } else if (!this.editingItem.title.trim()){
-                    Vue.set(this.errors, 'title', 'Title is required')
+                    this.errors.title = 'Title is required'
                 } else {
-                    Vue.delete(this.errors, 'title')
+                    delete this.errors.title
                 }
-                // set id from title if not set
                 if (!this.editingItem.id) {
                     this.editingItem.id = this.toId(this.editingItem.title)
-                    Vue.delete(this.errors, 'id')
+                    delete this.errors.id
                 }
             },
             onIdChange(e) {
-                // set id from title if not set
                 if (!this.editingItem.id) this.editingItem.id = this.toId(this.editingItem.title)
-                // validate
                 const $input = e.target;
                 $input.classList.toggle('is-invalid', !$input.checkValidity())
                 if (this.editingItem.id) {
                     const existingItem = this.$parent.items.find(i => i.id === this.editingItem.id);
                     if (existingItem && existingItem.id !== this.item.id)
-                        Vue.set(this.errors, 'id', `An item with the ID "${this.editingItem.id}" already exists`)
+                        this.errors.id = `An item with the ID "${this.editingItem.id}" already exists`
                     if (this.editingItem.id.startsWith('-'))
-                        Vue.set(this.errors, 'id', 'ID cannot start with "-"')
+                        this.errors.id = 'ID cannot start with "-"'
                     else if (this.editingItem.id.trim() === '')
-                        Vue.set(this.errors, 'id', 'ID is required')
+                        this.errors.id = 'ID is required'
                     else
-                        Vue.delete(this.errors, 'id')
+                        delete this.errors.id
                 } else {
-                    Vue.set(this.errors, 'id', 'ID is required')
+                    this.errors.id = 'ID is required'
                 }
             },
             onInventoryChange(e) {
                 const $input = e.target;
                 $input.classList.toggle('is-invalid', !$input.checkValidity())
                 if (!$input.checkValidity()) {
-                    Vue.set(this.errors, 'inventory', 'Inventory must not be set or be a valid number (>=0)')
+                    this.errors.inventory = 'Inventory must not be set or be a valid number (>=0)'
                 }
             },
             onPriceChange(e) {
                 const $input = e.target;
                 $input.classList.toggle('is-invalid', !$input.checkValidity())
                 if (this.editingItem.priceType !== 'Topup' && !$input.checkValidity()) {
-                     Vue.set(this.errors, 'price', 'Price must be a valid number')
+                     this.errors.price = 'Price must be a valid number'
                 } else {
-                    Vue.delete(this.errors, 'price')
+                    delete this.errors.price
                 }
             },
             onPriceTypeChange(e) {
                 const $input = e.target;
                 $input.classList.toggle('is-invalid', !$input.checkValidity())
                 if ($input.value === 'Topup') {
-                    Vue.set(this.editingItem, 'price', null)
+                    this.editingItem.price = null
                 }
             }
         },
@@ -175,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.errors = {};
                 this.editingItem = newItem;
                 if (this.editingItem != null) {
-                    // update categories
                     this.categoriesSelect.clearOptions();
                     this.categoriesSelect.addOptions(this.allCategories.map(value => ({ value, text: value })));
                     this.categoriesSelect.setValue(this.editingItem.categories);
@@ -191,19 +187,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             this.categoriesSelect.on('change', () => {
                 const value = this.categoriesSelect.getValue();
-                Vue.set(this.editingItem, 'categories', Array.from(value.split(',').reduce((res,  item) => {
+                this.editingItem.categories = Array.from(value.split(',').reduce((res, item) => {
                     const category = item.trim();
                     if (category) res.add(category);
                     return res;
-                }, new Set())))
+                }, new Set()))
             });
         },
-        beforeDestroy() {
+        beforeUnmount() {
             this.categoriesSelect.destroy();
         }
-    })
+    }
 
-    const ItemsEditor = Vue.component('items-editor', {
+    const ItemsEditor = {
         template: '#items-editor',
         components: {
             Item
@@ -218,13 +214,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return image.startsWith('~') ? image.replace('~', window.location.pathname.substring(0, image.indexOf('/apps'))) : image
             }
         }
-    })
+    }
 
-    Vue.use(vSortable)
-    Vue.use(VueSanitizeDirective.default)
-
-    new Vue({
-        el: '#TemplateEditor',
+    const { createApp } = Vue;
+    const app = createApp({
         name: 'template-editor',
         components: {
             ItemsEditor,
@@ -278,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             selectItem(event, index) {
                 this.selectedItem = this.items[index]
-                this.selectedItemInitial = { ...this.selectedItem } // pristine copy
+                this.selectedItemInitial = { ...this.selectedItem }
                 this.showOffcanvas()
             },
             removeItem(event, index) {
@@ -302,5 +295,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!this.items) this.items = []
             this.editorOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(this.$refs.editorOffcanvas);
         }
-    })
+    });
+
+    registerSortableDirective(app);
+    if (typeof VueSanitizeDirective !== 'undefined') {
+        const sanitizeDir = VueSanitizeDirective.default || VueSanitizeDirective;
+        if (sanitizeDir.install) {
+            app.use(sanitizeDir);
+        } else {
+            app.directive('sanitize', sanitizeDir);
+        }
+    }
+    app.mount('#TemplateEditor');
 })

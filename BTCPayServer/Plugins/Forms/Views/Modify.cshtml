@@ -135,7 +135,7 @@
                         <vc:icon symbol="actions-drag" />
                     </button>
                     <div class="field flex-grow-1">
-                        <component :is="getFieldComponent(field.type)" v-bind="field" :path="path.concat(field.name)" :selected-field="selectedField" v-on="$listeners" />
+                        <component :is="getFieldComponent(field.type)" v-bind="field" :path="path.concat(field.name)" :selected-field="selectedField" v-bind="$attrs" />
                     </div>
                     <button type="button" class="btn b-0 control remove" v-on:click="$emit('remove-field', $event, path, index)">
                         <vc:icon symbol="actions-remove" />
@@ -185,10 +185,10 @@
     <template id="field-type-fieldset">
         <fieldset>
             <legend class="h5 mt-1 mb-2" v-text="label"></legend>
-            <fields-editor :path="path" :fields="fields" :selected-field="selectedField" v-on="$listeners" class="nested-fields" />
+            <fields-editor :path="path" :fields="fields" :selected-field="selectedField" v-bind="$attrs" class="nested-fields" />
         </fieldset>
     </template>
-    <script src="~/vendor/vuejs/vue.min.js" asp-append-version="true"></script>
+    <script src="~/vendor/vuejs/vue.global.prod.js" asp-append-version="true"></script>
     <script src="~/vendor/vue-sanitize-directive/vue-sanitize-directive.umd.min.js" asp-append-version="true"></script>
     <script src="~/vendor/vue-sortable/sortable.min.js" asp-append-version="true"></script>
     <script src="~/vendor/vue-sortable/vue-sortable.js" asp-append-version="true"></script>

@@ -7,7 +7,8 @@
     </div>
 </template>
 <script>
-Vue.component("lnurl-withdraw-checkout", {
+window.__checkoutComponents = window.__checkoutComponents || {};
+window.__checkoutComponents["lnurl-withdraw-checkout"] = {
     template: "#lnurl-withdraw-template",
     props: {
         model: Object,
@@ -61,10 +62,10 @@ Vue.component("lnurl-withdraw-checkout", {
         }
     },
     beforeMount () {
-        this.$root.$on('read-nfc-data', this.sendData)
+        if (window.__checkoutNfcBus) window.__checkoutNfcBus.$on('read-nfc-data', this.sendData)
     },
-    beforeDestroy () {
-        this.$root.$off('read-nfc-data')
+    beforeUnmount () {
+        if (window.__checkoutNfcBus) window.__checkoutNfcBus.$off('read-nfc-data', this.sendData)
     },
     methods: {
         async handleClick () {
@@ -114,5 +115,5 @@ Vue.component("lnurl-withdraw-checkout", {
             this.submitting = false
         }
     }
-});
+};
 </script>

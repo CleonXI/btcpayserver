@@ -1,10 +1,10 @@
-Vue.directive('collapsible', {
-    bind: function (el, binding) {
+const collapsibleDirective = {
+    mounted: function (el, binding) {
         el.classList.add('collapse');
         el.classList[binding.value ? 'add' : 'remove']('show');
         el.transitionDuration = 350;
     },
-    update: function (el, binding) {
+    updated: function (el, binding) {
         if (binding.oldValue !== binding.value){
             if (binding.value) {
                 setTimeout(function () {
@@ -34,4 +34,8 @@ Vue.directive('collapsible', {
             }
         }
     }
-});
+};
+
+function registerCollapsibleDirective(app) {
+    app.directive('collapsible', collapsibleDirective);
+}

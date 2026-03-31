@@ -24,7 +24,8 @@
 </template>
 
 <script>
-	Vue.component(@Safe.Json(LNCheckoutModelExtension.CheckoutBodyComponentName), {
+	window.__checkoutComponents = window.__checkoutComponents || {};
+	window.__checkoutComponents[@Safe.Json(LNCheckoutModelExtension.CheckoutBodyComponentName)] = {
 		props: ['model', 'nfcSupported', 'nfcScanning', 'nfcErrorMessage', 'nfcWarningMessage'],
 		template: @Safe.Json("#" + LNCheckoutModelExtension.CheckoutBodyComponentName),
         components: {
@@ -34,5 +35,5 @@
             // currentTab is needed for backwards-compatibility with old plugin versions
             return { currentTab: undefined };
         }
-    });
+    };
 </script>

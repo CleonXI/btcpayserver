@@ -44,7 +44,8 @@
 </main>
 
 <script>
-    Vue.component('checkout-cheating', {
+    window.__checkoutComponents = window.__checkoutComponents || {};
+    window.__checkoutComponents['checkout-cheating'] = {
         el: '#checkout-cheating',
         data () {
             return {
@@ -104,5 +105,5 @@
                 this[processing] = false;
             }
         }
-    })
+    };
 </script>
