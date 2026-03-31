@@ -237,7 +237,12 @@ async function fetchStoreReports(abort) {
             setLoading(false);
 
             // Dates from API are UTC, convert them to local time
-            modifyFields(srv.result.fields, srv.result.data, 'datetime', a => a ? new Date(a).toISOString() : a);
+            modifyFields(srv.result.fields, srv.result.data, 'datetime', a => {
+                if (!a) return a;
+                const d = new Date(a);
+                const pad = n => String(n).padStart(2, '0');
+                return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + 'T' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds()) + '.' + String(d.getMilliseconds()).padStart(3, '0');
+            });
             const urlParams = new URLSearchParams(new URL(window.location).search);
             urlParams.set("viewName", srv.request.viewName);
             urlParams.set("from", srv.request.timePeriod.from);

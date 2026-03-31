@@ -59,16 +59,33 @@ function calendarDate(dateStr) {
     return new Intl.DateTimeFormat('default', { dateStyle: 'medium', timeStyle: 'short' }).format(date);
 }
 
+function ordinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+}
+
 function formatLongDate(dateStr) {
-    return new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric' }).format(new Date(dateStr));
+    const d = new Date(dateStr);
+    const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
+    const day = d.getDate();
+    return month + ' ' + day + ordinalSuffix(day) + ' ' + d.getFullYear();
 }
 
 function formatFullDateTime(dateStr) {
-    return new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true }).format(new Date(dateStr));
+    const d = new Date(dateStr);
+    const month = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
+    const day = d.getDate();
+    const time = new Intl.DateTimeFormat('en', { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true }).format(d);
+    return month + ' ' + day + ordinalSuffix(day) + ' ' + d.getFullYear() + ', ' + time;
 }
 
 function formatShortDateTime(dateStr) {
-    return new Intl.DateTimeFormat('default', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(dateStr));
+    return new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(dateStr));
 }
 
 function formatCSVDateTime(dateStr) {

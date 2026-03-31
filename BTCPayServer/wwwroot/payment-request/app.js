@@ -1,5 +1,5 @@
-var app = null;
-var eventAggregator = new Vue();
+let app = null;
+const eventAggregator = new Vue();
 
 document.addEventListener("DOMContentLoaded",function (ev) {
     Vue.use(Toasted);
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             },
             pay: function (amount) {
                 this.setLoading(true);
-                var self = this;
+                const self = this;
                 self.timeoutState = setTimeout(function () {
                     self.setLoading(false);
                 }, 5000);
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             },
             cancelPayment: function (amount) {
                 this.setLoading(true);
-                var self = this;
+                const self = this;
                 self.timeoutState = setTimeout(function () {
                     self.setLoading(false);
                 }, 5000);
@@ -119,8 +119,8 @@ document.addEventListener("DOMContentLoaded",function (ev) {
         mounted: function () {
             this.customAmount = noExponents(this.srvModel.amountDue || 0);
             hubListener.connect();
-            var self = this;
-            var toastOptions = {
+            const self = this;
+            const toastOptions = {
                 iconPack: "fontawesome",
                 theme: "bubble",
                 duration: 10000
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             });
             eventAggregator.$on("invoice-error", function (error) {
                 self.setLoading(false);
-                var msg = "";
+                let msg = "";
                 if (typeof error === "string") {
                     msg = error;
                 } else if (!error) {
@@ -157,10 +157,10 @@ document.addEventListener("DOMContentLoaded",function (ev) {
                 });
             });
             eventAggregator.$on("payment-received", function (amount, currency, prettyPMI, pmi) {
-                var onChain = pmi.endsWith('-CHAIN');
-                var amountFormatted = noExponents(parseFloat(amount));
-                var icon = onChain ? "plus" : "bolt";
-                var title = "New payment of " + amountFormatted + " " + currency + " " + prettyPMI;
+                const onChain = pmi.endsWith('-CHAIN');
+                const amountFormatted = noExponents(parseFloat(amount));
+                const icon = onChain ? "plus" : "bolt";
+                const title = "New payment of " + amountFormatted + " " + currency + " " + prettyPMI;
                 Vue.toasted.success(title, Object.assign({}, toastOptions), { icon });
             });
             eventAggregator.$on("info-updated", function (model) {
