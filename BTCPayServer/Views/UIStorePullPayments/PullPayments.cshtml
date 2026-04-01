@@ -20,8 +20,8 @@
 @section PageHeadContent {
     <style>
         .tooltip-inner { text-align: left; }
-        .actions-col .btn[data-clipboard] { color: var(--btcpay-body-link); }
-        .actions-col .btn[data-clipboard]:hover { color: var(--btcpay-body-link-accent); }
+        .btn[data-clipboard] { color: var(--btcpay-body-link); }
+        .btn[data-clipboard]:hover { color: var(--btcpay-body-link-accent); }
     </style>
 }
 
@@ -85,7 +85,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col" class="date-col">
+                <th scope="col" class="tw:min-w-32">
                     <div class="d-flex align-items-center gap-3">
                         <a asp-action="PullPayments"
                            asp-route-sortOrder="@(nextStartDateSortOrder ?? "asc")"
@@ -103,14 +103,14 @@
                 <th text-translate="true" scope="col">Name</th>
                 <th text-translate="true" scope="col">Automatically Approved</th>
                 <th text-translate="true" scope="col">Claimed</th>
-                <th scope="col" class="actions-col"></th>
+                <th scope="col" class="tw:text-right tw:print:hidden"></th>
             </tr>
             </thead>
             <tbody>
             @foreach (var pp in Model.PullPayments)
             {
                 <tr class="mass-action-row">
-                    <td class="date-col">@pp.StartDate.ToBrowserDate()</td>
+                    <td class="tw:min-w-32">@pp.StartDate.ToBrowserDate()</td>
                     <td>
                         <a
                             permission="@Policies.CanManagePullPayments"
@@ -133,7 +133,7 @@
                             </div>
                         </div>
                     </td>
-                    <td class="actions-col">
+                    <td class="tw:text-right tw:print:hidden">
                         <div class="d-inline-flex align-items-center gap-3">
                             <button type="button" data-clipboard="@Url.ActionAbsolute(Context.Request, "ViewPullPayment", "UIPullPayment", new { pullPaymentId = pp.Id })"
                                permission="@Policies.CanViewPullPayments"

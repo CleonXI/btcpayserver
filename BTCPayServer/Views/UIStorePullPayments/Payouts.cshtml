@@ -151,7 +151,7 @@
                                 <input type="checkbox" class="form-check-input mass-action-select-all" data-payout-state="@Model.PayoutState.ToString()" />
                             </th>
                         }
-                        <th class="date-col">
+                        <th class="tw:min-w-32">
                             <div class="d-flex align-items-center gap-3">
                                 <span text-translate="true">Date</span>
                                 <button type="button" class="btn btn-link p-0 switch-time-format only-for-js" title="Switch date format">
@@ -161,7 +161,7 @@
                         </th>
                         <th text-translate="true">Source</th>
                         <th text-translate="true">Destination</th>
-                        <th text-translate="true" class="amount-col">Amount</th>
+                        <th text-translate="true" class="tw:text-right tw:whitespace-nowrap">Amount</th>
                         @if (Model.PayoutState != PayoutState.AwaitingApproval)
                         {
                             <th text-translate="true" class="text-end">Transaction</th>
@@ -204,7 +204,7 @@
                                     <input type="hidden" asp-for="Payouts[i].PayoutId" />
                                 </td>
                             }
-                            <td class="date-col align-middle">
+                            <td class="tw:min-w-32 align-middle">
                                 @pp.Date.ToBrowserDate()
                             </td>
                             <td class="align-middle">
@@ -220,7 +220,7 @@
                             <td class="align-middle">
                                 <vc:truncate-center text="@pp.Destination" classes="truncate-center-id" />
                             </td>
-                            <td class="amount-col align-middle">
+                            <td class="tw:text-right tw:whitespace-nowrap align-middle">
                                 <span data-sensitive>@pp.Amount</span>
                             </td>
                             @if (Model.PayoutState != PayoutState.AwaitingApproval)

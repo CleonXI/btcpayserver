@@ -231,6 +231,9 @@
   --font-weight-btcpay-normal: var(--btcpay-font-weight-normal);
   --font-weight-btcpay-semibold: var(--btcpay-font-weight-semibold);
   --font-weight-btcpay-bold: var(--btcpay-font-weight-bold);
+
+  /* Breakpoints (aligned with Bootstrap) */
+  --breakpoint-xxl: 1400px;
 }
 
 /* ============================================================
@@ -1037,12 +1040,6 @@
     }
   }
 
-  @media (min-width: 1400px) {
-    .col-xxl-constrain {
-      max-width: 984px;
-    }
-  }
-
   a.unobtrusive-link {
     color: inherit;
     text-decoration: inherit;
@@ -1135,16 +1132,6 @@
     display: inline-block;
   }
 
-  .feedback-icon-loading {
-    color: var(--btcpay-warning);
-  }
-  .feedback-icon-success {
-    color: var(--btcpay-success);
-  }
-  .feedback-icon-failed {
-    color: var(--btcpay-danger);
-  }
-
   .pin-button {
     height: 135px;
     margin-top: 20px;
@@ -1186,10 +1173,6 @@
     margin-top: .5rem;
   }
 
-  .form-control-constrained { max-width: 12ch; }
-  .form-control-narrow { max-width: 10ch; }
-  .store-logo-preview { height: 2.1rem; max-width: 10.5rem; }
-  .progress-thin { height: 5px; }
   .no-marker > ul { list-style-type: none; padding-left: 0; }
   .profile-picture {
     height: var(--profile-picture-size, 2.1rem);
@@ -1198,7 +1181,6 @@
     object-fit: cover;
   }
   .switch-time-format { line-height: 1; }
-  .icon-note { color: var(--btcpay-neutral-500); }
 
   /* --- Site: Print --- */
   @media print {
@@ -1240,7 +1222,6 @@
     .card {
       page-break-inside: avoid;
     }
-    .actions-col,
     .sticky-header > div:last-child,
     .sticky-header > .btn:last-child {
       display: none;
@@ -2091,24 +2072,6 @@
   }
 
   /* --- Site: Tables --- */
-  .date-col {
-    min-width: 8rem;
-  }
-  .amount-col {
-    text-align: right;
-    white-space: nowrap;
-  }
-  .fee-col {
-    text-align: right;
-    white-space: nowrap;
-  }
-  .rate-col {
-    text-align: right;
-    white-space: nowrap;
-  }
-  .actions-col {
-    text-align: right;
-  }
 
   /* --- Site: Mass Actions --- */
   .mass-action-head,

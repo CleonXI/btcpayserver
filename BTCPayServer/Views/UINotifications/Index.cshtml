@@ -123,7 +123,7 @@
                                 <input name="selectedItems" type="checkbox" class="form-check-input mass-action-select-all" />
                             </th>
                             <th text-translate="true">Message</th>
-                            <th class="date-col">
+                            <th class="tw:min-w-32">
                                 <div class="d-flex align-items-center gap-3">
                                     <span text-translate="true">Date</span>
                                     <button type="button" class="btn btn-link p-0 switch-time-format only-for-js" title="@StringLocalizer["Switch date format"]">
@@ -174,7 +174,7 @@
                                 <td>
                                     @item.Body
                                 </td>
-                                <td class="date-col fw-normal">@item.Created.ToTimeAgo()</td>
+                                <td class="tw:min-w-32 fw-normal">@item.Created.ToTimeAgo()</td>
 
                                 <td class="text-end">
                                     <div class="d-inline-flex align-items-center gap-3">

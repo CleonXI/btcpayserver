@@ -288,7 +288,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th class="date-col">
+                <th class="tw:min-w-32">
                     <div class="d-flex align-items-center gap-3">
                         <span text-translate="true">Date</span>
                         <button type="button"
@@ -303,7 +303,7 @@
                 <th text-translate="true">Id</th>
                 <th text-translate="true">Labels</th>
                 <th text-translate="true">Status</th>
-                <th class="amount-col" text-translate="true">Amount</th>
+                <th class="tw:text-right tw:whitespace-nowrap" text-translate="true">Amount</th>
                 <th></th>
             </tr>
             </thead>
@@ -311,7 +311,7 @@
                 @foreach (var item in Model.Items)
                 {
                     <tr class="mass-action-row">
-                        <td class="date-col">
+                        <td class="tw:min-w-32">
                             @item.Created.ToBrowserDate()
                         </td>
                         <td>

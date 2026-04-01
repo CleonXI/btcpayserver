@@ -39,7 +39,7 @@
     </div>
     <partial name="_StatusMessage" />
     <div class="row">
-        <div class="col-xl-10 col-xxl-constrain">
+        <div class="col-xl-10 tw:xxl:max-w-[984px]">
             @if (!ViewContext.ModelState.IsValid)
             {
                 <div asp-validation-summary="All"></div>
@@ -155,7 +155,7 @@
     </div>
     <h3 class="my-3" text-translate="true">Testing</h3>
     <div class="row">
-        <div class="col-xl-10 col-xxl-constrain">
+        <div class="col-xl-10 tw:xxl:max-w-[984px]">
             <div class="form-group">
                 <label asp-for="TestEmail" class="form-label" text-translate="true">To test your settings, enter an email address</label>
                 <input asp-for="TestEmail" placeholder="@StringLocalizer["Firstname Lastname <email@example.com>"]" class="form-control" />

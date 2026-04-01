@@ -20,7 +20,7 @@
 <partial name="_StatusMessage" />
 
 <div class="row">
-    <div class="col-xxl-constrain col-xl-10">
+    <div class="tw:xxl:max-w-[984px] col-xl-10">
         @if (Model.Any())
         {
             <div class="table-responsive-md mt-0">
@@ -28,7 +28,7 @@
                     <thead>
                         <tr>
                             <th text-translate="true">Name</th>
-                            <th text-translate="true" class="actions-col" permission="@Policies.CanModifyStoreSettings">Actions</th>
+                            <th text-translate="true" class="tw:text-right tw:print:hidden" permission="@Policies.CanModifyStoreSettings">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,7 @@
                                     <a asp-action="Modify" asp-route-storeId="@item.StoreId" asp-route-id="@item.Id" id="Edit-@item.Name" permission="@Policies.CanModifyStoreSettings">@item.Name</a>
                                     <a asp-action="ViewPublicForm" asp-route-formId="@item.Id" id="View-@item.Name" not-permission="@Policies.CanModifyStoreSettings">@item.Name</a>
                                 </td>
-                                <td class="actions-col" permission="@Policies.CanModifyStoreSettings">
+                                <td class="tw:text-right tw:print:hidden" permission="@Policies.CanModifyStoreSettings">
                                     <a asp-action="Remove" asp-route-storeId="@item.StoreId" asp-route-id="@item.Id" id="Remove-@item.Id" data-bs-toggle="modal" data-bs-target="#ConfirmModal"  data-confirm-input="@StringLocalizer["Delete"]" text-translate="true">Remove</a> -
                                     <a asp-action="ViewPublicForm" asp-route-formId="@item.Id" id="View-@item.Name" text-translate="true">View</a>
                                 </td>

@@ -75,7 +75,7 @@ else
                 }
                 <th text-translate="true">To</th>
                 <th text-translate="true">Subject</th>
-                <th class="actions-col" permission="@Model.ModifyPermission"></th>
+                <th class="tw:text-right tw:print:hidden" permission="@Model.ModifyPermission"></th>
             </tr>
             </thead>
             <tbody>
@@ -89,7 +89,7 @@ else
                     }
                     <td>@string.Join(", ", rule.To)</td>
                     <td>@rule.Subject</td>
-                    <td class="actions-col" permission="@Model.ModifyPermission">
+                    <td class="tw:text-right tw:print:hidden" permission="@Model.ModifyPermission">
                         <div class="d-inline-flex align-items-center gap-3">
                         @if (storeId is not null)
                         {

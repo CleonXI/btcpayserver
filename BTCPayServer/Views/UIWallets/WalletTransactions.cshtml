@@ -337,7 +337,7 @@
             <th class="only-for-js mass-action-select-col">
                 <input type="checkbox" class="form-check-input mass-action-select-all" />
             </th>
-            <th class="date-col">
+            <th class="tw:min-w-32">
                 <div class="d-flex align-items-center gap-3">
                         <span text-translate="true">Date</span>
                         <button type="button" class="btn btn-link p-0 switch-time-format only-for-js" title="@StringLocalizer["Switch date format"]">
@@ -347,11 +347,11 @@
             </th>
             <th text-translate="true" style="min-width:125px">Label</th>
             <th text-translate="true">Transaction</th>
-            <th text-translate="true" class="amount-col">Amount</th>
-            <th text-translate="true" class="fee-col">Transaction fee</th>
+            <th text-translate="true" class="tw:text-right tw:whitespace-nowrap">Amount</th>
+            <th text-translate="true" class="tw:text-right tw:whitespace-nowrap">Transaction fee</th>
             @foreach (var rate in Model.Rates)
             {
-                <th class="rate-col"><span text-translate="true">Rate</span>&nbsp;<span>(@rate)</span></th>
+                <th class="tw:text-right tw:whitespace-nowrap"><span text-translate="true">Rate</span>&nbsp;<span>(@rate)</span></th>
             }
             <th></th>
         </tr>
