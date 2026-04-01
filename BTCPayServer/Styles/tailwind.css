@@ -1193,16 +1193,13 @@
     .text-md-nowrap {
       white-space: nowrap;
     }
+    .smMaxWidth {
+      max-width: 300px;
+    }
   }
 
   .smMaxWidth {
     max-width: 150px;
-  }
-
-  @media (min-width: 768px) {
-    .smMaxWidth {
-      max-width: 300px;
-    }
   }
 
   a.unobtrusive-link {
@@ -3156,9 +3153,6 @@
   }
 
   /* --- Utility replacements --- */
-  @media (min-width: 1400px) {
-    .content-constrain-xxl { max-width: 984px; }
-  }
   .min-w-date-col { min-width: 8rem; }
   .max-w-input-12ch { max-width: 12ch; }
   .max-w-input-10ch { max-width: 10ch; }
@@ -3178,22 +3172,6 @@
     padding-left: calc(var(--btcpay-gutter-x) * 0.5);
     margin-right: auto;
     margin-left: auto;
-  }
-
-  @media (min-width: 576px) {
-    .container { max-width: 540px; }
-  }
-  @media (min-width: 768px) {
-    .container { max-width: 720px; }
-  }
-  @media (min-width: 992px) {
-    .container { max-width: 960px; }
-  }
-  @media (min-width: 1200px) {
-    .container { max-width: 1140px; }
-  }
-  @media (min-width: 1400px) {
-    .container { max-width: 1320px; }
   }
 
   .row {
@@ -3217,20 +3195,12 @@
 
   .col { flex: 1 0 0%; }
   .col-auto { flex: 0 0 auto; width: auto; }
-  .col-1 { flex: 0 0 auto; width: 8.33333%; }
-  .col-2 { flex: 0 0 auto; width: 16.66667%; }
-  .col-3 { flex: 0 0 auto; width: 25%; }
   .col-4 { flex: 0 0 auto; width: 33.33333%; }
-  .col-5 { flex: 0 0 auto; width: 41.66667%; }
-  .col-6 { flex: 0 0 auto; width: 50%; }
-  .col-7 { flex: 0 0 auto; width: 58.33333%; }
   .col-8 { flex: 0 0 auto; width: 66.66667%; }
-  .col-9 { flex: 0 0 auto; width: 75%; }
-  .col-10 { flex: 0 0 auto; width: 83.33333%; }
-  .col-11 { flex: 0 0 auto; width: 91.66667%; }
   .col-12 { flex: 0 0 auto; width: 100%; }
 
   @media (min-width: 576px) {
+    .container { max-width: 540px; }
     .col-sm { flex: 1 0 0%; }
     .col-sm-auto { flex: 0 0 auto; width: auto; }
     .col-sm-1 { flex: 0 0 auto; width: 8.33333%; }
@@ -3248,6 +3218,7 @@
   }
 
   @media (min-width: 768px) {
+    .container { max-width: 720px; }
     .col-md { flex: 1 0 0%; }
     .col-md-auto { flex: 0 0 auto; width: auto; }
     .col-md-1 { flex: 0 0 auto; width: 8.33333%; }
@@ -3265,6 +3236,7 @@
   }
 
   @media (min-width: 992px) {
+    .container { max-width: 960px; }
     .col-lg { flex: 1 0 0%; }
     .col-lg-auto { flex: 0 0 auto; width: auto; }
     .col-lg-1 { flex: 0 0 auto; width: 8.33333%; }
@@ -3282,6 +3254,7 @@
   }
 
   @media (min-width: 1200px) {
+    .container { max-width: 1140px; }
     .col-xl { flex: 1 0 0%; }
     .col-xl-auto { flex: 0 0 auto; width: auto; }
     .col-xl-1 { flex: 0 0 auto; width: 8.33333%; }
@@ -3299,34 +3272,16 @@
   }
 
   @media (min-width: 1400px) {
+    .container { max-width: 1320px; }
+    .content-constrain-xxl { max-width: 984px; }
     .col-xxl { flex: 1 0 0%; }
-    .col-xxl-auto { flex: 0 0 auto; width: auto; }
-    .col-xxl-1 { flex: 0 0 auto; width: 8.33333%; }
-    .col-xxl-2 { flex: 0 0 auto; width: 16.66667%; }
-    .col-xxl-3 { flex: 0 0 auto; width: 25%; }
     .col-xxl-4 { flex: 0 0 auto; width: 33.33333%; }
-    .col-xxl-5 { flex: 0 0 auto; width: 41.66667%; }
     .col-xxl-6 { flex: 0 0 auto; width: 50%; }
-    .col-xxl-7 { flex: 0 0 auto; width: 58.33333%; }
     .col-xxl-8 { flex: 0 0 auto; width: 66.66667%; }
-    .col-xxl-9 { flex: 0 0 auto; width: 75%; }
-    .col-xxl-10 { flex: 0 0 auto; width: 83.33333%; }
-    .col-xxl-11 { flex: 0 0 auto; width: 91.66667%; }
-    .col-xxl-12 { flex: 0 0 auto; width: 100%; }
   }
 
-  .g-0, .gx-0 { --btcpay-gutter-x: 0; }
-  .g-0, .gy-0 { --btcpay-gutter-y: 0; }
-  .g-1, .gx-1 { --btcpay-gutter-x: 0.25rem; }
-  .g-1, .gy-1 { --btcpay-gutter-y: 0.25rem; }
-  .g-2, .gx-2 { --btcpay-gutter-x: 0.5rem; }
-  .g-2, .gy-2 { --btcpay-gutter-y: 0.5rem; }
-  .g-3, .gx-3 { --btcpay-gutter-x: 1rem; }
-  .g-3, .gy-3 { --btcpay-gutter-y: 1rem; }
-  .g-4, .gx-4 { --btcpay-gutter-x: 1.5rem; }
-  .g-4, .gy-4 { --btcpay-gutter-y: 1.5rem; }
-  .g-5, .gx-5 { --btcpay-gutter-x: 3rem; }
-  .g-5, .gy-5 { --btcpay-gutter-y: 3rem; }
+  .g-3 { --btcpay-gutter-x: 1rem; --btcpay-gutter-y: 1rem; }
+  .g-4 { --btcpay-gutter-x: 1.5rem; --btcpay-gutter-y: 1.5rem; }
 
   .btn {
     --btcpay-btn-padding-x: 1.5rem;
