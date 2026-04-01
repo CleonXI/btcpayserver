@@ -52,7 +52,7 @@
             {
                 <th class="text-center w-75px" text-translate="true">In use</th>
             }
-            <th class="tw:text-right tw:print:hidden" permission="@permission" text-translate="true">Actions</th>
+            <th class="text-end d-print-none" permission="@permission" text-translate="true">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -113,7 +113,7 @@
                         }
                     </td>
                 }
-                <td class="tw:text-right tw:print:hidden" permission="@permission">
+                <td class="text-end d-print-none" permission="@permission">
                     <div class="d-inline-flex align-items-center gap-3">
                         @if (role.IsServerRole && Model.DefaultRole != role.Id)
                         {

@@ -15,7 +15,7 @@
     <partial name="_StatusMessage" />
 
     <div class="row">
-        <div class="tw:xxl:max-w-[984px] col-xl-8">
+        <div class="content-constrain-xxl col-xl-8">
             @if (!ViewContext.ModelState.IsValid)
             {
                 <div asp-validation-summary="All" class="@(ViewContext.ModelState.ErrorCount.Equals(1) ? "no-marker" : "")"></div>
@@ -71,7 +71,7 @@
                         <input asp-for="LogoFile" type="file" class="form-control flex-grow">
                         @if (!string.IsNullOrEmpty(Model.LogoUrl))
                         {
-                            <img src="@Model.LogoUrl" alt="@Model.StoreName Logo" class="tw:h-[2.1rem] tw:max-w-[10.5rem]" loading="lazy"/>
+                            <img src="@Model.LogoUrl" alt="@Model.StoreName Logo" class="h-logo max-w-logo" loading="lazy"/>
                         }
                     </div>
                     <span asp-validation-for="LogoFile" class="text-danger"></span>
@@ -142,7 +142,7 @@
                     <vc:icon symbol="info"/>
                 </a>
                 <div class="input-group">
-                    <input inputmode="numeric" asp-for="InvoiceExpiration" class="form-control tw:max-w-[12ch]"/>
+                    <input inputmode="numeric" asp-for="InvoiceExpiration" class="form-control max-w-input-12ch"/>
                     <span class="input-group-text" text-translate="true">minutes</span>
                 </div>
                 <span asp-validation-for="InvoiceExpiration" class="text-danger"></span>
@@ -153,7 +153,7 @@
                     <vc:icon symbol="info"/>
                 </a>
                 <div class="input-group">
-                    <input inputmode="decimal" asp-for="PaymentTolerance" class="form-control tw:max-w-[12ch]"/>
+                    <input inputmode="decimal" asp-for="PaymentTolerance" class="form-control max-w-input-12ch"/>
                     <span class="input-group-text" text-translate="true">percent</span>
                 </div>
                 <span asp-validation-for="PaymentTolerance" class="text-danger"></span>
@@ -161,7 +161,7 @@
             <div class="form-group">
                 <label asp-for="BOLT11Expiration" class="form-label"></label>
                 <div class="input-group">
-                    <input inputmode="numeric" asp-for="BOLT11Expiration" class="form-control tw:max-w-[12ch]"/>
+                    <input inputmode="numeric" asp-for="BOLT11Expiration" class="form-control max-w-input-12ch"/>
 					<span class="input-group-text" text-translate="true">days</span>
                 </div>
                 <span asp-validation-for="BOLT11Expiration" class="text-danger"></span>
@@ -172,7 +172,7 @@
                     <vc:icon symbol="info"/>
                 </a>
                 <div class="input-group">
-                    <input inputmode="numeric" asp-for="MonitoringExpiration" class="form-control tw:max-w-[10ch]"/>
+                    <input inputmode="numeric" asp-for="MonitoringExpiration" class="form-control max-w-input-10ch"/>
                     <span class="input-group-text" text-translate="true">minutes</span>
                 </div>
                 <span asp-validation-for="MonitoringExpiration" class="text-danger"></span>
@@ -211,7 +211,7 @@
             <div class="form-group">
                 <label asp-for="RecommendedFeeBlockTarget" class="form-label"></label>
                 <div class="input-group">
-                    <input inputmode="numeric" asp-for="RecommendedFeeBlockTarget" class="form-control tw:max-w-[10ch]" min="1" />
+                    <input inputmode="numeric" asp-for="RecommendedFeeBlockTarget" class="form-control max-w-input-10ch" min="1" />
 					<span class="input-group-text" text-translate="true">blocks</span>
                 </div>
                 <span asp-validation-for="RecommendedFeeBlockTarget" class="text-danger"></span>

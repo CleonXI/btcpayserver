@@ -111,7 +111,7 @@
         </div>
     </div>
     <div class="row mt-3">
-        <div class="tw:xxl:max-w-[984px]">
+        <div class="content-constrain-xxl">
             <div class="form-group">
                 <label asp-for="Description" class="form-label" data-required></label>
                 <textarea asp-for="Description" rows="20" cols="40" class="form-control richtext"></textarea>
@@ -120,7 +120,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-10 tw:xxl:max-w-[984px]">
+        <div class="col-xl-10 content-constrain-xxl">
             <h3 class="mt-5 mb-4">Goal</h3>
             <div class="d-flex flex-wrap gap-3 mb-3">
                 <div class="form-group w-250px mb-0">
@@ -193,12 +193,12 @@
         </div>
     </div>
     <div id="perks" class="row">
-        <div class="tw:xxl:max-w-[984px]">
+        <div class="content-constrain-xxl">
             <partial name="TemplateEditor" model="@(nameof(Model.PerksTemplate), Model.PerksTemplate, "Perks", Model.TargetCurrency ?? Model.StoreDefaultCurrency)" />
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-8 tw:xxl:max-w-[984px]">
+        <div class="col-xl-8 content-constrain-xxl">
             <h3 class="mt-5 mb-4" text-translate="true">Contributions</h3>
             <div class="d-flex mb-3">
                 <input asp-for="SortPerksByPopularity" type="checkbox" class="btcpay-toggle me-3" />

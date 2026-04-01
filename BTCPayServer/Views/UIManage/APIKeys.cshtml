@@ -16,7 +16,7 @@
 </div>
 <partial name="_StatusMessage" />
 <div class="row">
-    <div class="col-xl-10 tw:xxl:max-w-[984px]">
+    <div class="col-xl-10 content-constrain-xxl">
         <p>
             @ViewLocalizer["The {0} offers programmatic access to your instance. You can manage your BTCPay Server (e.g. stores, invoices, users) as well as automate workflows and integrations (see {1}). For that you need the API keys, which can be generated here. Find more information in the {2}.",
                 Html.ActionLink(StringLocalizer["Greenfield API"], "SwaggerDocs", "UIHome", new { }, new { target = "_blank",  rel = "noreferrer noopener" }),
@@ -32,7 +32,7 @@
                         <th text-translate="true">Label</th>
                         <th text-translate="true" class="w-125px">Key</th>
                         <th text-translate="true">Permissions</th>
-                        <th class="tw:text-right tw:print:hidden"></th>
+                        <th class="text-end d-print-none"></th>
                     </tr>
                 </thead>
                 <tbody>

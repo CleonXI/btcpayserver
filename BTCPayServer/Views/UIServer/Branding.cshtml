@@ -22,7 +22,7 @@
     <partial name="_StatusMessage" />
 
     <div class="row">
-        <div class="col-xl-8 tw:xxl:max-w-[984px]">
+        <div class="col-xl-8 content-constrain-xxl">
             <div class="form-group">
                 <label asp-for="ServerName" class="form-label"></label>
                 <input asp-for="ServerName" class="form-control" />
@@ -63,7 +63,7 @@
                         <input asp-for="LogoFile" type="file" class="form-control flex-grow">
                         @if (!string.IsNullOrEmpty(Model.LogoUrl))
                         {
-                            <img src="@Model.LogoUrl" alt="Logo" class="tw:h-[2.1rem] tw:max-w-[10.5rem]" loading="lazy"/>
+                            <img src="@Model.LogoUrl" alt="Logo" class="h-logo max-w-logo" loading="lazy"/>
                         }
                     </div>
                     <span asp-validation-for="LogoFile" class="text-danger"></span>

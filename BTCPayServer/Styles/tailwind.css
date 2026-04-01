@@ -999,11 +999,6 @@
     display: inline-block;
   }
 
-  .no-gutter > [class*='col-'] {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
   .hide-when-js,
   .input-group-clear {
     display: none;
@@ -1513,25 +1508,6 @@
     .widget.store-numbers header h6 {
       margin-right: 0;
     }
-  }
-
-  /* --- Site: Trade Modal --- */
-  #tradeModal .qty { width: 41%; }
-  #tradeModal .btn-square { padding: 0; width: 2.5rem; height: 2.5rem; }
-
-  #tradeModal .trade-qty {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  #tradeModal .trade-qty .col-center {
-    flex: 0 0 2rem;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  #tradeModal .trade-qty .col-side {
-    flex: 1;
   }
 
   .modal-footer .modal-footer-left {
@@ -2149,112 +2125,6 @@
     }
   }
 
-  /* --- Wizard --- */
-  .wizard-body {
-    color: var(--btcpay-wizard-text);
-    background-color: var(--btcpay-wizard-bg);
-  }
-
-  #wizard-navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: -2rem;
-  }
-
-  #wizard-navbar a,
-  #wizard-navbar button {
-    position: relative;
-    color: var(--btcpay-body-text);
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: none;
-    background: none;
-  }
-
-  #wizard-navbar a::after,
-  #wizard-navbar button::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    content: "";
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    transition: background-color .2s, transform .2s;
-    background-color: transparent;
-  }
-
-  #wizard-navbar a .icon,
-  #wizard-navbar button .icon {
-    --icon-size: 1.75rem;
-  }
-
-  #wizard-navbar a:hover::after,
-  #wizard-navbar button:hover::after {
-    background-color: var(--btcpay-body-bg-hover);
-  }
-
-  #wizard-navbar a:active::after,
-  #wizard-navbar button:active::after {
-    transform: scale(.825);
-  }
-
-  #wizard-navbar .cancel {
-    margin-left: auto;
-  }
-
-  /* Wizard list-group overrides */
-  .wizard-body .list-group-item {
-    display: flex;
-    padding: 0;
-  }
-
-  .wizard-body .list-group-item.hide-when-js {
-    display: flex !important;
-  }
-
-  .wizard-body .list-group-item:active,
-  .wizard-body .list-group-item.active {
-    background-color: transparent;
-  }
-
-  .wizard-body .list-group-item .image {
-    display: flex;
-    flex: 0 0 90px;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-  }
-
-  .wizard-body .list-group-item .image .icon {
-    --icon-size: 2rem;
-  }
-
-  .wizard-body .list-group-item .content {
-    flex: 1;
-    padding: 1.5rem;
-  }
-
-  .wizard-body .list-group-item .content small {
-    font-size: 90%;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .wizard-body .list-group-item .image + .content {
-    padding-left: .5rem;
-  }
-
-  .wizard-body .list-group-item .icon-caret-right {
-    margin-right: 1.5rem;
-  }
-
   /* --- Editor --- */
   .editor .nav-pills .nav-link {
     background: none;
@@ -2363,98 +2233,6 @@
   .qr-container svg {
     width: 256px;
     height: 256px;
-  }
-
-  /* --- Checkout --- */
-  #Checkout {
-    --wrap-max-width: 400px;
-  }
-
-  .checkout-body {
-    overflow-x: hidden;
-  }
-
-  .checkout-body main {
-    position: relative;
-    border-radius: var(--border-radius);
-    background-color: var(--btcpay-bg-tile);
-  }
-
-  .checkout-body nav {
-    position: absolute;
-    top: var(--btcpay-space-m);
-    left: var(--btcpay-space-m);
-    right: var(--btcpay-space-m);
-  }
-
-  .checkout-body nav button {
-    position: absolute;
-    top: 0;
-    border: none;
-    background: none;
-    color: var(--btcpay-body-text-muted);
-  }
-
-  .checkout-body nav button:hover {
-    color: var(--btcpay-body-text-hover);
-  }
-
-  .checkout-body nav button#close {
-    inset-inline-end: 0;
-  }
-
-  .checkout-body nav button .icon {
-    --navbutton-size: .8rem;
-    width: var(--navbutton-size);
-    height: var(--navbutton-size);
-  }
-
-  .checkout-body section h4 {
-    margin-bottom: var(--btcpay-space-l);
-    font-weight: var(--btcpay-font-weight-semibold);
-    text-align: center;
-  }
-
-  .checkout-body section h5,
-  .checkout-body section h6 {
-    margin-bottom: 1.5rem;
-    font-weight: var(--btcpay-font-weight-semibold);
-    text-align: center;
-  }
-
-  .checkout-body section .top {
-    flex: 1;
-  }
-
-  .checkout-body section .buttons {
-    display: flex;
-    flex-direction: column;
-    gap: var(--btcpay-space-m);
-  }
-
-  .checkout-body section dl > div {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--btcpay-space-m);
-  }
-
-  .checkout-body section dl > div dt,
-  .checkout-body section dl > div dd {
-    margin: 0;
-    padding: var(--btcpay-space-xs) 0;
-    font-weight: var(--btcpay-font-weight-normal);
-  }
-
-  .checkout-body section dl > div dt {
-    text-align: start;
-    white-space: nowrap;
-    color: var(--btcpay-body-text-muted);
-  }
-
-  .checkout-body section dl > div dd {
-    text-align: end;
-    word-wrap: break-word;
-    max-width: 62.5%;
   }
 
   .info {
@@ -3154,4 +2932,15 @@
     border-bottom-right-radius: var(--btcpay-card-inner-border-radius);
     border-bottom-left-radius: var(--btcpay-card-inner-border-radius);
   }
+
+  /* --- Utility replacements --- */
+  @media (min-width: 1400px) {
+    .content-constrain-xxl { max-width: 984px; }
+  }
+  .min-w-date-col { min-width: 8rem; }
+  .max-w-input-12ch { max-width: 12ch; }
+  .max-w-input-10ch { max-width: 10ch; }
+  .max-w-logo { max-width: 10.5rem; }
+  .h-progress-sm { height: 5px; }
+  .h-logo { height: 2.1rem; }
 }

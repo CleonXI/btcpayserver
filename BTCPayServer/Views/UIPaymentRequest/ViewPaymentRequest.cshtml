@@ -117,7 +117,7 @@
                         }
                     </p>
                     <dl class="mt-n1 mb-4" v-if="srvModel.amountCollected > 0 && srvModel.amountDue > 0">
-                        <div class="progress bg-light d-flex mb-3 d-print-none tw:h-[5px]">
+                        <div class="progress bg-light d-flex mb-3 d-print-none h-progress-sm">
                             @{
                                 var prcnt = Model.Amount == 0? 100:  Model.AmountCollected / Model.Amount * 100;
                             }
@@ -230,19 +230,19 @@
                                 <thead>
                                 <tr>
                                     <th class="fw-normal text-secondary" scope="col" text-translate="true">Invoice Id</th>
-                                    <th class="fw-normal text-secondary tw:text-right tw:whitespace-nowrap w-125px" text-translate="true">Amount</th>
+                                    <th class="fw-normal text-secondary text-end text-nowrap w-125px" text-translate="true">Amount</th>
                                     <th class="fw-normal text-secondary text-end w-225px" text-translate="true">Status</th>
-                                    <th class="w-50px tw:text-right tw:print:hidden"></th>
+                                    <th class="w-50px text-end d-print-none"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td class="align-middle"><vc:truncate-center is-vue="true" text="invoice.id" padding="7" classes="truncate-center-id" /></td>
-                                        <td class="align-middle tw:text-right tw:whitespace-nowrap">{{invoice.amountFormatted}}</td>
+                                        <td class="align-middle text-end text-nowrap">{{invoice.amountFormatted}}</td>
                                         <td class="align-middle text-end text-print-default">
                                             <span class="badge" :class="`badge-${statusClass(invoice.stateFormatted)}`">{{invoice.stateFormatted}}</span>
                                         </td>
-                                        <td class="align-middle tw:text-right tw:print:hidden">
+                                        <td class="align-middle text-end d-print-none">
                                             <div class="d-inline-flex align-items-center gap-2">
                                                 <button class="accordion-button collapsed only-for-js ms-0 d-inline-block" type="button" :aria-controls="`invoice_details_${invoice.id}`" :aria-expanded="showDetails(invoice.id) ? 'true' : 'false'" v-if="invoice.payments && invoice.payments.length > 0" v-on:click="toggleDetails(invoice.id)">
                                                     <vc:icon symbol="caret-down" />
@@ -252,13 +252,13 @@
                                     </tr>
                                     <tr v-collapsible="showDetails(invoice.id)" :id="`invoice_details_${invoice.id}`" v-if="invoice.payments && invoice.payments.length > 0">
                                         <th class="fw-normal text-secondary" text-translate="true">Transaction</th>
-                                        <th class="fw-normal text-secondary tw:text-right tw:whitespace-nowrap" text-translate="true">Paid</th>
+                                        <th class="fw-normal text-secondary text-end text-nowrap" text-translate="true">Paid</th>
                                         <th class="fw-normal text-secondary text-end" text-translate="true">Payment</th>
                                     </tr>
                                     <tr v-collapsible="showDetails(invoice.id)" v-for="payment of invoice.payments" :key="`invoice_payment_${payment.id}`">
                                         <td class="text-break"><vc:truncate-center is-vue="true" text="payment.id" link="payment.link" padding="7" classes="truncate-center-id" /></td>
-                                        <td class="tw:text-right tw:whitespace-nowrap">{{payment.paidFormatted}}</td>
-                                        <td class="tw:text-right tw:whitespace-nowrap">{{payment.amountFormatted}} {{payment.paymentMethod}}</td>
+                                        <td class="text-end text-nowrap">{{payment.paidFormatted}}</td>
+                                        <td class="text-end text-nowrap">{{payment.amountFormatted}} {{payment.paymentMethod}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -278,14 +278,14 @@
                                         <thead>
                                         <tr>
                                             <th class="fw-normal text-secondary" scope="col" text-translate="true">Invoice Id</th>
-                                            <th class="fw-normal text-secondary tw:text-right tw:whitespace-nowrap w-125px" text-translate="true">Amount</th>
+                                            <th class="fw-normal text-secondary text-end text-nowrap w-125px" text-translate="true">Amount</th>
                                             <th class="fw-normal text-secondary text-end" text-translate="true">Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td><vc:truncate-center text="@invoice.Id" padding="7" classes="truncate-center-id" /></td>
-                                            <td class="tw:text-right tw:whitespace-nowrap">@invoice.AmountFormatted</td>
+                                            <td class="text-end text-nowrap">@invoice.AmountFormatted</td>
                                             <td class="text-end text-print-default">
                                                 <span class="badge badge-@StatusClass(invoice.State)">@invoice.StateFormatted</span>
                                             </td>
@@ -294,14 +294,14 @@
                                         {
                                             <tr>
                                                 <th class="fw-normal text-secondary" text-translate="true">Transaction</th>
-                                                <th class="fw-normal text-secondary tw:text-right tw:whitespace-nowrap" text-translate="true">Paid</th>
+                                                <th class="fw-normal text-secondary text-end text-nowrap" text-translate="true">Paid</th>
                                                 <th class="fw-normal text-secondary text-end" text-translate="true">Payment</th>
                                             </tr>
                                             @foreach (var payment in invoice.Payments)
                                             {
                                                 <tr>
                                                     <td class="text-break"><vc:truncate-center text="@payment.Id" link="@payment.Link" padding="7" classes="truncate-center-id" /></td>
-                                                    <td class="tw:text-right tw:whitespace-nowrap">@payment.PaidFormatted</td>
+                                                    <td class="text-end text-nowrap">@payment.PaidFormatted</td>
                                                     <td class="text-end text-nowrap">@payment.AmountFormatted</td>
                                                 </tr>
                                             }

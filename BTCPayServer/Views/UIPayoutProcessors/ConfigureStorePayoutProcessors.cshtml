@@ -14,7 +14,7 @@
 <p text-translate="true">Payout Processors allow BTCPay Server to handle payouts in an automated way.</p>
 
 <div class="row">
-    <div class="col-xl-8 tw:xxl:max-w-[984px]">
+    <div class="col-xl-8 content-constrain-xxl">
         @if (Model.Any())
         {
             foreach (var processorsView in Model)
@@ -24,7 +24,7 @@
                     <thead>
                     <tr>
                         <th text-translate="true">Payment Method</th>
-                        <th class="tw:text-right tw:print:hidden" permission="@Policies.CanModifyStoreSettings"></th>
+                        <th class="text-end d-print-none" permission="@Policies.CanModifyStoreSettings"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,7 @@
                             <td>
                                 @conf.Key.ToString()
                             </td>
-                            <td class="tw:text-right tw:print:hidden" permission="@Policies.CanModifyStoreSettings">
+                            <td class="text-end d-print-none" permission="@Policies.CanModifyStoreSettings">
                                 @if (conf.Value is null)
                                 {
                                     <a id="Configure-@conf.Key" href="@processorsView.Factory.ConfigureLink(storeId, conf.Key, Context.Request)" text-translate="true">Configure</a>

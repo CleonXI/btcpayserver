@@ -12,7 +12,7 @@
 
 <form method="post">
     <div class="row mb-5">
-        <div class="col-xl-8 tw:xxl:max-w-[984px]">
+        <div class="col-xl-8 content-constrain-xxl">
             <div class="form-group">
                 <label asp-for="DNSDomain" class="form-label"></label>
                 <input asp-for="DNSDomain" class="form-control" disabled="@(Model.CanUseSSH ? null : "disabled")" />
