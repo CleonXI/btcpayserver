@@ -3162,6 +3162,71 @@
     padding: 1rem;
   }
 
+  .flex-row-gap-2 {
+    @apply flex items-center gap-2;
+  }
+
+  .flex-row-gap-4 {
+    @apply flex items-center gap-4;
+  }
+
+  .inline-flex-row-gap-2 {
+    @apply inline-flex items-center gap-2;
+  }
+
+  .inline-flex-row-gap-4 {
+    @apply inline-flex items-center gap-4;
+  }
+
+  .flex-between-gap-2 {
+    @apply flex items-center justify-between gap-2;
+  }
+
+  .page-subtitle {
+    max-width: 36em;
+    margin: 1rem auto 2.5rem;
+    color: var(--btcpay-body-text-muted);
+  }
+
+  .page-subtitle :last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 400px) {
+    .page-subtitle {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  .th-muted-end {
+    font-weight: var(--btcpay-font-weight-normal);
+    color: var(--btcpay-body-text-muted);
+    text-align: end;
+  }
+
+  .tile-card {
+    display: flex;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background-color: var(--btcpay-bg-tile);
+    border-radius: 0.25rem;
+  }
+
+  .tile-section {
+    background-color: var(--btcpay-bg-tile);
+    height: 100%;
+    margin: 0;
+    padding: 1rem;
+    border-radius: 0.25rem;
+  }
+
+  @media (min-width: 576px) {
+    .tile-section {
+      padding: 3rem;
+    }
+  }
+
   /* --- Utility replacements --- */
   @media (min-width: 1400px) {
     .content-constrain-xxl { max-width: 984px; }
