@@ -68,11 +68,13 @@
         }
         onModalWillEnterMethod();
         iframe.style.display = 'block';
+        iframe.removeAttribute('aria-hidden');
     }
 
     function hideFrame() {
         onModalWillLeaveMethod();
         iframe.style.display = 'none';
+        iframe.setAttribute('aria-hidden', 'true');
         showingInvoice = false;
         iframe = window.document.body.removeChild(iframe);
     }

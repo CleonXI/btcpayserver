@@ -9,7 +9,7 @@ function startAuthCheck(url, onSuccess) {
             }
         };
         request.open("GET", url, true);
-        request.send(new FormData());
+        request.send();
     }
     check();
 }

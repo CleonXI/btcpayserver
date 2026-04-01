@@ -419,10 +419,9 @@ const posCommon = {
     mounted () {
         if (this.$refs.categories) {
             const getInnerNavWidth = () => {
-                // set to inline display, get width to get the real inner width, then set back to flex
                 this.$refs.categoriesNav.classList.remove('d-flex');
                 this.$refs.categoriesNav.classList.add('d-inline-flex');
-                const navWidth = this.$refs.categoriesNav.clientWidth - 32; // 32 is the margin
+                const navWidth = this.$refs.categoriesNav.clientWidth - 32;
                 this.$refs.categoriesNav.classList.remove('d-inline-flex');
                 this.$refs.categoriesNav.classList.add('d-flex');
                 return navWidth;
@@ -433,9 +432,10 @@ const posCommon = {
                 const activeEl = document.querySelector('#Categories .btcpay-pills input:checked + label')
                 if (activeEl) activeEl.scrollIntoView({ block: 'end', inline: 'center' })
             }
-            window.addEventListener('resize', e => {
+            this._resizeHandler = () => {
                 debounce('resize', adjustCategories, 50)
-            });
+            };
+            window.addEventListener('resize', this._resizeHandler);
             adjustCategories();
         }
 
@@ -459,5 +459,13 @@ const posCommon = {
         })
 
         this.updateDisplay()
+    },
+    beforeUnmount () {
+        if (this._resizeHandler) {
+            window.removeEventListener('resize', this._resizeHandler);
+        }
+        if (this.$refs.RecentTransactions) {
+            this.$refs.RecentTransactions.removeEventListener('show.bs.modal', this.loadRecentTransactions);
+        }
     }
 }

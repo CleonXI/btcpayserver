@@ -374,9 +374,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isPassword) {
             $el.setAttribute('type', 'text')
             if ($button.innerHTML.match('#actions-show')) $button.innerHTML = $button.innerHTML.replace('#actions-show', '#actions-hide');
+            $button.setAttribute('aria-label', 'Hide password');
         } else {
             $el.setAttribute('type', 'password')
             if ($button.innerHTML.match('#actions-hide')) $button.innerHTML = $button.innerHTML.replace('#actions-hide', '#actions-show');
+            $button.setAttribute('aria-label', 'Show password');
         }
     })
 

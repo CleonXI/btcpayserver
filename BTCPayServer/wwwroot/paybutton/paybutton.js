@@ -155,7 +155,7 @@ function inputChanges(vueApp, event, buttonSize) {
     const scripts = getScripts(srvModel);
     const code = html + (scripts.length ? `\n<script>\n    ${scripts.join('').trim()}\n</script>` : '')
 
-    $("#mainCode").text(code).html();
+    document.getElementById("mainCode").textContent = code;
     const preview = document.getElementById('preview');
     preview.innerHTML = html;
     scripts.forEach(snippet => {
@@ -190,8 +190,8 @@ function inputChanges(vueApp, event, buttonSize) {
         vueApp.lnurlLink = lnurlResult;
     }
     
-    $('pre code').each(function (i, block) {
-        hljs.highlightBlock(block);
+    document.querySelectorAll('pre code').forEach(block => {
+        hljs.highlightElement(block);
     });
 
     return html;
