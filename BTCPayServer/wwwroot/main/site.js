@@ -62,7 +62,6 @@ async function initLabelManager (elementId) {
         return [...serverLabels, ...newItems.map(item => ({ label: item }))];
     });
     const richInfo = labels ? JSON.parse(labels) : {};
-    let select;
     const refreshLabelOptions = async () => {
         if (!fetchUrl || !select) return;
 
@@ -220,7 +219,7 @@ async function initLabelManager (elementId) {
             }
         }
     };
-    select = new TomSelect(element, config);
+    const select = new TomSelect(element, config);
 
     element.parentElement.querySelectorAll('.ts-control .transaction-label a').forEach(lbl => {
         lbl.addEventListener('click', e => {
@@ -280,14 +279,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initLabelManagers();
 
-    let timeAgoTimer;
     function updateTimeAgo(){
         const elements = document.querySelectorAll("[data-timeago-unixms]");
         if (elements.length === 0) return;
         elements.forEach(el => {
             el.textContent = timeAgo(parseInt(el.dataset.timeagoUnixms));
         });
-        timeAgoTimer = setTimeout(updateTimeAgo, 1000);
+        setTimeout(updateTimeAgo, 1000);
     }
     updateTimeAgo();
 
@@ -547,7 +545,6 @@ if (window.Blazor) {
         async reconnect() {
             const delays = [500, 1000, 2000, 4000, 8000, 16000, 20000, 40000];
             let i = 0;
-            const lastDelay = delays.length - 1;
             while (i < delays.length) {
                 await this.delay(delays[i]);
                 try {

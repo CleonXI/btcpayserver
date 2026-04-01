@@ -238,8 +238,7 @@ app = createApp({
 
             showToast("Error creating invoice: " + msg, { type: 'error' });
         });
-        eventAggregator.$on("payment-received", function (amount, currency, prettyPMI, pmi) {
-            const onChain = pmi.endsWith("-CHAIN");
+        eventAggregator.$on("payment-received", function (amount, currency, prettyPMI) {
             if (self.sound) {
                 playRandomSound();
             }

@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     delegate("click", "#bip21parse", function () {
+        // eslint-disable-next-line no-alert
         const bip21 = prompt("Paste BIP21 here");
         if (bip21) {
             document.getElementById("BIP21").value = bip21;

@@ -78,6 +78,7 @@ window.BTCPayShopifyIntegrationModule = function () {
                 return response.json();
             }).catch(function () {
                 if (!backgroundCheck)
+                    // eslint-disable-next-line no-alert
                     alert("Could not initiate BTCPay Server payment method, try again later.");
             })
     }
