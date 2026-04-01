@@ -55,7 +55,7 @@
                     </td>
 					<td>@v.Fallback</td>
 					<td class="text-end print:hidden">
-						<div class="inline-flex items-center gap-4">
+						<div class="inline-flex-row-gap-4">
 							@if (v.IsDownloadedLanguagePack && v.UpdateAvailable)
 							{
 								<form method="post" asp-action="DownloadLanguagePack" asp-route-language="@v.DictionaryName" class="inline">

@@ -35,7 +35,7 @@
                 @if (Model.ShowCategories)
                 {
                     <div id="Categories" ref="categories" v-if="showCategories && allCategories" class="btcpay-pills flex flex-wrap items-center justify-center gap-4" :class="{ 'scrollable': categoriesScrollable }">
-                        <nav class="btcpay-pills flex items-center gap-4" ref="categoriesNav">
+                        <nav class="btcpay-pills flex-row-gap-4" ref="categoriesNav">
                             <template v-for="cat in allCategories">
                                 <input :id="`Category-${cat.value}`" type="radio" name="category" autocomplete="off" v-model="displayCategory" :value="cat.value">
                                 <label :for="`Category-${cat.value}`" class="btcpay-pill whitespace-nowrap">{{ cat.text }}</label>
@@ -65,7 +65,7 @@
 
                                 <div class="card-body flex flex-col gap-2 mb-auto">
                                     <h5 class="card-title m-0">{{ item.title }}</h5>
-                                    <div class="flex gap-2 items-center">
+                                    <div class="flex-row-gap-2">
                                         <span v-if="!item.hasPrice" class="font-semibold badge text-bg-btcpay-info">{{ item.priceFormatted }}</span>
                                         <span v-if="item.hasPrice" class="font-semibold">{{ item.priceFormatted }}</span>
                                         <span v-if="item.inventory !== null" class="badge text-bg-btcpay-warning inventory">
@@ -120,11 +120,11 @@
                                 <button type="button" v-on:click="removeFromCart(item.id)" class="btn btn-sm btn-link p-0 text-btcpay-danger font-semibold" text-translate="true">Remove</button>
                             </td>
                             <td class="align-middle">
-                                <div class="flex items-center gap-2 justify-end quantity">
+                                <div class="flex-row-gap-2 justify-end quantity">
                                     <span class="badge text-bg-btcpay-warning inventory" v-if="item.inventory">
                                         {{ item.inventoryText }}
                                     </span>
-                                    <div class="flex items-center gap-2 quantities">
+                                    <div class="flex-row-gap-2 quantities">
                                         <button type="button" v-on:click="updateQuantity(item.id, -1)" class="btn btn-minus">
                                             <span><vc:icon symbol="minus" css-class="ms-0" /></span>
                                         </button>

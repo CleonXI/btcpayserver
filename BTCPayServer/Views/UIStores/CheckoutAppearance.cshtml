@@ -149,7 +149,7 @@
                     </div>
                     <div class="collapse @(Model.PlaySoundOnPayment ? "show" : "")" id="PlaySoundOnPaymentOptions">
                         <div class="form-group mb-0 py-4">
-                            <div class="flex items-center justify-between gap-2">
+                            <div class="flex-between-gap-2">
                                 <label asp-for="SoundFile" class="form-label"></label>
                                 @if (!string.IsNullOrEmpty(Model.PaymentSoundUrl))
                                 {
@@ -161,7 +161,7 @@
                             </div>
                             @if (canUpload)
                             {
-                                <div class="flex items-center gap-4">
+                                <div class="flex-row-gap-4">
                                     <input asp-for="SoundFile" type="file" class="form-control grow">
                                     <audio controls src="@Model.PaymentSoundUrl" style="height:2.1rem;max-width:10.5rem;"></audio>
                                 </div>

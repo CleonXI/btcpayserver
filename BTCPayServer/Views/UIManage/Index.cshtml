@@ -47,7 +47,7 @@
         @if (canUpload)
         {
             <div class="form-group">
-                <div class="flex items-center justify-between gap-2">
+                <div class="flex-between-gap-2">
                     <label asp-for="ImageFile" class="form-label"></label>
                     @if (!string.IsNullOrEmpty(Model.ImageUrl))
                     {
@@ -57,7 +57,7 @@
                         </button>
                     }
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex-row-gap-4">
                     <input asp-for="ImageFile" type="file" class="form-control flex-grow">
                     @if (!string.IsNullOrEmpty(Model.ImageUrl))
                     {

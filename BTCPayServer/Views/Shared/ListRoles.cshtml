@@ -114,7 +114,7 @@
                     </td>
                 }
                 <td class="text-end print:hidden" permission="@permission">
-                    <div class="inline-flex items-center gap-4">
+                    <div class="inline-flex-row-gap-4">
                         @if (role.IsServerRole && Model.DefaultRole != role.Id)
                         {
                             <a permission="@Policies.CanModifyServerSettings" asp-action="SetDefaultRole" asp-route-role="@role.Role" asp-controller="UIServer" id="SetDefault" text-translate="true">Set as default</a>

@@ -202,7 +202,7 @@
             </div>
             <a href="@Model.Url" target="_blank" class="navbar-brand mb-0 h1 no-underline">@Model.StoreName</a>
         </div>
-        <div class="flex items-center gap-4">
+        <div class="flex-row-gap-4">
             @if (Model.Subscriber.TestAccount)
             {
                 @if (DateTimeOffset.UtcNow < Model.Subscriber.ReminderDate)
@@ -252,7 +252,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <h5 class="flex items-center gap-4 mb-2">
+                    <h5 class="flex-row-gap-4 mb-2">
                         <span data-testid="plan-name">@Model.Subscriber.Plan.Name</span>
                         @if (Model.Subscriber.Phase == SubscriberData.PhaseTypes.Trial)
                         {

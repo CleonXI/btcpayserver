@@ -16,7 +16,7 @@
             </div>
             <div class="modal-body">
                 <div v-if="recentTransactions.length" class="list-group list-group-flush">
-                    <a v-for="t in recentTransactions" :key="t.id" :href="t.url" class="list-group-item list-group-item-action flex items-center gap-4 pe-1 py-4">
+                    <a v-for="t in recentTransactions" :key="t.id" :href="t.url" class="list-group-item list-group-item-action flex-row-gap-4 pe-1 py-4">
                         <div class="flex items-baseline justify-between flex-wrap grow gap-2">
                             <span class="grow">{{displayDate(t.date)}}</span>
                             <span class="grow text-end">{{t.price}}</span>

@@ -48,7 +48,7 @@
         </ul>
     </details>
     <div class="flex justify-between items-center my-2">
-        <div class="flex gap-2 items-center">
+        <div class="flex-row-gap-2">
             <input class="form-check-input shrink-0"
                    id="select-all-checkbox"
                    type="checkbox"
@@ -57,7 +57,7 @@
             <span text-translate="true">Select All</span>
         </div>
 
-        <div class="flex gap-2 items-center">
+        <div class="flex-row-gap-2">
             <span text-translate="true">Sort by</span>
             <div class="btn-group gap-4" role="group">
                 <button type="button" class="btn btn-action"
@@ -128,7 +128,7 @@
                 <template text-translate="true" v-else>Hide unconfirmed coins</template>
             </button>
         </div>
-        <div class="flex gap-2 items-center">
+        <div class="flex-row-gap-2">
             <span class="text-btcpay-body-text-muted" text-translate="true">Page Size:</span>
             <div class="btn-group gap-2" role="group">
                 <button type="button" class="btn btn-action" :class="{active: pageSize === 10}" v-on:click="pageSize = 10; page = 0">10</button>

@@ -42,7 +42,7 @@
                         }
                         <div class="card-body flex flex-col gap-2 mb-auto">
                             <h5 class="card-title m-0">@Safe.Raw(item.Title)</h5>
-                            <div class="flex gap-2 items-center">
+                            <div class="flex-row-gap-2">
                                 @if (item.PriceType == AppItemPriceType.Topup || item.Price == 0)
                                 {
                                     <span class="font-semibold badge text-bg-btcpay-info">@Safe.Raw(char.ToUpper(formatted[0]) + formatted[1..])</span>

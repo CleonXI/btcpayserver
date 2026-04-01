@@ -2,7 +2,7 @@
 
 <template id="item-editor-upload">
     <div class="form-group">
-        <div class="flex items-center gap-2">
+        <div class="flex-row-gap-2">
             <input type="file" class="form-control" ref="input" v-on:change="fileChanged">
             <button class="btn btn-primary" type="button" v-on:click="upload" :disabled="disabled">Upload</button>
         </div>
@@ -98,7 +98,7 @@
 <template id="items-editor">
     <div>
         <div class="items list-group list-group-flush" v-sortable="{ handle: '.drag', onUpdate (event) { $emit('sort-items', event) } }">
-            <div v-for="(item, index) of items" class="inline-flex items-center gap-4 list-group-item" :key="item.id" :class="{ active: item === selectedItem }" v-on:click.stop="$emit('select-item', $event, index)">
+            <div v-for="(item, index) of items" class="inline-flex-row-gap-4 list-group-item" :key="item.id" :class="{ active: item === selectedItem }" v-on:click.stop="$emit('select-item', $event, index)">
                 <button type="button" class="btn b-0 control drag" :disabled="items.length === 1">
                     <vc:icon symbol="actions-drag" />
                 </button>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="flex flex-col gap-2">
                         <h5 class="card-title m-0" v-html="item.title"></h5>
-                        <div class="flex gap-2 items-center">
+                        <div class="flex-row-gap-2">
                             <span class="font-semibold badge text-bg-info" v-if="item.priceType === 'Topup' || item.price == 0">{{ item.priceType === 'Topup' ? 'Any amount' : 'Free' }}</span>
                             <span class="font-semibold text-btcpay-body-text-muted" v-else>{{ item.price }} @Model.currency{{ item.priceType === 'Minimum' ? ' minimum' : '' }}</span>
                             <span class="badge text-bg-warning" v-if="item.inventory">

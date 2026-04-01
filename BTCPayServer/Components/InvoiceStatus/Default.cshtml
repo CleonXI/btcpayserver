@@ -7,7 +7,7 @@
     var badgeClass = Model.State.Status.ToString().ToLower();
     var canMark = !string.IsNullOrEmpty(Model.InvoiceId) && (Model.State.CanMarkComplete() || Model.State.CanMarkInvalid());
 }
-<div class="inline-flex items-center gap-2">
+<div class="inline-flex-row-gap-2">
     @if (Model.IsArchived)
     {
         <span class="badge bg-btcpay-warning" text-translate="true">archived</span>

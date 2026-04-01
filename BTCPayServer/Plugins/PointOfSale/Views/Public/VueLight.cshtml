@@ -121,7 +121,7 @@
                 <div id="Categories" ref="categories" v-if="showCategories && allCategories"
                      class="w-full mt-4 btcpay-pills flex flex-wrap items-center justify-center gap-2"
                      :class="{ 'scrollable': categoriesScrollable }">
-                    <nav class="btcpay-pills flex items-center gap-4" ref="categoriesNav">
+                    <nav class="btcpay-pills flex-row-gap-4" ref="categoriesNav">
                         <template v-for="cat in allCategories">
                             <input :id="`Category-${cat.value}`" type="radio" name="category" autocomplete="off" v-model="displayCategory" :value="cat.value">
                             <label :for="`Category-${cat.value}`" class="btcpay-pill whitespace-nowrap">{{ cat.text }}</label>
@@ -153,7 +153,7 @@
                         </div>
                         <div class="flex flex-col gap-2">
                             <h5 class="card-title m-0">{{ item.title }}</h5>
-                            <div class="flex gap-2 items-center">
+                            <div class="flex-row-gap-2">
                                 <span v-if="!item.hasPrice" class="font-semibold badge text-bg-btcpay-info">{{ item.priceFormatted }}</span>
                                 <span v-if="item.hasPrice" class="font-semibold">{{ item.priceFormatted }}</span>
                                 <span v-if="item.inventory !== null" class="badge text-bg-btcpay-warning inventory">
@@ -161,7 +161,7 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="flex items-center gap-2 ms-auto quantities">
+                        <div class="flex-row-gap-2 ms-auto quantities">
                             <button type="button" v-on:click="updateQuantity(item.id, -1, true)" class="btn btn-minus"
                                     :disabled="getQuantity(item.id) <= 0 || item.disabled">
                                 <span><vc:icon symbol="minus" css-class="ms-0" /></span>

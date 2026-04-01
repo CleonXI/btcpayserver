@@ -78,7 +78,7 @@
             var detailsId = user.Stores.Any() ? $"user_details_{user.Id}" : null;
             <tr id="user_@user.Id" data-email="@user.Email" class="user-overview-row mass-action-row">
                 <td>
-                    <div class="flex items-center gap-2">
+                    <div class="flex-row-gap-2">
                         <span class="user-email">@user.Email</span>
                         @foreach (var role in user.Roles)
                         {

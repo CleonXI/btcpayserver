@@ -66,7 +66,7 @@
 </div>
 
 <div id="descriptor" class="collapse">
-    <div class="flex px-6 py-6 mb-6 bg-tile rounded">
+    <div class="tile-card">
         <div class="flex-1">
             <p class="mb-2" text-translate="true">Payment requests are persistent shareable pages that enable the receiver to pay at their convenience. Funds are paid to a payment request at the current exchange rate.</p>
             <p class="mb-4" text-translate="true">Requests may be paid in partial. They will remain valid until time expires or when paid what is due.</p>
@@ -289,7 +289,7 @@
             <thead>
             <tr>
                 <th class="min-w-date-col">
-                    <div class="flex items-center gap-4">
+                    <div class="flex-row-gap-4">
                         <span text-translate="true">Date</span>
                         <button type="button"
                                 class="btn btn-action switch-time-format only-for-js"
@@ -322,7 +322,7 @@
                             }
                         </td>
                         <td>
-                            <div class="inline-flex items-center gap-4">
+                            <div class="inline-flex-row-gap-4">
                                 <a asp-action="ViewPaymentRequest" asp-route-payReqId="@item.Id" id="PaymentRequest-@item.Id" target="_blank"
                                    class="btn btn-action" title="View Payment Request">
                                     <vc:icon symbol="actions-send" />

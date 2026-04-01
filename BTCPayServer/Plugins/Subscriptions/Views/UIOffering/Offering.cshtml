@@ -143,7 +143,7 @@
                             </span></td>
                             <td>@p.Data.MemberCount Members</td>
                             <td>
-                                <div class="inline-flex items-center gap-4">
+                                <div class="inline-flex-row-gap-4">
                                     <a class="edit-plan" asp-action="AddPlan"
                                        asp-route-storeId="@storeId"
                                        asp-route-offeringId="@offeringId"
@@ -330,7 +330,7 @@
                         </span>
                             </td>
                             <td>
-                                <div class="inline-flex items-center gap-4">
+                                <div class="inline-flex-row-gap-4">
                                     <a asp-action="CreatePortalSession" asp-route-storeId="@storeId" asp-route-offeringId="@subscriber.Data.OfferingId"
                                         permission="@SubscriptionsPolicies.CanManageSubscribers"
                                         asp-route-customerId="@subscriber.Data.CustomerId" class="portal-link" target="_blank">View Portal</a>
@@ -460,7 +460,7 @@
                                         <td>@rule.TriggerViewModel.Description</td>
                                         <td>@rule.Data.Subject</td>
                                         <td class="text-end print:hidden" permission="@Policies.CanModifyStoreSettings">
-                                            <div class="inline-flex items-center gap-4">
+                                            <div class="inline-flex-row-gap-4">
                                                 <a asp-area="@EmailsPlugin.Area"
                                                    asp-controller="UIStoreEmailRules"
                                                    asp-action="StoreEmailRulesEdit" asp-route-storeId="@storeId"

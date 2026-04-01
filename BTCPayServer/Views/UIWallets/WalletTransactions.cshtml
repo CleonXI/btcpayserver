@@ -272,7 +272,7 @@
         </div>
     }
 
-    <div class="dropdown inline-flex items-center gap-4 ms-auto" id="Export">
+    <div class="dropdown inline-flex-row-gap-4 ms-auto" id="Export">
         <a
             id="view-report"
             permission="@Policies.CanViewReports"
@@ -338,7 +338,7 @@
                 <input type="checkbox" class="form-check-input mass-action-select-all" />
             </th>
             <th class="min-w-date-col">
-                <div class="flex items-center gap-4">
+                <div class="flex-row-gap-4">
                         <span text-translate="true">Date</span>
                         <button type="button" class="btn btn-action switch-time-format only-for-js" title="@StringLocalizer["Switch date format"]">
                             <vc:icon symbol="time" />
@@ -367,7 +367,7 @@
                         <strong class="mass-action-selected-count">0</strong>
                             <span text-translate="true">selected</span>
                     </div>
-                    <form id="WalletActions" method="post" asp-action="WalletActions" asp-route-walletId="@walletId" permission="@Policies.CanModifyStoreSettings" class="inline-flex items-center gap-4">
+                    <form id="WalletActions" method="post" asp-action="WalletActions" asp-route-walletId="@walletId" permission="@Policies.CanModifyStoreSettings" class="inline-flex-row-gap-4">
                         <button id="BumpFee" name="command" type="submit" value="cpfp" class="btn btn-link">
                             <vc:icon symbol="actions-send" />
                             <span text-translate="true">Bump fee</span>

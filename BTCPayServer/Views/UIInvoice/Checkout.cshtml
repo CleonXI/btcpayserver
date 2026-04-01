@@ -70,7 +70,7 @@
                         <div v-if="showPaymentDueInfo" v-html="replaceNewlines($t('still_due', { amount: `${srvModel.due} ${srvModel.paymentMethodCurrency}` }))"></div>
                     </div>
                 </div>
-                <button id="DetailsToggle" class="flex items-center gap-2 btn btn-link payment-details-button mb-2" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
+                <button id="DetailsToggle" class="flex-row-gap-2 btn btn-link payment-details-button mb-2" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
                     <span class="font-semibold" v-t="'view_details'"></span>
                     <vc:icon symbol="caret-down" />
                 </button>
@@ -138,7 +138,7 @@
                                 :show-recommended-fee="showRecommendedFee"
                                 v-collapsible="displayPaymentDetails" />
                         </div>
-                        <button class="flex items-center gap-2 btn btn-link payment-details-button" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
+                        <button class="flex-row-gap-2 btn btn-link payment-details-button" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
                             <span class="font-semibold" v-t="'view_details'"></span>
                             <vc:icon symbol="caret-down" />
                         </button>
@@ -208,7 +208,7 @@
                                 :show-recommended-fee="showRecommendedFee"
                                 v-collapsible="displayPaymentDetails" />
                         </div>
-                        <button class="flex items-center gap-2 btn btn-link payment-details-button" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
+                        <button class="flex-row-gap-2 btn btn-link payment-details-button" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
                             <span class="font-semibold" v-t="'view_details'"></span>
                             <vc:icon symbol="caret-down" />
                         </button>

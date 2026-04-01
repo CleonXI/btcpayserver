@@ -263,7 +263,7 @@
                                     @if (!string.IsNullOrEmpty(downloadInfo?.Documentation))
                                     {
                                         <li>
-                                            <a href="@downloadInfo.Documentation" rel="noreferrer noopener" class="flex items-center gap-2" target="_blank">
+                                            <a href="@downloadInfo.Documentation" rel="noreferrer noopener" class="flex-row-gap-2" target="_blank">
                                                 <vc:icon symbol="docs" />
                                                 <span text-translate="true">Documentation</span>
                                             </a>
@@ -272,7 +272,7 @@
                                     else
                                     {
                                         <li>
-                                            <span rel="noreferrer noopener" class="flex items-center gap-2 text-btcpay-danger" target="_blank">
+                                            <span rel="noreferrer noopener" class="flex-row-gap-2 text-btcpay-danger" target="_blank">
                                                 <vc:icon symbol="docs" />
                                                 <span text-translate="true">No documentation</span>
                                             </span>
@@ -465,7 +465,7 @@ else
                                 @if (!string.IsNullOrEmpty(plugin.Documentation))
                                 {
                                     <li>
-                                        <a href="@plugin.Documentation" rel="noreferrer noopener" class="flex items-center gap-2" target="_blank">
+                                        <a href="@plugin.Documentation" rel="noreferrer noopener" class="flex-row-gap-2" target="_blank">
                                             <vc:icon symbol="docs" />
                                             <span text-translate="true">Documentation</span>
                                         </a>
@@ -474,7 +474,7 @@ else
                                 else
                                 {
                                     <li>
-                                        <span rel="noreferrer noopener" class="flex items-center gap-2 text-btcpay-danger" target="_blank">
+                                        <span rel="noreferrer noopener" class="flex-row-gap-2 text-btcpay-danger" target="_blank">
                                             <vc:icon symbol="docs" />
                                             <span text-translate="true">No documentation</span>
                                         </span>
