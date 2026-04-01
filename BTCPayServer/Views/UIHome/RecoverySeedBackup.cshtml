@@ -25,7 +25,7 @@
 
 <main>
     <partial name="_StatusMessage" />
-    <div class="d-inline-flex flex-column align-items-center justify-content-center">
+    <div class="inline-flex flex-col items-center justify-center">
         <div class="text-warning mb-3">
             <vc:icon symbol="warning" />
         </div>
@@ -38,11 +38,11 @@
     <div class="lead text-center">
         <p class="mb-0" text-translate="true">The combination of words below are called your recovery phrase. The recovery phrase allows you to access and restore your wallet. Write them down on a piece of paper in the exact order:</p>
     </div>
-    <ol id="RecoveryPhrase" data-mnemonic="@Model.Mnemonic" class="d-inline-block my-5 mx-auto ps-4">
+    <ol id="RecoveryPhrase" data-mnemonic="@Model.Mnemonic" class="inline-block my-5 mx-auto ps-4">
         @foreach (var word in Model.Words)
         {
-            <li class="text-start text-muted py-2">
-                <span class="text-dark h5">@word</span>
+            <li class="text-start text-btcpay-body-text-muted py-2">
+                <span class="text-btcpay-body-text h5">@word</span>
             </li>
         }
     </ol>
@@ -76,7 +76,7 @@
     </div>
     @if (Model.RequireConfirm)
     {
-        <form id="RecoveryConfirmation" action="@Url.EnsureLocal(Model.ReturnUrl, Context.Request)" class="position-relative d-flex align-items-start justify-content-center" style="padding:20px 0 100px" rel="noreferrer noopener">
+        <form id="RecoveryConfirmation" action="@Url.EnsureLocal(Model.ReturnUrl, Context.Request)" class="relative flex items-start justify-center" style="padding:20px 0 100px" rel="noreferrer noopener">
             <label class="form-check-label lead order-2" for="confirm" text-translate="true">I have written down my recovery phrase and stored it in a secure location</label>
             <input type="checkbox" class="me-3 order-1 form-check-input" id="confirm" style="margin-top:.35rem;flex-shrink:0">
             <button type="submit" class="btn btn-primary btn-lg px-5 order-3" id="submit" text-translate="true">Done</button>
