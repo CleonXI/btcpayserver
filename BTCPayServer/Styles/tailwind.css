@@ -3759,14 +3759,14 @@
     border-radius: var(--btcpay-border-radius);
   }
 
-  .input-group:not(.has-validation) > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
-  .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-control,
-  .input-group:not(.has-validation) > .form-floating:not(:last-child) > .form-select {
+  .input-group > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
+  .input-group > .form-floating:not(:last-child) > .form-control,
+  .input-group > .form-floating:not(:last-child) > .form-select {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
-  .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  .input-group > :not(:first-child):not(.dropdown-menu):not(.invalid-feedback) {
     margin-left: calc(var(--btcpay-border-width) * -1);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
