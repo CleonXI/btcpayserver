@@ -170,12 +170,12 @@
         // filter(){ return filter1 && filter2 && filter3; }
         const newData = [];
         const o = {};
-        eval('function filter() {return ' + filterStrings.join(' && ') + ';}');
+        const filter = new Function('return ' + filterStrings.join(' && ') + ';');
         for (let i = 0; i < rows.length; i++) {
             for (let fi = 0; fi < fields.length; fi++) {
                 o[fields[fi]] = rows[i][fi];
             }
-            if (!filter.bind(o)())
+            if (!filter.call(o))
                 continue;
             newData.push(rows[i]);
         }
