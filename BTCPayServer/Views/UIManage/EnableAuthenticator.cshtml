@@ -74,7 +74,7 @@
 
 @section PageFootContent {
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/js/qrcode.js" asp-append-version="true"></script>
+    <script src="~/vendor/qrcode/qrcode.js" asp-append-version="true"></script>
     <script>
         new QRCode(document.getElementById("qrCode"), {
             text: @Safe.Json(Model.AuthenticatorUri),
