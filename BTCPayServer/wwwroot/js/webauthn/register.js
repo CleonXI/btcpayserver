@@ -26,16 +26,16 @@ async function register(makeCredentialOptions) {
         registerNewCredential(newCredential);
 
     } catch (e) {
-        showErrorAlert(err.message ? err.message : err);
+        showErrorAlert(e.message ? e.message : e);
     }
 }
 
 // This should be used to verify the auth data with the server
 async function registerNewCredential(newCredential) {
     // Move data into Arrays incase it is super long
-    let attestationObject = new Uint8Array(newCredential.response.attestationObject);
-    let clientDataJSON = new Uint8Array(newCredential.response.clientDataJSON);
-    let rawId = new Uint8Array(newCredential.rawId);
+    const attestationObject = new Uint8Array(newCredential.response.attestationObject);
+    const clientDataJSON = new Uint8Array(newCredential.response.clientDataJSON);
+    const rawId = new Uint8Array(newCredential.rawId);
 
     const data = {
         id: newCredential.id,
