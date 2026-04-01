@@ -5483,4 +5483,39 @@
     max-width: 100%;
     height: auto;
   }
+
+  .text-danger {
+    color: var(--btcpay-danger);
+  }
+
+  .is-invalid {
+    border-color: var(--btcpay-danger) !important;
+  }
+
+  .is-valid {
+    border-color: var(--btcpay-success) !important;
+  }
+
+  .invalid-feedback {
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: var(--btcpay-danger);
+  }
+
+  .is-invalid ~ .invalid-feedback,
+  .is-invalid ~ .text-danger {
+    display: block;
+  }
+
+  .text-warning { color: var(--btcpay-warning); }
+  .text-light { color: var(--btcpay-light); }
+
+  .bg-primary { background-color: var(--btcpay-primary); }
+  .bg-secondary { background-color: var(--btcpay-secondary); }
+  .bg-success { background-color: var(--btcpay-success); }
+  .bg-info { background-color: var(--btcpay-info); }
+  .bg-warning { background-color: var(--btcpay-warning); }
+  .bg-danger { background-color: var(--btcpay-danger); }
 }
