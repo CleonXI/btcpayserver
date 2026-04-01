@@ -141,40 +141,22 @@
         </div>
     </div>
 </div>
+<script src="~/js/vue-utils.js" asp-append-version="true"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     function roundNumber(number, decimals) {
-        var newnumber = new Number(number + '').toFixed(parseInt(decimals));
-        return parseFloat(newnumber);
+        const result = Number(number + '').toFixed(parseInt(decimals));
+        return parseFloat(result);
     }
 
-    const tooltipDirective = {
-        mounted(el, binding) {
-            new bootstrap.Tooltip(el, {
-                title: binding.value,
-                placement: binding.arg || "auto",
-                trigger: 'hover'
-            });
-        },
-        updated(el, binding) {
-            const tooltip = bootstrap.Tooltip.getInstance(el);
-            if (tooltip) {
-                tooltip.dispose();
-            }
-            new bootstrap.Tooltip(el, {
-                title: binding.value,
-                placement: binding.arg || "auto",
-                trigger: 'hover'
-            });
-        }
-    };
+    const selectedInputsEl = document.getElementById("SelectedInputs");
 
     const app = Vue.createApp({
         data() {
             return {
                 filter: "",
                 items: @Safe.Json(Model.InputsAvailable),
-                selectedInputs: $("#SelectedInputs").val(),
+                selectedInputs: Array.from(selectedInputsEl.selectedOptions, function (o) { return o.value; }),
                 page: 0,
                 pageSize: 10,
                 showSelectedOnly: false,
@@ -206,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return this.page === 0 ? 0 : this.page * this.pageSize;
             },
             pageEnd: function() {
-                var result = this.pageStart + this.pageSize;
+                let result = this.pageStart + this.pageSize;
                 if (result > this.currentItems.length) {
                     result = this.currentItems.length;
                 }
@@ -267,18 +249,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 return filteredResults.slice(this.pageStart, this.pageEnd);
             },
             selectedItems: function() {
-                var result = [];
-                for (var i = 0; i < this.items.length; i++) {
-                    var currentItem = this.items[i];
-
-                    if (this.selectedInputs.indexOf(currentItem.outpoint) != -1) {
+                const result = [];
+                for (let i = 0; i < this.items.length; i++) {
+                    const currentItem = this.items[i];
+                    if (this.selectedInputs.indexOf(currentItem.outpoint) !== -1) {
                         result.push(currentItem);
                     }
                 }
                 return result;
             },
             selectedAmount: function() {
-                var result = 0;
+                let result = 0;
                 for (let i = 0; i < this.selectedItems.length; i++) {
                     result += this.selectedItems[i].amount;
                 }
@@ -290,11 +271,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         },
         mounted: function() {
-            var self = this;
-            self.selectedInputs = $("#SelectedInputs").val();
-            $(".crypto-balance-link").text(this.selectedAmount);
-            $("#SelectedInputs").on("input change", function() {
-                self.selectedInputs = $("#SelectedInputs").val();
+            const self = this;
+            self.selectedInputs = Array.from(selectedInputsEl.selectedOptions, function (o) { return o.value; });
+            document.querySelectorAll(".crypto-balance-link").forEach(function (el) { el.textContent = self.selectedAmount; });
+            selectedInputsEl.addEventListener("input", function () {
+                self.selectedInputs = Array.from(selectedInputsEl.selectedOptions, function (o) { return o.value; });
+            });
+            selectedInputsEl.addEventListener("change", function () {
+                self.selectedInputs = Array.from(selectedInputsEl.selectedOptions, function (o) { return o.value; });
             });
         },
         methods: {
@@ -325,47 +309,44 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
-                let res = $("#SelectedInputs").val() || [];
+                let res = Array.from(selectedInputsEl.selectedOptions, function (o) { return o.value; });
 
                 if (toggle) {
                     res.push(item.outpoint);
                 } else {
-                    res = res.filter(i => i !== item.outpoint);
+                    res = res.filter(function (i) { return i !== item.outpoint; });
                 }
 
-                // Do NOT use $("select option") or you'll break other selects like output labels
-                $("select[name='SelectedInputs'] option").each(function () {
-                    var selected = res.indexOf($(this).attr("value")) !== -1;
-                    $(this).attr("selected", selected ? "selected" : null);
+                selectedInputsEl.querySelectorAll("option").forEach(function (opt) {
+                    opt.selected = res.indexOf(opt.value) !== -1;
                 });
 
                 this.selectedInputs = res;
-                $(".crypto-balance-link").text(this.selectedAmount);
+                document.querySelectorAll(".crypto-balance-link").forEach(function (el) { el.textContent = this.selectedAmount; }.bind(this));
             },
             toggleSelectAllItems: function () {
-                const filteredOutpoints = this.filteredItems.map(item => item.outpoint);
-                let res = $("#SelectedInputs").val() || [];
+                const filteredOutpoints = this.filteredItems.map(function (item) { return item.outpoint; });
+                let res = Array.from(selectedInputsEl.selectedOptions, function (o) { return o.value; });
 
-                const allSelected = filteredOutpoints.every(outpoint => res.includes(outpoint));
+                const allSelected = filteredOutpoints.every(function (outpoint) { return res.includes(outpoint); });
 
                 if (allSelected) {
-                    res = res.filter(outpoint => !filteredOutpoints.includes(outpoint));
+                    res = res.filter(function (outpoint) { return !filteredOutpoints.includes(outpoint); });
                 } else {
                     const set = new Set(res);
-                    filteredOutpoints.forEach(outpoint => set.add(outpoint));
+                    filteredOutpoints.forEach(function (outpoint) { set.add(outpoint); });
                     res = Array.from(set);
                 }
 
-                $("#SelectedInputs").find("option").each(function () {
-                    var selected = res.indexOf($(this).attr("value")) !== -1;
-                    $(this).attr("selected", selected ? "selected" : null);
+                selectedInputsEl.querySelectorAll("option").forEach(function (opt) {
+                    opt.selected = res.indexOf(opt.value) !== -1;
                 });
 
                 this.selectedInputs = res;
-                $(".crypto-balance-link").text(this.selectedAmount);
+                document.querySelectorAll(".crypto-balance-link").forEach(function (el) { el.textContent = this.selectedAmount; }.bind(this));
             },
             styles: function (bgColor) {
-                let color = 'inherit'
+                let color = 'inherit';
                 if (bgColor.slice(0, 1) === '#') {
                     const hex = bgColor.slice(1);
                     // Convert to RGB value
@@ -381,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-    app.directive('tooltip', tooltipDirective);
+    registerTooltipDirective(app);
     app.mount('#coin-selection-app');
 });
 </script>

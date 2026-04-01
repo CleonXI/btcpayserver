@@ -65,39 +65,31 @@
             btcpay.appendInvoiceFrame(invoiceId);
         })
 
-        $('#btnCustomRangeDate').on('click', function (sender) {
-            var filterString = "";
+        delegate('click', '#btnCustomRangeDate', function () {
+            let filterString = "";
 
-            var dtpStartDate = $("#dtpStartDate").val();
-            if (dtpStartDate !== null && dtpStartDate !== "") {
+            const dtpStartDate = document.getElementById("dtpStartDate").value;
+            if (dtpStartDate) {
                 filterString = "startdate%3A" + dtpStartDate;
             }
 
-            var dtpEndDate = $("#dtpEndDate").val();
-            if (dtpEndDate !== null && dtpEndDate !== "") {
-                if (filterString !== "") {
-                    filterString += ",";
-                }
+            const dtpEndDate = document.getElementById("dtpEndDate").value;
+            if (dtpEndDate) {
+                if (filterString) filterString += ",";
                 filterString += "enddate%3A" + dtpEndDate;
             }
 
-            if (filterString !== "") {
-                var redirectUri = "/invoices?Count=" + $("#Count").val() +
-                    "&timezoneoffset=" + $("#TimezoneOffset").val() +
+            if (filterString) {
+                const redirectUri = "/invoices?Count=" + document.getElementById("Count").value +
+                    "&timezoneoffset=" + document.getElementById("TimezoneOffset").value +
                     "&SearchTerm=" + filterString;
-
                 window.location.href = redirectUri;
             } else {
-                $("#dtpStartDate").next().trigger("focus");
+                const startInput = document.getElementById("dtpStartDate");
+                const nextEl = startInput.nextElementSibling;
+                if (nextEl) nextEl.focus();
             }
         })
-
-        function getDateStringWithOffset(hoursDiff) {
-            var datenow = new Date();
-            var newDate = new Date(datenow.getTime() - (hoursDiff * 60 * 60 * 1000));
-            var str = newDate.toLocaleDateString() + " " + newDate.toLocaleTimeString();
-            return str;
-        }
     </script>
 }
 

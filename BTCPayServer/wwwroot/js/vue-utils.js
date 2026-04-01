@@ -39,3 +39,28 @@ const collapsibleDirective = {
 function registerCollapsibleDirective(app) {
     app.directive('collapsible', collapsibleDirective);
 }
+
+const tooltipDirective = {
+    mounted(el, binding) {
+        new bootstrap.Tooltip(el, {
+            title: binding.value,
+            placement: binding.arg || "auto",
+            trigger: 'hover'
+        });
+    },
+    updated(el, binding) {
+        const tooltip = bootstrap.Tooltip.getInstance(el);
+        if (tooltip) {
+            tooltip.dispose();
+        }
+        new bootstrap.Tooltip(el, {
+            title: binding.value,
+            placement: binding.arg || "auto",
+            trigger: 'hover'
+        });
+    }
+};
+
+function registerTooltipDirective(app) {
+    app.directive('tooltip', tooltipDirective);
+}

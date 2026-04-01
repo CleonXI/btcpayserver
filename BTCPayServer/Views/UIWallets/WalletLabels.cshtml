@@ -7,27 +7,8 @@
 }
 
 @section PageFootContent {
-    <script>
-        delegate('click', '.btn-delete', event => {
-            event.preventDefault()
-        })
-        
-        delegate('click', '.btn-edit', event => {
-            const button = event.target.closest('.btn-edit')
-            const label = button.dataset.label
-            const modal = document.getElementById('EditLabelModal')
-            const input = modal.querySelector('#EditLabelInput')
-            const form = modal.querySelector('form')
-            const oldLabelInput = modal.querySelector('#OldLabel')
-            const walletId = '@walletId'
-            
-            input.value = label
-            oldLabelInput.value = label
-            form.action = `/wallets/${walletId}/labels/${encodeURIComponent(label)}/edit`
-            
-            new bootstrap.Modal(modal).show()
-        })
-    </script>
+    <script src="~/js/label-edit-modal.js" asp-append-version="true"></script>
+    <script>initLabelEditModal('/wallets/@walletId/labels');</script>
 }
 
 <div class="sticky-header">

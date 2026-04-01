@@ -1,91 +1,90 @@
-﻿function updateFiatValue(element) {
-
-    if (!element) {
-        element = $(this);
-    }
-    var rateStr = $("#Rate").val();
-    var divisibilityStr = $("#FiatDivisibility").val();
-    var rate = parseFloat(rateStr);
-    var divisibility = parseInt(divisibilityStr);
+function updateFiatValue(element) {
+    const rate = parseFloat(document.getElementById("Rate").value);
+    const divisibility = parseInt(document.getElementById("FiatDivisibility").value);
     if (!isNaN(rate) && !isNaN(divisibility)) {
-        var fiatValue = $(element).parents(".input-group").first().find(".fiat-value")
-        var fiatValueInput = fiatValue.find(".fiat-value-edit-input");
-        var amountValue = parseFloat($(element).val());
-        fiatValue.show();
+        const inputGroup = element.closest(".input-group");
+        if (!inputGroup) return;
+        const fiatValue = inputGroup.querySelector(".fiat-value");
+        if (!fiatValue) return;
+        const fiatValueInput = fiatValue.querySelector(".fiat-value-edit-input");
+        const amountValue = parseFloat(element.value);
+        fiatValue.style.display = "";
         if (!isNaN(amountValue)) {
-            fiatValueInput.val((rate * amountValue).toFixed(divisibility));
+            fiatValueInput.value = (rate * amountValue).toFixed(divisibility);
         }
     }
 }
 
 function updateCryptoValue(element) {
-
-    if (!element) {
-        element = $(this);
-    }
-
-    var divisibilityStr = $("#CryptoDivisibility").val();
-    var divisibility = parseInt(divisibilityStr);
-    var rateStr = $("#Rate").val();
-    var rate = parseFloat(rateStr);
+    const divisibility = parseInt(document.getElementById("CryptoDivisibility").value);
+    const rate = parseFloat(document.getElementById("Rate").value);
     if (!isNaN(rate)) {
-        var cryptoValueInput =  $(element).parents(".input-group").first().find(".output-amount");
-        var amountValue = parseFloat($(element).val());
+        const inputGroup = element.closest(".input-group");
+        if (!inputGroup) return;
+        const cryptoValueInput = inputGroup.querySelector(".output-amount");
+        const amountValue = parseFloat(element.value);
         if (!isNaN(amountValue)) {
-            cryptoValueInput.val(( amountValue/rate).toFixed(divisibility));
+            cryptoValueInput.value = (amountValue / rate).toFixed(divisibility);
         } else {
-            cryptoValueInput.val("")
+            cryptoValueInput.value = "";
         }
     }
 }
 
-
-
-function updateFiatValueWithCurrentElement() {
-    updateFiatValue($(this))
+function selectCorrectFeeOption() {
+    const val = document.getElementById("FeeSatoshiPerByte").value;
+    document.querySelectorAll(".feerate-options .crypto-fee-link").forEach(function (el) {
+        el.classList.remove("active");
+    });
+    const match = document.querySelector('.feerate-options .crypto-fee-link[value="' + val + '"]');
+    if (match) match.classList.add("active");
 }
 
-function updateCryptoValueWithCurrentElement(){
-    updateCryptoValue($(this))
-}
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".output-amount").forEach(function (el) {
+        el.addEventListener("input", function () { updateFiatValue(this); });
+        updateFiatValue(el);
+    });
 
-function selectCorrectFeeOption(){
-    var val =  $("#FeeSatoshiPerByte").val();
-    $(".feerate-options").children(".crypto-fee-link").removeClass("active");
-    $(".feerate-options").find("[value='"+val+"']").first().addClass("active");
-}
+    delegate("input", ".fiat-value-edit-input", function (event) {
+        updateCryptoValue(event.target);
+    });
 
-$(function () {
-    $(".output-amount").on("input", updateFiatValueWithCurrentElement).each(updateFiatValueWithCurrentElement);
-    $(".fiat-value-edit-input").on("input", updateCryptoValueWithCurrentElement);
-
-    $(".crypto-fee-link").on("click", function (elem) {
-        $(this).parent().children().removeClass("active");
-        var val = $(this).addClass("active").val();
-        $("#FeeSatoshiPerByte").val(val);
+    delegate("click", ".crypto-fee-link", function (event) {
+        const el = event.target;
+        el.closest(".feerate-options").querySelectorAll(".crypto-fee-link").forEach(function (sibling) {
+            sibling.classList.remove("active");
+        });
+        el.classList.add("active");
+        document.getElementById("FeeSatoshiPerByte").value = el.value;
         return false;
     });
-    $("#FeeSatoshiPerByte").on("change input", selectCorrectFeeOption);
+
+    const feeInput = document.getElementById("FeeSatoshiPerByte");
+    if (feeInput) {
+        feeInput.addEventListener("change", selectCorrectFeeOption);
+        feeInput.addEventListener("input", selectCorrectFeeOption);
+    }
 
     selectCorrectFeeOption();
-    $(".crypto-balance-link").on("click", function (elem) {
-        var val = $(this).text();
-        var parentContainer = $(this).parents(".form-group");
-        var outputAmountElement = parentContainer.find(".output-amount");
-        outputAmountElement.val(val);
-        var subtractFeesEl = parentContainer.find(".subtract-fees");
-        if(subtractFeesEl.length === 0)
-            subtractFeesEl = $(".subtract-fees");
-        subtractFeesEl.prop('checked', true);
+
+    delegate("click", ".crypto-balance-link", function (event) {
+        const val = event.target.textContent;
+        const parentContainer = event.target.closest(".form-group");
+        const outputAmountElement = parentContainer.querySelector(".output-amount");
+        outputAmountElement.value = val;
+        let subtractFeesEl = parentContainer.querySelector(".subtract-fees");
+        if (!subtractFeesEl) subtractFeesEl = document.querySelector(".subtract-fees");
+        subtractFeesEl.checked = true;
         updateFiatValue(outputAmountElement);
         return false;
     });
 
-    $("#bip21parse").on("click", function(){
-        var bip21 = prompt("Paste BIP21 here");
-        if(bip21){
-            $("#BIP21").val(bip21);
-            $("form").submit();
+    delegate("click", "#bip21parse", function () {
+        const bip21 = prompt("Paste BIP21 here");
+        if (bip21) {
+            document.getElementById("BIP21").value = bip21;
+            document.querySelector("form").submit();
         }
     });
 });
