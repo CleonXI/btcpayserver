@@ -5,6 +5,7 @@
 @source "../Plugins/**/Views/**/*.cshtml";
 @source "../Components/**/*.cshtml";
 @source "../wwwroot/**/*.js";
+@source "../Blazor/**/*.razor";
 
 /* Dark mode variant matching existing BTCPay theme system */
 @variant dark (&:where([data-btcpay-theme="dark"], [data-btcpay-theme="dark"] *));
