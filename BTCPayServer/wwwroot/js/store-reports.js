@@ -1,7 +1,7 @@
 let app, searchBtnApp, origData;
 srv.sortBy = function (field, event) {
-    for (let key in this.fieldViews) {
-        if (this.fieldViews.hasOwnProperty(key)) {
+    for (const key in this.fieldViews) {
+        if (Object.prototype.hasOwnProperty.call(this.fieldViews, key)) {
             const sortedField = field === key;
             const fieldView = this.fieldViews[key];
 
@@ -30,8 +30,8 @@ srv.sortBy = function (field, event) {
 
 srv.applySort = function () {
     let fieldIndex, fieldView;
-    for (let key in this.fieldViews) {
-        if (this.fieldViews.hasOwnProperty(key)) {
+    for (const key in this.fieldViews) {
+        if (Object.prototype.hasOwnProperty.call(this.fieldViews, key)) {
             fieldView = this.fieldViews[key];
             if (fieldView.sortBy !== "") {
                 fieldIndex = this.result.fields.findIndex((a) => a.name === key);
@@ -62,8 +62,8 @@ srv.updateFieldViews = function () {
     this.fieldViews = this.fieldViews || {};
 
     // First we remove the fieldViews that doesn't apply anymore
-    for (let key in this.fieldViews) {
-        if (this.fieldViews.hasOwnProperty(key)) {
+    for (const key in this.fieldViews) {
+        if (Object.prototype.hasOwnProperty.call(this.fieldViews, key)) {
             if (!this.result.fields.find(i => i.name === key))
                 delete this.fieldViews[key];
         }
@@ -72,7 +72,7 @@ srv.updateFieldViews = function () {
     // Then we add those that are missing
     for (let i = 0; i < this.result.fields.length; i++) {
         const field = this.result.fields[i];
-        if (!this.fieldViews.hasOwnProperty(field.name)) {
+        if (!Object.prototype.hasOwnProperty.call(this.fieldViews, field.name)) {
             this.fieldViews[field.name] =
                 {
                     sortBy: "",

@@ -83,7 +83,7 @@ class PoSOrder {
             ctx.discount += discount;
             linePrice -= discount;
 
-            let taxRate = item.taxRate ?? 0;
+            const taxRate = item.taxRate ?? 0;
             let tax = linePrice * taxRate / 100;
             tax = this._round(tax);
             ctx.tax += tax;

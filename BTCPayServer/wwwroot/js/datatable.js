@@ -129,7 +129,7 @@
         }
         for (let i = 0; i < groupLevels[level].length; i++) {
             let foundFirst = false;
-            let groupData = groupLevels[level][i];
+            const groupData = groupLevels[level][i];
             let gotoNextRow = false;
             let stop = false;
             for (let gi = 0; gi < parent.groups.length; gi++) {
@@ -168,12 +168,11 @@
             return rows;
         // filterStrings are aggregated into one filter function:
         // filter(){ return filter1 && filter2 && filter3; }
-        var newData = [];
-        var o = {};
+        const newData = [];
+        const o = {};
         eval('function filter() {return ' + filterStrings.join(' && ') + ';}');
-        // For each row, build a JSON objects representing it, and evaluate it on the fitler
-        for (var i = 0; i < rows.length; i++) {
-            for (var fi = 0; fi < fields.length; fi++) {
+        for (let i = 0; i < rows.length; i++) {
+            for (let fi = 0; fi < fields.length; fi++) {
                 o[fields[fi]] = rows[i][fi];
             }
             if (!filter.bind(o)())
@@ -190,8 +189,8 @@
 
     function createTable(summaryDefinition, fields, rows) {
         rows = clone(rows);
-        var groupIndices = summaryDefinition.groups.map(g => fields.findIndex((a) => a === g)).filter(g => g !== -1);
-        var aggregatesIndices = summaryDefinition.aggregates.map(g => fields.findIndex((a) => a === g)).filter(g => g !== -1);
+        const groupIndices = summaryDefinition.groups.map(g => fields.findIndex((a) => a === g)).filter(g => g !== -1);
+        let aggregatesIndices = summaryDefinition.aggregates.map(g => fields.findIndex((a) => a === g)).filter(g => g !== -1);
         aggregatesIndices = aggregatesIndices.filter(g => g !== -1);
         // Filter rows
         rows = applyFilters(rows, fields, summaryDefinition.filters);
@@ -201,7 +200,7 @@
 
         // Group data represent tabular data of all the groups and aggregates given the data.
         // [Region, Crypto, PaymentType]
-        var groupRows = groupBy(groupIndices, aggregatesIndices, rows);
+        let groupRows = groupBy(groupIndices, aggregatesIndices, rows);
 
         // There will be several level of aggregation
         // For example, if you have 3 groups: [Region, Crypto, PaymentType] then you have 4 group data.
@@ -209,25 +208,25 @@
         // [Region, Crypto]
         // [Region]
         // []
-        var groupLevels = [];
+        const groupLevels = [];
         groupLevels.push(groupRows);
 
         // We build the group rows with less columns
         // Those builds the level:
         // [Region, Crypto], [Region] and []
-        for (var i = 1; i < groupIndices.length + 1; i++) {
+        for (let i = 1; i < groupIndices.length + 1; i++) {
 
             // We are grouping the group data.
             // For our example of 3 groups and 2 aggregate2, then:
             // First iteration: newGroupIndices = [0, 1], newAggregatesIndices = [3, 4]
             // Second iteration: newGroupIndices = [0], newAggregatesIndices = [2, 3]
             // Last iteration: newGroupIndices = [], newAggregatesIndices = [1, 2]
-            var newGroupIndices = [];
-            for (var gi = 0; gi < groupIndices.length - i; gi++) {
+            const newGroupIndices = [];
+            for (let gi = 0; gi < groupIndices.length - i; gi++) {
                 newGroupIndices.push(gi);
             }
-            var newAggregatesIndices = [];
-            for (var ai = 0; ai < aggregatesIndices.length; ai++) {
+            const newAggregatesIndices = [];
+            for (let ai = 0; ai < aggregatesIndices.length; ai++) {
                 newAggregatesIndices.push(newGroupIndices.length + 1 + ai);
             }
             // Group the group rows
@@ -238,7 +237,7 @@
         // Put the highest level ([]) on top
         groupLevels.reverse();
 
-        var root =
+        const root =
         {
             parent: null,
             groups: [],
@@ -262,7 +261,7 @@
         visitTree(root);
 
         // Create a representation that can easily be bound to VueJS
-        var rows = [];
+        rows = [];
         buildRows(root, rows);
         return {
             groups: summaryDefinition.groups,

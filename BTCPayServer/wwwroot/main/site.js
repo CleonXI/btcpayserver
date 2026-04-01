@@ -375,10 +375,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const isPassword = $el.getAttribute('type') === 'password';
         if (isPassword) {
             $el.setAttribute('type', 'text')
-            if (!!$button.innerHTML.match('#actions-show')) $button.innerHTML = $button.innerHTML.replace('#actions-show', '#actions-hide');
+            if ($button.innerHTML.match('#actions-show')) $button.innerHTML = $button.innerHTML.replace('#actions-show', '#actions-hide');
         } else {
             $el.setAttribute('type', 'password')
-            if (!!$button.innerHTML.match('#actions-hide')) $button.innerHTML = $button.innerHTML.replace('#actions-hide', '#actions-show');
+            if ($button.innerHTML.match('#actions-hide')) $button.innerHTML = $button.innerHTML.replace('#actions-hide', '#actions-show');
         }
     })
 
@@ -518,20 +518,20 @@ document.addEventListener("DOMContentLoaded", () => {
 if (window.Blazor) {
     let isUnloading = false;
     window.addEventListener("beforeunload", () => { isUnloading = true; });
-    let brokenConnection = {
+    const brokenConnection = {
         isConnected: false,
         titleContent: 'Connection broken',
         innerHTML: 'Please <a href="">refresh the page</a>.'
     };
-    let interruptedConnection = {
+    const interruptedConnection = {
         isConnected: false,
         titleContent: 'Connection interrupted',
         innerHTML: 'Attempt to reestablish the connection in a few seconds...'
     };
-    let successfulConnection = {
+    const successfulConnection = {
         isConnected: true,
         titleContent: 'Connection established',
-        innerHTML: '' // use empty link on purpose
+        innerHTML: ''
     };
     class BlazorReconnectionHandler {
         reconnecting = false;
@@ -545,7 +545,7 @@ if (window.Blazor) {
         }
 
         async reconnect() {
-            let delays = [500, 1000, 2000, 4000, 8000, 16000, 20000, 40000];
+            const delays = [500, 1000, 2000, 4000, 8000, 16000, 20000, 40000];
             let i = 0;
             const lastDelay = delays.length - 1;
             while (i < delays.length) {

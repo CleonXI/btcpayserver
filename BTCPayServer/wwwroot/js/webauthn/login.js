@@ -4,7 +4,7 @@ async function login(makeAssertionOptions) {
 
     // fix escaping. Change this to coerce
     makeAssertionOptions.allowCredentials.forEach(function (listItem) {
-        const fixedId = listItem.id.replace(/\_/g, "/").replace(/\-/g, "+");
+        const fixedId = listItem.id.replace(/_/g, "/").replace(/-/g, "+");
         listItem.id = Uint8Array.from(atob(fixedId), c => c.charCodeAt(0));
     });
 
@@ -29,11 +29,11 @@ async function login(makeAssertionOptions) {
  */
 async function verifyAssertionWithServer(assertedCredential) {
     // Move data into Arrays incase it is super long
-    let authData = new Uint8Array(assertedCredential.response.authenticatorData);
-    let clientDataJSON = new Uint8Array(assertedCredential.response.clientDataJSON);
-    let rawId = new Uint8Array(assertedCredential.rawId);
-    let sig = new Uint8Array(assertedCredential.response.signature);
-    let userHandle = assertedCredential.response.userHandle ? new Uint8Array(assertedCredential.response.userHandle) : null;
+    const authData = new Uint8Array(assertedCredential.response.authenticatorData);
+    const clientDataJSON = new Uint8Array(assertedCredential.response.clientDataJSON);
+    const rawId = new Uint8Array(assertedCredential.rawId);
+    const sig = new Uint8Array(assertedCredential.response.signature);
+    const userHandle = assertedCredential.response.userHandle ? new Uint8Array(assertedCredential.response.userHandle) : null;
     const data = {
         id: assertedCredential.id,
         rawId: coerceToBase64Url(rawId),

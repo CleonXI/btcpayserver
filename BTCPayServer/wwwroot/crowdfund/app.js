@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded",function (ev) {
     perk: function (newValue, oldValue) {
                 if(newValue.price.type === "Topup"){
             this.setAmount();
-                }else if (newValue.price != oldValue.price) {
+                }else if (newValue.price !== oldValue.price) {
             this.setAmount(newValue.price);
         }
     }
@@ -129,10 +129,10 @@ app = createApp({
             const result = [];
             for (let i = 0; i < this.srvModel.perks.length; i++) {
                 const currentPerk = this.srvModel.perks[i];
-                    if(this.srvModel.perkCount.hasOwnProperty(currentPerk.id)){
+                    if(Object.prototype.hasOwnProperty.call(this.srvModel.perkCount, currentPerk.id)){
                     currentPerk.sold = this.srvModel.perkCount[currentPerk.id];
                 }
-                    if(this.srvModel.perkValue.hasOwnProperty(currentPerk.id)){
+                    if(Object.prototype.hasOwnProperty.call(this.srvModel.perkValue, currentPerk.id)){
                     currentPerk.value = this.srvModel.perkValue[currentPerk.id];
                 }
                 result.push(currentPerk);

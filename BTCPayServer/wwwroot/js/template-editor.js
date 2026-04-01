@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error deserializing form config:', err)
         }
     }
-    let items = parseConfig(initialConfig) || []
+    const items = parseConfig(initialConfig) || []
 
     const itemProps = {
         id: String,

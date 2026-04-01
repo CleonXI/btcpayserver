@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     const $config = document.getElementById('FormConfig')
-    let config = parseConfig($config.value) || {}
+    const config = parseConfig($config.value) || {}
 
     const specialFieldTypeOptions = ['fieldset', 'textarea', 'select', 'mirror']
     const inputFieldTypeOptions = ['text', 'number', 'password', 'email', 'url', 'tel', 'date', 'datetime-local', 'color', 'checkbox', 'hidden']

@@ -20,8 +20,9 @@ function noExponents(value) {
     const data = String(value).split(/[eE]/);
     if (data.length === 1) return data[0];
 
-    let z = '', sign = value < 0 ? '-' : '',
-        str = data[0].replace('.', ''),
+    const sign = value < 0 ? '-' : '';
+    const str = data[0].replace('.', '');
+    let z = '',
         mag = Number(data[1]) + 1;
 
     if (mag < 0) {
