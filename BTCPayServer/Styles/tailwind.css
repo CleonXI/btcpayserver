@@ -1866,20 +1866,6 @@
     background: transparent !important;
   }
 
-  .form-floating .ts-wrapper {
-    margin-top: 1.85rem;
-  }
-
-  .form-floating input.ts-wrapper.form-control:not(.ts-hidden-accessible) {
-    padding: .5rem .75rem !important;
-    height: 39px;
-  }
-
-  .form-floating input.label-manager.form-control ~ label {
-    opacity: 0.65;
-    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
-  }
-
   input.ts-wrapper.form-control:not(.ts-hidden-accessible,.ts-inline) {
     padding: .5rem .75rem !important;
     height: 46px;
