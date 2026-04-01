@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded",function (ev) {
-    var c = document.getElementById("fireworks");
+    const c = document.getElementById("fireworks");
 if (!c || !c.getContext) return;
-var ctx = c.getContext("2d");
+const ctx = c.getContext("2d");
 if (!ctx) return;
 
-var cH;
-var cW;
-var bgColor = srvModel.animationColors[0];
-var animations = [];
+let cH;
+let cW;
+let bgColor = srvModel.animationColors[0];
+const animations = [];
 
-var colorPicker = (function() {
-    var colors = srvModel.animationColors;
-    var index = 0;
+const colorPicker = (function() {
+    const colors = srvModel.animationColors;
+    let index = 0;
     function next() {
         index = index++ < colors.length-1 ? index : 0;
         return colors[index];
@@ -26,13 +26,13 @@ var colorPicker = (function() {
 })();
 
 function removeAnimation(animation) {
-    var index = animations.indexOf(animation);
+    const index = animations.indexOf(animation);
     if (index > -1) animations.splice(index, 1);
 }
 
 function calcPageFillRadius(x, y) {
-    var l = Math.max(x - 0, cW - x);
-    var h = Math.max(y - 0, cH - y);
+    const l = Math.max(x - 0, cW - x);
+    const h = Math.max(y - 0, cH - y);
     return Math.sqrt(Math.pow(l, 2) + Math.pow(h, 2));
 }
 
@@ -41,19 +41,19 @@ function handleEvent(e) {
         e.preventDefault();
         e = e.touches[0];
     }
-    var currentColor = colorPicker.current();
-    var nextColor = colorPicker.next();
-    var targetR = calcPageFillRadius(e.pageX, e.pageY);
-    var rippleSize = Math.min(200, (cW * .4));
-    var minCoverDuration = 750;
+    const currentColor = colorPicker.current();
+    const nextColor = colorPicker.next();
+    const targetR = calcPageFillRadius(e.pageX, e.pageY);
+    const rippleSize = Math.min(200, (cW * .4));
+    const minCoverDuration = 750;
 
-    var pageFill = new Circle({
+    const pageFill = new Circle({
         x: e.pageX,
         y: e.pageY,
         r: 0,
         fill: nextColor
     });
-    var fillAnimation = anime({
+    const fillAnimation = anime({
         targets: pageFill,
         r: targetR,
         duration:  Math.max(targetR / 2 , minCoverDuration ),
@@ -64,7 +64,7 @@ function handleEvent(e) {
         }
     });
 
-    var ripple = new Circle({
+    const ripple = new Circle({
         x: e.pageX,
         y: e.pageY,
         r: 0,
@@ -75,7 +75,7 @@ function handleEvent(e) {
         },
         opacity: 1
     });
-    var rippleAnimation = anime({
+    const rippleAnimation = anime({
         targets: ripple,
         r: rippleSize,
         opacity: 0,
@@ -84,9 +84,9 @@ function handleEvent(e) {
         complete: removeAnimation
     });
 
-    var particles = [];
-    for (var i=0; i<32; i++) {
-        var particle = new Circle({
+    const particles = [];
+    for (let i=0; i<32; i++) {
+        const particle = new Circle({
             x: e.pageX,
             y: e.pageY,
             fill: currentColor,
@@ -94,7 +94,7 @@ function handleEvent(e) {
         })
         particles.push(particle);
     }
-    var particlesAnimation = anime({
+    const particlesAnimation = anime({
         targets: particles,
         x: function(particle){
             return particle.x + anime.random(rippleSize, -rippleSize);
@@ -111,7 +111,7 @@ function handleEvent(e) {
 }
 
 function extend(a, b){
-    for(var key in b) {
+    for(const key in b) {
         if(b.hasOwnProperty(key)) {
             a[key] = b[key];
         }
@@ -119,7 +119,7 @@ function extend(a, b){
     return a;
 }
 
-var Circle = function(opts) {
+const Circle = function(opts) {
     extend(this, opts);
 }
 
@@ -153,7 +153,7 @@ anime({
     }
 });
 
-var resizeCanvas = function() {
+const resizeCanvas = function() {
     cW = window.innerWidth;
     cH = window.innerHeight;
     c.width = cW * devicePixelRatio;
@@ -170,16 +170,16 @@ var resizeCanvas = function() {
 window.fireworks = function(count = 0) {
     const elem = document.getElementById("fireworks");
     elem.classList.remove("d-none");
-    var fauxClick = new Event("mousedown");
+    const fauxClick = new Event("mousedown");
     fauxClick.pageX = anime.random(0, cW);
     fauxClick.pageY = anime.random(0, cH);
-    
-    var middleSpaceX = cW * 0.6;
-    var middleSpaceY = cH * 0.6;
-    var middleSpaceX1 = middleSpaceX /2;
-    var middleSpaceX2 = middleSpaceX1 + middleSpaceX;
-    var middleSpaceY1 = middleSpaceY /2;
-    var middleSpaceY2 = middleSpaceY1 + middleSpaceY;
+
+    const middleSpaceX = cW * 0.6;
+    const middleSpaceY = cH * 0.6;
+    const middleSpaceX1 = middleSpaceX /2;
+    const middleSpaceX2 = middleSpaceX1 + middleSpaceX;
+    const middleSpaceY1 = middleSpaceY /2;
+    const middleSpaceY2 = middleSpaceY1 + middleSpaceY;
     
     while(true){
         if(fauxClick.pageX > middleSpaceX1 && fauxClick.pageX < middleSpaceX2){

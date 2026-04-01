@@ -1,15 +1,15 @@
 /* jshint browser: true, strict: false, maxlen: false, maxstatements: false */
 (function () {
-    var showingInvoice = false;
-    var scriptSrcRegex = /\/modal\/btcpay\.js(\?v=.*)?$/;
-    var supportsCurrentScript = ("currentScript" in document);
-    var thisScript = "";
+    let showingInvoice = false;
+    const scriptSrcRegex = /\/modal\/btcpay\.js(\?v=.*)?$/;
+    const supportsCurrentScript = ("currentScript" in document);
+    let thisScript = "";
     if (supportsCurrentScript) {
         thisScript = document.currentScript.src;
     }
     else {
-        for (var i = 0; i < document.scripts.length; i++) {
-            var script = document.scripts[i];
+        for (let i = 0; i < document.scripts.length; i++) {
+            const script = document.scripts[i];
             if (script.src.match(scriptSrcRegex)) {
                 thisScript = script.src;
             }
@@ -27,7 +27,7 @@
         return;
     }
 
-    var iframe = document.createElement('iframe');
+    let iframe = document.createElement('iframe');
     iframe.name = 'btcpay';
     iframe.class = 'btcpay';
     iframe.style.display = 'none';
@@ -44,8 +44,8 @@
     // https://web.dev/async-clipboard/#permissions-policy-integration
     iframe.setAttribute('allow', 'clipboard-read; clipboard-write')
 
-    var origin = 'http://chat.btcpayserver.org join us there, and initialize this with your origin url through setApiUrlPrefix';
-    var scriptMatch = thisScript.match(scriptSrcRegex)
+    let origin = 'http://chat.btcpayserver.org join us there, and initialize this with your origin url through setApiUrlPrefix';
+    const scriptMatch = thisScript.match(scriptSrcRegex)
     if (scriptMatch) {
         // We can't just take the domain as btcpay can run under a sub path with RootPath
         origin = thisScript.slice(0, thisScript.length - scriptMatch[0].length);
@@ -58,9 +58,9 @@
         return site.replace(/\/+$/, "");
     }
 
-    var onModalWillEnterMethod = function () { };
-    var onModalWillLeaveMethod = function () { };
-    var onModalReceiveMessageMethod = function (event) { };
+    let onModalWillEnterMethod = function () { };
+    let onModalWillLeaveMethod = function () { };
+    let onModalReceiveMessageMethod = function (event) { };
 
     function showFrame() {
         if (window.document.getElementsByName('btcpay').length === 0) {
@@ -88,7 +88,7 @@
     function onModalReceiveMessage(customOnModalReceiveMessage) {
         onModalReceiveMessageMethod = customOnModalReceiveMessage;
     }
-    var readerAbortController = null;
+    let readerAbortController = null;
 
     function startNfcScan() {
         const ndef = new NDEFReader();
@@ -144,8 +144,8 @@
         showingInvoice = true;
         window.document.body.appendChild(iframe);
 
-        var paymentMethodId = null;
-        var animateEntrance = params && typeof params === 'object'
+        let paymentMethodId = null;
+        const animateEntrance = params && typeof params === 'object'
             ? params.animateEntrance
             : undefined;
 
@@ -156,7 +156,7 @@
             paymentMethodId = params.paymentMethodId || null;
         }
 
-        var invoiceUrl;
+        let invoiceUrl;
         if (paymentMethodId) {
             invoiceUrl =
                 origin +
@@ -181,9 +181,9 @@
     }
 
     function setButtonListeners() {
-        var buttons = window.document.querySelectorAll('[data-btcpay-button]');
-        for (var i = 0; i < buttons.length; i++) {
-            var b = buttons[0];
+        const buttons = window.document.querySelectorAll('[data-btcpay-button]');
+        for (let i = 0; i < buttons.length; i++) {
+            const b = buttons[i];
             b.addEventListener('submit', showFrame);
         }
     }

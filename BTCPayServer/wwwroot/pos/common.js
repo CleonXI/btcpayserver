@@ -41,7 +41,7 @@ class PoSOrder {
             this.addLine(new PoSOrder.ItemLine(item.id, item.count, item.price, item.taxRate ?? defaultTaxRate));
         }
         if (amounts) {
-            var i = 1;
+            let i = 1;
             for (const item of amounts) {
                 if (!item) continue;
                 this.addLine(new PoSOrder.ItemLine("Custom Amount " + i, 1, item, defaultTaxRate));
@@ -56,7 +56,7 @@ class PoSOrder {
     // Else, returns the tax rate shared by all items
     getTaxRate() {
         if (this.itemLines.length === 0) return null;
-        var rate = this.itemLines[0].taxRate ?? 0;
+        const rate = this.itemLines[0].taxRate ?? 0;
         for (const line of this.itemLines.slice(1)) {
             if (rate !== line.taxRate)
             {

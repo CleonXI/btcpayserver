@@ -1,5 +1,4 @@
 async function register(makeCredentialOptions) {
-    console.debug("Credential Options Object", makeCredentialOptions);
     // Turn the challenge back into the accepted format of padded base64
     makeCredentialOptions.challenge = coerceToArrayBuffer(makeCredentialOptions.challenge);
     // Turn ID into a UInt8Array Buffer for some reason
@@ -12,9 +11,6 @@ async function register(makeCredentialOptions) {
 
     if (makeCredentialOptions.authenticatorSelection.authenticatorAttachment == null) makeCredentialOptions.authenticatorSelection.authenticatorAttachment = undefined;
 
-    console.debug("Credential Options Formatted", makeCredentialOptions);
-    console.debug("Creating PublicKeyCredential...");
-
     let newCredential;
     try {
         newCredential = await navigator.credentials.create({
@@ -25,8 +21,6 @@ async function register(makeCredentialOptions) {
         showErrorAlert(msg, e);
         return;
     }
-
-    console.debug("PublicKeyCredential Created", newCredential);
 
     try {
         registerNewCredential(newCredential);

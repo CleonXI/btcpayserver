@@ -8,7 +8,7 @@ window.BTCPayShopifyIntegrationModule = function () {
         });
 
     // execute BTCPayShopifyIntegrationModule as soon as possible
-    var paymentMethod = pageElements(".payment-method-list__item__info");
+    const paymentMethod = pageElements(".payment-method-list__item__info");
     if (null === paymentMethod) {
         return void setTimeout(() => {
             window.BTCPayShopifyIntegrationModule();
@@ -27,12 +27,12 @@ window.BTCPayShopifyIntegrationModule = function () {
     const shopify_order_id = Shopify.checkout.order_id;
     const btcPayServerUrl = window.BTCPAYSERVER_URL;
     const storeId = window.STORE_ID;
-    var currentInvoiceData;
-    var modalShown = false;
+    let currentInvoiceData;
+    let modalShown = false;
 
     let buttonElement = null;
 
-    var pageItems = {
+    const pageItems = {
         mainHeader: pageElements("#main-header"),
         orderConfirmed: pageElements(".os-step__title"),
         orderConfirmedDescription: pageElements(".os-step__description"),
