@@ -128,7 +128,7 @@
                     </div>
                     <div class="form-text crypto-info">
                         <span text-translate="true">Your available balance is</span>
-                        <button id="SweepBalance" type="button" class="crypto-balance-link btn btn-link p-0 align-baseline">@Model.CurrentBalance</button> <span>@Model.CryptoCode</span>.
+                        <button id="SweepBalance" type="button" class="crypto-balance-link btn btn-action align-baseline">@Model.CurrentBalance</button> <span>@Model.CryptoCode</span>.
                         @if (Model.ImmatureBalance > 0)
                         {
                             <span><br>@StringLocalizer["Note: {0} are still immature and require additional confirmations.", $"{Model.ImmatureBalance} {Model.CryptoCode}"]</span>
@@ -165,7 +165,7 @@
                 <span text-translate="true">Fee rate</span>
                 <span class="text-btcpay-body-text-muted">(sat/vB)</span>
             </label>
-            <input asp-for="FeeSatoshiPerByte" type="number" inputmode="numeric" min="0" step="any" class="form-control" style="max-width:14ch;" />
+            <input asp-for="FeeSatoshiPerByte" type="number" inputmode="numeric" min="0" step="any" class="form-control max-w-input-14ch" />
             <span asp-validation-for="FeeSatoshiPerByte" class="text-btcpay-danger"></span>
             <span id="FeeRate-Error" class="text-btcpay-danger"></span>
         </div>

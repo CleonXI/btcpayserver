@@ -59,14 +59,14 @@
 							@if (v.IsDownloadedLanguagePack && v.UpdateAvailable)
 							{
 								<form method="post" asp-action="DownloadLanguagePack" asp-route-language="@v.DictionaryName" class="inline">
-									<button type="submit" class="btn btn-link p-0">Update</button>
+									<button type="submit" class="btn btn-action">Update</button>
 								</form>
 							}
 							<a asp-action="CreateDictionary" asp-route-fallback="@v.DictionaryName" text-translate="true">Clone</a>
 							@if (!v.IsSelected)
 							{
                                 <form method="post" asp-action="SelectDictionary" asp-route-dictionary="@v.DictionaryName" class="inline">
-                                    <button id="Select-@v.DictionaryName" type="submit" class="btn btn-link p-0" text-translate="true">Select
+                                    <button id="Select-@v.DictionaryName" type="submit" class="btn btn-action" text-translate="true">Select
                                     </button>
                                 </form>
 							}

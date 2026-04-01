@@ -60,7 +60,7 @@
                     <label asp-for="LogoFile" class="form-label"></label>
                     @if (!string.IsNullOrEmpty(Model.LogoUrl))
                     {
-                        <button type="submit" class="btn btn-link p-0 text-btcpay-danger" name="RemoveLogoFile" value="true">
+                        <button type="submit" class="btn btn-action-danger" name="RemoveLogoFile" value="true">
                             <vc:icon symbol="cross" />Remove
                         </button>
                     }
@@ -87,7 +87,7 @@
                     <label asp-for="CssFile" class="form-label"></label>
                     @if (!string.IsNullOrEmpty(Model.CssUrl))
                     {
-                        <button type="submit" class="btn btn-link p-0 text-btcpay-danger" name="RemoveCssFile" value="true">
+                        <button type="submit" class="btn btn-action-danger" name="RemoveCssFile" value="true">
                             <vc:icon symbol="cross" />Remove
                         </button>
                     }

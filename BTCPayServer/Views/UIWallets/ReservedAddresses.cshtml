@@ -68,11 +68,11 @@
             <div class="flex gap-2 items-center">
                 <span class="text-btcpay-body-text-muted" text-translate="true">Page Size:</span>
                 <div class="btn-group gap-2" role="group">
-                    <button type="button" class="btn btn-link p-0" :class="{active: pageSize === 10}" v-on:click="setPageSize(10)">10</button>
-                    <button type="button" class="btn btn-link p-0" :class="{active: pageSize === 25}" v-on:click="setPageSize(25)">25</button>
-                    <button type="button" class="btn btn-link p-0" :class="{active: pageSize === 50}" v-on:click="setPageSize(50)">50</button>
-                    <button type="button" class="btn btn-link p-0" :class="{active: pageSize === 100}" v-on:click="setPageSize(100)">100</button>
-                    <button type="button" class="btn btn-link p-0" :class="{active: pageSize === 250}" v-on:click="setPageSize(250)">250</button>
+                    <button type="button" class="btn btn-action" :class="{active: pageSize === 10}" v-on:click="setPageSize(10)">10</button>
+                    <button type="button" class="btn btn-action" :class="{active: pageSize === 25}" v-on:click="setPageSize(25)">25</button>
+                    <button type="button" class="btn btn-action" :class="{active: pageSize === 50}" v-on:click="setPageSize(50)">50</button>
+                    <button type="button" class="btn btn-action" :class="{active: pageSize === 100}" v-on:click="setPageSize(100)">100</button>
+                    <button type="button" class="btn btn-action" :class="{active: pageSize === 250}" v-on:click="setPageSize(250)">250</button>
                 </div>
             </div>
         </div>

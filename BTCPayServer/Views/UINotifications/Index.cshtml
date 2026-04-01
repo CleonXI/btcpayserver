@@ -126,7 +126,7 @@
                             <th class="min-w-date-col">
                                 <div class="flex items-center gap-4">
                                     <span text-translate="true">Date</span>
-                                    <button type="button" class="btn btn-link p-0 switch-time-format only-for-js" title="@StringLocalizer["Switch date format"]">
+                                    <button type="button" class="btn btn-action switch-time-format only-for-js" title="@StringLocalizer["Switch date format"]">
                                         <vc:icon symbol="time" />
                                     </button>
                                 </div>
@@ -180,11 +180,11 @@
                                     <div class="inline-flex items-center gap-4">
                                         @if (!string.IsNullOrEmpty(item.ActionLink))
                                         {
-                                            <a href="@item.ActionLink" class="btn btn-link p-0" rel="noreferrer noopener" text-translate="true">Details</a>
+                                            <a href="@item.ActionLink" class="btn btn-action" rel="noreferrer noopener" text-translate="true">Details</a>
                                         }
                                         @if (!item.Seen)
                                         {
-                                            <button class="btn btn-link p-0 btn-toggle-seen whitespace-nowrap" type="submit" name="command" value="flip-individual:@(item.Id)">
+                                            <button class="btn btn-action btn-toggle-seen whitespace-nowrap" type="submit" name="command" value="flip-individual:@(item.Id)">
                                                 <span text-translate="true">Mark as seen</span>
                                             </button>
                                         }

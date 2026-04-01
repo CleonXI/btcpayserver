@@ -292,7 +292,7 @@
                     <div class="flex items-center gap-4">
                         <span text-translate="true">Date</span>
                         <button type="button"
-                                class="btn btn-link p-0 switch-time-format only-for-js"
+                                class="btn btn-action switch-time-format only-for-js"
                                 title="@StringLocalizer["Switch date format"]">
                             <vc:icon symbol="time" />
                         </button>
@@ -324,11 +324,11 @@
                         <td>
                             <div class="inline-flex items-center gap-4">
                                 <a asp-action="ViewPaymentRequest" asp-route-payReqId="@item.Id" id="PaymentRequest-@item.Id" target="_blank"
-                                   class="btn btn-link p-0" title="View Payment Request">
+                                   class="btn btn-action" title="View Payment Request">
                                     <vc:icon symbol="actions-send" />
                                 </a>
 
-                                <button type="button" class="btn btn-link p-0"
+                                <button type="button" class="btn btn-action"
                                         data-clipboard="@CallbackGenerator.PaymentRequestByIdLink(item.Id)"
                                         title="Copy Payment Request Link">
                                     <vc:icon symbol="actions-copy" />

@@ -23,7 +23,7 @@
                 <label asp-for="Email" class="form-label"></label>
                 @if (Model.RequiresEmailConfirmation)
                 {
-                    <button asp-action="SendVerificationEmail" class="inline-flex items-center gap-1 btn btn-link p-0">
+                    <button asp-action="SendVerificationEmail" class="inline-flex items-center gap-1 btn btn-action">
                         <vc:icon symbol="actions-email" />
                         <span text-translate="true">Send verification email</span>
                     </button>
@@ -51,7 +51,7 @@
                     <label asp-for="ImageFile" class="form-label"></label>
                     @if (!string.IsNullOrEmpty(Model.ImageUrl))
                     {
-                        <button type="submit" class="btn btn-link p-0 text-btcpay-danger" name="RemoveImageFile" value="true">
+                        <button type="submit" class="btn btn-action-danger" name="RemoveImageFile" value="true">
                             <vc:icon symbol="cross" />
                             <span text-translate="true">Remove</span>
                         </button>

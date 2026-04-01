@@ -46,7 +46,7 @@
             <label asp-for="ImageFile" class="form-label"></label>
             @if (!string.IsNullOrEmpty(Model.ImageUrl))
             {
-            <button type="submit" class="btn btn-link p-0 text-btcpay-danger" name="RemoveImageFile" value="true">
+            <button type="submit" class="btn btn-action-danger" name="RemoveImageFile" value="true">
                 <vc:icon symbol="cross" />
                 <span text-translate="true">Remove</span>
             </button>

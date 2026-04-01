@@ -45,12 +45,12 @@
             <div class="inline-flex gap-4 items-center">
 				@if (transaction.CanBumpFee)
 				{
-					<a asp-action="WalletBumpFee" asp-route-walletId="@Context.GetRouteValue("walletId")" asp-route-transactionId="@transaction.Id" class="btn btn-link p-0 bumpFee-btn">
+					<a asp-action="WalletBumpFee" asp-route-walletId="@Context.GetRouteValue("walletId")" asp-route-transactionId="@transaction.Id" class="btn btn-action bumpFee-btn">
 						<vc:icon symbol="actions-send" />
 						<span text-translate="true">Bump fee</span>
 					</a>
 				}
-                <button class="btn btn-link p-0 @(!string.IsNullOrEmpty(transaction.Comment) ? "text-btcpay-primary" : "text-btcpay-body-text-muted")" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-action @(!string.IsNullOrEmpty(transaction.Comment) ? "text-btcpay-primary" : "text-btcpay-body-text-muted")" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <vc:icon symbol="actions-comment" />
                 </button>
                 <div class="dropdown-menu">

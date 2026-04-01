@@ -79,7 +79,7 @@
                                             <div class="text-btcpay-body-text-muted">@Model.PermissionValues[i].Description</div>
                                             @if (Model.Stores.Any())
                                             {
-                                                <button type="submit" class="btn btn-link p-0" name="command" value="@($"{Model.PermissionValues[i].Permission}:change-store-mode")">Select specific stores</button>
+                                                <button type="submit" class="btn btn-action" name="command" value="@($"{Model.PermissionValues[i].Permission}:change-store-mode")">Select specific stores</button>
                                             }
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                         <small class="text-btcpay-body-text-muted text-break block my-2 lg:inline-block lg:my-0">@Model.PermissionValues[i].Permission</small>
                                     </h5>
                                     <div class="text-btcpay-body-text-muted">@Model.PermissionValues[i].Description</div>
-                                    <button type="submit" class="btn btn-link p-0" name="command" value="@($"{Model.PermissionValues[i].Permission}:change-store-mode")">Give permission to all stores instead</button>
+                                    <button type="submit" class="btn btn-action" name="command" value="@($"{Model.PermissionValues[i].Permission}:change-store-mode")">Give permission to all stores instead</button>
 
                                     @if (!Model.Stores.Any())
                                     {

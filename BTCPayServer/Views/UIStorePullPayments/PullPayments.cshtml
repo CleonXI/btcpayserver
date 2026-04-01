@@ -95,7 +95,7 @@
                             <span text-translate="true">Start</span>
                             <vc:icon symbol="actions-sort-@(startDateSortOrder ?? nextStartDateSortOrder ?? "desc")" />
                         </a>
-                        <button type="button" class="btn btn-link p-0 switch-time-format only-for-js" title="@StringLocalizer["Switch date format"]">
+                        <button type="button" class="btn btn-action switch-time-format only-for-js" title="@StringLocalizer["Switch date format"]">
                             <vc:icon symbol="time" />
                         </button>
                     </div>
@@ -137,7 +137,7 @@
                         <div class="inline-flex items-center gap-4">
                             <button type="button" data-clipboard="@Url.ActionAbsolute(Context.Request, "ViewPullPayment", "UIPullPayment", new { pullPaymentId = pp.Id })"
                                permission="@Policies.CanViewPullPayments"
-                               class="only-for-js btn btn-link p-0"
+                               class="only-for-js btn btn-action"
                                text-translate="true">
                                 Copy Link
                             </button>

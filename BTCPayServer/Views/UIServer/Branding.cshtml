@@ -51,7 +51,7 @@
                     <label asp-for="LogoFile" class="form-label"></label>
                     @if (!string.IsNullOrEmpty(Model.LogoUrl))
                     {
-                        <button type="submit" class="btn btn-link p-0 text-btcpay-danger" name="RemoveLogoFile" value="true">
+                        <button type="submit" class="btn btn-action-danger" name="RemoveLogoFile" value="true">
                             <vc:icon symbol="cross" />
                             <span text-translate="true">Remove</span>
                         </button>
@@ -100,7 +100,7 @@
                         <label asp-for="CustomThemeFile" class="form-label" data-required></label>
                         @if (!string.IsNullOrEmpty(Model.CustomThemeCssUrl))
                         {
-                            <button type="submit" class="btn btn-link p-0 text-btcpay-danger" name="RemoveCustomThemeFile" value="true">
+                            <button type="submit" class="btn btn-action-danger" name="RemoveCustomThemeFile" value="true">
                                 <vc:icon symbol="cross" />
                                 <span text-translate="true">Remove</span>
                             </button>
