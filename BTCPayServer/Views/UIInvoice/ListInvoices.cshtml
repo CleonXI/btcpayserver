@@ -127,11 +127,11 @@
 </div>
 
 <div id="descriptor" class="collapse">
-    <div class="d-flex px-4 py-4 mb-4 bg-tile rounded">
-        <div class="flex-fill">
+    <div class="flex px-6 py-6 mb-6 bg-tile rounded">
+        <div class="flex-1">
             <p text-translate="true" class="mb-2">Invoices are documents issued by the seller to a buyer to collect payment.</p>
-            <p text-translate="true" class="mb-3">An invoice must be paid within a defined time interval at a fixed exchange rate to protect the issuer from price fluctuations.</p>
-            <p class="mb-3" html-translate="true">You can also apply filters to your search by searching for <code>filtername:value</code>. Be sure to split your search parameters with comma. Supported filters are:</p>
+            <p text-translate="true" class="mb-4">An invoice must be paid within a defined time interval at a fixed exchange rate to protect the issuer from price fluctuations.</p>
+            <p class="mb-4" html-translate="true">You can also apply filters to your search by searching for <code>filtername:value</code>. Be sure to split your search parameters with comma. Supported filters are:</p>
             <ul>
                 <li html-translate="true"><code>orderid:id</code> for filtering a specific order</li>
                 <li html-translate="true"><code>itemcode:code</code> for filtering a specific type of item purchased through the pos or crowdfund apps</li>
@@ -191,7 +191,7 @@
     </div>
 </div>
 
-<form class="d-flex flex-wrap flex-sm-nowrap align-items-center gap-3 mb-4 col-xxl-8" asp-action="ListInvoices" asp-route-storeId="@Model.StoreId" method="get">
+<form class="flex flex-wrap sm:flex-nowrap items-center gap-4 mb-6 col-xxl-8" asp-action="ListInvoices" asp-route-storeId="@Model.StoreId" method="get">
     <input asp-for="Count" type="hidden" />
     <input asp-for="TimezoneOffset" type="hidden" />
     <input asp-for="SearchTerm" type="hidden" value="@Model.Search.WithoutSearchText()"/>
@@ -316,17 +316,17 @@
                             <input type="checkbox" class="form-check-input mass-action-select-all" />
                         </th>
                         <th class="min-w-date-col">
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="flex items-center gap-4">
                                 <span text-translate="true">Date</span>
                                 <button type="button" class="btn btn-link p-0 switch-time-format only-for-js" title="@StringLocalizer["Switch date format"]">
                                     <vc:icon symbol="time" />
                                 </button>
                             </div>
                         </th>
-                        <th text-translate="true" class="text-nowrap">Invoice Id</th>
-                        <th text-translate="true" class="text-nowrap">Order Id</th>
+                        <th text-translate="true" class="whitespace-nowrap">Invoice Id</th>
+                        <th text-translate="true" class="whitespace-nowrap">Order Id</th>
                         <th text-translate="true">Status</th>
-                        <th text-translate="true" class="text-end text-nowrap">Amount</th>
+                        <th text-translate="true" class="text-end whitespace-nowrap">Amount</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -336,12 +336,12 @@
                             <input type="checkbox" class="form-check-input mass-action-select-all" />
                         </th>
                         <th colspan="6">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div class="flex flex-wrap items-center justify-between gap-4">
                                 <div>
                                     <strong class="mass-action-selected-count">0</strong>
                                     <span text-translate="true">selected</span>
                                 </div>
-                                <div class="d-inline-flex align-items-center gap-3">
+                                <div class="inline-flex items-center gap-4">
                                     <button type="submit" name="command" value="archive" id="ArchiveSelected" class="btn btn-link">
                                         <vc:icon symbol="actions-archive" />
                                         <span text-translate="true">Archive</span>
@@ -378,7 +378,7 @@
                                 <vc:truncate-center text="@invoice.OrderId" link="@invoice.RedirectUrl" classes="truncate-center-id" />
                             </td>
                             <td class="align-middle">
-                                <div class="d-inline-flex align-items-center gap-2">
+                                <div class="inline-flex items-center gap-2">
                                     <vc:invoice-status state="invoice.Status" payments="invoice.Details.Payments" invoice-id="@invoice.InvoiceId"
                                        is-archived="invoice.Details.Archived" has-refund="invoice.HasRefund" />
                                     @if (invoice.ShowCheckout)
@@ -389,12 +389,12 @@
                                     }
                                 </div>
                             </td>
-                            <td class="align-middle text-end text-nowrap">
+                            <td class="align-middle text-end whitespace-nowrap">
                                 <span data-sensitive>@DisplayFormatter.Currency(invoice.Amount, invoice.Currency)</span>
                             </td>
                             <td class="align-middle text-end">
-                                <div class="d-inline-flex align-items-center gap-2">
-                                    <button class="accordion-button collapsed only-for-js ms-0 d-inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#@detailsId" aria-expanded="false" aria-controls="@detailsId">
+                                <div class="inline-flex items-center gap-2">
+                                    <button class="accordion-button collapsed only-for-js ms-0 inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#@detailsId" aria-expanded="false" aria-controls="@detailsId">
                                         <vc:icon symbol="caret-down" />
                                     </button>
                                 </div>
@@ -416,7 +416,7 @@
 }
 else
 {
-    <p data-testid="no-invoices" class="text-secondary mt-3" text-translate="true">
+    <p data-testid="no-invoices" class="text-btcpay-body-text-muted mt-4" text-translate="true">
         There are no invoices matching your criteria.
     </p>
 }

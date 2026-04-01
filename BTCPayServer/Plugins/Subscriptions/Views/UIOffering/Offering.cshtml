@@ -19,7 +19,7 @@
     <style>
         .card h6 {
             font-weight: var(--btcpay-font-weight-semibold);
-            color: var(--btcpay-body-text-muted);
+            color: var(--btcpay-body-text-btcpay-body-text-muted);
         }
     </style>
     <link href="~/vendor/summernote/summernote-bs5.css" rel="stylesheet" asp-append-version="true" />
@@ -35,9 +35,9 @@
 
 <partial name="_StatusMessage" />
 
-<div class="container-fluid px-4 py-4">
+<div class="container-fluid px-6 py-6">
     <!-- Metrics Cards -->
-    <div class="d-flex gap-5">
+    <div class="flex gap-12">
         <div>
             <div>
                 <h6 text-translate="true">Active Subscribers</h6>
@@ -47,13 +47,13 @@
         <div>
             <div>
                 <h6 text-translate="true">Monthly revenue</h6>
-                <h4 class="text-nowrap">@Model.TotalMonthlyRevenue</h4>
+                <h4 class="whitespace-nowrap">@Model.TotalMonthlyRevenue</h4>
             </div>
         </div>
     </div>
 
     <!-- Navigation Tabs -->
-    <ul id="SectionNav" class="nav mb-4">
+    <ul id="SectionNav" class="nav mb-6">
         <a class="nav-link @(Model.Section == SubscriptionSection.Subscribers ? "active" : "")"
            asp-action="Offering"
            asp-route-storeId="@storeId"
@@ -73,7 +73,7 @@
 
     @if (Model.Section == SubscriptionSection.Plans)
     {
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="flex justify-between items-center">
             <h4>Plans</h4>
             <a id="page-primary" permission="@SubscriptionsPolicies.CanModifyOfferings" asp-route-storeId="@storeId" asp-route-offeringId="@offeringId" asp-action="AddPlan"
                class="btn btn-primary"
@@ -106,7 +106,7 @@
                             data-plan-id="@p.Data.Id"
                             data-plan-name="@p.Data.Name"
                             data-allow-trial="@(p.Data.TrialDays > 0)">
-                            <td class="fw-semibold text-nowrap plan-name-col">
+                            <td class="font-semibold whitespace-nowrap plan-name-col">
                                 <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     @p.Data.Name
                                 </span>
@@ -126,7 +126,7 @@
                                     text="@p.Data.Id"
                                     classes="truncate-center-id plan-row-id" />
                             </td>
-                            <td class="text-nowrap">@DisplayFormatter.Currency(@p.Data.Price, @p.Data.Currency, DisplayFormatter.CurrencyFormat.CodeAndSymbol)</td>
+                            <td class="whitespace-nowrap">@DisplayFormatter.Currency(@p.Data.Price, @p.Data.Currency, DisplayFormatter.CurrencyFormat.CodeAndSymbol)</td>
                             <td>@p.Data.RecurringType</td>
                             <td>@p.Data.GracePeriodDays days</td>
                             <td>@p.Data.TrialDays days</td>
@@ -139,11 +139,11 @@
                                         _ => ("success", StringLocalizer["Active"])
                                     };
                                 }
-                                <span class="subscriber-status badge badge-translucent rounded-pill text-bg-@badge">@name</span>
+                                <span class="subscriber-status badge badge-translucent rounded-full text-bg-@badge">@name</span>
                             </span></td>
                             <td>@p.Data.MemberCount Members</td>
                             <td>
-                                <div class="d-inline-flex align-items-center gap-3">
+                                <div class="inline-flex items-center gap-4">
                                     <a class="edit-plan" asp-action="AddPlan"
                                        asp-route-storeId="@storeId"
                                        asp-route-offeringId="@offeringId"
@@ -166,7 +166,7 @@
                 else
                 {
                     <tr>
-                        <td colspan="8" class="text-secondary" text-translate="true">There are no subscription plans.</td>
+                        <td colspan="8" class="text-btcpay-body-text-muted" text-translate="true">There are no subscription plans.</td>
                     </tr>
                 }
                 </tbody>
@@ -176,7 +176,7 @@
     }
     else if (Model.Section == SubscriptionSection.Subscribers)
     {
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="flex justify-between items-center">
             <h4>Subscribers</h4>
             @if (Model.SelectablePlans.Count != 0)
             {
@@ -193,7 +193,7 @@
                 </a>
             }
         </div>
-        <form class="d-flex flex-wrap flex-sm-nowrap align-items-center gap-3 mb-4 col-xxl-8">
+        <form class="flex flex-wrap flex-sm-nowrap items-center gap-4 mb-6 col-xxl-8">
             <input asp-for="SearchTerm" class="form-control" placeholder="@StringLocalizer["Search by email, external reference, name…"]" />
         </form>
         <!-- Subscription Plans Table -->
@@ -223,10 +223,10 @@
                             data-plan-started="@subscriber.Data.PlanStarted.UtcDateTime.ToString("yyyy-MM-dd")"
                             data-expiration="@((subscriber.Data.TrialEnd ?? subscriber.Data.PeriodEnd)?.UtcDateTime.ToString("yyyy-MM-dd") ?? "")"
                             data-is-trial="@(subscriber.Data.TrialEnd.HasValue ? "true" : "false")">
-                            <td class="fw-semibold text-nowrap d-flex align-items-center subscriber-email-col">
+                            <td class="font-semibold whitespace-nowrap flex items-center subscriber-email-col">
                                 @if (subscriber.Data.TestAccount)
                                 {
-                                    <span class="badge badge-translucent rounded-pill text-bg-info">Test</span>
+                                    <span class="badge badge-translucent rounded-full text-bg-btcpay-info">Test</span>
                                 }
                                 <form method="post" asp-antiforgery="true" class="me-2" permission="@SubscriptionsPolicies.CanManageSubscribers">
                                     <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -248,7 +248,7 @@
                                 </form>
                                 <span class="me-2" not-permission="@SubscriptionsPolicies.CanManageSubscribers">@subscriber.Data.Customer.Email.Get()</span>
                             </td>
-                            <td class="fw-semibold text-nowrap subscriber-credit-col">
+                            <td class="font-semibold whitespace-nowrap subscriber-credit-col">
                                 <span permission="@SubscriptionsPolicies.CanCreditSubscribers">
                                     <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span>@DisplayFormatter.Currency(subscriber.Data.GetCredit(), subscriber.Data.Plan.Currency, DisplayFormatter.CurrencyFormat.CodeAndSymbol)</span>
@@ -278,37 +278,37 @@
                                     @DisplayFormatter.Currency(subscriber.Data.GetCredit(), subscriber.Data.Plan.Currency, DisplayFormatter.CurrencyFormat.CodeAndSymbol)
                                 </span>
                             </td>
-                            <td class="text-nowrap">
+                            <td class="whitespace-nowrap">
                                 <a href="#"
-                                   class="edit-dates-link text-decoration-none"
+                                   class="edit-dates-link no-underline"
                                    data-bs-toggle="modal"
                                    data-bs-target="#editDatesModal"
                                    title="@StringLocalizer["Edit dates"]">
                                     @subscriber.Data.PlanStarted.ToString("d")
-                                    <span class="ms-1 text-muted small">&#x270E;</span>
+                                    <span class="ms-1 text-btcpay-body-text-muted small">&#x270E;</span>
                                 </a>
                             </td>
-                            <td class="text-nowrap">
+                            <td class="whitespace-nowrap">
                                 @{
                                     var subExpiry = subscriber.Data.TrialEnd ?? subscriber.Data.PeriodEnd;
                                 }
                                 @if (subExpiry.HasValue)
                                 {
                                     <a href="#"
-                                       class="edit-dates-link text-decoration-none"
+                                       class="edit-dates-link no-underline"
                                        data-bs-toggle="modal"
                                        data-bs-target="#editDatesModal"
                                        title="@StringLocalizer["Edit dates"]">
                                         @subExpiry.Value.ToString("d")
-                                        <span class="ms-1 text-muted small">&#x270E;</span>
+                                        <span class="ms-1 text-btcpay-body-text-muted small">&#x270E;</span>
                                     </a>
                                 }
                                 else
                                 {
-                                    <span class="text-muted">—</span>
+                                    <span class="text-btcpay-body-text-muted">—</span>
                                 }
                             </td>
-                            <td class="text-nowrap">@subscriber.Data.Plan.Name</td>
+                            <td class="whitespace-nowrap">@subscriber.Data.Plan.Name</td>
                             <td>
                         <span class="subscriber-phase">
                             @{
@@ -321,7 +321,7 @@
                                     _ => throw new NotSupportedException()
                                 };
                             }
-                            <span class="badge badge-translucent rounded-pill text-bg-@style">@name</span>
+                            <span class="badge badge-translucent rounded-full text-bg-@style">@name</span>
                         </span></td>
                             <td>
 
@@ -330,7 +330,7 @@
                         </span>
                             </td>
                             <td>
-                                <div class="d-inline-flex align-items-center gap-3">
+                                <div class="inline-flex items-center gap-4">
                                     <a asp-action="CreatePortalSession" asp-route-storeId="@storeId" asp-route-offeringId="@subscriber.Data.OfferingId"
                                         permission="@SubscriptionsPolicies.CanManageSubscribers"
                                         asp-route-customerId="@subscriber.Data.CustomerId" class="portal-link" target="_blank">View Portal</a>
@@ -354,13 +354,13 @@
                     if (Model.TooMuchSubscribers)
                     {
                         <tr>
-                            <td colspan="8" class="text-secondary" text-translate="true">There are many subscribers, use search to look for them.</td>
+                            <td colspan="8" class="text-btcpay-body-text-muted" text-translate="true">There are many subscribers, use search to look for them.</td>
                         </tr>
                     }
                 }
                 else
                 {
-                    <td colspan="8" class="text-secondary" text-translate="true">There are no subscribers.</td>
+                    <td colspan="8" class="text-btcpay-body-text-muted" text-translate="true">There are no subscribers.</td>
                 }
                 </tbody>
             </table>
@@ -370,10 +370,10 @@
     else if (Model.Section == SubscriptionSection.Mails)
     {
         <form asp-antiforgery="true" method="post">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="flex justify-between items-center mb-6">
                 <h4 text-translate="true">Mails</h4>
-                <div class="d-flex justify-content-start sticky-footer">
-                    <button id="page-primary" class="btn btn-success px-4" type="submit" text-translate="true">Save</button>
+                <div class="flex justify-start sticky-footer">
+                    <button id="page-primary" class="btn btn-success px-6" type="submit" text-translate="true">Save</button>
                 </div>
             </div>
 
@@ -381,13 +381,13 @@
                 @if (!Model.EmailConfigured)
                 {
                     <div class="col-lg-6">
-                        <div class="card h-100">
+                        <div class="card h-full">
                             <div class="card-body">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                <div class="flex items-center justify-between mb-2">
                                     <h5 class="mb-0" text-translate="true">Email Configuration</h5>
                                 </div>
 
-                                <p class="text-muted mb-3" text-translate="true">No email address has been configured for the Server. Configure an email address
+                                <p class="text-btcpay-body-text-muted mb-4" text-translate="true">No email address has been configured for the Server. Configure an email address
                                     to
                                     begin sending emails.</p>
                                 <a
@@ -404,26 +404,26 @@
                 }
                 <!-- Notifications & Alerts -->
                 <div class="col-lg-@(Model.EmailConfigured ? "12" : "6")">
-                    <div class="card h-100">
+                    <div class="card h-full">
                         <div class="card-body">
-                            <h5 class="mb-3" text-translate="true">Notifications & Alerts</h5>
-                            <div class="form-group mb-4">
+                            <h5 class="mb-4" text-translate="true">Notifications & Alerts</h5>
+                            <div class="form-group mb-6">
                                 <label asp-for="PaymentRemindersDays" class="form-label" text-translate="true">Email Reminder Days Before Due</label>
                                 <div class="input-group">
                                     <input inputmode="number" asp-for="PaymentRemindersDays" class="form-control" style="max-width:12ch;"
                                            min="0" />
                                     <span class="input-group-text" text-translate="true">days</span>
                                 </div>
-                                <span asp-validation-for="PaymentRemindersDays" class="text-danger"></span>
+                                <span asp-validation-for="PaymentRemindersDays" class="text-btcpay-danger"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card mt-4">
+            <div class="card mt-6">
                 <div class="card-body">
-                    <div class="d-flex align-items-center gap-4 mb-3">
+                    <div class="flex items-center gap-6 mb-4">
                         <h5 class="mb-0" text-translate="true">Email rules</h5>
                         <span class="dropdown-toggle btn btn-outline-secondary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add email rule</span>
                         <div class="dropdown-menu">
@@ -441,15 +441,15 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th class="text-nowrap w-25" text-translate="true">Trigger</th>
+                                <th class="whitespace-nowrap w-25" text-translate="true">Trigger</th>
                                 <th class="w-75" text-translate="true">Subject</th>
-                                <th class="text-end d-print-none" permission="@Policies.CanModifyStoreSettings"></th>
+                                <th class="text-end print:hidden" permission="@Policies.CanModifyStoreSettings"></th>
                             </tr>
                             </thead>
                             <tbody>
                             @if (Model.EmailRules.Count == 0)
                             {
-                                <td colspan="2" class="text-secondary" text-translate="true">There are no email rules for this offering.</td>
+                                <td colspan="2" class="text-btcpay-body-text-muted" text-translate="true">There are no email rules for this offering.</td>
                             }
                             else
                             {
@@ -459,8 +459,8 @@
                                     <tr>
                                         <td>@rule.TriggerViewModel.Description</td>
                                         <td>@rule.Data.Subject</td>
-                                        <td class="text-end d-print-none" permission="@Policies.CanModifyStoreSettings">
-                                            <div class="d-inline-flex align-items-center gap-3">
+                                        <td class="text-end print:hidden" permission="@Policies.CanModifyStoreSettings">
+                                            <div class="inline-flex items-center gap-4">
                                                 <a asp-area="@EmailsPlugin.Area"
                                                    asp-controller="UIStoreEmailRules"
                                                    asp-action="StoreEmailRulesEdit" asp-route-storeId="@storeId"
@@ -509,5 +509,6 @@
         });
     </script>
     <script src="~/vendor/vuejs/vue.global.prod.js" asp-append-version="true"></script>
+    <script src="~/vendor/bootstrap/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/vendor/summernote/summernote-bs5.js" asp-append-version="true"></script>
 }

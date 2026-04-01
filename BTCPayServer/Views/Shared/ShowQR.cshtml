@@ -11,31 +11,31 @@
                 <div class="modal-body pt-0">
                     <div class="payment-box">
                         <div class="qr-container">
-                            <component v-if="currentFragment" :is="currentMode.href ? 'a': 'div'" class="qr-container d-inline-block" :href="currentMode.href">
+                            <component v-if="currentFragment" :is="currentMode.href ? 'a': 'div'" class="qr-container inline-block" :href="currentMode.href">
                                 <qrcode :value="currentFragment" :options="qrOptions"></qrcode>
                             </component>
                         </div>
-                        <div v-if="currentFragment" class="input-group mt-3">
+                        <div v-if="currentFragment" class="input-group mt-4">
                             <div class="form-floating">
                                 <vc:truncate-center text="currentFragment" padding="15" elastic="true" is-vue="true" classes="form-control-plaintext"/>
                                 <label>{{title}}</label>
                             </div>
                         </div>
                     </div>
-                    <ul class="nav btcpay-pills justify-content-center mt-4 mb-3" v-if="modes && Object.keys(modes).length > 1">
+                    <ul class="nav btcpay-pills justify-center mt-6 mb-4" v-if="modes && Object.keys(modes).length > 1">
                         <li class="nav-item" v-for="(item, key) in modes">
                             <a class="btcpay-pill" :class="{ 'active': key === mode }" href="#" v-on:click="mode = key">{{item.title}}</a>
                         </li>
                     </ul>
-                    <div class="input-group input-group-sm mt-3" v-if="currentFragment && currentMode.showData">
+                    <div class="input-group input-group-sm mt-4" v-if="currentFragment && currentMode.showData">
                         <input type="text" class="form-control" readonly :value="currentFragment" id="qr-code-data-input">
-                        <button type="button" class="btn btn-outline-secondary px-3" data-clipboard-target="#qr-code-data-input">
+                        <button type="button" class="btn btn-outline-secondary px-4" data-clipboard-target="#qr-code-data-input">
                             <vc:icon symbol="actions-copy" />
                         </button>
                     </div>
-                    <div v-if="note" v-html="note" class="text-muted mt-3" id="scan-qr-modal-note"></div>
+                    <div v-if="note" v-html="note" class="text-btcpay-body-text-muted mt-4" id="scan-qr-modal-note"></div>
                 </div>
-                <div class="mb-4 text-center" v-if="continueCallback">
+                <div class="mb-6 text-center" v-if="continueCallback">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-on:click="continueCallback()">{{ continueTitle || 'Continue' }}</button>
                 </div>
             </div>

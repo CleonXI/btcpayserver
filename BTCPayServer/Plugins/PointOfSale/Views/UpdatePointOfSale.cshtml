@@ -21,6 +21,7 @@
 
 @section PageFootContent {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/vendor/bootstrap/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/vendor/summernote/summernote-bs5.js" asp-append-version="true"></script>
     <script src="~/pos/admin.js" asp-append-version="true"></script>
 }
@@ -39,7 +40,7 @@
             {
                 <div class="btn-group" role="group" aria-label="View Point of Sale">
                     <a class="btn btn-secondary" asp-controller="UIPointOfSale" asp-action="ViewPointOfSale" asp-route-appId="@Model.Id" id="ViewApp" target="_blank" text-translate="true">View</a>
-                    <button type="button" class="btn btn-secondary px-3 d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#OpenPosModal">
+                    <button type="button" class="btn btn-secondary px-4 inline-flex items-center" data-bs-toggle="modal" data-bs-target="#OpenPosModal">
                         <vc:icon symbol="qr-code" />
                     </button>
                 </div>
@@ -61,14 +62,14 @@
             <div class="form-group">
                 <label asp-for="AppName" class="form-label" data-required></label>
                 <input asp-for="AppName" class="form-control" required />
-                <span asp-validation-for="AppName" class="text-danger"></span>
+                <span asp-validation-for="AppName" class="text-btcpay-danger"></span>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="Title" class="form-label" data-required></label>
                 <input asp-for="Title" class="form-control" required />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <span asp-validation-for="Title" class="text-btcpay-danger"></span>
             </div>
         </div>
         <div class="form-group">
@@ -88,16 +89,16 @@
             <label asp-for="Currency" class="form-label"></label>
             <input asp-for="Currency" class="form-control w-auto" currency-selection />
             <div class="form-text">@StringLocalizer["Uses the store's default currency ({0}) if empty.", Model.StoreDefaultCurrency]</div>
-            <span asp-validation-for="Currency" class="text-danger"></span>
+            <span asp-validation-for="Currency" class="text-btcpay-danger"></span>
         </div>
     </div>
 
-    <div id="description" class="row mt-4">
+    <div id="description" class="row mt-6">
         <div class="content-constrain-xxl">
             <div class="form-group mb-0">
                 <label asp-for="Description" class="form-label"></label>
                 <textarea asp-for="Description" rows="10" cols="40" class="form-control richtext"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <span asp-validation-for="Description" class="text-btcpay-danger"></span>
             </div>
         </div>
     </div>
@@ -106,69 +107,69 @@
             <partial name="TemplateEditor" model="@(nameof(Model.Template), Model.Template, "Products", Model.Currency ?? Model.StoreDefaultCurrency)" />
         </div>
     </div>
-    <div class="row mt-5">
+    <div class="row mt-12">
         <div class="col-sm-10 col-md-9 col-xl-7 col-xxl-6">
-            <h3 class="mb-4" text-translate="true">Checkout</h3>
+            <h3 class="mb-6" text-translate="true">Checkout</h3>
             <fieldset>
                 <div class="form-group" id="button-price-text">
                     <label asp-for="ButtonText" class="form-label" data-required></label>
                     <input asp-for="ButtonText" class="form-control" required />
-                    <span asp-validation-for="ButtonText" class="text-danger"></span>
+                    <span asp-validation-for="ButtonText" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="FormId" class="form-label"></label>
                     <select asp-for="FormId" class="form-select w-auto" asp-items="@checkoutFormOptions"></select>
-                    <span asp-validation-for="FormId" class="text-danger"></span>
+                    <span asp-validation-for="FormId" class="text-btcpay-danger"></span>
                 </div>
-                <div class="form-group d-flex align-items-center">
-                    <input asp-for="DisableZeroAmountInvoice" type="checkbox" class="btcpay-toggle me-3"/>
+                <div class="form-group flex items-center">
+                    <input asp-for="DisableZeroAmountInvoice" type="checkbox" class="btcpay-toggle me-4"/>
                     <label asp-for="DisableZeroAmountInvoice" class="form-check-label"></label>
                 </div>
             </fieldset>
             <fieldset id="keypad-display" class="mt-2">
-                <legend class="h5 mb-3 fw-semibold" text-translate="true">Keypad</legend>
-                <div class="form-group d-flex align-items-center pt-2">
-                    <input asp-for="ShowItems" type="checkbox" class="btcpay-toggle me-3" />
+                <legend class="h5 mb-4 font-semibold" text-translate="true">Keypad</legend>
+                <div class="form-group flex items-center pt-2">
+                    <input asp-for="ShowItems" type="checkbox" class="btcpay-toggle me-4" />
                     <label asp-for="ShowItems" class="form-label mb-0"></label>
-                    <span asp-validation-for="ShowItems" class="text-danger"></span>
+                    <span asp-validation-for="ShowItems" class="text-btcpay-danger"></span>
                 </div>
             </fieldset>
             <fieldset id="cart-display" class="mt-2">
-                <legend class="h5 mb-3 fw-semibold">Cart</legend>
-                <div class="form-group d-flex align-items-center pt-2">
-                    <input asp-for="ShowSearch" type="checkbox" class="btcpay-toggle me-3" />
+                <legend class="h5 mb-4 font-semibold">Cart</legend>
+                <div class="form-group flex items-center pt-2">
+                    <input asp-for="ShowSearch" type="checkbox" class="btcpay-toggle me-4" />
                     <label asp-for="ShowSearch" class="form-check-label"></label>
-                    <span asp-validation-for="ShowSearch" class="text-danger"></span>
+                    <span asp-validation-for="ShowSearch" class="text-btcpay-danger"></span>
                 </div>
-                <div class="form-group d-flex align-items-center">
-                    <input asp-for="ShowCategories" type="checkbox" class="btcpay-toggle me-3" />
+                <div class="form-group flex items-center">
+                    <input asp-for="ShowCategories" type="checkbox" class="btcpay-toggle me-4" />
                     <label asp-for="ShowCategories" class="form-check-label"></label>
-                    <span asp-validation-for="ShowCategories" class="text-danger"></span>
+                    <span asp-validation-for="ShowCategories" class="text-btcpay-danger"></span>
                 </div>
             </fieldset>
             <fieldset id="tips" class="mt-2">
-                <legend class="h5 mb-3 fw-semibold" text-translate="true">Tips</legend>
-                <div class="form-group d-flex align-items-center pt-2">
-                    <input asp-for="EnableTips" type="checkbox" class="btcpay-toggle me-3" data-bs-toggle="collapse" data-bs-target="#CustomTipsSettings" aria-expanded="@Model.EnableTips" aria-controls="CustomTipsSettings" />
+                <legend class="h5 mb-4 font-semibold" text-translate="true">Tips</legend>
+                <div class="form-group flex items-center pt-2">
+                    <input asp-for="EnableTips" type="checkbox" class="btcpay-toggle me-4" data-bs-toggle="collapse" data-bs-target="#CustomTipsSettings" aria-expanded="@Model.EnableTips" aria-controls="CustomTipsSettings" />
                     <label asp-for="EnableTips" class="form-check-label"></label>
-                    <span asp-validation-for="EnableTips" class="text-danger"></span>
+                    <span asp-validation-for="EnableTips" class="text-btcpay-danger"></span>
                 </div>
                 <div class="collapse @(Model.EnableTips ? "show" : "")" id="CustomTipsSettings">
                     <div class="form-group">
                         <label asp-for="CustomTipText" class="form-label" data-required></label>
                         <input asp-for="CustomTipText" class="form-control" required />
-                        <span asp-validation-for="CustomTipText" class="text-danger"></span>
+                        <span asp-validation-for="CustomTipText" class="text-btcpay-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="CustomTipPercentages" class="form-label"></label>
                         <input asp-for="CustomTipPercentages" class="form-control" />
-                        <span asp-validation-for="CustomTipPercentages" class="text-danger"></span>
+                        <span asp-validation-for="CustomTipPercentages" class="text-btcpay-danger"></span>
                     </div>
                 </div>
             </fieldset>
 
             <fieldset id="taxes" class="mt-2">
-                <legend class="h5 mb-3 fw-semibold" text-translate="true">Taxes</legend>
+                <legend class="h5 mb-4 font-semibold" text-translate="true">Taxes</legend>
                 <div class="form-group">
                     <label asp-for="DefaultTaxRate" class="form-label"></label>
                     <div class="input-group">
@@ -176,33 +177,33 @@
                         <span class="input-group-text">%</span>
                     </div>
                     <div class="form-text" text-translate="true">This rate can also be overridden per item.</div>
-                    <span asp-validation-for="DefaultTaxRate" class="text-danger"></span>
+                    <span asp-validation-for="DefaultTaxRate" class="text-btcpay-danger"></span>
                 </div>
             </fieldset>
 
             <fieldset id="discounts" class="mt-2">
-                <legend class="h5 mb-3 fw-semibold" text-translate="true">Discounts</legend>
-                <div class="form-group d-flex align-items-center">
-                    <input asp-for="ShowDiscount" type="checkbox" class="btcpay-toggle me-3" />
+                <legend class="h5 mb-4 font-semibold" text-translate="true">Discounts</legend>
+                <div class="form-group flex items-center">
+                    <input asp-for="ShowDiscount" type="checkbox" class="btcpay-toggle me-4" />
                     <div>
                         <label asp-for="ShowDiscount" class="form-check-label"></label>
-                        <div class="text-muted" text-translate="true">Not recommended for customer self-checkout.</div>
+                        <div class="text-btcpay-body-text-muted" text-translate="true">Not recommended for customer self-checkout.</div>
                     </div>
-                    <span asp-validation-for="ShowDiscount" class="text-danger"></span>
+                    <span asp-validation-for="ShowDiscount" class="text-btcpay-danger"></span>
                 </div>
             </fieldset>
             <fieldset id="custom-payments" class="mt-2">
-                <legend class="h5 mb-3 fw-semibold" text-translate="true">Custom Payments</legend>
-                <div class="form-group mb-4 d-flex align-items-center">
-                    <input asp-for="ShowCustomAmount" type="checkbox" class="btcpay-toggle me-3" data-bs-toggle="collapse" data-bs-target="#CustomAmountSettings" aria-expanded="@Model.ShowCustomAmount" aria-controls="CustomAmountSettings"/>
+                <legend class="h5 mb-4 font-semibold" text-translate="true">Custom Payments</legend>
+                <div class="form-group mb-6 flex items-center">
+                    <input asp-for="ShowCustomAmount" type="checkbox" class="btcpay-toggle me-4" data-bs-toggle="collapse" data-bs-target="#CustomAmountSettings" aria-expanded="@Model.ShowCustomAmount" aria-controls="CustomAmountSettings"/>
                     <label asp-for="ShowCustomAmount" class="form-check-label"></label>
-                    <span asp-validation-for="ShowCustomAmount" class="text-danger"></span>
+                    <span asp-validation-for="ShowCustomAmount" class="text-btcpay-danger"></span>
                 </div>
                 <div class="collapse @(Model.ShowCustomAmount ? "show" : "")" id="CustomAmountSettings">
                     <div class="form-group">
                         <label asp-for="CustomButtonText" class="form-label" data-required></label>
                         <input asp-for="CustomButtonText" class="form-control" required />
-                        <span asp-validation-for="CustomButtonText" class="text-danger"></span>
+                        <span asp-validation-for="CustomButtonText" class="text-btcpay-danger"></span>
                     </div>
                 </div>
             </fieldset>
@@ -226,7 +227,7 @@
                                 <div class="form-group">
                                     <label asp-for="HtmlLang" class="form-label"></label>
                                     <input asp-for="HtmlLang" class="form-control"/>
-                                    <span asp-validation-for="HtmlLang" class="text-danger"></span>
+                                    <span asp-validation-for="HtmlLang" class="text-btcpay-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="HtmlMetaTags" class="form-label"></label>
@@ -236,7 +237,7 @@
 <meta name="author" content="John Doe">
 Please insert valid HTML here. Only meta tags accepted.'>
                                     </textarea>
-                                    <span asp-validation-for="HtmlMetaTags" class="text-danger"></span>
+                                    <span asp-validation-for="HtmlMetaTags" class="text-btcpay-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -255,12 +256,12 @@ Please insert valid HTML here. Only meta tags accepted.'>
                                 @if (Model.Example1 != null)
                                 {
                                     <span text-translate="true">For anything with a custom amount</span>
-                                    <pre class="p-3">@Model.Example1</pre>
+                                    <pre class="p-4">@Model.Example1</pre>
                                 }
                                 @if (Model.Example2 != null)
                                 {
                                     <span text-translate="true">For a specific item of your template</span>
-                                    <pre class="p-3">@Model.Example2</pre>
+                                    <pre class="p-4">@Model.Example2</pre>
                                 }
                             </div>
                         </div>
@@ -278,7 +279,7 @@ Please insert valid HTML here. Only meta tags accepted.'>
                                 @{
                                     var iframe = $"<iframe src='{Url.Action("ViewPointOfSale", "UIPointOfSale", new { appId = Model.Id }, Context.Request.Scheme)}' style='max-width: 100%; border: 0;'></iframe>";
                                 }
-                                <pre class="p-3">@iframe</pre>
+                                <pre class="p-4">@iframe</pre>
                             </div>
                         </div>
                     </div>
@@ -294,12 +295,12 @@ Please insert valid HTML here. Only meta tags accepted.'>
                                 <div class="form-group">
                                     <label asp-for="RedirectUrl" class="form-label"></label>
                                     <input asp-for="RedirectUrl" class="form-control" />
-                                    <span asp-validation-for="RedirectUrl" class="text-danger"></span>
+                                    <span asp-validation-for="RedirectUrl" class="text-btcpay-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="RedirectAutomatically" class="form-label"></label>
                                     <select asp-for="RedirectAutomatically" asp-items="Model.RedirectAutomaticallySelectList" class="form-select"></select>
-                                    <span asp-validation-for="RedirectAutomatically" class="text-danger"></span>
+                                    <span asp-validation-for="RedirectAutomatically" class="text-btcpay-danger"></span>
                                 </div>
                             </div>
                         </div>
@@ -316,10 +317,10 @@ Please insert valid HTML here. Only meta tags accepted.'>
                                 <div class="form-group">
                                     <label asp-for="NotificationUrl" class="form-label"></label>
                                     <input asp-for="NotificationUrl" class="form-control" />
-                                    <span asp-validation-for="NotificationUrl" class="text-danger"></span>
+                                    <span asp-validation-for="NotificationUrl" class="text-btcpay-danger"></span>
                                 </div>
                                 <p html-translate="true">A <code>POST</code> callback will be sent to the specified <code>notificationUrl</code> (for on-chain transactions when there are sufficient confirmations):</p>
-                                <pre class="p-3">@Model.ExampleCallback</pre>
+                                <pre class="p-4">@Model.ExampleCallback</pre>
                                 <p html-translate="true"><strong>Never</strong> trust anything but <code>id</code>, <strong>ignore</strong> the other fields completely, an attacker can spoof those, they are present only for backward compatibility reason:</p>
                                 <ul>
                                     <li html-translate="true">Send a <code>GET</code> request to <code>https://btcpay.example.com/invoices/{invoiceId}</code> with <code>Content-Type: application/json; Authorization: Basic YourLegacyAPIkey"</code>, Legacy API key can be created with Access Tokens in Store settings</li>
@@ -335,16 +336,16 @@ Please insert valid HTML here. Only meta tags accepted.'>
     </div>
 </form>
 
-<div class="d-grid d-sm-flex flex-wrap gap-3 mt-3">
+<div class="grid sm:flex flex-wrap gap-4 mt-4">
     <form method="post" asp-controller="UIApps" asp-action="ToggleArchive" asp-route-appId="@Model.Id">
-        <button type="submit" class="w-100 btn btn-outline-secondary" id="btn-archive-toggle" permission="@Policies.CanModifyStoreSettings">
+        <button type="submit" class="w-full btn btn-outline-secondary" id="btn-archive-toggle" permission="@Policies.CanModifyStoreSettings">
             @if (Model.Archived)
             {
-                <span class="text-nowrap" text-translate="true">Unarchive this app</span>
+                <span class="whitespace-nowrap" text-translate="true">Unarchive this app</span>
             }
             else
             {
-                <span class="text-nowrap" data-bs-toggle="tooltip" title="@StringLocalizer["Archive this app so that it does not appear in the apps list by default"]" text-translate="true">Archive this app</span>
+                <span class="whitespace-nowrap" data-bs-toggle="tooltip" title="@StringLocalizer["Archive this app so that it does not appear in the apps list by default"]" text-translate="true">Archive this app</span>
             }
         </button>
     </form>

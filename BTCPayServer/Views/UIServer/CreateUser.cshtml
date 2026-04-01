@@ -56,14 +56,14 @@
                     <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
                 </div>
             }
-            <div class="d-flex my-3">
-                <input asp-for="SendInvitationEmail" type="checkbox" class="btcpay-toggle me-3" disabled="@(canSendEmail ? null : "disabled")" />
+            <div class="flex my-6">
+                <input asp-for="SendInvitationEmail" type="checkbox" class="btcpay-toggle me-6" disabled="@(canSendEmail ? null : "disabled")" />
                 <div>
                     <label asp-for="SendInvitationEmail" class="form-check-label"></label>
                     <span asp-validation-for="SendInvitationEmail" class="text-danger"></span>
                     @if (!canSendEmail)
                     {
-                        <div class="text-secondary">
+                        <div class="text-btcpay-body-text-muted">
                             <span text-translate="true">Your email server has not been configured.</span>
                             <a asp-controller="UIServer" asp-action="Emails" text-translate="true">Please configure it first.</a>
                         </div>

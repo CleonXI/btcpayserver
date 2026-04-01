@@ -15,7 +15,7 @@
         canSuspend = (await AuthorizationService.AuthorizeAsync(User, subscriber.Customer.StoreId, SubscriptionsPolicies.CanManageSubscribers)).Succeeded;
     hasDropdown = hasDropdown && canSuspend;
 }
-<span class="subscriber-status badge badge-translucent rounded-pill text-bg-@badge">
+<span class="subscriber-status badge badge-translucent rounded-full text-bg-@badge">
 @if (hasDropdown)
     {
         <form asp-action="SubscriberSuspend"

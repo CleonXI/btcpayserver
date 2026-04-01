@@ -27,7 +27,7 @@
 
 @if (supported is null)
 {
-    <div class="alert alert-warning text-center sticky-top mb-0 rounded-0" role="alert">
+    <div class="alert alert-warning text-center sticky-top mb-0 rounded-none" role="alert">
         LNURL is not enabled on your store, which this print feature relies on.
         <a asp-controller="UIStores" asp-action="LightningSettings" asp-route-cryptoCode="BTC"  asp-route-storeId="@store.Id" class="alert-link p-0">
             Enable LNURL
@@ -36,8 +36,8 @@
 }
 else
 {
-    <div class="alert alert-info alert-dismissible d-flex align-items-center justify-content-center sticky-top mb-0 rounded-0 d-print-none fade show" role="alert">
-        <button type="button" class="btn btn-info me-4 border border-light" onclick="window.print()">
+    <div class="alert alert-info alert-dismissible flex items-center justify-center sticky-top mb-0 rounded-none print:hidden fade show" role="alert">
+        <button type="button" class="btn btn-info me-6 border border-light" onclick="window.print()">
             <vc:icon symbol="pos-print" />&nbsp;Print
         </button>
         This view is intended for printing only —
@@ -75,12 +75,12 @@ else
                 var item = Model.Items[x];
                 var formatted = DisplayFormatter.Currency(item.Price ?? 0, Model.CurrencyCode, DisplayFormatter.CurrencyFormat.Symbol);
                 if (item.PriceType == AppItemPriceType.Fixed && item.Price == 0) continue;
-                <div class="d-flex flex-wrap">
-                    <div class="tile card w-100" data-id="@x">
-                        <div class="card-body pt-0 d-flex flex-column gap-2">
+                <div class="flex flex-wrap">
+                    <div class="tile card w-full" data-id="@x">
+                        <div class="card-body pt-0 flex flex-col gap-2">
                             <h5 class="card-title m-0">@Safe.Raw(item.Title)</h5>
-                            <div class="d-flex gap-2 align-items-center">
-                                <span class="fw-semibold">
+                            <div class="flex gap-2 items-center">
+                                <span class="font-semibold">
                                     @switch (item.PriceType)
                                     {
                                         case AppItemPriceType.Topup:
@@ -136,7 +136,7 @@ else
             }
         </div>
     </main>
-    <footer class="store-footer d-print-none">
+    <footer class="store-footer print:hidden">
         <a class="store-powered-by" href="https://btcpayserver.org" target="_blank" rel="noreferrer noopener">
             <span text-translate="true">Powered by</span> <partial name="_StoreFooterLogo" />
         </a>

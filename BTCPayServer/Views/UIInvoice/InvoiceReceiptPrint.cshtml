@@ -76,13 +76,13 @@
     <div id="InvoiceSummary" style="max-width:600px">
         @if (isProcessing)
         {
-            <div class="lead text-center fw-semibold" id="invoice-processing">
+            <div class="lead text-center font-semibold" id="invoice-processing">
                 The invoice has detected a payment but is still waiting to be settled.
             </div>
         }
         else if (!isSettled)
         {
-            <div class="lead text-center fw-semibold" id="invoice-unsettled">
+            <div class="lead text-center font-semibold" id="invoice-unsettled">
                 The invoice is not settled.
             </div>
         }
@@ -103,12 +103,12 @@
                         @foreach (var (key, value) in Model.AdditionalData)
                         {
                             <tr class="additional-data">
-                                <td class="text-secondary">@key</td>
+                                <td class="text-btcpay-body-text-muted">@key</td>
                                 <td class="text-end">@value</td>
                             </tr>
                         }
                         <tr>
-                            <td colspan="2"><hr class="w-100 my-0"/></td>
+                            <td colspan="2"><hr class="w-full my-0"/></td>
                         </tr>
                     }
 					@if (hasCart)
@@ -120,7 +120,7 @@
                             @foreach (var (key, value) in cartDict)
                             {
                                 <tr class="cart-data">
-                                    <td class="key text-secondary">@key</td>
+                                    <td class="key text-btcpay-body-text-muted">@key</td>
                                     <td class="val text-end">@value</td>
                                 </tr>
                             }
@@ -138,60 +138,60 @@
                         @if (posData.ItemsTotal != null)
                         {
                             <tr class="sums-data">
-                                <td class="key text-secondary">Items total</td>
+                                <td class="key text-btcpay-body-text-muted">Items total</td>
                                 <td class="val text-end">@posData.ItemsTotal</td>
                             </tr>
                         }
                         @if (posData.Discount != null)
                         {
                             <tr class="sums-data">
-                                <td class="key text-secondary">Discount</td>
+                                <td class="key text-btcpay-body-text-muted">Discount</td>
                                 <td class="val text-end">@posData.Discount</td>
                             </tr>
                         }
                         @if (posData.Subtotal != null)
                         {
                             <tr class="sums-data">
-                                <td class="key text-secondary">Subtotal</td>
+                                <td class="key text-btcpay-body-text-muted">Subtotal</td>
                                 <td class="val text-end">@posData.Subtotal</td>
                             </tr>
                         }
                         @if (posData.Tax != null)
                         {
                             <tr class="sums-data">
-                                <td class="key text-secondary">Tax</td>
+                                <td class="key text-btcpay-body-text-muted">Tax</td>
                                 <td class="val text-end">@posData.Tax</td>
                             </tr>
                         }
                         @if (posData.Tip != null)
                         {
                             <tr class="sums-data">
-                                <td class="key text-secondary">Tip</td>
+                                <td class="key text-btcpay-body-text-muted">Tip</td>
                                 <td class="val text-end">@posData.Tip</td>
                             </tr>
                         }
                         @if (posData.Total != null)
                         {
                             <tr>
-                                <td colspan="2"><hr class="w-100 my-0"/></td>
+                                <td colspan="2"><hr class="w-full my-0"/></td>
                             </tr>
                             <tr class="sums-data">
-                                <td class="key text-secondary">Total</td>
-                                <td class="val text-end fw-semibold">@posData.Total</td>
+                                <td class="key text-btcpay-body-text-muted">Total</td>
+                                <td class="val text-end font-semibold">@posData.Total</td>
                             </tr>
                         }
                     }
                     else
                     {
                         <tr class="sums-data">
-                            <td class="key text-nowrap text-secondary">Total</td>
-                            <td class="val text-end fw-semibold">@DisplayFormatter.Currency(Model.Amount, Model.Currency, DisplayFormatter.CurrencyFormat.Symbol)</td>
+                            <td class="key whitespace-nowrap text-btcpay-body-text-muted">Total</td>
+                            <td class="val text-end font-semibold">@DisplayFormatter.Currency(Model.Amount, Model.Currency, DisplayFormatter.CurrencyFormat.Symbol)</td>
                         </tr>
                     }
                     @if (Model.Payments?.Any() is true)
                     {
                         <tr>
-                            <td colspan="2"><hr class="w-100 my-0"/></td>
+                            <td colspan="2"><hr class="w-full my-0"/></td>
                         </tr>
                         @for (var i = 0; i < Model.Payments.Count; i++)
                         {
@@ -199,28 +199,28 @@
                             @if (Model.Payments.Count > 1)
                             {
                                 <tr>
-                                    <td colspan="2" class="text-nowrap text-secondary">Payment @(i + 1)</td>
+                                    <td colspan="2" class="whitespace-nowrap text-btcpay-body-text-muted">Payment @(i + 1)</td>
                                 </tr>
                                 <tr class="payment-data">
-                                    <td class="text-nowrap">Received</td>
+                                    <td class="whitespace-nowrap">Received</td>
                                     <td>@payment.ReceivedDate.ToBrowserDate()</td>
                                 </tr>
                             }
                             <tr class="payment-data">
-                                <td class="text-nowrap text-secondary">@(Model.Payments.Count == 1 ? "Paid" : "")</td>
+                                <td class="whitespace-nowrap text-btcpay-body-text-muted">@(Model.Payments.Count == 1 ? "Paid" : "")</td>
                                 <td class="text-end">@payment.AmountFormatted</td>
                             </tr>
                             <tr class="payment-data">
                                 <td colspan="2" class="text-end">@payment.PaidFormatted</td>
                             </tr>
                             <tr class="payment-data">
-                                <td class="text-nowrap text-secondary">Rate</td>
+                                <td class="whitespace-nowrap text-btcpay-body-text-muted">Rate</td>
                                 <td class="text-end">@payment.RateFormatted</td>
                             </tr>
                             @if (!string.IsNullOrEmpty(payment.Destination))
                             {
                                 <tr class="payment-data">
-                                    <td class="text-nowrap text-secondary">Destination</td>
+                                    <td class="whitespace-nowrap text-btcpay-body-text-muted">Destination</td>
                                     <td class="text-break">
                                         @if (payment.Destination.Length > 69)
                                         {
@@ -240,13 +240,13 @@
                             @if (!string.IsNullOrEmpty(payment.PaymentProof))
                             {
                                 <tr class="payment-data">
-                                    <td class="text-nowrap text-secondary">Pay Proof</td>
+                                    <td class="whitespace-nowrap text-btcpay-body-text-muted">Pay Proof</td>
                                     <td class="text-break">@payment.PaymentProof</td>
                                 </tr>
                             }
                         }
                         <tr>
-                            <td colspan="2"><hr class="w-100 my-0"/></td>
+                            <td colspan="2"><hr class="w-full my-0"/></td>
                         </tr>
                     }
                 </table>
@@ -260,7 +260,7 @@
     <div class="store-footer p-3">
         <a class="store-powered-by" href="https://btcpayserver.org" target="_blank" rel="noreferrer noopener" style="color:#000;"><span text-translate="true">Powered by</span> <partial name="_StoreFooterLogo" /></a>
     </div>
-    <hr class="w-100 my-0 bg-none"/>
+    <hr class="w-full my-0 bg-none"/>
 </center>
 </body>
 <script src="~/main/utils.js" asp-append-version="true"></script>

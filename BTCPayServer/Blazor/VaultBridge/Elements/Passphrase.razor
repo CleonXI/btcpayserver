@@ -1,7 +1,7 @@
 ﻿@inherits VaultElement
 @implements IDisposable
 
-<div id="passphrase-input" class="mt-4">
+<div id="passphrase-input" class="mt-6">
     <div class="form-group">
         <label for="Password" class="form-label">@ui.StringLocalizer["Passphrase (Leave empty if there isn't any passphrase)"]</label>
         <div class="input-group">
@@ -23,10 +23,10 @@
         </div>
         @if (Error != "")
         {
-            <span class="text-danger">@Error</span>
+            <span class="text-btcpay-danger">@Error</span>
         }
     </div>
-    <button id="vault-confirm" class="btn btn-primary mt-4" type="button" @onclick="OnConfirmPasswordClick">@ui.StringLocalizer["Confirm"]</button>
+    <button id="vault-confirm" class="btn btn-primary mt-6" type="button" @onclick="OnConfirmPasswordClick">@ui.StringLocalizer["Confirm"]</button>
 </div>
 
 @code {

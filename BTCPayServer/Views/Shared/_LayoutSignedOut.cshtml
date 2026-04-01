@@ -41,18 +41,18 @@
     @await RenderSectionAsync("PageFootContent", false)
 }
 
-<div class="row justify-content-center mb-2">
+<div class="row justify-center mb-2">
     <div class="col text-center">
-        <a asp-controller="UIHome" asp-action="Index" tabindex="-1" class="d-inline-block navbar-brand mx-0 mb-4">
+        <a asp-controller="UIHome" asp-action="Index" tabindex="-1" class="inline-block navbar-brand mx-0 mb-6">
             <vc:main-logo />
         </a>
 
-		<h1 data-testid="header" class="h2 mb-3">@ViewLocalizer["Welcome to {0}", string.IsNullOrWhiteSpace(settings.ServerName) ? "BTCPay Server" : settings.ServerName]</h1>
+		<h1 data-testid="header" class="h2 mb-4">@ViewLocalizer["Welcome to {0}", string.IsNullOrWhiteSpace(settings.ServerName) ? "BTCPay Server" : settings.ServerName]</h1>
         @if (ViewBag.ShowLeadText)
         {
             <p class="lead">
-                <span class="d-sm-block" text-translate="true">A self-hosted, open-source bitcoin payment processor.</span>
-                <span class="d-sm-block" text-translate="true">It is secure, private, censorship-resistant and free.</span>
+                <span class="sm:block" text-translate="true">A self-hosted, open-source bitcoin payment processor.</span>
+                <span class="sm:block" text-translate="true">It is secure, private, censorship-resistant and free.</span>
             </p>
         }
 
@@ -70,8 +70,8 @@
 
 @if (!string.IsNullOrWhiteSpace(contactUrl))
 {
-    <p class="text-center mt-n5 mb-5 pt-2">
-        <a class="text-secondary" href="@contactUrl" id="ContactLink">Contact Us</a>
+    <p class="text-center -mt-12 mb-12 pt-2">
+        <a class="text-btcpay-body-text-muted" href="@contactUrl" id="ContactLink">Contact Us</a>
     </p>
     @if (contactUrl != settings.ContactUrl)
     {
@@ -84,7 +84,7 @@
     }
 }
 
-<div class="row justify-content-center mt-5">
+<div class="row justify-center mt-12">
     <div class="col">
         <partial name="_BTCPaySupporters"/>
     </div>

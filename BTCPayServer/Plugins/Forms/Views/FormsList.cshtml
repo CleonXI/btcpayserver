@@ -13,7 +13,7 @@
             <vc:icon symbol="info" />
         </a>
     </h2>
-	<a id="page-primary" asp-action="Create" asp-route-storeId="@storeId" class="btn btn-primary mt-3 mt-sm-0" role="button" permission="@Policies.CanModifyStoreSettings" text-translate="true">
+	<a id="page-primary" asp-action="Create" asp-route-storeId="@storeId" class="btn btn-primary mt-4 mt-sm-0" role="button" permission="@Policies.CanModifyStoreSettings" text-translate="true">
         Create Form
     </a>
 </div>
@@ -28,7 +28,7 @@
                     <thead>
                         <tr>
                             <th text-translate="true">Name</th>
-                            <th text-translate="true" class="text-end d-print-none" permission="@Policies.CanModifyStoreSettings">Actions</th>
+                            <th text-translate="true" class="text-end print:hidden" permission="@Policies.CanModifyStoreSettings">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,7 @@
                                     <a asp-action="Modify" asp-route-storeId="@item.StoreId" asp-route-id="@item.Id" id="Edit-@item.Name" permission="@Policies.CanModifyStoreSettings">@item.Name</a>
                                     <a asp-action="ViewPublicForm" asp-route-formId="@item.Id" id="View-@item.Name" not-permission="@Policies.CanModifyStoreSettings">@item.Name</a>
                                 </td>
-                                <td class="text-end d-print-none" permission="@Policies.CanModifyStoreSettings">
+                                <td class="text-end print:hidden" permission="@Policies.CanModifyStoreSettings">
                                     <a asp-action="Remove" asp-route-storeId="@item.StoreId" asp-route-id="@item.Id" id="Remove-@item.Id" data-bs-toggle="modal" data-bs-target="#ConfirmModal"  data-confirm-input="@StringLocalizer["Delete"]" text-translate="true">Remove</a> -
                                     <a asp-action="ViewPublicForm" asp-route-formId="@item.Id" id="View-@item.Name" text-translate="true">View</a>
                                 </td>
@@ -51,7 +51,7 @@
         }
         else
         {
-            <p class="text-secondary" text-translate="true">
+            <p class="text-btcpay-body-text-muted" text-translate="true">
                 There are no forms yet.
             </p>
         }

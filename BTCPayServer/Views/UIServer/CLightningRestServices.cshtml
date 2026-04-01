@@ -25,7 +25,7 @@
     <p text-translate="true">BTCPay exposes Core Lightning's REST service for outside consumption, you will find connection information here.</p>
 </div>
 
-<h5 class="mb-3" text-translate="true">Compatible wallets</h5>
+<h5 class="mb-4" text-translate="true">Compatible wallets</h5>
 <div class="services-list">
     <a href="https://github.com/ZeusLN/zeus" target="_blank" class="service" rel="noreferrer noopener">
         <img src="~/img/zeus.jpg" asp-append-version="true" alt="Zeus" loading="lazy" />
@@ -33,7 +33,7 @@
     </a>
 </div>
 
-<h4 class="mt-4 mb-3" text-translate="true">QR Code connection</h4>
+<h4 class="mt-6 mb-4" text-translate="true">QR Code connection</h4>
 <p>
     <span text-translate="true">You can use this QR Code to connect external software to your C-Lightning instance.<br /></span>
     <span text-translate="true">This QR Code is only valid for 10 minutes</span>
@@ -55,7 +55,7 @@
             <div id="qrCodeData" data-url="@Model.QRCode"></div>
         </div>
         <p text-translate="true">See QR Code information by clicking <a href="#detailsQR" data-bs-toggle="collapse" text-translate="true">here</a></p>
-        <div id="detailsQR" class="collapse"><h4 class="mt-4 mb-3">QR Code connection</h4>
+        <div id="detailsQR" class="collapse"><h4 class="mt-6 mb-4">QR Code connection</h4>
             <div class="form-group">
                 <label class="form-label" text-translate="true">QR Code data</label>
                 <input asp-for="QRCode" readonly class="form-control" />

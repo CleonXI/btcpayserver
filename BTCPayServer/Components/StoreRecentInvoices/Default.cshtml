@@ -12,9 +12,9 @@
     </header>
     @if (Model.InitialRendering)
     {
-        <div class="loading d-flex justify-content-center p-3">
+        <div class="loading flex justify-center p-4">
             <div class="spinner-border text-light" role="status">
-                <span class="visually-hidden" text-translate="true">Loading...</span>
+                <span class="sr-only" text-translate="true">Loading...</span>
             </div>
         </div>
         <script>
@@ -30,14 +30,14 @@
     }
     else if (Model.Invoices.Any())
     {
-        <div class="table-responsive mt-3 mb-0">
+        <div class="table-responsive mt-4 mb-0">
             <table class="table table-hover mb-0">
                 <thead>
                 <tr>
                     <th class="w-125px" text-translate="true">Date</th>
-                    <th class="text-nowrap" text-translate="true">Invoice Id</th>
+                    <th class="whitespace-nowrap" text-translate="true">Invoice Id</th>
                     <th text-translate="true">Status</th>
-                    <th class="text-end" text-translate="true">Amount</th>
+                    <th class="text-right" text-translate="true">Amount</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -52,7 +52,7 @@
                             <vc:invoice-status state="invoice.Status" payments="invoice.Details.Payments" invoice-id="@invoice.InvoiceId"
                                is-archived="invoice.Details.Archived" has-refund="invoice.HasRefund" />
                         </td>
-                        <td class="text-end">
+                        <td class="text-right">
                             <span data-sensitive>@DisplayFormatter.Currency(invoice.Amount, invoice.Currency)</span>
                         </td>
                     </tr>
@@ -63,10 +63,10 @@
     }
     else
     {
-        <p class="text-secondary my-3" text-translate="true">
+        <p class="text-btcpay-body-text-muted my-4" text-translate="true">
             There are no recent invoices.
         </p>
-        <a asp-controller="UIInvoice" asp-action="CreateInvoice" asp-route-storeId="@Model.StoreId" class="fw-semibold" text-translate="true">
+        <a asp-controller="UIInvoice" asp-action="CreateInvoice" asp-route-storeId="@Model.StoreId" class="font-semibold" text-translate="true">
             Create Invoice
         </a>
     }

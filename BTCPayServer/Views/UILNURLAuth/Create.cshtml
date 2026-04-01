@@ -9,13 +9,13 @@
     };
 }
 
-<h2 class="mb-2 mb-lg-3">@ViewData["Title"]</h2>
+<h2 class="mb-2 lg:mb-4">@ViewData["Title"]</h2>
 <partial name="_StatusMessage" />
 
 <p text-translate="true">Scan the QR code with your Lightning wallet to link it to your user account.</p>
 
-<div id="info-message" class="d-inline-block">
-    <ul class="nav justify-content-center btcpay-pills align-items-center gap-2 my-2">
+<div id="info-message" class="inline-block">
+    <ul class="nav justify-center btcpay-pills items-center gap-2 my-2">
         @for (var i = 0; i < formats.Count; i++)
         {
             var mode = formats.ElementAt(i);
@@ -36,7 +36,7 @@
                 <div class="qr-container" style="min-height: 256px;">
                     <vc:qr-code data="@mode.Value" />
                 </div>
-                <a href="@mode.Value" class="btn btn-primary mt-3" rel="noreferrer noopener" text-translate="true">
+                <a href="@mode.Value" class="btn btn-primary mt-4" rel="noreferrer noopener" text-translate="true">
                     Open in wallet
                 </a>
             </div>

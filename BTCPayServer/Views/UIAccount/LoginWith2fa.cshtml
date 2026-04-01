@@ -1,7 +1,7 @@
 @model LoginWith2faViewModel
 
 <div class="twoFaBox">
-    <h2 class="h3 mb-3" text-translate="true">Two-Factor Authentication</h2>
+    <h2 class="h3 mb-4" text-translate="true">Two-Factor Authentication</h2>
     <form method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]" asp-action="LoginWith2fa">
         @if (!ViewContext.ModelState.IsValid)
         {
@@ -11,18 +11,18 @@
         <div class="form-group">
             <label asp-for="TwoFactorCode" class="form-label"></label>
             <input asp-for="TwoFactorCode" class="form-control" autocomplete="off" autofocus style="width:14ch"/>
-            <span asp-validation-for="TwoFactorCode" class="text-danger"></span>
+            <span asp-validation-for="TwoFactorCode" class="text-btcpay-danger"></span>
         </div>
-        <div class="form-check mb-3">
+        <div class="form-check mb-4">
             <input asp-for="RememberMachine" type="checkbox" class="form-check-input" />
             <label asp-for="RememberMachine" class="form-check-label"></label>
-            <span asp-validation-for="RememberMachine" class="text-danger"></span>
+            <span asp-validation-for="RememberMachine" class="text-btcpay-danger"></span>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary" text-translate="true">Log in</button>
         </div>
     </form>
-    <p class="text-secondary mt-4 mb-0">
+    <p class="text-btcpay-body-text-muted mt-6 mb-0">
         Don't have access to your authenticator device?
         <br>
         You can <a asp-action="LoginWithRecoveryCode" asp-route-returnUrl="@ViewData["ReturnUrl"]">log in with a recovery code</a>.

@@ -42,8 +42,8 @@
         <component type="typeof(BTCPayServer.Blazor.NotificationsDropDown)" render-mode="ServerPrerendered" />
     }
 </div>
-<nav id="mainNav" class="d-flex flex-column justify-content-between">
-    <div class="accordion px-3 px-lg-4">
+<nav id="mainNav" class="flex flex-col justify-between">
+    <div class="accordion px-4 lg:px-6">
         @if (SignInManager.IsSignedIn(User))
         {
             @if (Model.Store != null)
@@ -107,14 +107,14 @@
                                         @if (isSetUp && scheme.WalletSupported)
                                         {
                                             <a layout-menu-item="@nameof(WalletsNavPages.Transactions)-@scheme.Crypto" asp-area="" asp-controller="UIWallets" asp-action="WalletTransactions" asp-route-walletId="@scheme.WalletId">
-                                                <span class="me-2 btcpay-status btcpay-status--@(scheme.Enabled ? "enabled" : "pending")"></span>
+                                                <span class="mr-2 btcpay-status btcpay-status--@(scheme.Enabled ? "enabled" : "pending")"></span>
                                                 <span>@PrettyName.PrettyName(scheme.PaymentMethodId)</span>
                                             </a>
                                         }
                                         else
                                         {
                                             <a layout-menu-item="@nameof(WalletsNavPages.Transactions)-@scheme.Crypto" asp-area="" asp-controller="UIStores" asp-action="SetupWallet" asp-route-cryptoCode="@scheme.Crypto" asp-route-storeId="@Model.Store.Id">
-                                                <span class="me-2 btcpay-status btcpay-status--@(scheme.Enabled ? "enabled" : "pending")"></span>
+                                                <span class="mr-2 btcpay-status btcpay-status--@(scheme.Enabled ? "enabled" : "pending")"></span>
                                                 <span>@PrettyName.PrettyName(scheme.PaymentMethodId)</span>
                                             </a>
                                         }
@@ -157,7 +157,7 @@
                                                 data-testid="Lightning-@scheme.CryptoCode"
                                                 layout-menu-item="@nameof(StoreNavPages.Lightning)-@scheme.CryptoCode"
                                                 asp-area="" asp-controller="UIStores" asp-action="Lightning" asp-route-cryptoCode="@scheme.CryptoCode" asp-route-storeId="@Model.Store.Id">
-                                                <span class="me-2 btcpay-status btcpay-status--@status"></span>
+                                                <span class="mr-2 btcpay-status btcpay-status--@status"></span>
                                                 <span>@PrettyName.PrettyName(scheme.PaymentMethodId)</span>
                                             </a>
                                         }
@@ -167,7 +167,7 @@
                                                 data-testid="Lightning-@scheme.CryptoCode"
                                                 layout-menu-item="@nameof(StoreNavPages.LightningSettings)-@scheme.CryptoCode"
                                                 asp-area="" asp-controller="UIStores" asp-action="SetupLightningNode" asp-route-cryptoCode="@scheme.CryptoCode" asp-route-storeId="@Model.Store.Id">
-                                                <span class="me-2 btcpay-status btcpay-status--@(scheme.Enabled ? "enabled" : "pending")"></span>
+                                                <span class="mr-2 btcpay-status btcpay-status--@(scheme.Enabled ? "enabled" : "pending")"></span>
                                                 <span>@PrettyName.PrettyName(scheme.PaymentMethodId)</span>
                                             </a>
                                         }
@@ -256,7 +256,7 @@
                                 <a layout-menu-item="@nameof(ServerNavPages.Plugins)" asp-area="" asp-controller="UIServer" asp-action="ListPlugins">
                                     @if (PluginService.GetDisabledPlugins().Any())
                                     {
-                                        <span class="me-2 btcpay-status btcpay-status--disabled"></span>
+                                        <span class="mr-2 btcpay-status btcpay-status--disabled"></span>
                                     }
                                     else
                                     {
@@ -317,7 +317,7 @@
     </div>
     @if (SignInManager.IsSignedIn(User))
     {
-        <ul id="mainNavSettings" class="navbar-nav border-top p-3 px-lg-4">
+        <ul id="mainNavSettings" class="navbar-nav border-t p-4 lg:px-6">
             <li class="nav-item" permission="@Policies.CanModifyServerSettings">
                 <a layout-menu-item="@nameof(ServerNavPages.Policies)" asp-area="" asp-controller="UIServer" asp-action="Policies">
                     <vc:icon symbol="nav-server-settings"/>
@@ -364,14 +364,14 @@
                     <vc:icon symbol="nav-account"/>
                     <span text-translate="true">Account</span>
                 </a>
-                <ul class="dropdown-menu py-0 w-100" aria-labelledby="Nav-Account">
-                    <li class="p-3 border-bottom d-flex align-items-center gap-2">
+                <ul class="dropdown-menu py-0 w-full" aria-labelledby="Nav-Account">
+                    <li class="p-4 border-b flex items-center gap-2">
                         @if (!string.IsNullOrEmpty(Model.UserImageUrl))
                         {
                             <img src="@Model.UserImageUrl" alt="Profile picture" class="profile-picture"/>
                         }
                         <div>
-                            <strong class="d-block text-truncate" style="max-width:@(string.IsNullOrEmpty(Model.UserImageUrl) ? "195px" : "160px")">
+                            <strong class="block truncate" style="max-width:@(string.IsNullOrEmpty(Model.UserImageUrl) ? "195px" : "160px")">
                                 @if (string.IsNullOrEmpty(Model.UserName))
                                 {
                                     @(User.Identity?.Name)
@@ -383,32 +383,32 @@
                             </strong>
                             @if (User.IsInRole(Roles.ServerAdmin))
                             {
-                                <div class="text-secondary" text-translate="true">Administrator</div>
+                                <div class="text-btcpay-body-text-muted" text-translate="true">Administrator</div>
                             }
                         </div>
                     </li>
                     @if (!Theme.CustomTheme)
                     {
-                        <li class="py-1 px-3">
-                            <vc:theme-switch css-class="w-100 pt-2"/>
+                        <li class="py-1 px-4">
+                            <vc:theme-switch css-class="w-full pt-2"/>
                         </li>
                     }
-                    <li class="py-1 px-3">
-                        <label class="d-flex align-items-center justify-content-between gap-3 nav-link">
-                            <span class="fw-semibold" text-translate="true">Hide Sensitive Info</span>
+                    <li class="py-1 px-4">
+                        <label class="flex items-center justify-between gap-4 nav-link">
+                            <span class="font-semibold" text-translate="true">Hide Sensitive Info</span>
                             <input id="HideSensitiveInfo" name="HideSensitiveInfo" type="checkbox" class="btcpay-toggle" />
                         </label>
                         <script>
                             document.getElementById('HideSensitiveInfo').checked = window.localStorage.getItem('btcpay-hide-sensitive-info') === 'true';
                         </script>
                     </li>
-                    <li class="border-top py-1 px-3">
+                    <li class="border-t py-1 px-4">
                         <a asp-area="" asp-controller="UIManage" asp-action="Index" class="nav-link" id="Nav-ManageAccount">
                             <span text-translate="true">Manage Account</span>
                         </a>
                     </li>
-                    <li class="border-top py-1 px-3">
-                        <a asp-area="" asp-controller="UIAccount" asp-action="Logout" class="nav-link text-danger" id="Nav-Logout">
+                    <li class="border-t py-1 px-4">
+                        <a asp-area="" asp-controller="UIAccount" asp-action="Logout" class="nav-link text-btcpay-danger" id="Nav-Logout">
                             <span text-translate="true">Logout</span>
                         </a>
                     </li>

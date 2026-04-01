@@ -31,13 +31,13 @@
                 @for (var index = 0; index < Model.DisabledNotifications.Count; index++)
                 {
                     var item = Model.DisabledNotifications[index];
-                    <div class="d-flex align-items-center my-3">
+                    <div class="flex items-center my-4">
                         <input type="hidden" asp-for="DisabledNotifications[index].Value" />
-                        <input type="checkbox" asp-for="DisabledNotifications[index].Selected" class="btcpay-toggle me-3" />
+                        <input type="checkbox" asp-for="DisabledNotifications[index].Selected" class="btcpay-toggle me-4" />
                         <label class="form-check-label cursor-pointer" asp-for="DisabledNotifications[index].Selected" text-translate="true">@item.Text</label>
                     </div>
                 }
-                <div class="mt-4">
+                <div class="mt-6">
                     <button type="submit" class="btn btn-secondary" name="command" value="disable-all" text-translate="true">Disable all notifications</button>
                 </div>
             }

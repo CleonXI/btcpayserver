@@ -22,7 +22,7 @@
 }
 
 <header class="text-center">
-    <h1 class="mb-4">@ViewData["Title"]</h1>
+    <h1 class="mb-6">@ViewData["Title"]</h1>
 </header>
 
 <form method="post" asp-action="WalletReceive">
@@ -30,7 +30,7 @@
     @if (string.IsNullOrEmpty(Model.Address))
     {
         <div class="payment-box mb-3">
-            <button id="generateButton" class="btn btn-primary w-100" type="submit" name="command" value="generate-new-address">Generate next available @Model.CryptoCode address</button>
+            <button id="generateButton" class="btn btn-primary w-full" type="submit" name="command" value="generate-new-address">Generate next available @Model.CryptoCode address</button>
         </div>
     }
     else
@@ -42,11 +42,11 @@
             <div class="form-group">
                 <input type="text" class="form-control" readonly asp-for="PaymentLink" id="payment-link"/>
             </div>
-            <div class="row mt-4">
-                <button type="submit" name="command" value="generate-new-address" class="btn btn-primary w-100" text-translate="true">Generate another address</button>
+            <div class="row mt-6">
+                <button type="submit" name="command" value="generate-new-address" class="btn btn-primary w-full" text-translate="true">Generate another address</button>
             </div>
         </noscript>
-        <div class="nav flex-wrap align-items-center justify-content-center gap-2 mb-4">
+        <div class="nav flex-wrap items-center justify-center gap-2 mb-6">
             <a class="btcpay-pill active" data-bs-toggle="tab" href="#address-tab" text-translate="true">Address</a>
             <a class="btcpay-pill " data-bs-toggle="tab" href="#link-tab" text-translate="true">Link</a>
         </div>
@@ -93,11 +93,11 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-4">
-                <button type="submit" name="command" value="generate-new-address" class="btn btn-primary w-100" text-translate="true">Generate another address</button>
+            <div class="mt-6">
+                <button type="submit" name="command" value="generate-new-address" class="btn btn-primary w-full" text-translate="true">Generate another address</button>
             </div>
             <div class="payment-box mt-3">
-                <a class="btn btn-outline-info w-100"
+                <a class="btn btn-outline-info w-full"
                    id="reserved-addresses-button"
                    asp-controller="UIWallets" asp-action="ReservedAddresses" asp-route-walletId="@walletId" text-translate="true">
                     Reserved Addresses
@@ -110,7 +110,7 @@
     @if (env.CheatMode)
     {
         <div class="payment-box mt-3">
-            <button type="submit" name="command" value="fill-wallet" class="btn btn-outline-info w-100" text-translate="true">Cheat Mode: Send funds to this wallet</button>
+            <button type="submit" name="command" value="fill-wallet" class="btn btn-outline-info w-full" text-translate="true">Cheat Mode: Send funds to this wallet</button>
         </div>
     }
 </form>

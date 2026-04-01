@@ -7,7 +7,7 @@
 
 @if (Model.StoreNotConfigured)
 {
-    <div class="alert alert-warning alert-dismissible mb-5" role="alert">
+    <div class="alert alert-warning alert-dismissible mb-12" role="alert">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close" />
         </button>
@@ -32,7 +32,7 @@
             <a asp-controller="UIManage" asp-action="APIKeys" text-translate="true">click here</a>.
         </p>
 
-        <div class="d-flex align-items-center justify-content-between mt-5 mb-3">
+        <div class="flex items-center justify-between mt-12 mb-6">
             <h3 class="mb-0">@ViewData["Title"]</h3>
             <a id="CreateNewToken" asp-action="CreateToken" class="btn btn-primary" role="button" asp-route-storeId="@Context.GetRouteValue("storeId")" permission="@Policies.CanModifyStoreSettings" text-translate="true">
                 Create Token
@@ -72,28 +72,28 @@
         }
         else
         {
-            <p class="text-secondary mt-3" text-translate="true">
+            <p class="text-btcpay-body-text-muted mt-6" text-translate="true">
                 No access tokens yet.
             </p>
         }
 
-        <h3 class="mt-5 mb-3" text-translate="true">Legacy API Keys</h3>
+        <h3 class="mt-12 mb-4" text-translate="true">Legacy API Keys</h3>
         <p text-translate="true">Alternatively, you can use the invoice API by including the following HTTP Header in your requests:</p>
         <p><code>Authorization: Basic @Model.EncodedApiKey</code></p>
 
         <form method="post" asp-action="GenerateAPIKey" asp-route-storeId="@Context.GetRouteValue("storeId")" permission="@Policies.CanModifyStoreSettings">
             <div class="form-group">
                 <label asp-for="ApiKey" class="form-label"></label>
-                <div class="d-flex">
+                <div class="flex">
                     <input asp-for="ApiKey" readonly class="form-control"/>
                     @if (string.IsNullOrEmpty(Model.ApiKey))
                     {
-                        <button class="btn btn-primary ms-3" type="submit" text-translate="true">Generate</button>
+                        <button class="btn btn-primary ms-4" type="submit" text-translate="true">Generate</button>
                     }
                     else
                     {
-                        <button class="btn btn-danger ms-3" type="submit" name="command" value="revoke" text-translate="true">Revoke</button>
-                        <button class="btn btn-primary ms-3" type="submit" text-translate="true">Regenerate</button>
+                        <button class="btn btn-danger ms-4" type="submit" name="command" value="revoke" text-translate="true">Revoke</button>
+                        <button class="btn btn-primary ms-4" type="submit" text-translate="true">Regenerate</button>
                     }
                 </div>
             </div>

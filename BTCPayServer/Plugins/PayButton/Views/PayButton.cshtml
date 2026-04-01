@@ -182,7 +182,7 @@
 <div id="payButtonCtrl">
     <div class="row">
         <div class="col-xl-8">
-            <div class="alert alert-warning alert-dismissible mb-4" role="alert">
+            <div class="alert alert-warning alert-dismissible mb-6" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@StringLocalizer["Close"]">
                     <vc:icon symbol="close" />
                 </button>
@@ -197,7 +197,7 @@
                 </form>
             </div>
             <p text-translate="true">Configure your Pay Button, and the generated code will be displayed at the bottom of the page to copy into your project.</p>
-            <h4 class="mt-3 mb-3" text-translate="true">General Settings</h4>
+            <h4 class="mt-4 mb-4" text-translate="true">General Settings</h4>
             <div class="form-group col-md-8">
                 <label class="form-label" for="price" text-translate="true">Price</label>
                 <input name="price" type="text" class="form-control" id="price" inputmode="decimal"
@@ -229,7 +229,7 @@
         </div>
     </div>
 
-    <h4 class="mt-5 mb-3" text-translate="true">Display Options</h4>
+    <h4 class="mt-12 mb-4" text-translate="true">Display Options</h4>
     <div class="row">
         <div class="col-xl-8 content-constrain-xxl">
             <div class="form-group">
@@ -248,15 +248,15 @@
                 <input name="payButtonText" type="text" class="form-control" id="pb-text"
                        v-model="srvModel.payButtonText" v-on:change="inputChanges">
             </div>
-            <div class="form-group mb-4">
+            <div class="form-group mb-6">
                 <label class="form-label" for="pb-image-url" text-translate="true">Pay Button Image Url</label>
                 <input name="payButtonImageUrl" type="text" class="form-control" id="pb-image-url"
                        v-model="srvModel.payButtonImageUrl" v-on:change="inputChanges"
                        :required="imageUrlRequired">
             </div>
-            <div class="form-group mb-4">
+            <div class="form-group mb-6">
                 <label class="form-label" text-translate="true">Image Size</label>
-                <div class="btn-group d-flex" role="group">
+                <div class="btn-group flex" role="group">
                     <button type="button" class="btn btn-outline-secondary"
                             v-on:click="inputChanges($event, 0)">146 x 40 px</button>
                     <button type="button" class="btn btn-outline-secondary"
@@ -321,13 +321,13 @@
                 </div>
             </template>
         </div>
-        <div class="col-xl-4 mt-4 mt-xl-0">
-            <h5 class="mb-3" text-translate="true">Preview</h5>
+        <div class="col-xl-4 mt-6 mt-xl-0">
+            <h5 class="mb-4" text-translate="true">Preview</h5>
             <div id="preview"></div>
         </div>
     </div>
 
-    <h4 class="mt-5 mb-3" text-translate="true">Payment Notifications</h4>
+    <h4 class="mt-12 mb-4" text-translate="true">Payment Notifications</h4>
     <div class="row">
         <div class="col-xl-8 content-constrain-xxl">
             <div class="form-group">
@@ -355,7 +355,7 @@
         </div>
     </div>
 
-    <h4 class="mt-5 mb-3" text-translate="true">Advanced Options</h4>
+    <h4 class="mt-12 mb-4" text-translate="true">Advanced Options</h4>
     <div class="row" v-if="!srvModel.appIdEndpoint">
         <div class="col-xl-8 content-constrain-xxl">
             <p>@ViewLocalizer["Specify additional query string parameters that should be appended to the checkout page once the invoice is created. For example, <code>lang=da-DK</code> would load the checkout page in Danish by default."]</p>
@@ -385,7 +385,7 @@
         </div>
     </div>
 
-    <h4 class="mt-5 mb-3" text-translate="true">Generated Code</h4>
+    <h4 class="mt-12 mb-4" text-translate="true">Generated Code</h4>
     <div class="row">
         <div class="col-xxl-8">
             <pre><code id="mainCode" class="html"></code></pre>
@@ -396,10 +396,10 @@
     </div>
 
     <div v-if="!srvModel.appIdEndpoint && (previewLink || lnurlLink)">
-        <h4 class="mt-5 mb-3" text-translate="true">Alternatives</h4>
+        <h4 class="mt-12 mb-4" text-translate="true">Alternatives</h4>
         <p text-translate="true">You can also share the link/LNURL or encode it in a QR code.</p>
-        <div class="align-items-center" style="width:256px">
-            <ul class="nav my-3 btcpay-pills align-items-center gap-2">
+        <div class="items-center" style="width:256px">
+            <ul class="nav my-4 btcpay-pills items-center gap-2">
                 <li class="nav-item" v-if="previewLink">
                     <a class="btcpay-pill" :class="{ active: alternativeMode === 'link' }" data-bs-toggle="tab" data-bs-target="#Alternative-Link" role="tab" href="#Alternative-Link" text-translate="true">
                         Link
@@ -414,10 +414,10 @@
             <div class="tab-content">
                 <div class="tab-pane" :class="{ active: alternativeMode === 'link' }" id="Alternative-Link" role="tabpanel">
                     <div class="payment-box">
-                        <a class="qr-container d-inline-block" :class="{ active: true }" :href="previewLink">
+                        <a class="qr-container inline-block" :class="{ active: true }" :href="previewLink">
                             <qrcode :value="previewLink" :options="qrOptions" tag="img"></qrcode>
                         </a>
-                        <div class="input-group mt-3">
+                        <div class="input-group mt-4">
                             <div class="form-floating">
                                 <vc:truncate-center text="previewLink" is-vue="true" padding="15" elastic="true" classes="form-control-plaintext" />
                                 <label text-translate="true">Link URL</label>
@@ -427,10 +427,10 @@
                 </div>
                 <div class="tab-pane" :class="{ active: alternativeMode === 'lnurl' }" id="Alternative-LNURL" role="tabpanel">
                     <div class="payment-box">
-                        <a class="qr-container d-inline-block" :href="lnurlLink">
+                        <a class="qr-container inline-block" :href="lnurlLink">
                             <qrcode :value="lnurlLink" :options="qrOptions" tag="img"></qrcode>
                         </a>
-                        <div class="input-group mt-3">
+                        <div class="input-group mt-4">
                             <div class="form-floating">
                                 <vc:truncate-center text="lnurlLink" is-vue="true" padding="15" elastic="true" classes="form-control-plaintext" />
                                 <label text-translate="true">LNURL</label>

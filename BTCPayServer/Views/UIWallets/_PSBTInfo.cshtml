@@ -2,10 +2,10 @@
 
 @if (Model.CanCalculateBalance)
 {
-    <p class="lead text-center text-secondary">
+    <p class="lead text-center text-btcpay-body-text-muted">
         <span text-translate="true">This transaction will change your balance:</span>
         <br>
-        <span id="balance-toggle" class="text-@(Model.Positive ? "success" : "danger") cursor-pointer">
+        <span id="balance-toggle" class="text-@(Model.Positive ? "btcpay-success" : "btcpay-danger") cursor-pointer">
             @Model.BalanceChange.CryptoAmount
             @if (Model.BalanceChange.FiatAmount != null)
             {
@@ -17,7 +17,7 @@
 @if (Model.ReplacementBalanceChange is not null)
 {
     <div id="replacements">
-        <h4 class="mb-n3" text-translate="true">Replacements</h4>
+        <h4 class="-mb-4" text-translate="true">Replacements</h4>
         <table class="table">
             <thead>
                 <tr>
@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="text-end text-@(Model.ReplacementBalanceChange.Positive ? "success" : "danger")">
+                    <td class="text-end text-@(Model.ReplacementBalanceChange.Positive ? "btcpay-success" : "btcpay-danger")">
 						<span class="amount-toggle cursor-pointer"
 							  data-btc="@Model.ReplacementBalanceChange.BalanceChange.CryptoAmount"
 							  data-fiat="@Model.ReplacementBalanceChange.BalanceChange.FiatAmount">
@@ -39,7 +39,7 @@
     </div>
 }
 <div id="inputs">
-    <h4 class="mb-n3" text-translate="true">Inputs</h4>
+    <h4 class="-mb-4" text-translate="true">Inputs</h4>
     <table class="table">
         <thead>
         <tr>
@@ -54,7 +54,7 @@
             <tr>
                 @if (input.Error != null)
                 {
-                    <td>@input.Index <span class="text-danger" title="@input.Error"><vc:icon symbol="warning"/></span></td>
+                    <td>@input.Index <span class="text-btcpay-danger" title="@input.Error"><vc:icon symbol="warning"/></span></td>
                 }
                 else
                 {
@@ -63,7 +63,7 @@
                 <td>
                     @if (input.Labels.Any())
                     {
-                        <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <div class="flex flex-wrap gap-2 items-center">
                             @foreach (var label in input.Labels)
                             {
                                 <div class="transaction-label" style="--label-bg:@label.Color;--label-fg:@label.TextColor">
@@ -82,7 +82,7 @@
                         </div>
                     }
                 </td>
-                <td class="text-end text-@(input.Positive ? "success" : "danger")">
+                <td class="text-end text-@(input.Positive ? "btcpay-success" : "btcpay-danger")">
                     <span class="amount-toggle cursor-pointer"
                           data-btc="@input.BalanceChange.CryptoAmount"
                           data-fiat="@input.BalanceChange.FiatAmount">
@@ -95,8 +95,8 @@
     </table>
 </div>
 
-<div id="outputs" class="mt-4">
-    <h4 class="mb-n3" text-translate="true">Outputs</h4>
+<div id="outputs" class="mt-6">
+    <h4 class="-mb-4" text-translate="true">Outputs</h4>
     <table class="table">
         <thead>
         <tr>
@@ -113,7 +113,7 @@
                 <td>
                     @if (destination.Labels.Any())
                     {
-                        <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <div class="flex flex-wrap gap-2 items-center">
                             @foreach (var label in destination.Labels)
                             {
                                 <div class="transaction-label" style="--label-bg:@label.Color;--label-fg:@label.TextColor">
@@ -132,7 +132,7 @@
                         </div>
                     }
                 </td>
-                <td class="text-end text-@(destination.Positive ? "success" : "danger")">
+                <td class="text-end text-@(destination.Positive ? "btcpay-success" : "btcpay-danger")">
                     <span class="amount-toggle cursor-pointer"
                           data-btc="@destination.Balance.CryptoAmount"
                           data-fiat="@destination.Balance.FiatAmount">
@@ -147,7 +147,7 @@
 
 @if (Model.FeeRate != null)
 {
-    <p class="text-muted text-end">
+    <p class="text-btcpay-body-text-muted text-end">
         <span text-translate="true">Transaction fee rate:</span>
         <b>@Model.FeeRate</b>
     </p>

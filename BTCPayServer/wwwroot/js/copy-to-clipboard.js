@@ -2,7 +2,7 @@ function confirmCopy(el, message) {
     if (el.dataset.clipboardConfirming) return;
     const hasIcon = !!el.innerHTML.match('icon-actions-copy')
     const confirmMessage = document.createElement('span');
-    confirmMessage.className = 'text-success';
+    confirmMessage.className = 'text-btcpay-success';
     confirmMessage.textContent = message;
     if (hasIcon) {
         el.innerHTML = el.innerHTML.replace('#actions-copy', '#checkmark');

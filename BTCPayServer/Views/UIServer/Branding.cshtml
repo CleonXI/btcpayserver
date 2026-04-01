@@ -39,7 +39,7 @@
                 <label asp-for="BaseUrl" class="form-label"></label>
                 <div class="input-group flex-nowrap">
                     <input asp-for="BaseUrl" class="form-control" />
-                    <button class="btn btn-success input-group-clear px-3" type="submit" name="command" value="SetBaseUrl" text-translate="true">
+                    <button class="btn btn-success input-group-clear px-4" type="submit" name="command" value="SetBaseUrl" text-translate="true">
                         Use current URL
                     </button>
                 </div>
@@ -47,11 +47,11 @@
                 <span asp-validation-for="BaseUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <div class="d-flex align-items-center justify-content-between gap-2">
+                <div class="flex items-center justify-between gap-2">
                     <label asp-for="LogoFile" class="form-label"></label>
                     @if (!string.IsNullOrEmpty(Model.LogoUrl))
                     {
-                        <button type="submit" class="btn btn-link p-0 text-danger" name="RemoveLogoFile" value="true">
+                        <button type="submit" class="btn btn-link p-0 text-btcpay-danger" name="RemoveLogoFile" value="true">
                             <vc:icon symbol="cross" />
                             <span text-translate="true">Remove</span>
                         </button>
@@ -59,7 +59,7 @@
                 </div>
                 @if (canUpload)
                 {
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="flex items-center gap-6">
                         <input asp-for="LogoFile" type="file" class="form-control flex-grow">
                         @if (!string.IsNullOrEmpty(Model.LogoUrl))
                         {
@@ -75,14 +75,14 @@
                 }
             </div>
 
-			<h3 class="mt-5 mb-3" text-translate="true">Theme</h3>
+			<h3 class="mt-12 mb-4" text-translate="true">Theme</h3>
             <p text-translate="true">Use the default Light or Dark Themes, or provide a custom CSS theme file below.</p>
 
-            <div class="d-flex align-items-center mb-3">
-                <input asp-for="CustomTheme" type="checkbox" class="btcpay-toggle me-3" data-bs-toggle="collapse" data-bs-target="#CustomThemeSettings" aria-expanded="@(Model.CustomTheme)" aria-controls="CustomThemeSettings" />
+            <div class="flex items-center mb-6">
+                <input asp-for="CustomTheme" type="checkbox" class="btcpay-toggle me-4" data-bs-toggle="collapse" data-bs-target="#CustomThemeSettings" aria-expanded="@(Model.CustomTheme)" aria-controls="CustomThemeSettings" />
                 <div>
                     <label asp-for="CustomTheme" class="form-check-label"></label>
-                    <div class="text-muted">
+                    <div class="text-btcpay-body-text-muted">
                         <span text-translate="true">Adjust the design of your BTCPay Server instance to your needs.</span>
                         <a href="https://docs.btcpayserver.org/Development/Theme/" target="_blank" rel="noreferrer noopener">
                             <vc:icon symbol="info" />
@@ -96,11 +96,11 @@
                     <select asp-for="CustomThemeExtension" asp-items="@themeExtension" class="form-select w-auto"></select>
                 </div>
                 <div class="form-group mb-0">
-                    <div class="d-flex align-items-center justify-content-between gap-2">
+                    <div class="flex items-center justify-between gap-2">
                         <label asp-for="CustomThemeFile" class="form-label" data-required></label>
                         @if (!string.IsNullOrEmpty(Model.CustomThemeCssUrl))
                         {
-                            <button type="submit" class="btn btn-link p-0 text-danger" name="RemoveCustomThemeFile" value="true">
+                            <button type="submit" class="btn btn-link p-0 text-btcpay-danger" name="RemoveCustomThemeFile" value="true">
                                 <vc:icon symbol="cross" />
                                 <span text-translate="true">Remove</span>
                             </button>
@@ -108,11 +108,11 @@
                     </div>
                     @if (canUpload)
                     {
-                        <div class="d-flex align-items-center gap-3">
+                        <div class="flex items-center gap-6">
                             <input asp-for="CustomThemeFile" type="file" class="form-control flex-grow">
                             @if (!string.IsNullOrEmpty(Model.CustomThemeCssUrl))
                             {
-                                <a href="@Model.CustomThemeCssUrl" target="_blank" rel="noreferrer noopener" class="text-nowrap" text-translate="true">Custom CSS</a>
+                                <a href="@Model.CustomThemeCssUrl" target="_blank" rel="noreferrer noopener" class="whitespace-nowrap" text-translate="true">Custom CSS</a>
                             }
                         </div>
                         <span asp-validation-for="CustomThemeFile" class="text-danger"></span>

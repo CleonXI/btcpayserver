@@ -8,25 +8,25 @@
     {
         var hasCount = vm.PerkCount.ContainsKey(item.Id);
         var hasValue = vm.PerkValue.ContainsKey(item.Id);
-        <div class="card mb-4 perk expanded" id="@item.Id">
+        <div class="card mb-6 perk expanded" id="@item.Id">
             @if (vm.DisplayPerksRanking && hasCount)
             {
-                <span class="btn btn-sm rounded-circle px-0 btn-primary perk-badge">#@(Array.IndexOf(vm.Perks, item) + 1)</span>
+                <span class="btn btn-sm rounded-full px-0 btn-primary perk-badge">#@(Array.IndexOf(vm.Perks, item) + 1)</span>
             }
             @if (!string.IsNullOrEmpty(item.Image))
             {
                 <img class="card-img-top" src="@item.Image" alt="@item.Title" asp-append-version="true" loading="lazy" />
             }
             <div class="card-body">
-                <div class="card-title d-flex align-items-center justify-content-between mb-1">
-                    <label class="h5 d-flex align-items-center">
+                <div class="card-title flex items-center justify-between mb-1">
+                    <label class="h5 flex items-center">
                         @if (vm.Started && !vm.Ended )
                         {
                             <input type="radio" asp-for="ChoiceKey" value="@item.Id" class="form-check-input mt-0 me-2"/>
                         }
                         @(string.IsNullOrEmpty(item.Title) ? item.Id : item.Title)
                     </label>
-                    <span class="text-muted">
+                    <span class="text-btcpay-body-text-muted">
                         @if (item.Price is > 0)
                         {
                             <span>@item.Price.Value</span>
@@ -51,7 +51,7 @@
             </div>
             @if (hasCount || hasValue || item.Inventory.HasValue)
             {
-                <div class="card-footer d-flex flex-wrap justify-content-between">
+                <div class="card-footer flex flex-wrap justify-between">
                     @switch (item.Inventory)
                     {
                         case null:
@@ -81,15 +81,15 @@
         <div class="form-group">
             <label asp-for="Email" class="form-label"></label>
             <input asp-for="Email" type="email" class="form-control"/>
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <span asp-validation-for="Email" class="text-btcpay-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Amount" class="form-label"></label>
-            <div class="input-group mb-3">
+            <div class="input-group mb-4">
                 <input inputmode="decimal" asp-for="Amount" type="number" step="any" class="form-control"/>
                 <span class="input-group-text">@vm.TargetCurrency.ToUpperInvariant()</span>
             </div>
-            <span asp-validation-for="Amount" class="text-danger"></span>
+            <span asp-validation-for="Amount" class="text-btcpay-danger"></span>
         </div>
         <input type="hidden" asp-for="RedirectToCheckout"/>
         <button type="submit" class="btn btn-primary" text-translate="true">Contribute</button>

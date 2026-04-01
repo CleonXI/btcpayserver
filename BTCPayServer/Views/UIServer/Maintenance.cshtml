@@ -11,7 +11,7 @@
 <partial name="_StatusMessage" />
 
 <form method="post">
-    <div class="row mb-5">
+    <div class="row mb-12">
         <div class="col-xl-8 content-constrain-xxl">
             <div class="form-group">
                 <label asp-for="DNSDomain" class="form-label"></label>
@@ -21,7 +21,7 @@
             </div>
             <button name="command" type="submit" class="btn btn-secondary" value="changedomain" title="@StringLocalizer["Change domain"]" disabled="@(Model.CanUseSSH ? null : "disabled")">Change Domain</button>
 
-            <h4 class="mt-5 mb-2" text-translate="true">Restart</h4>
+            <h4 class="mt-12 mb-2" text-translate="true">Restart</h4>
             <p text-translate="true">Restart BTCPay Server and related services.</p>
             <div class="form-group">
                 <div class="input-group">
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <h4 class="mt-5 mb-2" text-translate="true">Clean</h4>
+            <h4 class="mt-12 mb-2" text-translate="true">Clean</h4>
             <p text-translate="true">Delete unused Docker images present on your system.</p>
             <div class="form-group">
                 <div class="input-group">
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <h4 class="mt-5 mb-2" text-translate="true">Update</h4>
+            <h4 class="mt-12 mb-2" text-translate="true">Update</h4>
             <p text-translate="true">Update to the latest version of BTCPay Server.</p>
             <div class="form-group">
                 <div class="input-group">

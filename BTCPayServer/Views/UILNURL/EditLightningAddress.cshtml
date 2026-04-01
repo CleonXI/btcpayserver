@@ -36,9 +36,9 @@
 @if (Context.Request.PathBase.ToString() != string.Empty)
 {
     <div class="alert alert-warning" role="alert">
-        Your BTCPay Server installation is using the root path <span class="fw-bold">@Context.Request.PathBase</span>.<br /><br />
-        This is incompatible with wallets attempting to resolve <span class="fw-bold">@Context.Request.GetAbsoluteUriNoPathBase(new Uri("/.well-known/lnurlp/{username}", UriKind.Relative))</span> rather than <span class="fw-bold">@Context.Request.GetAbsoluteUri("/.well-known/lnurlp/{username}")</span>.<br /><br />
-        If the LN Address doesn't work, ask your integrator to redirect queries from <span class="fw-bold">@Context.Request.GetAbsoluteUriNoPathBase(new Uri("/.well-known/lnurlp/{username}", UriKind.Relative))</span> to <span class="fw-bold">@Context.Request.GetAbsoluteUri("/.well-known/lnurlp/{username}")</span>.
+        Your BTCPay Server installation is using the root path <span class="font-bold">@Context.Request.PathBase</span>.<br /><br />
+        This is incompatible with wallets attempting to resolve <span class="font-bold">@Context.Request.GetAbsoluteUriNoPathBase(new Uri("/.well-known/lnurlp/{username}", UriKind.Relative))</span> rather than <span class="font-bold">@Context.Request.GetAbsoluteUri("/.well-known/lnurlp/{username}")</span>.<br /><br />
+        If the LN Address doesn't work, ask your integrator to redirect queries from <span class="font-bold">@Context.Request.GetAbsoluteUriNoPathBase(new Uri("/.well-known/lnurlp/{username}", UriKind.Relative))</span> to <span class="font-bold">@Context.Request.GetAbsoluteUri("/.well-known/lnurlp/{username}")</span>.
     </div>
 }
 
@@ -55,9 +55,9 @@
                 <input asp-for="Add.Username" class="form-control"/>
                 <span class="input-group-text">@@@Context.Request.Host.ToUriComponent()@Context.Request.PathBase</span>
             </div>
-            <span asp-validation-for="Add.Username" class="text-danger"></span>
+            <span asp-validation-for="Add.Username" class="text-btcpay-danger"></span>
         </div>
-        <button class="d-inline-flex align-items-center btn btn-link text-primary fw-semibold p-0 mb-3" type="button" id="AdvancedSettingsButton" data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
+        <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0 mb-4" type="button" id="AdvancedSettingsButton" data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
             <vc:icon symbol="caret-down"/>
             <span class="ms-1" text-translate="true">Advanced settings</span>
         </button>
@@ -67,21 +67,21 @@
                     <div class="form-group" title="@StringLocalizer["The currency to generate the invoice in when generated through this lightning address"]">
                         <label asp-for="Add.CurrencyCode" class="form-label"></label>
                         <input asp-for="Add.CurrencyCode" class="form-control w-auto" currency-selection style="max-width:16ch;"/>
-                        <span asp-validation-for="Add.CurrencyCode" class="text-danger"></span>
+                        <span asp-validation-for="Add.CurrencyCode" class="text-btcpay-danger"></span>
                     </div>
                 </div>
                 <div class="col-12 col-sm-auto">
                     <div class="form-group" title="@StringLocalizer["Minimum amount of sats to allow to be sent to this ln address"]">
                         <label asp-for="Add.Min" class="form-label"></label>
                         <input asp-for="Add.Min" class="form-control" type="number" inputmode="numeric" min="1" style="max-width:16ch;"/>
-                        <span asp-validation-for="Add.Min" class="text-danger"></span>
+                        <span asp-validation-for="Add.Min" class="text-btcpay-danger"></span>
                     </div>
                 </div>
                 <div class="col-12 col-sm-auto">
                     <div class="form-group" title="@StringLocalizer["Maximum amount of sats to allow to be sent to this ln address"]">
                         <label asp-for="Add.Max" class="form-label"></label>
                         <input asp-for="Add.Max" class="form-control" type="number" inputmode="numeric" min="1" max="@int.MaxValue" style="max-width:16ch;"/>
-                        <span asp-validation-for="Add.Max" class="text-danger"></span>
+                        <span asp-validation-for="Add.Max" class="text-btcpay-danger"></span>
                     </div>
                 </div>
                 <div class="col-12 col-sm-auto">
@@ -91,7 +91,7 @@
 							<vc:icon symbol="info" />
 						</a>
                         <textarea asp-for="Add.InvoiceMetadata" class="form-control"></textarea>
-                        <span asp-validation-for="Add.InvoiceMetadata" class="text-danger"></span>
+                        <span asp-validation-for="Add.InvoiceMetadata" class="text-btcpay-danger"></span>
                     </div>
                 </div>
             </div>
@@ -125,7 +125,7 @@
                     <td>
                         <div class="input-group clipboard-button" data-clipboard="@address">
                             <input type="text" class="form-control copy-cursor lightning-address-value" readonly value="@address"/>
-                            <button type="button" class="btn btn-outline-secondary px-3">
+                            <button type="button" class="btn btn-outline-secondary px-4">
                                 <vc:icon symbol="actions-copy" />
                             </button>
                         </div>
@@ -161,7 +161,7 @@
     }
     else
     {
-        <p class="text-secondary" text-translate="true">
+        <p class="text-btcpay-body-text-muted" text-translate="true">
             There are no Lightning Addresses yet.
         </p>
     }

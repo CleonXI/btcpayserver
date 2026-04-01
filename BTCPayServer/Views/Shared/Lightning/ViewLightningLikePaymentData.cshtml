@@ -52,7 +52,7 @@
                     <tr>
 						<th class="w-175px">Type</th>
                         <th class="w-175px">Destination</th>
-                        <th class="text-nowrap">Payment Proof</th>
+                        <th class="whitespace-nowrap">Payment Proof</th>
                         <th class="w-150px text-end">Paid</th>
                     </tr>
                 </thead>
@@ -67,8 +67,8 @@
                             <td>
                                 <vc:truncate-center text="@payment.PaymentProof" classes="truncate-center-id" />
                             </td>
-                            <td class="payment-value text-end text-nowrap">
-                                <span data-sensitive class="text-success">@payment.Amount</span>
+                            <td class="payment-value text-end whitespace-nowrap">
+                                <span data-sensitive class="text-btcpay-success">@payment.Amount</span>
                             </td>
                         </tr>
                     }

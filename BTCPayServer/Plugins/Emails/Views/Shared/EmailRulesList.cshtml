@@ -75,7 +75,7 @@ else
                 }
                 <th text-translate="true">To</th>
                 <th text-translate="true">Subject</th>
-                <th class="text-end d-print-none" permission="@Model.ModifyPermission"></th>
+                <th class="text-end print:hidden" permission="@Model.ModifyPermission"></th>
             </tr>
             </thead>
             <tbody>
@@ -89,8 +89,8 @@ else
                     }
                     <td>@string.Join(", ", rule.To)</td>
                     <td>@rule.Subject</td>
-                    <td class="text-end d-print-none" permission="@Model.ModifyPermission">
-                        <div class="d-inline-flex align-items-center gap-3">
+                    <td class="text-end print:hidden" permission="@Model.ModifyPermission">
+                        <div class="inline-flex items-center gap-4">
                         @if (storeId is not null)
                         {
 
@@ -112,7 +112,7 @@ else
 }
 else
 {
-    <p class="text-secondary" text-translate="true">
+    <p class="text-btcpay-body-text-muted" text-translate="true">
         There are no rules yet.
     </p>
 }

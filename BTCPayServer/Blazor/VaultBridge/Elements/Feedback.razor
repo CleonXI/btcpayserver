@@ -4,8 +4,8 @@
 @using Microsoft.AspNetCore.Razor.TagHelpers
 @using Microsoft.Extensions.Localization
 
-<div class="vault-feedback mb-2 d-flex align-items-center">
-    <Icon Class=@($"vault-feedback-icon icon me-2 {GetClass()}") Symbol="@GetSymbol()"></Icon>
+<div class="vault-feedback mb-2 flex items-center">
+    <Icon Class=@($"vault-feedback-icon icon mr-2 {GetClass()}") Symbol="@GetSymbol()"></Icon>
     <span class="vault-feedback-content flex-grow">
 				@if (Html is not null)
         {

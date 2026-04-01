@@ -16,10 +16,10 @@
     </nav>
 </div>
 <partial name="_StatusMessage" />
-<p class="my-3" text-translate="true">To use an authenticator app go through the following steps:</p>
+<p class="my-4" text-translate="true">To use an authenticator app go through the following steps:</p>
 <div class="col-xl-8 content-constrain-xxl">
-    <ol class="ps-3">
-        <li class="mb-5">
+    <ol class="ps-4">
+        <li class="mb-12">
             <div class="mb-2" text-translate="true">Download a two-factor authenticator app like …</div>
             <ul>
                 <li>
@@ -40,10 +40,10 @@
                 </li>
             </ul>
         </li>
-        <li class="mb-5">
+        <li class="mb-12">
             <p class="mb-2" text-translate="true">Scan the QR Code or enter the following key into your two-factor authenticator app:</p>
-            <div class="input-group input-group-sm mb-4">
-                <input readonly class="form-control font-monospace" value="@Model.SharedKey" id="SharedKey" style="max-width:20rem">
+            <div class="input-group input-group-sm mb-6">
+                <input readonly class="form-control font-btcpay-mono" value="@Model.SharedKey" id="SharedKey" style="max-width:20rem">
                 <button type="button" class="btn btn-outline-secondary clipboard-button" data-clipboard-target="#SharedKey">
                     <vc:icon symbol="actions-copy" />
                 </button>

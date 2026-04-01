@@ -18,7 +18,7 @@
     <div class="row">
         <div class="content-constrain-xxl col-xl-8">
             <fieldset>
-                <legend text-translate="true" class="mb-3">Rate Source</legend>
+                <legend text-translate="true" class="mb-4">Rate Source</legend>
 
                 @if (Model.PrimarySource.ShowScripting || Model.FallbackSource?.ShowScripting is true)
                 {
@@ -91,8 +91,8 @@ X_X = kraken(X_X);</code></pre>
                 </fieldset>
                 <fieldset>
                     <legend text-translate="true">Fallback rate source</legend>
-                    <div class="form-group d-flex align-items-center pt-2">
-                        <input asp-for="HasFallback" type="checkbox" class="btcpay-toggle me-3" data-bs-toggle="collapse" data-bs-target="#FallbackSection"
+                    <div class="form-group flex items-center pt-2">
+                        <input asp-for="HasFallback" type="checkbox" class="btcpay-toggle me-4" data-bs-toggle="collapse" data-bs-target="#FallbackSection"
                                aria-expanded="@Model.HasFallback" aria-controls="FallbackSection" />
                         <div>
                             <label asp-for="HasFallback" class="form-check-label"></label>
@@ -109,31 +109,31 @@ X_X = kraken(X_X);</code></pre>
     <div class="row">
         <div class="content-constrain-xxl col-xl-8">
             <fieldset>
-                <legend text-translate="true" class="mb-3">Rate Spread</legend>
+                <legend text-translate="true" class="mb-4">Rate Spread</legend>
                 <div class="form-group">
                     <label asp-for="Spread" class="form-label"></label>
                     <div class="input-group">
                         <input inputmode="decimal" asp-for="Spread" class="form-control" />
                         <span class="input-group-text">%</span>
                     </div>
-                    <span asp-validation-for="Spread" class="text-danger"></span>
+                    <span asp-validation-for="Spread" class="text-btcpay-danger"></span>
                 </div>
             </fieldset>
         </div>
     </div>
     <div class="row">
         <div class="content-constrain-xxl col-xl-8">
-            <fieldset class="mb-3">
+            <fieldset class="mb-4">
                 <legend text-translate="true">Currency Pair Testing</legend>
                 <div class="form-group">
                     <label asp-for="ScriptTest" class="form-label"><span text-translate="true">Currency pairs to test against your rule</span> (<code>DOGE_USD,DOGE_CAD,BTC_CAD,BTC_USD</code>)</label>
-                    <div class="d-flex">
+                    <div class="flex">
                         <input asp-for="ScriptTest" class="form-control" placeholder="BTC_USD, BTC_CAD" />
-                        <button name="command" value="Test" type="submit" class="btn btn-secondary ms-3" title="@StringLocalizer["Test"]"
+                        <button name="command" value="Test" type="submit" class="btn btn-secondary ms-4" title="@StringLocalizer["Test"]"
                                 permission="@Policies.CanModifyStoreSettings" text-translate="true">Test
                         </button>
                     </div>
-                    <span asp-validation-for="ScriptTest" class="text-danger"></span>
+                    <span asp-validation-for="ScriptTest" class="text-btcpay-danger"></span>
                 </div>
 
                 @if (Model.TestRateRules != null)
@@ -148,14 +148,14 @@ X_X = kraken(X_X);</code></pre>
                                     @if (result.Error)
                                     {
                                         <th class="small">
-                                            <vc:icon symbol="cross" css-class="text-danger testresult_failed" />
+                                            <vc:icon symbol="cross" css-class="text-btcpay-danger testresult_failed" />
                                             <span class="testresult_pair">@result.CurrencyPair</span>
                                         </th>
                                     }
                                     else
                                     {
                                         <th class="small">
-                                            <vc:icon symbol="checkmark" css-class="text-success testresult_success" />
+                                            <vc:icon symbol="checkmark" css-class="text-btcpay-success testresult_success" />
                                             <span class="testresult_pair">@result.CurrencyPair</span>
                                         </th>
                                     }
@@ -172,12 +172,12 @@ X_X = kraken(X_X);</code></pre>
     <div class="row">
         <div class="content-constrain-xxl col-xl-8">
             <div class="form-group">
-                <fieldset class="mb-3">
+                <fieldset class="mb-4">
                     <legend text-translate="true">Default Currency Pairs</legend>
                     <label asp-for="DefaultCurrencyPairs"
                            class="form-label">@ViewLocalizer["Query pairs via REST by querying {0} without the need to specify currencyPairs.", Html.ActionLink(StringLocalizer["this link"], "GetRates2", "BitpayRate", new { storeId = Model.StoreId }, new { target = "_blank" })]</label>
                     <input asp-for="DefaultCurrencyPairs" class="form-control" placeholder="BTC_USD, BTC_CAD" />
-                    <span asp-validation-for="DefaultCurrencyPairs" class="text-danger"></span>
+                    <span asp-validation-for="DefaultCurrencyPairs" class="text-btcpay-danger"></span>
                 </fieldset>
             </div>
         </div>

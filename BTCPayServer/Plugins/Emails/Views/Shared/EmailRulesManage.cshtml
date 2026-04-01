@@ -65,7 +65,7 @@
             <select asp-for="Trigger"
                     asp-items="@Model.Triggers.Select(t => new SelectListItem(StringLocalizer[t.Description], t.Trigger))"
                     class="form-select email-rule-trigger" required></select>
-            <span asp-validation-for="Trigger" class="text-danger"></span>
+            <span asp-validation-for="Trigger" class="text-btcpay-danger"></span>
             <div class="form-text" text-translate="true">Choose what event sends the email.</div>
         }
         else
@@ -87,7 +87,7 @@
             <input type="hidden" asp-for="Condition"></input>
             <input asp-for="Condition" class="form-control" disabled></input>
         }
-        <span asp-validation-for="Condition" class="text-danger"></span>
+        <span asp-validation-for="Condition" class="text-btcpay-danger"></span>
         <div class="form-text" text-translate="true">Only send email when the specified JSON Path exists</div>
     </div>
 
@@ -97,38 +97,38 @@
     <div class="form-group">
         <label asp-for="To" class="form-label" text-translate="true">To</label>
         <input type="text" asp-for="To" placeholder="@placeholder" class="form-control email-rule-to" />
-        <span asp-validation-for="To" class="text-danger"></span>
+        <span asp-validation-for="To" class="text-btcpay-danger"></span>
         <div class="form-text" text-translate="true">Who to send the email to. For multiple emails, separate with a comma.</div>
     </div>
     <div class="form-group">
         <label asp-for="CC" class="form-label" text-translate="true">CC</label>
         <input type="text" asp-for="CC" placeholder="@placeholder" class="form-control email-rule-cc" />
-        <span asp-validation-for="CC" class="text-danger"></span>
+        <span asp-validation-for="CC" class="text-btcpay-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="BCC" class="form-label" text-translate="true">BCC</label>
         <input type="text" asp-for="BCC" placeholder="@placeholder" class="form-control email-rule-bcc" />
-        <span asp-validation-for="BCC" class="text-danger"></span>
+        <span asp-validation-for="BCC" class="text-btcpay-danger"></span>
     </div>
 
-    <div class="form-check mb-4 customer-email-container">
+    <div class="form-check mb-6 customer-email-container">
         <input asp-for="AdditionalData.CustomerEmail" type="checkbox" class="form-check-input email-rule-customer-email customer-email-checkbox" />
         <label asp-for="AdditionalData.CustomerEmail" class="form-check-label" text-translate="true">Send the email to the buyer, if email was provided to the invoice</label>
-        <span asp-validation-for="AdditionalData.CustomerEmail" class="text-danger"></span>
+        <span asp-validation-for="AdditionalData.CustomerEmail" class="text-btcpay-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Subject" class="form-label" data-required></label>
         <input type="text" asp-for="Subject" class="form-control email-rule-subject" />
-        <span asp-validation-for="Subject" class="text-danger"></span>
+        <span asp-validation-for="Subject" class="text-btcpay-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Body" class="form-label" data-required></label>
         <textarea asp-for="Body" class="form-control richtext email-rule-body" rows="4"></textarea>
-        <span asp-validation-for="Body" class="text-danger"></span>
+        <span asp-validation-for="Body" class="text-btcpay-danger"></span>
         <div class="form-text rounded bg-light p-2">
-            <h6 class="text-muted p-0" text-translate="true">Placeholders</h6>
+            <h6 class="text-btcpay-body-text-muted p-0" text-translate="true">Placeholders</h6>
             <table id="placeholders" class="table">
             </table>
             <span>* These fields are JSON objects. You can access properties within them using <a href="https://www.newtonsoft.com/json/help/html/SelectToken.htm#SelectTokenJSONPath" rel="noreferrer noopener" target="_blank">this syntax</a>. For example <code>{Invoice.Metadata.itemCode}</code> or <code>{Subscriber.Metadata.accessKey}</code></span>
@@ -139,6 +139,7 @@
 
 @section PageFootContent {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/vendor/bootstrap/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/vendor/summernote/summernote-bs5.js" asp-append-version="true"></script>
     <script>
         // Fix annoying summernote bug (need to go back to preview after changing codeview): https://github.com/summernote/summernote/issues/94

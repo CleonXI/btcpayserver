@@ -5,11 +5,11 @@
 
 @if (ConfirmedOnDevice)
 {
-<button id="vault-confirm" class="btn btn-primary mt-4" type="button" @onclick="OnConfirm">@ui.StringLocalizer["Confirm"]</button>
+<button id="vault-confirm" class="btn btn-primary mt-6" type="button" @onclick="OnConfirm">@ui.StringLocalizer["Confirm"]</button>
 }
 else
 {
-<button id="vault-confirm" class="btn btn-primary mt-4" type="button" disabled="disabled">@ui.StringLocalizer["Please, confirm on the device first..."]</button>
+<button id="vault-confirm" class="btn btn-primary mt-6" type="button" disabled="disabled">@ui.StringLocalizer["Please, confirm on the device first..."]</button>
 }
 
 @code {

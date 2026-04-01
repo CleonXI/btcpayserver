@@ -47,14 +47,14 @@
                     <input type="hidden" asp-for="Role" />
                     <input required="required" class="form-control" disabled value="@Model.Role" />
                 }
-                <span asp-validation-for="Role" class="text-danger"></span>
+                <span asp-validation-for="Role" class="text-btcpay-danger"></span>
             </div>
 
-            <h4 class="mt-4 mb-3">Permissions</h4>
+            <h4 class="mt-6 mb-4">Permissions</h4>
             <select multiple="multiple" asp-for="Permissions" class="form-select hide-when-js">
                 @foreach (var policy in storePolicies)
                 {
-                    <option value="@policy" class="text-truncate" asp-selected="@Model.Permissions.Contains(policy)">@policy</option>
+                    <option value="@policy" class="truncate" asp-selected="@Model.Permissions.Contains(policy)">@policy</option>
                 }
             </select>
             <div class="list-group mb-2">
@@ -66,7 +66,7 @@
                     }
                 }
             </div>
-            <span asp-validation-for="Permissions" class="text-danger"></span>
+            <span asp-validation-for="Permissions" class="text-btcpay-danger"></span>
         </div>
     </div>
 </form>
@@ -77,10 +77,10 @@
         var policy = permission.Definition.Policy;
         <div class="form-check mb-0">
             <input type="checkbox" class="form-check-input policy-cb" checked="@isChecked" value="@policy" id="Policy-@policy.Replace(".", "_")" />
-            <label class="h5 fw-semibold form-check-label mb-1" for="Policy-@policy.Replace(".", "_")" data-bs-toggle="tooltip" title="@policy">
+            <label class="h5 font-semibold form-check-label mb-1" for="Policy-@policy.Replace(".", "_")" data-bs-toggle="tooltip" title="@policy">
                 @permission.Definition.Display.Title
             </label>
-            <p class="text-muted">@permission.Definition.Display.Description</p>
+            <p class="text-btcpay-body-text-muted">@permission.Definition.Display.Description</p>
             @if (permission.Children.Count != 0)
             {
                 <div class="list-group">

@@ -19,7 +19,7 @@
     <table class="table table-hover mb-0">
         <thead>
             <tr>
-                <th class="text-nowrap w-175px" text-translate="true">Payment method</th>
+                <th class="whitespace-nowrap w-175px" text-translate="true">Payment method</th>
                 @if (Model.ShowAddress)
                 {
                     <th text-translate="true">Destination</th>
@@ -44,7 +44,7 @@
             @foreach (var payment in invoice.CryptoPayments)
             {
                 <tr>
-                    <td class="text-nowrap">@payment.PaymentMethod</td>
+                    <td class="whitespace-nowrap">@payment.PaymentMethod</td>
                     @if (Model.ShowAddress)
                     {
                         <td title="@payment.Address">
@@ -53,16 +53,16 @@
                     }
                     @if (invoice.HasRates)
                     {
-                        <td class="text-nowrap text-end">
+                        <td class="whitespace-nowrap text-end">
                             <span data-sensitive>@payment.Rate</span>
                         </td>
                     }
-                    <td class="text-nowrap text-end">
+                    <td class="whitespace-nowrap text-end">
                         <span data-sensitive>@payment.TotalDue</span>
                     </td>
                     @if (invoice.StillDue)
                     {
-                        <td class="text-nowrap text-end">
+                        <td class="whitespace-nowrap text-end">
                             @if (payment.Due != null)
                             {
                                 <span data-sensitive>@payment.Due</span>
@@ -71,17 +71,17 @@
                     }
                     else if (invoice.Overpaid)
                     {
-                        <td class="text-nowrap text-end">
+                        <td class="whitespace-nowrap text-end">
                             @if (payment.Overpaid != null)
                             {
-                                <span data-sensitive class="text-warning">@payment.Overpaid</span>
+                                <span data-sensitive class="text-btcpay-warning">@payment.Overpaid</span>
                             }
                         </td>
                     }
-                    <td class="text-nowrap text-end">
+                    <td class="whitespace-nowrap text-end">
                         @if (payment.Paid != null)
                         {
-                            <span data-sensitive class="text-success">@payment.Paid</span>
+                            <span data-sensitive class="text-btcpay-success">@payment.Paid</span>
                         }
                     </td>
                 </tr>

@@ -34,21 +34,21 @@
                     </td>
                     <td>@store.Users.Count User@(store.Users.Count == 1 ? "" : "s")</td>
                     <td class="text-end">
-                        <div class="d-inline-flex align-items-center gap-2">
-                            <button class="accordion-button collapsed only-for-js ms-0 d-inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#@detailsId" aria-expanded="false" aria-controls="@detailsId">
+                        <div class="inline-flex items-center gap-2">
+                            <button class="accordion-button collapsed only-for-js ms-0 inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#@detailsId" aria-expanded="false" aria-controls="@detailsId">
                                 <vc:icon symbol="caret-down" />
                             </button>
                         </div>
                     </td>
                 </tr>
                 <tr id="@detailsId" class="store-details-row collapse">
-                    <td colspan="5" class="border-top-0">
+                    <td colspan="5" class="border-t-0">
                         @if (store.Users.Any())
                         {
                             <ul class="mb-0 p-0">
                                 @foreach (var user in store.Users)
                                 {
-                                    <li class="py-1 d-flex gap-2">
+                                    <li class="py-1 flex gap-2">
                                         <a asp-controller="UIServer" asp-action="User" asp-route-userId="@user.ApplicationUser.Id">@user.ApplicationUser.Email</a>
                                         <span class="badge bg-light">@user.StoreRoleId</span>
                                         @if (store.Archived)
@@ -61,7 +61,7 @@
                         }
                         else
                         {
-                            <span class="text-secondary" text-translate="true">No users</span>
+                            <span class="text-btcpay-body-text-muted" text-translate="true">No users</span>
                         }
                     </td>
                 </tr>
@@ -71,7 +71,7 @@
 }
 else
 {
-    <p class="text-secondary mt-3" text-translate="true">
+    <p class="text-btcpay-body-text-muted mt-6" text-translate="true">
         There are no stores yet.
     </p>
 }

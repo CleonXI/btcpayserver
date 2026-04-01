@@ -59,17 +59,17 @@
             <vc:icon symbol="nav-reporting" />
             <span text-translate="true">Reporting</span>
         </a>
-        <a id="page-primary" asp-action="EditPaymentRequest" asp-route-storeId="@storeId" class="btn btn-primary mt-3 mt-sm-0" role="button" permission="@Policies.CanModifyPaymentRequests">
+        <a id="page-primary" asp-action="EditPaymentRequest" asp-route-storeId="@storeId" class="btn btn-primary mt-4 sm:mt-0" role="button" permission="@Policies.CanModifyPaymentRequests">
             <span text-translate="true">Create Request</span>
         </a>
     </div>
 </div>
 
 <div id="descriptor" class="collapse">
-    <div class="d-flex px-4 py-4 mb-4 bg-tile rounded">
-        <div class="flex-fill">
+    <div class="flex px-6 py-6 mb-6 bg-tile rounded">
+        <div class="flex-1">
             <p class="mb-2" text-translate="true">Payment requests are persistent shareable pages that enable the receiver to pay at their convenience. Funds are paid to a payment request at the current exchange rate.</p>
-            <p class="mb-3" text-translate="true">Requests may be paid in partial. They will remain valid until time expires or when paid what is due.</p>
+            <p class="mb-4" text-translate="true">Requests may be paid in partial. They will remain valid until time expires or when paid what is due.</p>
             <a href="https://docs.btcpayserver.org/PaymentRequests/" target="_blank" rel="noreferrer noopener" text-translate="true">Learn More</a>
         </div>
         <button type="button" class="btn-close ms-auto" data-bs-toggle="collapse" data-bs-target="#descriptor" aria-expanded="false" aria-label="@StringLocalizer["Close"]">
@@ -128,7 +128,7 @@
 <form asp-action="GetPaymentRequests"
       asp-route-storeId="@storeId"
       method="get"
-      class="d-flex flex-wrap flex-sm-nowrap align-items-center gap-3 mb-4 col-xxl-8">
+      class="flex flex-wrap sm:flex-nowrap items-center gap-4 mb-6 col-xxl-8">
     <input type="hidden" asp-for="Count" />
     <input type="hidden" asp-for="TimezoneOffset" />
     <input asp-for="SearchTerm" type="hidden" value="@Model.Search.WithoutSearchText()"/>
@@ -253,7 +253,7 @@
                     <li><hr class="dropdown-divider" /></li>
                     <li>
                         <a asp-route-labelFilter=""
-                           class="dropdown-item text-danger"
+                           class="dropdown-item text-btcpay-danger"
                            text-translate="true">
                             Clear label filter
                         </a>
@@ -289,7 +289,7 @@
             <thead>
             <tr>
                 <th class="min-w-date-col">
-                    <div class="d-flex align-items-center gap-3">
+                    <div class="flex items-center gap-4">
                         <span text-translate="true">Date</span>
                         <button type="button"
                                 class="btn btn-link p-0 switch-time-format only-for-js"
@@ -303,7 +303,7 @@
                 <th text-translate="true">Id</th>
                 <th text-translate="true">Labels</th>
                 <th text-translate="true">Status</th>
-                <th class="text-end text-nowrap" text-translate="true">Amount</th>
+                <th class="text-end whitespace-nowrap" text-translate="true">Amount</th>
                 <th></th>
             </tr>
             </thead>
@@ -318,11 +318,11 @@
                             <a asp-action="EditPaymentRequest" asp-route-storeId="@item.StoreId" asp-route-payReqId="@item.Id" id="Edit-@item.Id">@item.Title</a>
                             @if (item.ExpiryDate.HasValue && item.Status != "Expired")
                             {
-                                <div><span class="text-muted small">Expires: @item.ExpiryDate?.ToBrowserDate()</span></div>
+                                <div><span class="text-btcpay-body-text-muted small">Expires: @item.ExpiryDate?.ToBrowserDate()</span></div>
                             }
                         </td>
                         <td>
-                            <div class="d-inline-flex align-items-center gap-3">
+                            <div class="inline-flex items-center gap-4">
                                 <a asp-action="ViewPaymentRequest" asp-route-payReqId="@item.Id" id="PaymentRequest-@item.Id" target="_blank"
                                    class="btn btn-link p-0" title="View Payment Request">
                                     <vc:icon symbol="actions-send" />
@@ -376,7 +376,7 @@
 }
 else
 {
-    <p class="text-secondary mt-3" text-translate="true">
+    <p class="text-btcpay-body-text-muted mt-4" text-translate="true">
         There are no payment requests matching your criteria.
     </p>
 }

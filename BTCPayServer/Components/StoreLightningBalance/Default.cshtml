@@ -5,7 +5,7 @@
     return;
 }
 <div id="StoreLightningBalance-@Model.StoreId" class="widget store-lightning-balance">
-    <div class="d-flex gap-3 align-items-center justify-content-between mb-2">
+    <div class="flex gap-4 items-center justify-between mb-2">
         <h6 text-translate="true">Lightning Balance</h6>
         @if (Model.CryptoCode != Model.DefaultCurrency && Model.Balance != null)
         {
@@ -23,13 +23,13 @@
     }
     else if (Model.Balance != null)
     {
-        <div class="balances d-flex flex-wrap">
+        <div class="balances flex flex-wrap">
             @if (Model.Balance.OffchainBalance != null)
             {
                 <div class="balance">
-                    <div class="d-flex align-items-baseline gap-1">
-                        <h3 class="d-inline-block me-1" data-balance="@Model.TotalOffchain" data-sensitive>@Model.TotalOffchain</h3>
-                        <span class="text-secondary fw-semibold text-nowrap">
+                    <div class="flex items-baseline gap-1">
+                        <h3 class="inline-block mr-1" data-balance="@Model.TotalOffchain" data-sensitive>@Model.TotalOffchain</h3>
+                        <span class="text-btcpay-body-text-muted font-semibold whitespace-nowrap">
                             @ViewLocalizer["<span class=\"currency\">{0}</span> in channels", Model.CryptoCode]
                         </span>
                     </div>
@@ -37,44 +37,44 @@
                     <div class="balance-details collapse" id="balanceDetailsOffchain">
                         @if (Model.Balance.OffchainBalance.Opening != null)
                         {
-                            <div class="mt-2 d-flex align-items-baseline gap-1">
-                                <span class="fw-semibold" data-balance="@Model.Balance.OffchainBalance.Opening" data-sensitive>
+                            <div class="mt-2 flex items-baseline gap-1">
+                                <span class="font-semibold" data-balance="@Model.Balance.OffchainBalance.Opening" data-sensitive>
                                     @Model.Balance.OffchainBalance.Opening
                                 </span>
-                                <span class="text-secondary text-nowrap">
+                                <span class="text-btcpay-body-text-muted whitespace-nowrap">
                                     @ViewLocalizer["<span class=\"currency\">{0}</span> opening channels", Model.CryptoCode]
                                 </span>
                             </div>
                         }
                         @if (Model.Balance.OffchainBalance.Local != null)
                         {
-                            <div class="mt-2 d-flex align-items-baseline gap-1">
-                                <span class="fw-semibold" data-balance="@Model.Balance.OffchainBalance.Local" data-sensitive>
+                            <div class="mt-2 flex items-baseline gap-1">
+                                <span class="font-semibold" data-balance="@Model.Balance.OffchainBalance.Local" data-sensitive>
                                     @Model.Balance.OffchainBalance.Local
                                 </span>
-                                <span class="text-secondary text-nowrap">
+                                <span class="text-btcpay-body-text-muted whitespace-nowrap">
                                     @ViewLocalizer["<span class=\"currency\">{0}</span> local balance", Model.CryptoCode]
                                 </span>
                             </div>
                         }
                         @if (Model.Balance.OffchainBalance.Remote != null)
                         {
-                            <div class="mt-2 d-flex align-items-baseline gap-1">
-                                <span class="fw-semibold" data-balance="@Model.Balance.OffchainBalance.Remote" data-sensitive>
+                            <div class="mt-2 flex items-baseline gap-1">
+                                <span class="font-semibold" data-balance="@Model.Balance.OffchainBalance.Remote" data-sensitive>
                                     @Model.Balance.OffchainBalance.Remote
                                 </span>
-                                <span class="text-secondary text-nowrap">
+                                <span class="text-btcpay-body-text-muted whitespace-nowrap">
                                     @ViewLocalizer["<span class=\"currency\">{0}</span> remote balance", Model.CryptoCode]
                                 </span>
                             </div>
                         }
                         @if (Model.Balance.OffchainBalance.Closing != null)
                         {
-                            <div class="mt-2 d-flex align-items-baseline gap-1">
-                                <span class="fw-semibold" data-balance="@Model.Balance.OffchainBalance.Closing" data-sensitive>
+                            <div class="mt-2 flex items-baseline gap-1">
+                                <span class="font-semibold" data-balance="@Model.Balance.OffchainBalance.Closing" data-sensitive>
                                     @Model.Balance.OffchainBalance.Closing
                                 </span>
-                                <span class="text-secondary text-nowrap">
+                                <span class="text-btcpay-body-text-muted whitespace-nowrap">
                                     @ViewLocalizer["<span class=\"currency\">{0}</span> closing channels", Model.CryptoCode]
                                 </span>
                             </div>
@@ -85,42 +85,42 @@
             @if (Model.Balance.OnchainBalance != null)
             {
                 <div class="balance">
-                    <div class="d-flex align-items-baseline gap-1">
-                        <h3 class="d-inline-block me-1" data-balance="@Model.TotalOnchain" data-sensitive>@Model.TotalOnchain</h3>
-                        <span class="text-secondary fw-semibold text-nowrap">
+                    <div class="flex items-baseline gap-1">
+                        <h3 class="inline-block mr-1" data-balance="@Model.TotalOnchain" data-sensitive>@Model.TotalOnchain</h3>
+                        <span class="text-btcpay-body-text-muted font-semibold whitespace-nowrap">
                             @ViewLocalizer["<span class=\"currency\">{0}</span> on-chain", Model.CryptoCode]
                         </span>
                     </div>
                     <div class="balance-details collapse" id="balanceDetailsOnchain">
                         @if (Model.Balance.OnchainBalance.Confirmed != null)
                         {
-                            <div class="mt-2 d-flex align-items-baseline gap-1">
-                                <span class="fw-semibold" data-balance="@Model.Balance.OnchainBalance.Confirmed" data-sensitive>
+                            <div class="mt-2 flex items-baseline gap-1">
+                                <span class="font-semibold" data-balance="@Model.Balance.OnchainBalance.Confirmed" data-sensitive>
                                     @Model.Balance.OnchainBalance.Confirmed
                                 </span>
-                                <span class="text-secondary text-nowrap">
+                                <span class="text-btcpay-body-text-muted whitespace-nowrap">
                                     @ViewLocalizer["<span class=\"currency\">{0}</span> confirmed", Model.CryptoCode]
                                 </span>
                             </div>
                         }
                         @if (Model.Balance.OnchainBalance.Unconfirmed != null)
                         {
-                            <div class="mt-2 d-flex align-items-baseline gap-1">
-                                <span class="fw-semibold" data-balance="@Model.Balance.OnchainBalance.Unconfirmed" data-sensitive>
+                            <div class="mt-2 flex items-baseline gap-1">
+                                <span class="font-semibold" data-balance="@Model.Balance.OnchainBalance.Unconfirmed" data-sensitive>
                                     @Model.Balance.OnchainBalance.Unconfirmed
                                 </span>
-                                <span class="text-secondary text-nowrap">
+                                <span class="text-btcpay-body-text-muted whitespace-nowrap">
                                     @ViewLocalizer["<span class=\"currency\">{0}</span> unconfirmed", Model.CryptoCode]
                                 </span>
                             </div>
                         }
                         @if (Model.Balance.OnchainBalance.Reserved != null)
                         {
-                            <div class="mt-2 d-flex align-items-baseline gap-1">
-                                <span class="fw-semibold" data-balance="@Model.Balance.OnchainBalance.Reserved" data-sensitive>
+                            <div class="mt-2 flex items-baseline gap-1">
+                                <span class="font-semibold" data-balance="@Model.Balance.OnchainBalance.Reserved" data-sensitive>
                                     @Model.Balance.OnchainBalance.Reserved
                                 </span>
-                                <span class="text-secondary text-nowrap">
+                                <span class="text-btcpay-body-text-muted whitespace-nowrap">
                                     @ViewLocalizer["<span class=\"currency\">{0}</span> reserved", Model.CryptoCode]
                                 </span>
                             </div>
@@ -129,12 +129,12 @@
                 </div>
             }
         </div>
-        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 @(Model.Series != null ? "my-3" : "mt-3")">
+        <div class="flex flex-wrap items-center justify-between gap-4 @(Model.Series != null ? "my-4" : "mt-4")">
             @if (Model.Balance.OffchainBalance != null && Model.Balance.OnchainBalance != null)
             {
-                <button class="d-inline-flex align-items-center btn btn-link text-primary fw-semibold p-0 ms-n1" type="button" data-bs-toggle="collapse" data-bs-target=".balance-details" aria-expanded="false" aria-controls="balanceDetailsOffchain balanceDetailsOnchain">
+                <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0 -ml-1" type="button" data-bs-toggle="collapse" data-bs-target=".balance-details" aria-expanded="false" aria-controls="balanceDetailsOffchain balanceDetailsOnchain">
                     <vc:icon symbol="caret-down" />
-                    <span class="ms-1" text-translate="true">Details</span>
+                    <span class="ml-1" text-translate="true">Details</span>
                 </button>
             }
             @if (Model.Series != null)
@@ -156,9 +156,9 @@
     }
     else
     {
-        <div class="loading d-flex justify-content-center p-3">
+        <div class="loading flex justify-center p-4">
             <div class="spinner-border text-light" role="status">
-                <span class="visually-hidden" text-translate="true">Loading...</span>
+                <span class="sr-only" text-translate="true">Loading...</span>
             </div>
         </div>
         <script src="~/Components/StoreLightningBalance/Default.cshtml.js" asp-append-version="true"></script>

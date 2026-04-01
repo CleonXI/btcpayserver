@@ -35,7 +35,7 @@
         {
             <h2>@ViewData["Title"]</h2>
         }
-		<button id="page-primary" type="submit" class="btn btn-primary mt-3" title="@StringLocalizer["Approve this pairing demand"]" text-translate="true">Approve</button>
+		<button id="page-primary" type="submit" class="btn btn-primary mt-4" title="@StringLocalizer["Approve this pairing demand"]" text-translate="true">Approve</button>
     </div>
     <partial name="_StatusMessage" />
     <div class="row">
@@ -55,7 +55,7 @@
                 <div class="form-group">
                     <label asp-for="StoreId" class="form-label" text-translate="true">Pair To Store</label>
                     <select asp-for="StoreId" asp-items="@(new SelectList(Model.Stores, "Id", "Name"))" class="form-select"></select>
-                    <span asp-validation-for="StoreId" class="text-danger"></span>
+                    <span asp-validation-for="StoreId" class="text-btcpay-danger"></span>
                 </div>
             }
             else

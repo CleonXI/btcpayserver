@@ -12,10 +12,10 @@
 
 <header class="text-center">
     <h1>@ViewData["Title"]</h1>
-    <p class="lead text-secondary mt-3" text-translate="true">Manually enter your 12 or 24 word recovery seed.</p>
+    <p class="lead text-btcpay-body-text-muted mt-4" text-translate="true">Manually enter your 12 or 24 word recovery seed.</p>
 </header>
 
-<div class="my-5">
+<div class="my-12">
     @if (Model.CanUseHotWallet)
     {
 		Model.SetViewData(ViewData);

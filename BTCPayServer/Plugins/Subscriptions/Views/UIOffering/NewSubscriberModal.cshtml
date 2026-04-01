@@ -18,8 +18,8 @@
                 </div>
 
                 <div class="modal-body pt-0">
-                    <div class="d-flex justify-content-between">
-                        <div class="form-group flex-fill me-4">
+                    <div class="flex justify-between">
+                        <div class="form-group flex-1 me-6">
                             <label for="newSubscriber-prefilledEmail" class="form-label" text-translate="true">Email</label>
                             <input id="newSubscriber-prefilledEmail"
                                    name="prefilledEmail"
@@ -56,12 +56,12 @@
                     </div>
 
                     <!-- Trial checkbox only appears when plan supports trials -->
-                    <div class="form-group d-flex align-items-center" v-if="showTrial">
+                    <div class="form-group flex items-center" v-if="showTrial">
                         <input id="newSubscriber-isTrial"
                                name="isTrial"
                                value="true"
                                type="checkbox"
-                               class="btcpay-toggle me-3"
+                               class="btcpay-toggle me-4"
                                v-model="isTrial">
                         <label class="form-check-label" for="newSubscriber-isTrial" text-translate="true">Enable trial</label>
                     </div>

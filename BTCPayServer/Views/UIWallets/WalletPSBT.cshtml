@@ -60,10 +60,10 @@
 
 <header class="text-center">
     <h1>@ViewData["Title"]</h1>
-    <p class="lead text-secondary mt-3 mx-md-5" text-translate="true">You can decode a PSBT by either pasting its content, uploading the file or scanning the wallet QR code.</p>
+    <p class="lead text-btcpay-body-text-muted mt-4 mx-md-5" text-translate="true">You can decode a PSBT by either pasting its content, uploading the file or scanning the wallet QR code.</p>
 </header>
 
-<div class="my-5">
+<div class="my-12">
     @if (Model.Errors != null && Model.Errors.Count != 0)
     {
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -84,13 +84,13 @@
         <div class="form-group">
             <label asp-for="PSBT" class="form-label"></label>
             <textarea class="form-control" rows="5" asp-for="PSBT"></textarea>
-            <span asp-validation-for="PSBT" class="text-danger"></span>
+            <span asp-validation-for="PSBT" class="text-btcpay-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="UploadedPSBTFile" class="form-label"></label>
             <input asp-for="UploadedPSBTFile" type="file" class="form-control">
         </div>
-        <div class="d-flex">
+        <div class="flex">
             @if (this.Model.SigningContext.PendingTransactionId is not null)
             {
                 <button type="submit" name="command" value="collect" class="btn btn-primary mt-2" id="Collect" text-translate="true">Collect signatures</button>

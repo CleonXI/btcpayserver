@@ -388,7 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const $badge = $button.closest('[data-invoice-state-badge]')
         const { invoiceId, newState } = $button.dataset
 
-        $badge.classList.add('pe-none'); // disable further interaction
+        $badge.classList.add('pointer-events-none'); // disable further interaction
         const response = await fetch(`${baseUrl}/invoices/${invoiceId}/changestate/${newState}`, { method: 'POST' })
         if (response.ok) {
             const { statusString } = await response.json()
@@ -400,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
             $badge.replaceWith(newBadge);
             newBadge.focus();
         } else {
-            $badge.classList.remove('pe-none');
+            $badge.classList.remove('pointer-events-none');
             showToast("Invoice state update failed", { type: 'error' });
         }
     })
@@ -579,7 +579,7 @@ if (window.Blazor) {
                 $state.classList.add(content.isConnected ? 'btcpay-status--enabled' : 'btcpay-status--disabled');
                 $title.textContent = content.titleContent;
                 $body.innerHTML = content.innerHTML;
-                $body.classList.toggle('d-none', content.isConnected);
+                $body.classList.toggle('hidden', content.isConnected);
                 if (!isUnloading) {
                     const toast = new bootstrap.Toast($status, { autohide: false });
                     if (content.isConnected) {

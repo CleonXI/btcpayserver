@@ -15,7 +15,7 @@
 <form method="post" autocomplete="off">
     <div class="sticky-header">
         <h2>@ViewData.GetTitle()</h2>
-        <div class="d-flex justify-content-end">
+        <div class="flex justify-end">
             <button cheat-mode="true" id="mailpit" type="submit" class="btn btn-info" name="command" value="mailpit">Use mailpit</button>
             @if (Model.StoreId is null)
             {
@@ -46,12 +46,12 @@
             }
             @if (Model.StoreId is null)
             {
-                <div class="form-group mb-4">
-                    <div class="d-flex align-items-center">
-                        <input asp-for="EnableStoresToUseServerEmailSettings" type="checkbox" class="btcpay-toggle me-3" />
+                <div class="form-group mb-6">
+                    <div class="flex items-center">
+                        <input asp-for="EnableStoresToUseServerEmailSettings" type="checkbox" class="btcpay-toggle me-4" />
                         <div>
                             <label asp-for="EnableStoresToUseServerEmailSettings" class="form-check-label"></label>
-                            <div class="text-muted">
+                            <div class="text-btcpay-body-text-muted">
                                 <span text-translate="true">This can be overridden at the Store level.</span>
                                 <a href="https://docs.btcpayserver.org/Notifications/#server-emails" target="_blank" rel="noreferrer noopener">
                                     <vc:icon symbol="info" />
@@ -65,8 +65,8 @@
             {
                 @if (Model.IsFallbackSetup)
                 {
-                    <label class="d-flex align-items-center mb-4">
-                        <input type="checkbox" asp-for="IsCustomSMTP" class="btcpay-toggle me-3" data-bs-toggle="collapse" data-bs-target="#SmtpSettings"
+                    <label class="flex items-center mb-6">
+                        <input type="checkbox" asp-for="IsCustomSMTP" class="btcpay-toggle me-4" data-bs-toggle="collapse" data-bs-target="#SmtpSettings"
                                aria-expanded="@Model.IsCustomSMTP" aria-controls="SmtpSettings" />
                         <div>
                             <span text-translate="true">Use custom SMTP settings for this store</span>
@@ -82,7 +82,7 @@
 
             <div class="collapse @(Model.IsCustomSMTP || Model.StoreId is null ? "show" : "")" id="SmtpSettings">
                 <div class="form-group">
-                    <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                    <div class="flex flex-wrap gap-2 items-center justify-between">
                         <label asp-for="Settings.Server" class="form-label" text-translate="true">SMTP Server</label>
                         <div class="dropdown only-for-js mt-n2" id="quick-fill">
                             <button class="btn btn-link p-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -99,30 +99,30 @@
                         </div>
                     </div>
                     <input asp-for="Settings.Server" data-fill="server" class="form-control" />
-                    <span asp-validation-for="Settings.Server" class="text-danger"></span>
+                    <span asp-validation-for="Settings.Server" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Settings.Port" class="form-label" text-translate="true">Port</label>
                     <input asp-for="Settings.Port" data-fill="port" class="form-control" />
-                    <span asp-validation-for="Settings.Port" class="text-danger"></span>
+                    <span asp-validation-for="Settings.Port" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Settings.From" class="form-label" text-translate="true">Sender's Email Address</label>
                     <input asp-for="Settings.From" class="form-control" placeholder="@StringLocalizer["Firstname Lastname <email@example.com>"]" />
-                    <span asp-validation-for="Settings.From" class="text-danger"></span>
+                    <span asp-validation-for="Settings.From" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Settings.Login" class="form-label" text-translate="true">Login</label>
                     <input asp-for="Settings.Login" class="form-control" />
                     <div class="form-text" text-translate="true">For many email providers (like Gmail) your login is your email address.</div>
-                    <span asp-validation-for="Settings.Login" class="text-danger"></span>
+                    <span asp-validation-for="Settings.Login" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-group" permission="@Model.ModifyPermission">
                     <label asp-for="Settings.Password" class="form-label" text-translate="true">Password</label>
                     @if (!Model.PasswordSet)
                     {
                         <input asp-for="Settings.Password" type="password" value="@Model.Settings.Password" class="form-control" />
-                        <span asp-validation-for="Settings.Password" class="text-danger"></span>
+                        <span asp-validation-for="Settings.Password" class="text-btcpay-danger"></span>
                     }
                     else
                     {
@@ -134,16 +134,16 @@
                     }
                 </div>
                 <input asp-for="PasswordSet" type="hidden" />
-                <div class="my-4">
-                    <button class="d-inline-flex align-items-center btn btn-link text-primary fw-semibold p-0" type="button" id="AdvancedSettingsButton"
+                <div class="my-6">
+                    <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="AdvancedSettingsButton"
                             data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
                         <vc:icon symbol="caret-down" />
                         <span class="ms-1" text-translate="true">Advanced settings</span>
                     </button>
                     <div id="AdvancedSettings" class="collapse">
-                        <div class="pt-3 pb-1">
-                            <div class="d-flex">
-                                <input asp-for="Settings.EnabledCertificateCheck" type="checkbox" class="btcpay-toggle me-3" />
+                        <div class="pt-4 pb-1">
+                            <div class="flex">
+                                <input asp-for="Settings.EnabledCertificateCheck" type="checkbox" class="btcpay-toggle me-4" />
                                 <label asp-for="Settings.EnabledCertificateCheck" class="form-check-label" text-translate="true">TLS certificate security
                                     checks</label>
                             </div>
@@ -153,13 +153,13 @@
             </div>
         </div>
     </div>
-    <h3 class="my-3" text-translate="true">Testing</h3>
+    <h3 class="my-4" text-translate="true">Testing</h3>
     <div class="row">
         <div class="col-xl-10 content-constrain-xxl">
             <div class="form-group">
                 <label asp-for="TestEmail" class="form-label" text-translate="true">To test your settings, enter an email address</label>
                 <input asp-for="TestEmail" placeholder="@StringLocalizer["Firstname Lastname <email@example.com>"]" class="form-control" />
-                <span asp-validation-for="TestEmail" class="text-danger"></span>
+                <span asp-validation-for="TestEmail" class="text-btcpay-danger"></span>
             </div>
             <button type="submit" class="btn btn-secondary mt-2" name="command" value="Test" id="Test" text-translate="true">Send Test Email</button>
         </div>

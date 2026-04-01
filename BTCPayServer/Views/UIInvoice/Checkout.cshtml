@@ -33,7 +33,7 @@
         <link rel="preload" href="@Model.ErrorSoundUrl" as="audio" />
     }
 </head>
-<body class="min-vh-100">
+<body class="min-h-screen">
     <div id="Checkout" class="public-page-wrap" v-cloak>
 		@if (Model.ShowStoreHeader)
 		{
@@ -46,8 +46,8 @@
                 </button>
             </nav>
             <section id="payment" v-if="isActive">
-                <div v-if="srvModel.itemDesc && srvModel.itemDesc !== srvModel.storeName" v-text="srvModel.itemDesc" class="fw-semibold text-center text-break text-muted mb-3"></div>
-                <div class="d-flex justify-content-center mt-1 text-center">
+                <div v-if="srvModel.itemDesc && srvModel.itemDesc !== srvModel.storeName" v-text="srvModel.itemDesc" class="font-semibold text-center text-break text-btcpay-body-text-muted mb-4"></div>
+                <div class="flex justify-center mt-1 text-center">
                     @if (Model.IsUnsetTopUp)
                     {
                         <h2 id="AmountDue" v-t="'any_amount'"></h2>
@@ -57,10 +57,10 @@
                         <h2 id="AmountDue" class="clipboard-button clipboard-button-hover" v-text="`${srvModel.due} ${srvModel.paymentMethodCurrency}`" :data-clipboard="asNumber(srvModel.due)" data-clipboard-hover :data-amount-due="srvModel.due">@Model.Due @Model.PaymentMethodCurrency</h2>
                     }
                 </div>
-                <div id="PaymentInfo" class="info mt-3 mb-2" v-collapsible="showInfo">
+                <div id="PaymentInfo" class="info mt-4 mb-2" v-collapsible="showInfo">
                     <div>
                         <div class="timer" v-if="showTimer">
-                            <span class="spinner-border spinner-border-sm" role="status"><span class="visually-hidden"></span></span>
+                            <span class="spinner-border spinner-border-sm" role="status"><span class="sr-only"></span></span>
                             <span v-t="'expiry_info'"></span> <span class="expiryTime">{{timeText}}</span>
                         </div>
                         <div class="payment-due" v-if="showPaymentDueInfo">
@@ -70,8 +70,8 @@
                         <div v-if="showPaymentDueInfo" v-html="replaceNewlines($t('still_due', { amount: `${srvModel.due} ${srvModel.paymentMethodCurrency}` }))"></div>
                     </div>
                 </div>
-                <button id="DetailsToggle" class="d-flex align-items-center gap-2 btn btn-link payment-details-button mb-2" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
-                    <span class="fw-semibold" v-t="'view_details'"></span>
+                <button id="DetailsToggle" class="flex items-center gap-2 btn btn-link payment-details-button mb-2" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
+                    <span class="font-semibold" v-t="'view_details'"></span>
                     <vc:icon symbol="caret-down" />
                 </button>
                 <div id="PaymentDetails" class="payment-details" v-collapsible="displayPaymentDetails">
@@ -84,9 +84,9 @@
                         :show-recommended-fee="showRecommendedFee"
                         class="pb-4" />
                 </div>
-                <div class="mt-3 mb-2 payment-methods-wrapper">
-                    <h6 class="text-center mb-3" v-t="'pay_with'"></h6>
-                    <div class="btcpay-pills d-flex flex-wrap align-items-center justify-content-center gap-2 pb-2">
+                <div class="mt-4 mb-2 payment-methods-wrapper">
+                    <h6 class="text-center mb-4" v-t="'pay_with'"></h6>
+                    <div class="btcpay-pills flex flex-wrap items-center justify-center gap-2 pb-2">
                         <a v-for="crypto in displayedPaymentMethods"
                            asp-action="Checkout" asp-route-invoiceId="@Model.InvoiceId"
                            class="btcpay-pill m-0 payment-method"
@@ -115,7 +115,7 @@
                             <div id="confetti" v-if="srvModel.celebratePayment" v-on:click="celebratePayment(5000)"></div>
                             <vc:icon symbol="checkout-sent" />
                         </span>
-                        <h4 v-t="'payment_received'" class="mb-4"></h4>
+                        <h4 v-t="'payment_received'" class="mb-6"></h4>
                         <p class="text-center" v-t="'payment_received_body'"></p>
 						<p class="text-center" v-if="srvModel.receivedConfirmations !== null && srvModel.requiredConfirmations" v-t="{ path: 'payment_received_confirmations', args: { cryptoCode: realPaymentMethodCurrency, receivedConfirmations: srvModel.receivedConfirmations, requiredConfirmations: srvModel.requiredConfirmations } }"></p>
                         <div id="PaymentDetails" class="payment-details">
@@ -138,14 +138,14 @@
                                 :show-recommended-fee="showRecommendedFee"
                                 v-collapsible="displayPaymentDetails" />
                         </div>
-                        <button class="d-flex align-items-center gap-2 btn btn-link payment-details-button" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
-                            <span class="fw-semibold" v-t="'view_details'"></span>
+                        <button class="flex items-center gap-2 btn btn-link payment-details-button" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
+                            <span class="font-semibold" v-t="'view_details'"></span>
                             <vc:icon symbol="caret-down" />
                         </button>
                     </div>
-                    <div class="buttons mt-3" v-if="storeLink || isModal">
-                        <a v-if="storeLink" class="btn btn-secondary rounded-pill w-100" :href="storeLink" :target="isModal ? '_top' : null" v-html="$t('return_to_store', { storeName: srvModel.storeName })" id="StoreLink"></a>
-                        <button v-else-if="isModal" class="btn btn-secondary rounded-pill w-100" v-on:click="close" v-t="'Close'"></button>
+                    <div class="buttons mt-4" v-if="storeLink || isModal">
+                        <a v-if="storeLink" class="btn btn-secondary rounded-full w-full" :href="storeLink" :target="isModal ? '_top' : null" v-html="$t('return_to_store', { storeName: srvModel.storeName })" id="StoreLink"></a>
+                        <button v-else-if="isModal" class="btn btn-secondary rounded-full w-full" v-on:click="close" v-t="'Close'"></button>
                     </div>
                 </div>
                 <div v-if="isSettled" id="settled" key="settled">
@@ -173,13 +173,13 @@
                                 :paid="paid"
                                 :due="due"
                                 :show-recommended-fee="showRecommendedFee"
-                                class="mb-5" />
+                                class="mb-12" />
                         </div>
                     </div>
                     <div class="buttons" v-if="srvModel.receiptLink || storeLink || isModal">
-                        <a v-if="srvModel.receiptLink" class="btn btn-primary rounded-pill w-100" :href="srvModel.receiptLink" :target="isModal ? '_top' : null" v-t="'view_receipt'" id="ReceiptLink"></a>
-                        <a v-if="storeLink" class="btn btn-secondary rounded-pill w-100" :href="storeLink" :target="isModal ? '_top' : null" v-html="$t('return_to_store', { storeName: srvModel.storeName })" id="StoreLink"></a>
-                        <button v-else-if="isModal" class="btn btn-secondary rounded-pill w-100" v-on:click="close" v-t="'Close'"></button>
+                        <a v-if="srvModel.receiptLink" class="btn btn-primary rounded-full w-full" :href="srvModel.receiptLink" :target="isModal ? '_top' : null" v-t="'view_receipt'" id="ReceiptLink"></a>
+                        <a v-if="storeLink" class="btn btn-secondary rounded-full w-full" :href="storeLink" :target="isModal ? '_top' : null" v-html="$t('return_to_store', { storeName: srvModel.storeName })" id="StoreLink"></a>
+                        <button v-else-if="isModal" class="btn btn-secondary rounded-full w-full" v-on:click="close" v-t="'Close'"></button>
                     </div>
                 </div>
                 <div v-if="isInvalid" id="unpaid" key="unpaid">
@@ -208,22 +208,22 @@
                                 :show-recommended-fee="showRecommendedFee"
                                 v-collapsible="displayPaymentDetails" />
                         </div>
-                        <button class="d-flex align-items-center gap-2 btn btn-link payment-details-button" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
-                            <span class="fw-semibold" v-t="'view_details'"></span>
+                        <button class="flex items-center gap-2 btn btn-link payment-details-button" type="button" :aria-expanded="displayPaymentDetails ? 'true' : 'false'" v-on:click="displayPaymentDetails = !displayPaymentDetails">
+                            <span class="font-semibold" v-t="'view_details'"></span>
                             <vc:icon symbol="caret-down" />
                         </button>
-                        <p class="text-center mt-3" v-html="replaceNewlines($t(isPaidPartial ? 'invoice_paidpartial_body' : 'invoice_expired_body', { storeName: srvModel.storeName, minutes: srvModel.maxTimeMinutes }))"></p>
+                        <p class="text-center mt-4" v-html="replaceNewlines($t(isPaidPartial ? 'invoice_paidpartial_body' : 'invoice_expired_body', { storeName: srvModel.storeName, minutes: srvModel.maxTimeMinutes }))"></p>
                     </div>
                     <div class="buttons" v-if="(isPaidPartial && srvModel.storeSupportUrl) || storeLink || isModal">
-                        <a v-if="storeLink" class="btn btn-primary rounded-pill w-100" :href="storeLink" :target="isModal ? '_top' : null" v-html="$t('return_to_store', { storeName: srvModel.storeName })" id="StoreLink"></a>
-                        <button v-else-if="isModal" class="btn btn-primary rounded-pill w-100" v-on:click="close" v-t="'Close'"></button>
+                        <a v-if="storeLink" class="btn btn-primary rounded-full w-full" :href="storeLink" :target="isModal ? '_top' : null" v-html="$t('return_to_store', { storeName: srvModel.storeName })" id="StoreLink"></a>
+                        <button v-else-if="isModal" class="btn btn-primary rounded-full w-full" v-on:click="close" v-t="'Close'"></button>
                     </div>
                 </div>
             </section>
         </main>
         <main v-if="isActive && srvModel.checkoutText" class="tile checkout-text">
             <section>
-                <div class="text-muted text-center" v-text="srvModel.checkoutText"></div>
+                <div class="text-btcpay-body-text-muted text-center" v-text="srvModel.checkoutText"></div>
             </section>
         </main>
         @if (Env.CheatMode)
@@ -231,7 +231,7 @@
             <checkout-cheating invoice-id="@Model.InvoiceId" :due="due" :is-settled="isSettled" :is-processing="isProcessing" :payment-method-id="pmId" :crypto-code="srvModel.paymentMethodCurrency"></checkout-cheating>
         }
         <footer class="store-footer">
-            <a v-if="srvModel.storeSupportUrl" class="mb-4" :href="srvModel.storeSupportUrl" v-t="'contact_us'" id="ContactLink"></a>
+            <a v-if="srvModel.storeSupportUrl" class="mb-6" :href="srvModel.storeSupportUrl" v-t="'contact_us'" id="ContactLink"></a>
             <a class="store-powered-by" href="https://btcpayserver.org" target="_blank" rel="noreferrer noopener">
                 {{$t("powered_by")}} <partial name="_StoreFooterLogo" />
             </a>
@@ -239,7 +239,7 @@
         </footer>
     </div>
     <noscript>
-        <div class="p-5 text-center">
+        <div class="p-12 text-center">
             <h2>Javascript is currently disabled in your browser.</h2>
             <h5>Please enable Javascript and refresh this page for the best experience.</h5>
             <p>

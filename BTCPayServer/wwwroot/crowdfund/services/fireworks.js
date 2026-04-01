@@ -169,7 +169,7 @@ const resizeCanvas = function() {
 
 window.fireworks = function(count = 0) {
     const elem = document.getElementById("fireworks");
-    elem.classList.remove("d-none");
+    elem.classList.remove("hidden");
     const fauxClick = new Event("mousedown");
     fauxClick.pageX = anime.random(0, cW);
     fauxClick.pageY = anime.random(0, cH);
@@ -198,7 +198,7 @@ window.fireworks = function(count = 0) {
        if (count < 5) {
            fireworks(count + 1);
        } else {
-           elem.classList.add("d-none");
+           elem.classList.add("hidden");
        }
     }, 750);
 };

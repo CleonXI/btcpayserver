@@ -27,10 +27,10 @@
     </style>
 }
 
-<h1 class="text-center mb-5">@ViewData["Title"]</h1>
+<h1 class="text-center mb-12">@ViewData["Title"]</h1>
 
 <form method="post" class="mt-n2 text-center">
-    <div id="LightningNodeTypeTablist" class="nav btcpay-pills align-items-center justify-content-center mb-3" role="tablist">
+    <div id="LightningNodeTypeTablist" class="nav btcpay-pills items-center justify-center mb-4" role="tablist">
         <input asp-for="LightningNodeType" value="@LightningNodeType.Internal" type="radio" id="LightningNodeType-@LightningNodeType.Internal"
                data-bs-toggle="pill" data-bs-target="#InternalSetup" role="tab" aria-controls="InternalSetup"
                aria-selected="@(Model.LightningNodeType == LightningNodeType.Internal ? "true" : "false")"
@@ -47,35 +47,35 @@
     </div>
 
     <div id="LightningNodeTypeTabs" class="tab-content text-start">
-        <div id="InternalSetup" class="pt-3 tab-pane fade @(Model.LightningNodeType == LightningNodeType.Internal ? "show active" : "")" role="tabpanel"
+        <div id="InternalSetup" class="pt-4 tab-pane fade @(Model.LightningNodeType == LightningNodeType.Internal ? "show active" : "")" role="tabpanel"
              aria-labelledby="LightningNodeType-@LightningNodeType.Internal">
             @if (Model.CanUseInternalNode)
             {
-                <p class="mb-4" text-translate="true">Using the BTCPay Server internal node for this store requires no further configuration. Click the save
+                <p class="mb-6" text-translate="true">Using the BTCPay Server internal node for this store requires no further configuration. Click the save
                     button below to start accepting Bitcoin through the Lightning Network.</p>
             }
             else
             {
-                <p class="mb-4" text-translate="true">Your instance administrator has disabled the use of the Internal node for non-admin users.</p>
+                <p class="mb-6" text-translate="true">Your instance administrator has disabled the use of the Internal node for non-admin users.</p>
             }
         </div>
-        <div id="CustomSetup" class="pt-3 tab-pane fade @(Model.LightningNodeType == LightningNodeType.Custom ? "show active" : "")" role="tabpanel"
+        <div id="CustomSetup" class="pt-4 tab-pane fade @(Model.LightningNodeType == LightningNodeType.Custom ? "show active" : "")" role="tabpanel"
              aria-labelledby="LightningNodeType-@LightningNodeType.Custom">
             <div class="form-group">
                 <label asp-for="ConnectionString" class="form-label" text-translate="true">Connection configuration for your custom Lightning node:</label>
-                <div class="d-sm-flex">
+                <div class="sm:flex">
                     <textarea asp-for="ConnectionString" class="form-control mb-2 me-2" placeholder="type=…;server=…;"
                               rows="4">@(Model.LightningNodeType == LightningNodeType.Internal ? "" : Model.ConnectionString)</textarea>
                 </div>
-                <div class="d-sm-flex">
-                    <button id="test" name="command" type="submit" value="test" class="btn btn-secondary text-nowrap mb-2" text-translate="true">
+                <div class="sm:flex">
+                    <button id="test" name="command" type="submit" value="test" class="btn btn-secondary whitespace-nowrap mb-2" text-translate="true">
                         Test connection
                     </button>
                 </div>
-                <span asp-validation-for="ConnectionString" class="text-danger"></span>
+                <span asp-validation-for="ConnectionString" class="text-btcpay-danger"></span>
             </div>
             <vc:ui-extension-point location="ln-payment-method-setup-custom" model="@Model" />
-            <p class="mt-4 mb-2" text-translate="true">BTCPay Server currently supports:</p>
+            <p class="mt-6 mb-2" text-translate="true">BTCPay Server currently supports:</p>
             <div class="accordion" id="CustomNodeSupport">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="CustomNodeCLightningHeader">
@@ -129,7 +129,7 @@
                     <div id="CustomNodeEclairContent" class="accordion-collapse collapse" aria-labelledby="CustomNodeEclairHeader"
                          data-bs-parent="#CustomNodeSupport">
                         <div class="accordion-body">
-                            <ul class="pb-3">
+                            <ul class="pb-4">
                                 <li>
                                     <code><b>type=</b>eclair;<b>server=</b>https://eclair:8080/;<b>password=</b>eclairpassword...</code>
                                 </li>
@@ -157,7 +157,7 @@
                     <div id="CustomNodePhoenixdContent" class="accordion-collapse collapse" aria-labelledby="CustomNodePhoenixdHeader"
                          data-bs-parent="#CustomNodeSupport">
                         <div class="accordion-body">
-                            <ul class="pb-3">
+                            <ul class="pb-4">
                                 <li>
                                     <code><b>type=</b>phoenixd;<b>server=</b>http://phoenixd:9740/;<b>password=</b>phoenixdpassword...</code>
                                 </li>
@@ -197,12 +197,12 @@
                             </p>
                             <p class="mb-2" html-translate="true">The <code>macaroon</code> parameter expects the HEX value, it can be obtained using this
                                 command:</p>
-                            <pre class="mb-4">xxd -p -c 256 /root/.lnd/data/chain/bitcoin/mainnet/invoice.macaroon | tr -d '\n'</pre>
+                            <pre class="mb-6">xxd -p -c 256 /root/.lnd/data/chain/bitcoin/mainnet/invoice.macaroon | tr -d '\n'</pre>
                             <p class="mb-2" html-translate="true">
                                 You can omit <code>certthumbprint</code> if the certificate is trusted by your machine. The <code>certthumbprint</code> can be
                                 obtained using this command:
                             </p>
-                            <pre class="mb-4">openssl x509 -noout -fingerprint -sha256 -in /root/.lnd/tls.cert | sed -e 's/.*=//;s/://g'</pre>
+                            <pre class="mb-6">openssl x509 -noout -fingerprint -sha256 -in /root/.lnd/tls.cert | sed -e 's/.*=//;s/://g'</pre>
                             <p class="mb-0" html-translate="true">If your LND REST server is using HTTP or HTTPS with an untrusted certificate, you can set
                                 <code>allowinsecure=true</code> as a fallback.</p>
                         </div>
@@ -241,7 +241,7 @@
         <vc:ui-extension-point location="ln-payment-method-setup-tab" model="@Model" />
     </div>
 
-    <div class="text-start mt-4">
+    <div class="text-start mt-6">
         <button id="page-primary" name="command" type="submit" value="save" class="btn btn-primary me-2" text-translate="true">Save</button>
     </div>
 </form>

@@ -129,10 +129,10 @@
                     a.style.setProperty('--btcpay-dropdown-link-active-color', label.textColor);
                     labelText.textContent = label.text;
                     if (label.usageCount > 0) {
-                        labelCount.classList.remove('d-none');
+                        labelCount.classList.remove('hidden');
                         labelCount.textContent = label.usageCount;
                     } else {
-                        labelCount.classList.add('d-none');
+                        labelCount.classList.add('hidden');
                         labelCount.textContent = '';
                     }
                     fragment.appendChild(labelFilterItem);
@@ -154,7 +154,7 @@
         }
 
         if ($actions && $actions.offsetTop - window.innerHeight > 0) {
-            document.getElementById('GoToTop').classList.remove('d-none');
+            document.getElementById('GoToTop').classList.remove('hidden');
         }
 
         const count = @Safe.Json(Model.Count);
@@ -164,7 +164,7 @@
         let skip = @Safe.Json(Model.Skip) - count;
 
         async function loadMoreTransactions() {
-            $indicator.classList.remove('d-none');
+            $indicator.classList.remove('hidden');
 
             const skipNext = skip + count;
             const url = loadMoreUrl.replace(`skip=${skipInitial}`, `skip=${skipNext}`)
@@ -190,12 +190,12 @@
                     // replace table and dropdowns if initial response was empty
                     if (responseEmpty) {
                         $dropdowns.remove();
-                        $transactions.innerHTML = '<div class="text-secondary" data-loaded="true">There are no transactions yet.</div>';
+                        $transactions.innerHTML = '<div class="text-btcpay-body-text-muted" data-loaded="true">There are no transactions yet.</div>';
                     }
                 }
             }
 
-            $indicator.classList.add('d-none');
+            $indicator.classList.add('hidden');
             formatDateTimes(document.querySelector('#WalletTransactions .switch-time-format').dataset.mode);
             initLabelManagers();
         }
@@ -217,18 +217,18 @@
 </div>
 <partial name="_StatusMessage" />
 
-<div class="d-flex flex-wrap align-items-center justify-content-between gap-3" id="Dropdowns">
+<div class="flex flex-wrap items-center justify-between gap-4" id="Dropdowns">
     @if (Model.Labels.Any())
     {
         <div class="btn-group" id="Filter">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 @if (string.IsNullOrEmpty(labelFilter))
                 {
-                    <span class="text-secondary" text-translate="true">Filter by label</span>
+                    <span class="text-btcpay-body-text-muted" text-translate="true">Filter by label</span>
                 }
                 else
                 {
-                    <span class="text-secondary" text-translate="true">Label:</span>
+                    <span class="text-btcpay-body-text-muted" text-translate="true">Label:</span>
                     <span>@labelFilter</span>
                 }
             </button>
@@ -236,9 +236,9 @@
                 var visibleLabels = initialLabels;
             }
             <ul class="dropdown-menu mt-1 py-0" id="LabelDropdownMenu" style="min-width:280px">
-                <li class="px-2 pt-2 pb-2@(sortedLabels.Count() > maxVisibleLabels ? "" : " d-none")" id="LabelSearchContainer">
+                <li class="px-2 pt-2 pb-2@(sortedLabels.Count() > maxVisibleLabels ? "" : " hidden")" id="LabelSearchContainer">
                     <div class="input-group border rounded">
-                        <span class="input-group-text border-0 text-muted px-2" style="background:transparent">
+                        <span class="input-group-text border-0 text-btcpay-body-text-muted px-2" style="background:transparent">
                             <vc:icon symbol="actions-search" />
                         </span>
                         <input type="text" class="form-control border-0 shadow-none ps-0 bg-transparent" id="LabelSearch"
@@ -251,7 +251,7 @@
                     <li class="label-filter-item">
                         <a asp-route-labelFilter="@label.Text" class="dropdown-item transaction-label-text label-filter-link@(labelFilter == label.Text ? " active" : string.Empty)" style="--btcpay-dropdown-link-active-bg:@label.Color;--btcpay-dropdown-link-active-color:@label.TextColor;">
                             <span class="label-filter-text">@label.Text</span>
-                            <small class="label-filter-count@(label.UsageCount > 0 ? string.Empty : " d-none")">@label.UsageCount</small>
+                            <small class="label-filter-count@(label.UsageCount > 0 ? string.Empty : " hidden")">@label.UsageCount</small>
                         </a>
                     </li>
                 }
@@ -265,14 +265,14 @@
                 <li class="label-filter-item">
                     <a asp-route-labelFilter="LABEL_PLACEHOLDER" class="dropdown-item transaction-label-text label-filter-link">
                         <span class="label-filter-text"></span>
-                        <small class="label-filter-count d-none"></small>
+                        <small class="label-filter-count hidden"></small>
                     </a>
                 </li>
             </template>
         </div>
     }
 
-    <div class="dropdown d-inline-flex align-items-center gap-3 ms-auto" id="Export">
+    <div class="dropdown inline-flex items-center gap-4 ms-auto" id="Export">
         <a
             id="view-report"
             permission="@Policies.CanViewReports"
@@ -338,7 +338,7 @@
                 <input type="checkbox" class="form-check-input mass-action-select-all" />
             </th>
             <th class="min-w-date-col">
-                <div class="d-flex align-items-center gap-3">
+                <div class="flex items-center gap-4">
                         <span text-translate="true">Date</span>
                         <button type="button" class="btn btn-link p-0 switch-time-format only-for-js" title="@StringLocalizer["Switch date format"]">
                             <vc:icon symbol="time" />
@@ -347,11 +347,11 @@
             </th>
             <th text-translate="true" style="min-width:125px">Label</th>
             <th text-translate="true">Transaction</th>
-            <th text-translate="true" class="text-end text-nowrap">Amount</th>
-            <th text-translate="true" class="text-end text-nowrap">Transaction fee</th>
+            <th text-translate="true" class="text-end whitespace-nowrap">Amount</th>
+            <th text-translate="true" class="text-end whitespace-nowrap">Transaction fee</th>
             @foreach (var rate in Model.Rates)
             {
-                <th class="text-end text-nowrap"><span text-translate="true">Rate</span>&nbsp;<span>(@rate)</span></th>
+                <th class="text-end whitespace-nowrap"><span text-translate="true">Rate</span>&nbsp;<span>(@rate)</span></th>
             }
             <th></th>
         </tr>
@@ -362,12 +362,12 @@
                 <input type="checkbox" class="form-check-input mass-action-select-all" />
             </th>
             <th colspan="5">
-                <div class="d-flex flex-wrap align-items-center gap-3">
+                <div class="flex flex-wrap items-center gap-4">
                     <div>
                         <strong class="mass-action-selected-count">0</strong>
                             <span text-translate="true">selected</span>
                     </div>
-                    <form id="WalletActions" method="post" asp-action="WalletActions" asp-route-walletId="@walletId" permission="@Policies.CanModifyStoreSettings" class="d-inline-flex align-items-center gap-3">
+                    <form id="WalletActions" method="post" asp-action="WalletActions" asp-route-walletId="@walletId" permission="@Policies.CanModifyStoreSettings" class="inline-flex items-center gap-4">
                         <button id="BumpFee" name="command" type="submit" value="cpfp" class="btn btn-link">
                             <vc:icon symbol="actions-send" />
                             <span text-translate="true">Bump fee</span>
@@ -386,16 +386,16 @@
     <vc:pager view-model="Model" />
 </noscript>
 
-<div class="text-center only-for-js d-none" id="LoadingIndicator">
-    <div class="spinner-border spinner-border-sm text-secondary ms-2" role="status">
-        <span class="visually-hidden" text-translate="true">Loading...</span>
+<div class="text-center only-for-js hidden" id="LoadingIndicator">
+    <div class="spinner-border spinner-border-sm text-btcpay-body-text-muted ms-2" role="status">
+        <span class="sr-only" text-translate="true">Loading...</span>
     </div>
 </div>
-<div class="d-flex flex-wrap align-items-center justify-content-center gap-3 mb-5 only-for-js" id="ListActions">
-    <button type="button" class="btn btn-secondary d-none" id="GoToTop" text-translate="true">Go to top</button>
+<div class="flex flex-wrap items-center justify-center gap-4 mb-12 only-for-js" id="ListActions">
+    <button type="button" class="btn btn-secondary hidden" id="GoToTop" text-translate="true">Go to top</button>
 </div>
 
-<p class="mt-4 mb-0">
+<p class="mt-6 mb-0">
     @ViewLocalizer["If BTCPay Server shows you an invalid balance, {0}.<br />If some transactions appear in BTCPay Server, but are missing in another wallet, {1}.",
         Html.ActionLink(StringLocalizer["rescan your wallet"], "WalletRescan", "UIWallets", new { walletId = Context.GetRouteValue("walletId") }),
         new HtmlString($"<a href=\"https://docs.btcpayserver.org/FAQ/Wallet/#missing-payments-in-my-software-or-hardware-wallet\" target=\"_blank\" rel=\"noreferrer noopener\">{StringLocalizer["follow these instructions"]}</a>")]

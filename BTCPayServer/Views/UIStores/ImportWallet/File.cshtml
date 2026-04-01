@@ -12,14 +12,14 @@
 
 <header class="text-center">
     <h1>@ViewData["Title"]</h1>
-    <p class="lead text-secondary mt-3" text-translate="true">Upload the file exported from your wallet.</p>
+    <p class="lead text-btcpay-body-text-muted mt-4" text-translate="true">Upload the file exported from your wallet.</p>
 </header>
 
-<form method="post" enctype="multipart/form-data" class="my-5">
+<form method="post" enctype="multipart/form-data" class="my-12">
     <div class="form-group">
         <label asp-for="WalletFile" class="form-label"></label>
         <input asp-for="WalletFile" type="file" class="form-control" required>
-        <span asp-validation-for="WalletFile" class="text-danger"></span>
+        <span asp-validation-for="WalletFile" class="text-btcpay-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary" text-translate="true">Continue</button>
@@ -34,7 +34,7 @@
     </thead>
     <tbody>
     <tr>
-        <td class="text-nowrap">Cobo Vault</td>
+        <td class="whitespace-nowrap">Cobo Vault</td>
         <td>Settings ❯ Watch-Only Wallet ❯ BTCPay ❯ Export Wallet</td>
     </tr>
     <tr>
@@ -54,7 +54,7 @@
         <td>Search ❯ &quot;wallet folder&quot;</td>
     </tr>
      <tr>
-        <td class="text-nowrap">Specter Desktop</td>
+        <td class="whitespace-nowrap">Specter Desktop</td>
         <td>Wallet ❯ Settings ❯ Export ❯ Export To Wallet Software ❯ Save wallet file</td>
     </tr>
      <tr>

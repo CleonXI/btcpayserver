@@ -8,15 +8,15 @@
         .SetCategory(WellKnownCategories.ForLightning(Model.CryptoCode)));
 }
 
-<h2 class="mb-2 mb-lg-3">@ViewData["Title"]</h2>
+<h2 class="mb-2 lg:mb-4">@ViewData["Title"]</h2>
 <partial name="_StatusMessage" />
-<div class="mb-5">
-    <div class="mb-3">
-        <span class="me-3" id="NodeType">@Model.LightningNodeType Node</span>
+<div class="mb-12">
+    <div class="mb-4">
+        <span class="me-4" id="NodeType">@Model.LightningNodeType Node</span>
 
         @if (Model.LightningNodeType != LightningNodeType.Internal)
         {
-            <span class="me-3" id="CustomNodeInfo">
+            <span class="me-4" id="CustomNodeInfo">
                 @try
                 {
                     var client = LightningClientFactoryService.Create(Model.ConnectionString, NetworkProvider.GetNetwork<BTCPayNetwork>(Model.CryptoCode));
@@ -48,8 +48,8 @@
 
     @if (Model.Services != null && Model.Services.Any())
     {
-        <div permission="@Policies.CanModifyServerSettings" class="mt-5">
-            <h3 class="mb-3" text-translate="true">Services</h3>
+        <div permission="@Policies.CanModifyServerSettings" class="mt-12">
+            <h3 class="mb-4" text-translate="true">Services</h3>
             <div id="Services" class="services-list">
                 @foreach (var service in Model.Services)
                 {
@@ -58,7 +58,7 @@
                         <div class="service" id="@($"Service-{service.ServiceName}")">
                             <img src="@($"~/img/{service.Type.ToLower()}.png")" asp-append-version="true" alt="@service.DisplayName" loading="lazy" />
                             <h6>@service.DisplayName</h6>
-                            <small class="d-block mt-3 lh-sm fw-semibold text-danger">@service.Error</small>
+                            <small class="block mt-4 lh-sm font-semibold text-btcpay-danger">@service.Error</small>
                         </div>
                     }
                     else if (string.IsNullOrEmpty(service.Link))

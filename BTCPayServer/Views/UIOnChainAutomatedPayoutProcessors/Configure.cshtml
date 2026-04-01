@@ -28,17 +28,17 @@
             {
                 <div asp-validation-summary="All"></div>
             }
-            <div class="d-flex my-3">
-                <input asp-for="ProcessNewPayoutsInstantly" type="checkbox" class="btcpay-toggle me-3" />
+            <div class="flex my-4">
+                <input asp-for="ProcessNewPayoutsInstantly" type="checkbox" class="btcpay-toggle me-4" />
                 <label asp-for="ProcessNewPayoutsInstantly" class="form-check-label"></label>
-                <span asp-validation-for="ProcessNewPayoutsInstantly" class="text-danger"></span>
+                <span asp-validation-for="ProcessNewPayoutsInstantly" class="text-btcpay-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IntervalMinutes" class="form-label" data-required text-translate="true">Interval</label>
                 <div class="input-group">
                     <input asp-for="IntervalMinutes" class="form-control" inputmode="numeric" style="max-width:12ch;">
                     <span class="input-group-text" text-translate="true">minutes</span>
-                    <span asp-validation-for="IntervalMinutes" class="text-danger"></span>
+                    <span asp-validation-for="IntervalMinutes" class="text-btcpay-danger"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -46,7 +46,7 @@
                 <div class="input-group">
                     <input asp-for="FeeTargetBlock" class="form-control" min="1" inputmode="numeric" style="max-width:12ch;">
                     <span class="input-group-text" text-translate="true">blocks</span>
-                    <span asp-validation-for="FeeTargetBlock" class="text-danger"></span>
+                    <span asp-validation-for="FeeTargetBlock" class="text-btcpay-danger"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -54,7 +54,7 @@
                 <div class="input-group">
                     <input asp-for="Threshold" class="form-control" min="0" inputmode="numeric" style="max-width:12ch;">
                     <span class="input-group-text">@cryptoCode</span>
-                    <span asp-validation-for="FeeTargetBlock" class="text-danger"></span>
+                    <span asp-validation-for="FeeTargetBlock" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-text" text-translate="true">Only process payouts when this payout sum is reached.</div>
             </div>

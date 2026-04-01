@@ -2,7 +2,7 @@
 @functions {
     private void Title(string name, string status)
     {
-        <h5 class="d-flex align-items-center fw-semibold">
+        <h5 class="flex items-center font-semibold">
             <span class="me-2 btcpay-status btcpay-status--@status"></span>
             @name
         </h5>
@@ -70,7 +70,7 @@
         @if (!line.Status.IsFullySynched && line.Status.BitcoinStatus != null)
         {
             var percent = (int)(line.Status.BitcoinStatus.VerificationProgress * 100);
-            <div class="progress mb-3">
+            <div class="progress mb-4">
                 <div class="progress-bar" role="progressbar" aria-valuenow="@percent"
                      aria-valuemin="0" aria-valuemax="100" style="width:@(percent)%">
                     @percent %

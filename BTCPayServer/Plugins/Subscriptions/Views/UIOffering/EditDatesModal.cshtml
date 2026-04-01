@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div>
                         <span text-translate="true">Editing dates for</span>
-                        <span class="edit-dates-subscriber-name fw-semibold"></span>
+                        <span class="edit-dates-subscriber-name font-semibold"></span>
                     </div>
                 </div>
                 <div class="modal-body pt-0">
@@ -19,20 +19,20 @@
                     <input name="timezoneOffset" type="hidden" class="edit-dates-tz" />
                     <input name="expirationTimezoneOffset" type="hidden" class="edit-dates-expiry-tz" />
 
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label class="form-label" text-translate="true">Start Date</label>
                         <input type="date" name="startDate" class="form-control edit-dates-start" required />
                     </div>
 
-                    <div class="mb-3 edit-dates-expiration-group">
+                    <div class="mb-4 edit-dates-expiration-group">
                         <label class="form-label edit-dates-expiration-label"></label>
                         <input type="date" name="expirationDate" class="form-control edit-dates-expiration" />
-                        <div class="form-text text-muted" text-translate="true">
+                        <div class="form-text text-btcpay-body-text-muted" text-translate="true">
                             Grace period and reminder date are recalculated automatically from plan settings.
                             Leave blank for lifetime plans.
                         </div>
                     </div>
-                    <div class="text-danger edit-dates-error" style="display:none"></div>
+                    <div class="text-btcpay-danger edit-dates-error" style="display:none"></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" text-translate="true">Cancel</button>

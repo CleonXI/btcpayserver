@@ -2,11 +2,11 @@
 
 <template id="item-editor-upload">
     <div class="form-group">
-        <div class="d-flex align-items-center gap-2">
+        <div class="flex items-center gap-2">
             <input type="file" class="form-control" ref="input" v-on:change="fileChanged">
             <button class="btn btn-primary" type="button" v-on:click="upload" :disabled="disabled">Upload</button>
         </div>
-        <div v-if="error" class="form-text text-danger" v-text="error"></div>
+        <div v-if="error" class="form-text text-btcpay-danger" v-text="error"></div>
     </div>
 </template>
 
@@ -16,12 +16,12 @@
             <div class="form-group">
                 <label for="EditorTitle" class="form-label" data-required>Title</label>
                 <input id="EditorTitle" required class="form-control mb-2" v-model="editingItem && editingItem.title" v-on:change="onTitleChange" />
-                <div class="text-danger mb-3" v-if="errors.title">{{errors.title}}</div>
+                <div class="text-btcpay-danger mb-4" v-if="errors.title">{{errors.title}}</div>
             </div>
             <div class="form-group">
                 <label for="EditorId" class="form-label" data-required>ID</label>
                 <input id="EditorId" required class="form-control mb-2" v-model="editingItem && editingItem.id" v-on:change="onIdChange" />
-                <div class="text-danger mb-3" v-if="errors.id">{{errors.id}}</div>
+                <div class="text-btcpay-danger mb-4" v-if="errors.id">{{errors.id}}</div>
                 <div class="form-text" v-else text-translate="true">Leave blank to generate ID from title.</div>
             </div>
             <div class="form-group row">
@@ -48,7 +48,7 @@
                         <span class="input-group-text" id="currency-addon" v-pre>@Model.currency</span>
                     </div>
                 </div>
-                <div class="text-danger" v-if="errors.price">{{errors.price}}</div>
+                <div class="text-btcpay-danger" v-if="errors.price">{{errors.price}}</div>
             </div>
             <div class="form-group">
                 <label for="EditorTaxRate" class="form-label" text-translate="true">Tax rate</label>
@@ -85,8 +85,8 @@
                 <label for="BuyButtonText" class="form-label" text-translate="true">Buy Button Text</label>
                 <input id="BuyButtonText" type="text" class="form-control mb-2" v-model="editingItem && editingItem.buyButtonText" />
             </div>
-            <div class="form-group d-flex align-items-center">
-                <input type="checkbox" id="Disabled" class="btcpay-toggle me-3" :checked="editingItem && !editingItem.disabled" v-on:change="$event => editingItem.disabled = !$event.target.checked" />
+            <div class="form-group flex items-center">
+                <input type="checkbox" id="Disabled" class="btcpay-toggle me-4" :checked="editingItem && !editingItem.disabled" v-on:change="$event => editingItem.disabled = !$event.target.checked" />
                 <label for="Disabled" class="form-check-label" text-translate="true">Enable</label>
             </div>
             <vc:ui-extension-point location="app-template-editor-item-detail" model="Model"></vc:ui-extension-point>
@@ -98,19 +98,19 @@
 <template id="items-editor">
     <div>
         <div class="items list-group list-group-flush" v-sortable="{ handle: '.drag', onUpdate (event) { $emit('sort-items', event) } }">
-            <div v-for="(item, index) of items" class="d-inline-flex align-items-center gap-3 list-group-item" :key="item.id" :class="{ active: item === selectedItem }" v-on:click.stop="$emit('select-item', $event, index)">
+            <div v-for="(item, index) of items" class="inline-flex items-center gap-4 list-group-item" :key="item.id" :class="{ active: item === selectedItem }" v-on:click.stop="$emit('select-item', $event, index)">
                 <button type="button" class="btn b-0 control drag" :disabled="items.length === 1">
                     <vc:icon symbol="actions-drag" />
                 </button>
-                <div class="template-item d-flex align-items-start w-100 gap-3">
+                <div class="template-item flex items-start w-full gap-4">
                     <div class="img">
                         <img :src="getImage(item)" :alt="item.title" :style="(item.image ? null : { opacity: 0.5 })" loading="lazy">
                     </div>
-                    <div class="d-flex flex-column gap-2">
+                    <div class="flex flex-col gap-2">
                         <h5 class="card-title m-0" v-html="item.title"></h5>
-                        <div class="d-flex gap-2 align-items-center">
-                            <span class="fw-semibold badge text-bg-info" v-if="item.priceType === 'Topup' || item.price == 0">{{ item.priceType === 'Topup' ? 'Any amount' : 'Free' }}</span>
-                            <span class="fw-semibold text-muted" v-else>{{ item.price }} @Model.currency{{ item.priceType === 'Minimum' ? ' minimum' : '' }}</span>
+                        <div class="flex gap-2 items-center">
+                            <span class="font-semibold badge text-bg-info" v-if="item.priceType === 'Topup' || item.price == 0">{{ item.priceType === 'Topup' ? 'Any amount' : 'Free' }}</span>
+                            <span class="font-semibold text-btcpay-body-text-muted" v-else>{{ item.price }} @Model.currency{{ item.priceType === 'Minimum' ? ' minimum' : '' }}</span>
                             <span class="badge text-bg-warning" v-if="item.inventory">
                                 {{ item.inventory > 0 ? `${item.inventory} left` : 'Sold out' }}
                             </span>
@@ -122,7 +122,7 @@
                 </button>
             </div>
         </div>
-        <button type="button" id="btAddItem" class="btn btn-link py-0 px-2 mt-2 mb-2 gap-1 add fw-semibold d-inline-flex align-items-center" v-on:click.stop="$emit('add-item', $event)">
+        <button type="button" id="btAddItem" class="btn btn-link py-0 px-2 mt-2 mb-2 gap-1 add font-semibold inline-flex items-center" v-on:click.stop="$emit('add-item', $event)">
             <vc:icon symbol="actions-add" />
             <span text-translate="true">Add Item</span>
         </button>
@@ -130,16 +130,16 @@
 </template>
 
 <div id="TemplateEditor" class="editor" v-cloak>
-    <h3 class="mt-5 mb-3" v-pre>@Model.title</h3>
+    <h3 class="mt-12 mb-4" v-pre>@Model.title</h3>
     @if (ViewContext.ViewData.ModelState.TryGetValue(Model.templateId, out var errors))
     {
         foreach (var error in errors.Errors)
         {
-            <p class="text-danger" v-pre>@error.ErrorMessage</p>
+            <p class="text-btcpay-danger" v-pre>@error.ErrorMessage</p>
         }
     }
-    <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-3">
-        <ul class="nav nav-pills gap-4" role="tablist">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-4">
+        <ul class="nav nav-pills gap-6" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="EditorTabButton" data-bs-toggle="pill" data-bs-target="#EditorTabPane" type="button" role="tab" aria-controls="EditorTabPane" aria-selected="true" text-translate="true">Editor</button>
             </li>
@@ -150,7 +150,7 @@
     </div>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="EditorTabPane" role="tabpanel" aria-labelledby="EditorTabButton" tabindex="0">
-            <div class="row align-items-start">
+            <div class="row items-start">
                 <div class="col-12">
                     <items-editor :items="items"
                                   :selected-item="selectedItem"
@@ -162,20 +162,20 @@
                                   class="bg-tile pb-2 rounded" />
                 </div>
                 <div class="offcanvas offcanvas-end" tabindex="-1" ref="editorOffcanvas">
-                    <div class="offcanvas-header justify-content-between p-3">
+                    <div class="offcanvas-header justify-between p-4">
                         <h5 class="offcanvas-title" text-translate="true">Edit Item</h5>
-                        <button type="button" class="btn btn-sm rounded-pill" :class="{ 'btn-primary': itemChanged, 'btn-outline-secondary': !itemChanged }" v-on:click="hideOffcanvas" v-text="itemChanged ? 'Apply' : 'Close'"></button>
+                        <button type="button" class="btn btn-sm rounded-full" :class="{ 'btn-primary': itemChanged, 'btn-outline-secondary': !itemChanged }" v-on:click="hideOffcanvas" v-text="itemChanged ? 'Apply' : 'Close'"></button>
                     </div>
-                    <div class="offcanvas-body p-3">
-                        <item-editor ref="itemEditor" :item="selectedItem" class="bg-tile w-100 rounded" />
+                    <div class="offcanvas-body p-4">
+                        <item-editor ref="itemEditor" :item="selectedItem" class="bg-tile w-full rounded" />
                     </div>
                 </div>
             </div>
         </div>
         <div class="tab-pane fade" id="CodeTabPane" role="tabpanel" aria-labelledby="CodeTabButton" tabindex="0">
             <label for="TemplateConfig" class="form-label" text-translate="true">Template JSON</label>
-            <textarea id="TemplateConfig" name="@Model.templateId" rows="21" cols="21" class="form-control font-monospace" style="font-size:.85rem" v-model="itemsJSON" v-on:change="updateFromJSON"></textarea>
-            <span asp-validation-for="@Model.templateId" class="text-danger"></span>
+            <textarea id="TemplateConfig" name="@Model.templateId" rows="21" cols="21" class="form-control font-btcpay-mono" style="font-size:.85rem" v-model="itemsJSON" v-on:change="updateFromJSON"></textarea>
+            <span asp-validation-for="@Model.templateId" class="text-btcpay-danger"></span>
         </div>
     </div>
 </div>

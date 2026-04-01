@@ -66,7 +66,7 @@
         }
 
         .navbar {
-            border-bottom: 1px solid var(--btcpay-body-border-light);
+            border-b: 1px solid var(--btcpay-body-border-light);
             padding: 1rem 0;
         }
 
@@ -165,7 +165,7 @@
         }
 
         .table th {
-            border-top: none;
+            border-t: none;
             font-weight: 600;
         }
 
@@ -194,15 +194,15 @@
 <!-- Navigation -->
 <nav class="navbar btcpay-header">
     <div class="container-fluid">
-        <div class="d-flex align-items-center">
-            <div class="company-logo me-3">
-                <a href="@Model.Url" class="text-decoration-none" target="_blank">
+        <div class="flex items-center">
+            <div class="company-logo me-4">
+                <a href="@Model.Url" class="no-underline" target="_blank">
                     <img src="@Model.Logo" alt="@Model.StoreName" />
                 </a>
             </div>
-            <a href="@Model.Url" target="_blank" class="navbar-brand mb-0 h1 text-decoration-none">@Model.StoreName</a>
+            <a href="@Model.Url" target="_blank" class="navbar-brand mb-0 h1 no-underline">@Model.StoreName</a>
         </div>
-        <div class="d-flex align-items-center gap-3">
+        <div class="flex items-center gap-4">
             @if (Model.Subscriber.TestAccount)
             {
                 @if (DateTimeOffset.UtcNow < Model.Subscriber.ReminderDate)
@@ -228,7 +228,7 @@
                     <button type="submit" class="btn btn-outline-info" name="command" value="move7days">Move to 7 days</button>
                 </form>
             }
-            <span class="me-3 text-muted">@Model.Subscriber.Customer.GetPrimaryIdentity()</span>
+            <span class="me-4 text-btcpay-body-text-muted">@Model.Subscriber.Customer.GetPrimaryIdentity()</span>
         </div>
     </div>
 </nav>
@@ -236,11 +236,11 @@
 <div class="main-content">
     <partial name="_StatusMessage" />
     <!-- Page Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="flex justify-between items-center mb-6">
         <h2 class="mb-0">Subscription Management</h2>
         @if (@Model.Subscriber.Customer.ExternalRef is not null)
         {
-            <span class="text-muted">Customer Reference: @Model.Subscriber.Customer.ExternalRef</span>
+            <span class="text-btcpay-body-text-muted">Customer Reference: @Model.Subscriber.Customer.ExternalRef</span>
         }
     </div>
 
@@ -252,41 +252,41 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8">
-                    <h5 class="d-flex align-items-center gap-3 mb-2">
+                    <h5 class="flex items-center gap-4 mb-2">
                         <span data-testid="plan-name">@Model.Subscriber.Plan.Name</span>
                         @if (Model.Subscriber.Phase == SubscriberData.PhaseTypes.Trial)
                         {
-                            <span class="badge badge-translucent rounded-pill text-bg-info">Trial</span>
+                            <span class="badge badge-translucent rounded-full text-bg-btcpay-info">Trial</span>
                         }
                         else if (Model.Subscriber.Phase == SubscriberData.PhaseTypes.Grace)
                         {
-                            <span class="badge badge-translucent rounded-pill text-bg-warning">Grace</span>
+                            <span class="badge badge-translucent rounded-full text-bg-btcpay-warning">Grace</span>
                         }
                         @if (Model.Data.Subscriber is { ProcessingInvoiceId: {} pendingInvoiceId, OptimisticActivation: false })
                         {
-                            <span class="badge badge-translucent rounded-pill text-bg-warning" title="@pendingInvoiceId">Pending invoice</span>
+                            <span class="badge badge-translucent rounded-full text-bg-btcpay-warning" title="@pendingInvoiceId">Pending invoice</span>
                         }
                     </h5>
                     @if (Model.Subscriber.Plan.Description is not null)
                     {
-                        <p class="text-muted mb-3">@Model.Subscriber.Plan.Description</p>
+                        <p class="text-btcpay-body-text-muted mb-4">@Model.Subscriber.Plan.Description</p>
                     }
 
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="me-3"><vc:subscriber-status subscriber="@Model.Subscriber" /></span>
+                    <div class="flex items-center mb-2">
+                        <span class="me-4"><vc:subscriber-status subscriber="@Model.Subscriber" /></span>
                         @if (!string.IsNullOrEmpty(date))
                         {
                             @if (Model.Subscriber.Phase is SubscriberData.PhaseTypes.Normal)
                             {
-                                <span class="text-muted">Next billing: @date</span>
+                                <span class="text-btcpay-body-text-muted">Next billing: @date</span>
                             }
                             else if (Model.Subscriber.Phase is SubscriberData.PhaseTypes.Trial)
                             {
-                                <span class="text-muted">Trial expires: @date</span>
+                                <span class="text-btcpay-body-text-muted">Trial expires: @date</span>
                             }
                             else if (Model.Subscriber.Phase is SubscriberData.PhaseTypes.Grace)
                             {
-                                <span class="text-muted">The subscription has already expired and will soon be inactivated</span>
+                                <span class="text-btcpay-body-text-muted">The subscription has already expired and will soon be inactivated</span>
                             }
                         }
                     </div>
@@ -295,7 +295,7 @@
                 {
                     <div class="col-md-4 text-md-end">
                         <h4 class="mb-1">@DisplayFormatter.Currency(Model.Plan.Price, Model.Plan.Currency, DisplayFormatter.CurrencyFormat.Symbol)</h4>
-                        <p class="text-muted mb-0">@StringLocalizer.RecurringToString(Model.Plan.RecurringType)</p>
+                        <p class="text-btcpay-body-text-muted mb-0">@StringLocalizer.RecurringToString(Model.Plan.RecurringType)</p>
                     </div>
                 }
             </div>
@@ -398,11 +398,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <h6 class="mb-2">Payment Method</h6>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="d-flex align-items-center">
-                            <span class="badge bg-light text-dark border">Credit balance</span>
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center">
+                            <span class="badge bg-light text-btcpay-dark border">Credit balance</span>
                             <span
-                                class="ms-2 fw-semibold credit-balance">@creditBalance</span>
+                                class="ms-2 font-semibold credit-balance">@creditBalance</span>
                         </div>
                         <button id="add-credit" class="btn btn-link p-0" type="button" data-bs-toggle="collapse" data-bs-target="#credit-input"
                                 aria-expanded="false"
@@ -418,37 +418,37 @@
                                 <input inputmode="decimal" class="form-control" placeholder="Enter credit amount" asp-for="Credit.InputAmount" min="0"
                                        required />
                             </div>
-                            <span asp-validation-for="Credit.InputAmount" class="text-danger"></span>
+                            <span asp-validation-for="Credit.InputAmount" class="text-btcpay-danger"></span>
                         </form>
                     </div>
                     @if (Model.Subscriber.Plan.RecurringType is not PlanData.RecurringInterval.Lifetime)
                     {
                         <hr>
-                        <div class="d-flex justify-content-between credit-plan-price">
-                            <div class="text-muted">Plan price</div>
+                        <div class="flex justify-between credit-plan-price">
+                            <div class="text-btcpay-body-text-muted">Plan price</div>
                             <div>@DisplayFormatter.Currency(Model.Subscriber.Plan.Price, Model.Subscriber.Plan.Currency, DisplayFormatter.CurrencyFormat.Symbol)</div>
                         </div>
                         @if (Model.Credit.CreditApplied > 0m)
                         {
-                            <div class="d-flex justify-content-between credit-applied">
-                                <div class="text-muted">Credit applied</div>
-                                <div class="text-success">
+                            <div class="flex justify-between credit-applied">
+                                <div class="text-btcpay-body-text-muted">Credit applied</div>
+                                <div class="text-btcpay-success">
                                     - @DisplayFormatter.Currency(Model.Credit.CreditApplied, Model.Credit.Currency, DisplayFormatter.CurrencyFormat.Symbol)</div>
                             </div>
                         }
                         @if (Model.Credit.CreditApplied < 0m)
                         {
-                            <div class="d-flex justify-content-between credit-past-due">
-                                <div class="text-muted">Past due</div>
-                                <div class="text-danger">
+                            <div class="flex justify-between credit-past-due">
+                                <div class="text-btcpay-body-text-muted">Past due</div>
+                                <div class="text-btcpay-danger">
                                     - @DisplayFormatter.Currency((-Model.Credit.CreditApplied), Model.Credit.Currency, DisplayFormatter.CurrencyFormat.Symbol)</div>
                             </div>
                         }
-                        <div class="d-flex justify-content-between fw-semibold credit-next-charge">
+                        <div class="flex justify-between font-semibold credit-next-charge">
                             <div>Next charge on @date</div>
                             <div>@DisplayFormatter.Currency(Model.Credit.NextCharge, Model.Credit.Currency, DisplayFormatter.CurrencyFormat.Symbol)</div>
                         </div>
-                        <form method="post" class="d-flex mt-3">
+                        <form method="post" class="flex mt-4">
                             <input type="hidden" name="command" value="update-auto-renewal" />
                             <input type="checkbox" class="btcpay-toggle me-2" id="autoRenewal" asp-for="Subscriber.AutoRenew">
                             <label class="form-check-label" for="autoRenewal">Auto renewal</label>
@@ -459,13 +459,13 @@
                 {
                     <div class="col-md-6">
                         <h6 class="mb-2">Notification</h6>
-                        <p class="text-muted mb-0">
+                        <p class="text-btcpay-body-text-muted mb-0">
                             @foreach (var identity in Model.Subscriber.Customer.CustomerIdentities)
                             {
                                 <vc:contact type="@identity.Type" value="@identity.Value"></vc:contact>
                             }
                         </p>
-                        <p class="form-text mb-0">Payment reminder will be sent <span class="fw-bold">@Model.Subscriber.PaymentReminderDaysOrDefault days</span> before
+                        <p class="form-text mb-0">Payment reminder will be sent <span class="font-bold">@Model.Subscriber.PaymentReminderDaysOrDefault days</span> before
                             expiration.</p>
                     </div>
                 }
@@ -483,7 +483,7 @@
             <div class="card-body">
 				@if (hasPending && Model.Subscriber.NewPlan is not null)
 				{
-					<div class="alert-translucent alert-info mb-3 scheduled-change-banner">
+					<div class="alert-translucent alert-info mb-4 scheduled-change-banner">
 						<div class="notice-content">
 							<i class="fa fa-clock-o alert-icon"></i>
 							<div class="alert-text">
@@ -512,8 +512,8 @@
                                     <div class="col-md-4" data-plan-name="@plan.Name">
                                         <div class="current-plan">
                                             <h6 class="mb-1 changeplan-title">@plan.Name</h6>
-                                            <p class="text-muted mb-2"><span>@DisplayFormatter.Currency(plan.Price, plan.Currency, DisplayFormatter.CurrencyFormat.Symbol)</span> <span>@StringLocalizer.RecurringToString(plan.RecurringType)</span></p>
-                                            <span class="badge bg-primary">Current</span>
+                                            <p class="text-btcpay-body-text-muted mb-2"><span>@DisplayFormatter.Currency(plan.Price, plan.Currency, DisplayFormatter.CurrencyFormat.Symbol)</span> <span>@StringLocalizer.RecurringToString(plan.RecurringType)</span></p>
+                                            <span class="badge bg-btcpay-primary">Current</span>
                                         </div>
                                     </div>
                                 }
@@ -523,7 +523,7 @@
                                          data-plan-name="@plan.Name"
                                          data-plan-id="@plan.PlanId">
                                         <h6 class="mb-1 changeplan-title">@plan.Name</h6>
-                                        <p class="text-muted mb-2"><span>@DisplayFormatter.Currency(plan.Price, plan.Currency, DisplayFormatter.CurrencyFormat.Symbol)</span> <span>@StringLocalizer.RecurringToString(plan.RecurringType)</span></p>
+                                        <p class="text-btcpay-body-text-muted mb-2"><span>@DisplayFormatter.Currency(plan.Price, plan.Currency, DisplayFormatter.CurrencyFormat.Symbol)</span> <span>@StringLocalizer.RecurringToString(plan.RecurringType)</span></p>
 
                                             <input type="hidden" name="changedPlanId" value="@plan.PlanId" />
                                             @if (plan.ChangeType == PlanChangeData.ChangeType.Upgrade)
@@ -570,16 +570,16 @@
                     <table class="table table-hover mb-0">
                         <thead>
                         <tr>
-                            <th class="text-nowrap">Date</th>
+                            <th class="whitespace-nowrap">Date</th>
                             <th>Description</th>
-                            <th class="text-nowrap text-end">Amount</th>
-                            <th class="text-nowrap text-end">Total Balance</th>
+                            <th class="whitespace-nowrap text-end">Amount</th>
+                            <th class="whitespace-nowrap text-end">Total Balance</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach (var tx in Model.Transactions)
                         {
-                            var color = tx.Amount >= 0 ? "text-success" : "text-danger";
+                            var color = tx.Amount >= 0 ? "text-btcpay-success" : "text-btcpay-danger";
                             <tr>
                                 <td>@tx.Date.ToString("D")</td>
                                 <td>@tx.Description</td>
@@ -611,36 +611,36 @@
                 </div>
                 <form method="post">
                     <div class="modal-body">
-                        <div html-translate="true" class="upgrade-mode">Would you like to upgrade <span class="subscriber-name fw-semibold"></span> to <b class="changePlanName"></b>?</div>
-                        <div html-translate="true" class="downgrade-mode">Would you like to downgrade <span class="subscriber-name fw-semibold"></span> to <b class="changePlanName"></b> ?</div>
+                        <div html-translate="true" class="upgrade-mode">Would you like to upgrade <span class="subscriber-name font-semibold"></span> to <b class="changePlanName"></b>?</div>
+                        <div html-translate="true" class="downgrade-mode">Would you like to downgrade <span class="subscriber-name font-semibold"></span> to <b class="changePlanName"></b> ?</div>
                     </div>
                     <div class="modal-body pt-0 pb-0">
                         <input name="changePlanId" type="hidden" />
 
-                        <div id="changePlanCost" class="d-flex justify-content-between align-items-center pl">
-                            <div class="text-muted">New plan cost</div>
+                        <div id="changePlanCost" class="flex justify-between items-center pl">
+                            <div class="text-btcpay-body-text-muted">New plan cost</div>
                             <div></div>
                         </div>
 
                         @if (Model.Refund.Value != 0)
                         {
-                            <div class="d-flex justify-content-between align-items-center pl">
-                                <div class="text-muted">Current plan refund</div>
+                            <div class="flex justify-between items-center pl">
+                                <div class="text-btcpay-body-text-muted">Current plan refund</div>
                                 <div>-@Model.Refund.Display</div>
                             </div>
                         }
 
-                        <div id="changePlanUsedCredits" class="d-flex justify-content-between align-items-center pl">
-                            <div class="text-muted">Used credits</div>
+                        <div id="changePlanUsedCredits" class="flex justify-between items-center pl">
+                            <div class="text-btcpay-body-text-muted">Used credits</div>
                             <div></div>
                         </div>
                         <hr />
-                        <div id="changePlanRemainingToPay" class="d-flex justify-content-between align-items-center pl">
-                            <div class="text-muted">Amount due</div>
-                            <div class="fw-bold"></div>
+                        <div id="changePlanRemainingToPay" class="flex justify-between items-center pl">
+                            <div class="text-btcpay-body-text-muted">Amount due</div>
+                            <div class="font-bold"></div>
                         </div>
-                        <div id="changePlanCreditBalance" class="d-flex justify-content-between align-items-center pl">
-                            <div class="text-muted">Credit balance adjustment</div>
+                        <div id="changePlanCreditBalance" class="flex justify-between items-center pl">
+                            <div class="text-btcpay-body-text-muted">Credit balance adjustment</div>
                             <div></div>
                         </div>
                     </div>
@@ -719,11 +719,11 @@
             setField(changePlanRemainingToPay, m.amountDue);
             setField(changePlanCreditBalance, m.creditBalanceAdjustment.text);
             if (m.creditBalanceAdjustment.value > 0) {
-                changePlanCreditBalance.children[1].classList.add('text-success');
-                changePlanCreditBalance.children[1].classList.remove('text-danger');
+                changePlanCreditBalance.children[1].classList.add('text-btcpay-success');
+                changePlanCreditBalance.children[1].classList.remove('text-btcpay-danger');
             } else {
-                changePlanCreditBalance.children[1].classList.add('text-danger');
-                changePlanCreditBalance.children[1].classList.remove('text-success');
+                changePlanCreditBalance.children[1].classList.add('text-btcpay-danger');
+                changePlanCreditBalance.children[1].classList.remove('text-btcpay-success');
             }
 
             if (action === "upgrade") {

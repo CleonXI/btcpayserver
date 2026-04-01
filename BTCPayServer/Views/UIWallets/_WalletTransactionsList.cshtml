@@ -24,25 +24,25 @@
         <td>
             <vc:truncate-center text="@transaction.Id" link="@transaction.Link" classes="truncate-center-id" />
         </td>
-        <td class="align-middle text-end text-nowrap">
-            <span data-sensitive class="text-@(transaction.Positive ? "success" : "danger")@(transaction.IsConfirmed ? "" : " opacity-50")">@transaction.Balance</span>
+        <td class="align-middle text-end whitespace-nowrap">
+            <span data-sensitive class="text-@(transaction.Positive ? "btcpay-success" : "btcpay-danger")@(transaction.IsConfirmed ? "" : " opacity-50")">@transaction.Balance</span>
         </td>
-        <td class="align-middle text-end text-nowrap">
+        <td class="align-middle text-end whitespace-nowrap">
             <span data-sensitive class="@(transaction.IsConfirmed ? "" : " opacity-50")">
                 @if (transaction.HistoryLine is { Fee: { } fee, FeeRate: { } fr })
                 {
-                    <span><span>@fee</span> <span class="text-muted">(@fr)</span></span>
+                    <span><span>@fee</span> <span class="text-btcpay-body-text-muted">(@fr)</span></span>
                 }
             </span>
         </td>
         @foreach (var rate in transaction.Rates)
         {
-            <td class="align-middle text-end text-nowrap">
+            <td class="align-middle text-end whitespace-nowrap">
                 <span>@rate</span>
             </td>
         }
         <td class="align-middle text-end">
-            <div class="d-inline-flex gap-3 align-items-center">
+            <div class="inline-flex gap-4 items-center">
 				@if (transaction.CanBumpFee)
 				{
 					<a asp-action="WalletBumpFee" asp-route-walletId="@Context.GetRouteValue("walletId")" asp-route-transactionId="@transaction.Id" class="btn btn-link p-0 bumpFee-btn">
@@ -50,7 +50,7 @@
 						<span text-translate="true">Bump fee</span>
 					</a>
 				}
-                <button class="btn btn-link p-0 @(!string.IsNullOrEmpty(transaction.Comment) ? "text-primary" : "text-secondary")" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-link p-0 @(!string.IsNullOrEmpty(transaction.Comment) ? "text-btcpay-primary" : "text-btcpay-body-text-muted")" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <vc:icon symbol="actions-comment" />
                 </button>
                 <div class="dropdown-menu">
@@ -60,7 +60,7 @@
                             <textarea name="addcomment" maxlength="200" rows="2" cols="20" class="form-control form-control-sm p-1">@transaction.Comment</textarea>
                         </div>
                         <div class="p-2">
-                            <button type="submit" class="btn btn-primary btn-sm w-100" text-translate="true">Save comment</button>
+                            <button type="submit" class="btn btn-primary btn-sm w-full" text-translate="true">Save comment</button>
                         </div>
                     </form>
                 </div>

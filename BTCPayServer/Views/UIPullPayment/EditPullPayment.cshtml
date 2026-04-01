@@ -11,6 +11,7 @@
 
 @section PageFootContent {
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/vendor/bootstrap/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/vendor/summernote/summernote-bs5.js" asp-append-version="true"></script>
 }
 
@@ -32,7 +33,7 @@
             }
             else
             {
-				<button id="page-primary" type="submit" class="btn btn-primary order-sm-1" text-translate="true">Save</button>
+				<button id="page-primary" type="submit" class="btn btn-primary sm:order-1" text-translate="true">Save</button>
                 <a class="btn btn-secondary" asp-action="ViewPullPayment" asp-route-pullPaymentId="@Model.Id" id="ViewPullPayment" target="_blank" text-translate="true">View</a>
             }
         </div>
@@ -49,7 +50,7 @@
             <div class="form-group">
                 <label asp-for="Name" class="form-label" data-required></label>
                 <input asp-for="Name" class="form-control" required />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <span asp-validation-for="Name" class="text-btcpay-danger"></span>
             </div>
         </div>
     </div>
@@ -59,7 +60,7 @@
             <div class="form-group">
                 <label asp-for="Description" class="form-label"></label>
                 <textarea asp-for="Description" class="form-control richtext"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <span asp-validation-for="Description" class="text-btcpay-danger"></span>
             </div>
         </div>
     </div>

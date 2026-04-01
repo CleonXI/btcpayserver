@@ -69,9 +69,9 @@
 </div>
 
 <div id="descriptor" class="collapse">
-    <div class="d-flex px-4 py-4 mb-4 bg-tile rounded">
-        <div class="flex-fill">
-            <p class="mb-3">
+    <div class="flex px-6 py-6 mb-6 bg-tile rounded">
+        <div class="flex-1">
+            <p class="mb-4">
                 <span text-translate="true">Payouts allow you to process pull payments, in the form of refunds, salary payouts, or withdrawals.</span>
                 <span permission="@Policies.CanModifyStoreSettings">You can also <a id="PayoutProcessors" asp-action="ConfigureStorePayoutProcessors" asp-controller="UIPayoutProcessors" asp-route-storeId="@storeId">configure payout processors</a> to automate payouts.</span>
             </p>
@@ -87,7 +87,7 @@
 
 @if (!Model.HasPayoutProcessor)
 {
-    <div class="alert alert-info mb-5" role="alert" permission="@Policies.CanModifyStoreSettings">
+    <div class="alert alert-info mb-12" role="alert" permission="@Policies.CanModifyStoreSettings">
         <span text-translate="true">Pro tip: There are supported but unconfigured Payout Processors for this payout payment method.</span><br/>
         <span text-translate="true">Payout Processors help automate payouts so that you do not need to manually handle them.</span>
         <a class="alert-link p-0" asp-action="ConfigureStorePayoutProcessors" asp-controller="UIPayoutProcessors" asp-route-storeId="@storeId" text-translate="true">Configure now</a>
@@ -97,7 +97,7 @@
 <form method="post" id="Payouts">
     <input type="hidden" asp-for="PayoutMethodId" />
     <input type="hidden" asp-for="PayoutState" />
-    <div class="d-flex justify-content-between mb-4">
+    <div class="flex justify-between mb-6">
         <ul class="nav mb-1 gap-2">
             @foreach (var state in Model.PayoutMethods)
             {
@@ -106,20 +106,20 @@
                        asp-route-payoutState="@Model.PayoutState"
                        asp-route-payoutMethodId="@state.ToString()"
                        asp-route-pullPaymentId="@Model.PullPaymentId"
-                       class="btcpay-pill position-relative me-0 @(state.ToString() == Model.PayoutMethodId ? "active" : "")"
+                       class="btcpay-pill relative me-0 @(state.ToString() == Model.PayoutMethodId ? "active" : "")"
                        id="@state.ToString()-view"
                        role="tab">
                         @state.ToString()
                         @if (Model.PayoutMethodCount.TryGetValue(state.ToString(), out var count) && count > 0)
                         {
-                            <span class="badge rounded-pill fw-semibold pe-0">@count</span>
+                            <span class="badge rounded-full font-semibold pe-0">@count</span>
                         }
                     </a>
                 </li>
             }
         </ul>
     </div>
-    <nav id="SectionNav" class="mb-3">
+    <nav id="SectionNav" class="mb-4">
         <div class="nav">
             @foreach (var state in Model.PayoutStateCount)
             {
@@ -133,7 +133,7 @@
                     @state.Key.GetStateString()
                     @if (state.Value > 0)
                     {
-                        <span class="badge rounded-pill fw-semibold ms-1 bg-medium">@state.Value</span>
+                        <span class="badge rounded-full font-semibold ms-1 bg-medium">@state.Value</span>
                     }
                 </a>
             }
@@ -152,7 +152,7 @@
                             </th>
                         }
                         <th class="min-w-date-col">
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="flex items-center gap-4">
                                 <span text-translate="true">Date</span>
                                 <button type="button" class="btn btn-link p-0 switch-time-format only-for-js" title="Switch date format">
                                     <vc:icon symbol="time" />
@@ -161,7 +161,7 @@
                         </th>
                         <th text-translate="true">Source</th>
                         <th text-translate="true">Destination</th>
-                        <th text-translate="true" class="text-end text-nowrap">Amount</th>
+                        <th text-translate="true" class="text-end whitespace-nowrap">Amount</th>
                         @if (Model.PayoutState != PayoutState.AwaitingApproval)
                         {
                             <th text-translate="true" class="text-end">Transaction</th>
@@ -176,12 +176,12 @@
                             <input type="checkbox" class="form-check-input mass-action-select-all" />
                         </th>
                         <th colspan="5">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
+                            <div class="flex flex-wrap items-center justify-between gap-4">
                                 <div>
                                     <strong class="mass-action-selected-count">0</strong>
                                     <span text-translate="true">selected</span>
                                 </div>
-                                <div class="d-inline-flex align-items-center gap-3">
+                                <div class="inline-flex items-center gap-4">
                                     @foreach (var action in stateActions)
                                     {
                                         <button type="submit" id="@Model.PayoutState-@action.Action" name="Command" class="btn btn-link" value="@Model.PayoutState-@action.Action">@action.Text</button>
@@ -220,7 +220,7 @@
                             <td class="align-middle">
                                 <vc:truncate-center text="@pp.Destination" classes="truncate-center-id" />
                             </td>
-                            <td class="text-end text-nowrap align-middle">
+                            <td class="text-end whitespace-nowrap align-middle">
                                 <span data-sensitive>@pp.Amount</span>
                             </td>
                             @if (Model.PayoutState != PayoutState.AwaitingApproval)
@@ -241,6 +241,6 @@
     }
     else
     {
-        <p class="text-muted mb-0" id="@Model.PayoutState-no-payouts" text-translate="true">There are no payouts matching these criteria.</p>
+        <p class="text-btcpay-body-text-muted mb-0" id="@Model.PayoutState-no-payouts" text-translate="true">There are no payouts matching these criteria.</p>
     }
 </form>

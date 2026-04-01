@@ -73,7 +73,7 @@
             padding: 0.5rem 0;
             display: flex;
             align-items: center;
-            color: var(--btcpay-body-text-muted);
+            color: var(--btcpay-body-text-btcpay-body-text-muted);
         }
 
         .feature-list li i {
@@ -157,9 +157,9 @@
                 <div class="subscription-details">
                     @if (Model.StoreBranding.LogoUrl is not null || Model.StoreName is not null)
                     {
-                        <div class="d-flex align-items-center mb-4">
+                        <div class="flex items-center mb-6">
 
-                            <div class="company-logo me-3">
+                            <div class="company-logo me-4">
                                 @if (Model.StoreBranding.LogoUrl is null)
                                 {
                                     <img src="~/img/btcpay-logo.svg" alt="@Model.StoreName" />
@@ -170,12 +170,12 @@
                                 }
                             </div>
                             <div>
-                                <h6 class="mb-0 fw-semibold">@Model.StoreName</h6>
+                                <h6 class="mb-0 font-semibold">@Model.StoreName</h6>
                             </div>
                         </div>
                     }
 
-                    <h3 class="subscription-title d-inline-flex align-items-center gap-2">
+                    <h3 class="subscription-title inline-flex items-center gap-2">
                         <span>@Model.Title</span>
                         <a type="button" class="btn-link"
                                 href="#"
@@ -194,7 +194,7 @@
 
                     @if (Model.Data.PlanFeatures.Count(i => !string.IsNullOrWhiteSpace(i.Feature.Description)) != 0)
                     {
-                        <h5 class="mb-3">What's included:</h5>
+                        <h5 class="mb-4">What's included:</h5>
                         <ul class="feature-list">
                             @foreach (var item in Model.Data.PlanFeatures.Where(i => !string.IsNullOrWhiteSpace(i.Feature.Description)))
                             {
@@ -217,8 +217,8 @@
                     </div>
 
                     <form id="checkoutForm" method="post">
-                        <div class="mb-4">
-                            <label for="customerEmail" class="form-label fw-semibold">Email Address</label>
+                        <div class="mb-6">
+                            <label for="customerEmail" class="form-label font-semibold">Email Address</label>
                             <input
                                 asp-for="Email"
                                 type="email"
@@ -227,7 +227,7 @@
                                 placeholder="Enter your email address"
                                 required
                                 disabled="@Model.IsPrefilled">
-                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <span asp-validation-for="Email" class="text-btcpay-danger"></span>
                             <div class="form-text">
                                 <i class="fas fa fa-info-circle me-1"></i>
                                 We'll send your receipt and account details here

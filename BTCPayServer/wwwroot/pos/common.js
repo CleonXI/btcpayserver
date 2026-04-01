@@ -419,11 +419,11 @@ const posCommon = {
     mounted () {
         if (this.$refs.categories) {
             const getInnerNavWidth = () => {
-                this.$refs.categoriesNav.classList.remove('d-flex');
-                this.$refs.categoriesNav.classList.add('d-inline-flex');
+                this.$refs.categoriesNav.classList.remove('flex');
+                this.$refs.categoriesNav.classList.add('inline-flex');
                 const navWidth = this.$refs.categoriesNav.clientWidth - 32;
-                this.$refs.categoriesNav.classList.remove('d-inline-flex');
-                this.$refs.categoriesNav.classList.add('d-flex');
+                this.$refs.categoriesNav.classList.remove('inline-flex');
+                this.$refs.categoriesNav.classList.add('flex');
                 return navWidth;
             }
             const adjustCategories = () => {

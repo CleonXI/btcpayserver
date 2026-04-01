@@ -22,13 +22,13 @@
     <input type="hidden" asp-for="SelectiveStores" value="@Model.SelectiveStores"/>
     <header class="text-center">
         <h1>@ViewData["Title"]</h1>
-        <p class="lead text-secondary mt-3">Are you sure about exposing your API Key to @displayName?</p>
+        <p class="lead text-btcpay-body-text-muted mt-4">Are you sure about exposing your API Key to @displayName?</p>
     </header>
     <p>
         You've previously generated the API Key <code>@Model.ApiKey</code> specifically for
         <strong>@displayName</strong> with the URL <code>@Model.RedirectUrl</code>.
     </p>
-    <div class="d-flex gap-3">
+    <div class="flex gap-4">
         <button class="btn btn-primary" name="command" id="continue" type="submit" value="Confirm" text-translate="true">Authorize app</button>
         <button class="btn btn-secondary" name="command" id="back" type="button" text-translate="true">Cancel</button>
     </div>

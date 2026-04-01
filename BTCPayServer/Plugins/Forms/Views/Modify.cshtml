@@ -42,23 +42,23 @@
                 <label for="field-editor-field-name" class="form-label" data-required text-translate="true">Name</label>
                 <input id="field-editor-field-name" class="form-control" list="special-field-names" required v-model="field.name" />
                 <div text-translate="true" class="form-text">The name of the field in the invoice's metadata.</div>
-                <div text-translate="true" class="form-text text-info" v-if="field.name === 'invoice_currency'">The configured name means the value of this field will determine the invoice currency for public forms.</div>
-                <div text-translate="true" class="form-text text-info" v-if="field.name === 'invoice_amount'">The configured name means the value of this field will determine the invoice amount for public forms.</div>
-                <div text-translate="true" class="form-text text-info" v-if="field.name && field.name.startsWith('invoice_amount_adjustment')">The configured name means the value of this field will adjust the invoice amount for public forms and the point of sale app.</div>
-                <div text-translate="true" class="form-text text-info" v-if="field.name && field.name.startsWith('invoice_amount_multiply_adjustment')">The configured name means the value of this field will adjust the invoice amount by multiplying it for public forms and the point of sale app.</div>
+                <div text-translate="true" class="form-text text-btcpay-info" v-if="field.name === 'invoice_currency'">The configured name means the value of this field will determine the invoice currency for public forms.</div>
+                <div text-translate="true" class="form-text text-btcpay-info" v-if="field.name === 'invoice_amount'">The configured name means the value of this field will determine the invoice amount for public forms.</div>
+                <div text-translate="true" class="form-text text-btcpay-info" v-if="field.name && field.name.startsWith('invoice_amount_adjustment')">The configured name means the value of this field will adjust the invoice amount for public forms and the point of sale app.</div>
+                <div text-translate="true" class="form-text text-btcpay-info" v-if="field.name && field.name.startsWith('invoice_amount_multiply_adjustment')">The configured name means the value of this field will adjust the invoice amount by multiplying it for public forms and the point of sale app.</div>
             </div>
             <div class="form-group" v-if="field.type === 'select'">
                 <h5 class="mt-2" text-translate="true">Options</h5>
                 <div class="options" v-sortable="{ handle: '.drag', onUpdate: sortOptions }">
-                    <div v-for="(option, index) in field.options" :key="option.value" class="d-flex align-items-start gap-2 pt-3">
+                    <div v-for="(option, index) in field.options" :key="option.value" class="flex items-start gap-2 pt-4">
                         <button type="button" class="btn b-0 control drag">
                             <vc:icon symbol="drag" />
                         </button>
-                        <div class="field flex-grow-1">
+                        <div class="field grow">
                             <label :for="`field-option-value-${index}`" class="form-label" text-translate="true">Value</label>
                             <input :id="`field-option-value-${index}`" class="form-control" v-model.lazy="option.value" />
                         </div>
-                        <div class="field flex-grow-1">
+                        <div class="field grow">
                             <label :for="`field-option-text-${index}`" class="form-label" text-translate="true">Text</label>
                             <input :id="`field-option-text-${index}`" class="form-control" v-model="option.text" />
                         </div>
@@ -67,7 +67,7 @@
                         </button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-link px-1 py-2 gap-1 add fw-semibold d-inline-flex align-items-center" v-on:click.stop="addOption($event)">
+                <button type="button" class="btn btn-link px-1 py-2 gap-1 add font-semibold inline-flex items-center" v-on:click.stop="addOption($event)">
                     <vc:icon symbol="actions-add" />
                     <span text-translate="true">Add Option</span>
                 </button>
@@ -87,15 +87,15 @@
                 <h5 class="mt-2" text-translate="true">Value Mapper</h5>
                 <div class="form-text" text-translate="true">The values being mirrored from another field will be mapped to another value if configured.</div>
                 <div class="options">
-                    <div v-if="field.valuemap" v-for="(v, k, index) in field.valuemap" :key="k" class="d-flex align-items-start gap-2 pt-3">
-                        <div class="field flex-grow-1">
+                    <div v-if="field.valuemap" v-for="(v, k, index) in field.valuemap" :key="k" class="flex items-start gap-2 pt-4">
+                        <div class="field grow">
                             <label :for="`field-valuemap-value-${index}`" class="form-label" text-translate="true">Original Value</label>
                             <select v-if="mirroredField && mirroredField.type === 'select'" :id="`field-valuemap-value-${index}`" class="form-select" v-on:change="updateValueMap(k, $event.target.value, v)">
                                 <option v-for="option in mirroredField.options" v-if="option.text && option.value" :key="option.value" :value="option.value" :selected="k === option.value" v-text="`${option.value} (${option.text})`"></option>
                             </select>
                             <input v-else :id="`field-valuemap-value-${index}`" class="form-control" placeholder="@StringLocalizer["Value to match"]" :value="k" v-on:change="updateValueMap(k, $event.target.value, v)" />
                         </div>
-                        <div class="field flex-grow-1">
+                        <div class="field grow">
                             <label :for="`field-valuemap-mapped-${index}`" class="form-label" text-translate="true">Mapped Value</label>
                             <input :id="`field-valuemap-mapped-${index}`" class="form-control" placeholder="@StringLocalizer["Value to set"]" :value="v" v-on:change="updateValueMap(k, k, $event.target.value)" />
                         </div>
@@ -104,7 +104,7 @@
                         </button>
                     </div>
                 </div>
-                <button type="button" class="btn btn-link px-1 py-2 gap-1 add fw-semibold d-inline-flex align-items-center" v-on:click.stop="addValueMap($event)">
+                <button type="button" class="btn btn-link px-1 py-2 gap-1 add font-semibold inline-flex items-center" v-on:click.stop="addValueMap($event)">
                     <vc:icon symbol="actions-add" />
                     <span text-translate="true">Add mapped value</span>
                 </button>
@@ -129,11 +129,11 @@
     <template id="fields-editor">
         <div>
             <div class="fields list-group" :class="{ 'list-group-flush': path.length }" :data-path="path.join(',')" v-sortable="{ handle: '.drag', onUpdate (event) { const { path } = this.el.dataset; $emit('sort-fields', event, (path.indexOf(',') !== -1 ? path.split(',') : [])) } }">
-                <div v-for="(field, index) in fields" :key="field.name" class="d-flex align-items-start gap-2 list-group-item" :class="{ active: field === selectedField }" v-on:click.stop="$emit('select-field', $event, path, index)">
+                <div v-for="(field, index) in fields" :key="field.name" class="flex items-start gap-2 list-group-item" :class="{ active: field === selectedField }" v-on:click.stop="$emit('select-field', $event, path, index)">
                     <button type="button" class="btn b-0 control drag" :disabled="fields.length === 1">
                         <vc:icon symbol="actions-drag" />
                     </button>
-                    <div class="field flex-grow-1">
+                    <div class="field grow">
                         <component :is="getFieldComponent(field.type)" v-bind="field" :path="path.concat(field.name)" :selected-field="selectedField" v-bind="$attrs" />
                     </div>
                     <button type="button" class="btn b-0 control remove" v-on:click="$emit('remove-field', $event, path, index)">
@@ -141,7 +141,7 @@
                     </button>
                 </div>
             </div>
-            <button type="button" class="btn btn-link py-0 px-2 mt-2 mb-2 gap-1 add fw-semibold d-inline-flex align-items-center" v-on:click.stop="$emit('add-field', $event, path)">
+            <button type="button" class="btn btn-link py-0 px-2 mt-2 mb-2 gap-1 add font-semibold inline-flex items-center" v-on:click.stop="$emit('add-field', $event, path)">
                 <vc:icon symbol="actions-add" />
                 <span text-translate="true">Add Form Field</span>
             </button>
@@ -220,7 +220,7 @@
         </div>
     </div>
     <partial name="_StatusMessage" />
-    <div class="row mb-4">
+    <div class="row mb-6">
         <div class="col-12">
             @if (!ViewContext.ModelState.IsValid)
             {
@@ -229,9 +229,9 @@
             <div class="form-group" style="max-width: 27rem;">
                 <label asp-for="Name" class="form-label" data-required></label>
                 <input asp-for="Name" class="form-control" required />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <span asp-validation-for="Name" class="text-btcpay-danger"></span>
             </div>
-            <div class="d-flex align-items-center mb-4 gap-3">
+            <div class="flex items-center mb-6 gap-4">
                 <input asp-for="Public" type="checkbox" class="btcpay-toggle" />
                 <div>
                     <label asp-for="Public"></label>
@@ -242,8 +242,8 @@
     </div>
 
     <div id="FormEditor" class="editor content-constrain-xxl">
-        <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-3">
-            <ul class="nav nav-pills gap-4" role="tablist">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-4">
+            <ul class="nav nav-pills gap-6" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="EditorTabButton" data-bs-toggle="pill" data-bs-target="#EditorTabPane" type="button" role="tab" aria-controls="EditorTabPane" aria-selected="true" text-translate="true">Editor</button>
                 </li>
@@ -251,15 +251,15 @@
                     <button class="nav-link" id="CodeTabButton" data-bs-toggle="pill" data-bs-target="#CodeTabPane" type="button" role="tab" aria-controls="CodeTabPane" aria-selected="false" text-translate="true">Code</button>
                 </li>
             </ul>
-            <div class="d-flex align-items-center gap-2 mb-1">
-                <span class="fw-semibold" text-translate="true">Templates</span>
-                <button type="button" class="btn btn-link p-0 fw-semibold" v-on:click="applyTemplate('email')" id="ApplyEmailTemplate" text-translate="true">Email</button>
-                <button type="button" class="btn btn-link p-0 fw-semibold" v-on:click="applyTemplate('address')" id="ApplyAddressTemplate" text-translate="true">Address</button>
+            <div class="flex items-center gap-2 mb-1">
+                <span class="font-semibold" text-translate="true">Templates</span>
+                <button type="button" class="btn btn-link p-0 font-semibold" v-on:click="applyTemplate('email')" id="ApplyEmailTemplate" text-translate="true">Email</button>
+                <button type="button" class="btn btn-link p-0 font-semibold" v-on:click="applyTemplate('address')" id="ApplyAddressTemplate" text-translate="true">Address</button>
             </div>
         </div>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="EditorTabPane" role="tabpanel" aria-labelledby="EditorTabButton" tabindex="0">
-                <div class="row align-items-start">
+                <div class="row items-start">
                     <div class="col-12">
                         <fields-editor :path="[]"
                                        :fields="fields"
@@ -272,22 +272,22 @@
                                        class="bg-tile pb-2 rounded" />
                     </div>
                     <div class="offcanvas offcanvas-end" tabindex="-1" ref="editorOffcanvas">
-                        <div class="offcanvas-header justify-content-between p-3">
+                        <div class="offcanvas-header justify-between p-4">
                             <h5 class="offcanvas-title" text-translate="true">Edit Field</h5>
                             <button type="button" class="btn-close" aria-label="@StringLocalizer["Close"]" v-on:click="hideOffcanvas">
                                 <vc:icon symbol="close" />
                             </button>
                         </div>
-                        <div class="offcanvas-body p-3">
-                            <field-editor :field="selectedField" class="bg-tile w-100 rounded" />
+                        <div class="offcanvas-body p-4">
+                            <field-editor :field="selectedField" class="bg-tile w-full rounded" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="CodeTabPane" role="tabpanel" aria-labelledby="CodeTabButton" tabindex="0">
                 <label asp-for="FormConfig" class="form-label" data-required text-translate="true">Form JSON</label>
-                <textarea asp-for="FormConfig" class="form-control font-monospace" style="font-size:.85rem" rows="21" cols="21" v-model="configJSON" v-on:change="updateFromJSON"></textarea>
-                <span asp-validation-for="FormConfig" class="text-danger"></span>
+                <textarea asp-for="FormConfig" class="form-control font-btcpay-mono" style="font-size:.85rem" rows="21" cols="21" v-model="configJSON" v-on:change="updateFromJSON"></textarea>
+                <span asp-validation-for="FormConfig" class="text-btcpay-danger"></span>
             </div>
         </div>
     </div>

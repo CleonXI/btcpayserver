@@ -5,7 +5,7 @@
     <select multiple="multiple" asp-for="SelectedInputs" class="form-select">
         @foreach (var input in Model.InputsAvailable)
         {
-            <option value="@input.Outpoint" class="text-truncate" asp-selected="@(Model.SelectedInputs?.Contains(input.Outpoint)??false)">(@input.Amount) @input.Outpoint</option>
+            <option value="@input.Outpoint" class="truncate" asp-selected="@(Model.SelectedInputs?.Contains(input.Outpoint)??false)">(@input.Amount) @input.Outpoint</option>
         }
     </select>
 </div>
@@ -15,16 +15,16 @@
     #coin-selection-app .btn-link.active { --btcpay-btn-active-color: var(--btcpay-body-link); }
 </style>
 <div id="coin-selection-app" class="only-for-js" v-cloak>
-    <div class="d-sm-flex justify-content-between align-items-center">
+    <div class="sm:flex justify-between items-center">
         <h5 class="mb-sm-0" text-translate="true">Coin selection</h5>
-        <span class="text-muted text-end">
+        <span class="text-btcpay-body-text-muted text-end">
             <span>@StringLocalizer["{0} selected", "{{selectedItems.length}}"]</span>
             <span v-show="selectedItems.length > 0">({{selectedAmount}} @Model.CryptoCode)</span>
             <span>/ @StringLocalizer["{0} total", "{{items.length}}"] (@Model.CurrentBalance&nbsp;@Model.CryptoCode)</span>
         </span>
     </div>
     <input type="text" v-model="filter" class="form-control my-3" placeholder="@StringLocalizer["Filter by transaction id, amount, label, comment"]"/>
-    <details class="text-muted small mt-2">
+    <details class="text-btcpay-body-text-muted small mt-2">
         <summary text-translate="true">Available Filters (click to expand)</summary>
         <ul class="mb-0">
             <li class="mb-2"><b text-translate="true">General text search:</b> <span text-translate="true">txid, amount, comment, label</span></li>
@@ -47,9 +47,9 @@
             <li class="mb-2"><b text-translate="true">Combine filters:</b> <code>tag1 amountmin:0.0005 before:2024-01-01</code></li>
         </ul>
     </details>
-    <div class="d-flex justify-content-between align-items-center my-2">
-        <div class="d-flex gap-2 align-items-center">
-            <input class="form-check-input flex-shrink-0"
+    <div class="flex justify-between items-center my-2">
+        <div class="flex gap-2 items-center">
+            <input class="form-check-input shrink-0"
                    id="select-all-checkbox"
                    type="checkbox"
                    :checked="isSelectAllChecked"
@@ -57,9 +57,9 @@
             <span text-translate="true">Select All</span>
         </div>
 
-        <div class="d-flex gap-2 align-items-center">
+        <div class="flex gap-2 items-center">
             <span text-translate="true">Sort by</span>
-            <div class="btn-group gap-3" role="group">
+            <div class="btn-group gap-4" role="group">
                 <button type="button" class="btn btn-link p-0"
                         :class="{active: sortOrder.startsWith('amount')}"
                         v-on:click="sortBy('amount')" text-translate="true">Amount</button>
@@ -69,20 +69,20 @@
             </div>
         </div>
     </div>
-    <ul class="list-group list-group-flush mb-3" v-show="filteredItems.length">
-        <li class="list-group-item py-2 cursor-pointer gap-2 align-items-center justify-content-between"
+    <ul class="list-group list-group-flush mb-4" v-show="filteredItems.length">
+        <li class="list-group-item py-2 cursor-pointer gap-2 items-center justify-between"
             v-for="item of filteredItems"
             :key="item.outpoint"
             :class="{ 'active': item.selected }"
             v-on:click="toggleItem($event, item, !item.selected)">
-            <div class="d-flex align-items-start flex-grow-1 gap-2" style="min-width:0">
-                <input class="form-check-input flex-shrink-0"
+            <div class="flex items-start grow gap-2" style="min-width:0">
+                <input class="form-check-input shrink-0"
                        type="checkbox"
                        :id="item.outpoint"
                        :value="item.outpoint"
                        :checked="item.selected">
-                <a :href="item.link" target="_blank" class="text-truncate flex-grow-1" v-tooltip="item.outpoint">{{item.outpoint}}</a>
-                <div v-if="item.labels" class="d-flex flex-wrap gap-2 flex-fill" style="min-width:20%;max-width:40%;">
+                <a :href="item.link" target="_blank" class="truncate grow" v-tooltip="item.outpoint">{{item.outpoint}}</a>
+                <div v-if="item.labels" class="flex flex-wrap gap-2 flex-1" style="min-width:20%;max-width:40%;">
                     <span v-for="label of item.labels"
                        key="label.text"
                        class="transaction-label"
@@ -92,21 +92,21 @@
                         {{label.text}}
                     </span>
                 </div>
-                <span v-if="item.comment" data-bs-toggle="tooltip" v-tooltip="item.comment" class="badge bg-info rounded-pill" style="min-width:2em">
+                <span v-if="item.comment" data-bs-toggle="tooltip" v-tooltip="item.comment" class="badge bg-btcpay-info rounded-full" style="min-width:2em">
                     <vc:icon symbol="info" />
                 </span>
-                <span :class="{'bg-secondary' : item.confirmations > 0, 'bg-warning' : item.confirmations <= 0}"
-                      class="badge d-inline-flex align-items-center gap-1 py-1"
+                <span :class="{'bg-btcpay-secondary' : item.confirmations > 0, 'bg-btcpay-warning' : item.confirmations <= 0}"
+                      class="badge inline-flex items-center gap-1 py-1"
                       data-bs-toggle="tooltip"
                       v-tooltip="`${item.confirmations} confirmation${item.confirmations === 1 ? '' : 's'}`">
                     {{item.confirmations}} <vc:icon symbol="block" />
                 </span>
-                <span class="text-nowrap flex-shrink-0 ms-2" style="font-family: 'Courier';">{{item.amount.toFixed(@Model.CryptoDivisibility)}} @Model.CryptoCode</span>
+                <span class="whitespace-nowrap shrink-0 ms-2" style="font-family: 'Courier';">{{item.amount.toFixed(@Model.CryptoDivisibility)}} @Model.CryptoCode</span>
             </div>
         </li>
     </ul>
 
-    <div class="d-grid d-sm-flex flex-wrap gap-3 justify-content-between">
+    <div class="grid sm:flex flex-wrap gap-4 justify-between">
         <ul class="pagination">
             <li class="page-item" :class="{'disabled' : pageStart == 0}">
                 <a class="page-link p-0" tabindex="-1" href="#" v-on:click.prevent="page = page -1">«</a>
@@ -118,7 +118,7 @@
                 <a class="page-link p-0" href="#" v-on:click.prevent="page = page +1">»</a>
             </li>
         </ul>
-        <div class="btn-group gap-3">
+        <div class="btn-group gap-4">
             <button type="button" :disabled="selectedInputs.length === 0" v-on:click="showSelectedOnly = !showSelectedOnly; page = 0" class="btn btn-link p-0">
                 <template text-translate="true" v-if="showSelectedOnly">Show all</template>
                 <template text-translate="true" v-else>Show selected only</template>
@@ -128,8 +128,8 @@
                 <template text-translate="true" v-else>Hide unconfirmed coins</template>
             </button>
         </div>
-        <div class="d-flex gap-2 align-items-center">
-            <span class="text-muted" text-translate="true">Page Size:</span>
+        <div class="flex gap-2 items-center">
+            <span class="text-btcpay-body-text-muted" text-translate="true">Page Size:</span>
             <div class="btn-group gap-2" role="group">
                 <button type="button" class="btn btn-link p-0" :class="{active: pageSize === 10}" v-on:click="pageSize = 10; page = 0">10</button>
                 <button type="button" class="btn btn-link p-0" :class="{active: pageSize === 25}" v-on:click="pageSize = 25; page = 0">25</button>

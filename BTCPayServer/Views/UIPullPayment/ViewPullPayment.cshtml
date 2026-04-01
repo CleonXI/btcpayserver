@@ -30,15 +30,15 @@
     <partial name="LayoutHead"/>
     <link href="~/vendor/vue-qrcode-reader/vue-qrcode-reader.css" rel="stylesheet" asp-append-version="true"/>
 </head>
-<body class="min-vh-100">
-    <div id="app" class="d-flex flex-column min-vh-100 pb-l">
+<body class="min-h-screen">
+    <div id="app" class="flex flex-col min-h-screen pb-l">
         @if (Model.IsPending)
         {
-            <nav class="btcpay-header navbar sticky-top py-3 py-lg-4 d-print-none">
-                <div class="container gap-3">
-                    <form asp-action="ClaimPullPayment" asp-route-pullPaymentId="@Model.Id" class="flex-fill">
-                        <div class="row align-items-center" style="width:calc(100% + 30px)">
-                            <div class="col-12 mb-3 col-lg-6 mb-lg-0">
+            <nav class="btcpay-header navbar sticky-top py-4 lg:py-6 print:hidden">
+                <div class="container gap-4">
+                    <form asp-action="ClaimPullPayment" asp-route-pullPaymentId="@Model.Id" class="flex-1">
+                        <div class="row items-center" style="width:calc(100% + 30px)">
+                            <div class="col-12 mb-4 col-lg-6 lg:mb-0">
                                 <div class="input-group">
                                     @if (Model.LnurlEndpoint is not null)
                                     {
@@ -46,7 +46,7 @@
                                             <vc:icon symbol="qr-code" />
                                         </button>
                                     }
-                                    <input class="form-control form-control-lg font-monospace" asp-for="Destination" placeholder="@StringLocalizer["Enter destination to claim funds"]" required style="font-size:.9rem;height:42px;">
+                                    <input class="form-control form-control-lg font-btcpay-mono" asp-for="Destination" placeholder="@StringLocalizer["Enter destination to claim funds"]" required style="font-size:.9rem;height:42px;">
                                     @if (Model.BitcoinOnly)
 									{
 										<span class="input-group-text">BTC</span>
@@ -65,48 +65,48 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-12 mb-3 col-sm-6 mb-sm-0 col-lg-3">
+                            <div class="col-12 mb-4 sm:mb-0 col-sm-6 col-lg-3">
                                 <div class="input-group">
                                     <input type="number" inputmode="decimal" class="form-control form-control-lg text-end hide-number-spin" asp-for="ClaimedAmount" max="@Model.AmountDue" min="@Model.MinimumClaim" step="any" placeholder="@StringLocalizer["Amount"]" required>
-                                    <span class="input-group-text px-3">@Model.Currency.ToUpper()</span>
+                                    <span class="input-group-text px-4">@Model.Currency.ToUpper()</span>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3">
-                                <button class="btn btn-lg btn-primary w-100 text-nowrap" type="submit" text-translate="true">Claim Funds</button>
+                                <button class="btn btn-lg btn-primary w-full whitespace-nowrap" type="submit" text-translate="true">Claim Funds</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </nav>
         }
-        <main class="flex-grow-1 py-4">
+        <main class="grow py-6">
             <div class="container">
-                <partial name="_StatusMessage" model="@(new ViewDataDictionary(ViewData){ { "Margin", "mb-4" } })" />
+                <partial name="_StatusMessage" model="@(new ViewDataDictionary(ViewData){ { "Margin", "mb-6" } })" />
                 @if (!ViewContext.ModelState.IsValid)
                 {
-                    @Html.ValidationSummary(string.Empty, new { @class = $"alert alert-danger mb-4 pb-0 {(ViewContext.ModelState.ErrorCount.Equals(1) ? "no-marker" : "")}" })
+                    @Html.ValidationSummary(string.Empty, new { @class = $"alert alert-danger mb-6 pb-0 {(ViewContext.ModelState.ErrorCount.Equals(1) ? "no-marker" : "")}" })
                 }
 
                 <div class="row">
-                    <div class="col col-12 col-lg-6 mb-4">
-                        <div class="bg-tile h-100 m-0 p-3 p-sm-5 rounded">
+                    <div class="col col-12 col-lg-6 mb-6">
+                        <div class="bg-tile h-full m-0 p-4 sm:p-12 rounded">
                             @if (!string.IsNullOrWhiteSpace(Model.Title))
                             {
-                                <h2 class="h4 mb-3" data-testid="title">@Model.Title</h2>
+                                <h2 class="h4 mb-4" data-testid="title">@Model.Title</h2>
                             }
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="text-muted text-nowrap" text-translate="true">Start Date</span>
-                                <span class="text-nowrap">@Model.StartDate.ToBrowserDate()</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-btcpay-body-text-muted whitespace-nowrap" text-translate="true">Start Date</span>
+                                <span class="whitespace-nowrap">@Model.StartDate.ToBrowserDate()</span>
                             </div>
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="text-muted text-nowrap" text-translate="true">Last Updated</span>
-                                <span class="text-nowrap">@Model.LastRefreshed.ToBrowserDate()</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-btcpay-body-text-muted whitespace-nowrap" text-translate="true">Last Updated</span>
+                                <span class="whitespace-nowrap">@Model.LastRefreshed.ToBrowserDate()</span>
                             </div>
-                            <div class="d-flex align-items-center only-for-js gap-3 my-3">
-                                <button type="button" class="btn btn-link fw-semibold d-print-none p-0" id="copyLink" text-translate="true">
+                            <div class="flex items-center only-for-js gap-4 my-4">
+                                <button type="button" class="btn btn-link font-semibold print:hidden p-0" id="copyLink" text-translate="true">
                                     Copy Link
                                 </button>
-                                <button type="button" class="btn btn-link fw-semibold d-print-none p-0" page-qr>
+                                <button type="button" class="btn btn-link font-semibold print:hidden p-0" page-qr>
                                     <vc:icon symbol="qr-code" />
                                     <span text-translate="true">Show QR</span>
                                 </button>
@@ -114,35 +114,35 @@
                             @if (!string.IsNullOrEmpty(Model.EndsIn))
                             {
                                 <p>
-                                    <span class="text-muted text-nowrap" text-translate="true">Ends in</span>
+                                    <span class="text-btcpay-body-text-muted whitespace-nowrap" text-translate="true">Ends in</span>
                                     &nbsp;
-                                    <span class="text-nowrap">@Model.EndsIn</span>
+                                    <span class="whitespace-nowrap">@Model.EndsIn</span>
                                 </p>
                             }
                             @if (!string.IsNullOrEmpty(Model.Description))
                             {
-                                <div class="mt-4" data-testid="description">@Safe.Raw(Model.Description)</div>
+                                <div class="mt-6" data-testid="description">@Safe.Raw(Model.Description)</div>
                             }
                         </div>
                     </div>
-                    <div class="col col-12 col-lg-6 mb-4">
-                        <div class="bg-tile h-100 m-0 p-3 p-sm-5 rounded">
-                            <h2 class="h4 mb-3" text-translate="true">Payment Details</h2>
-                            <dl class="mb-0 mt-md-4">
-                                <div class="d-flex d-print-inline-block flex-column mb-4 me-5">
-                                    <dt class="h4 fw-semibold text-nowrap text-primary text-print-default order-2 order-sm-1 mb-1">@DisplayFormatter.Currency(Model.AmountDue, Model.Currency)</dt>
-                                    <dd class="order-1 order-sm-2 mb-1" text-translate="true">Available claim</dd>
+                    <div class="col col-12 col-lg-6 mb-6">
+                        <div class="bg-tile h-full m-0 p-4 sm:p-12 rounded">
+                            <h2 class="h4 mb-4" text-translate="true">Payment Details</h2>
+                            <dl class="mb-0 md:mt-6">
+                                <div class="flex print:inline-block flex-col mb-6 me-12">
+                                    <dt class="h4 font-semibold whitespace-nowrap text-btcpay-primary text-print-default order-2 sm:order-1 mb-1">@DisplayFormatter.Currency(Model.AmountDue, Model.Currency)</dt>
+                                    <dd class="order-1 sm:order-2 mb-1" text-translate="true">Available claim</dd>
                                 </div>
-                                <div class="progress bg-light d-none d-sm-flex mb-sm-4 d-print-none h-progress-sm">
+                                <div class="progress bg-light hidden sm:flex sm:mb-6 print:hidden h-progress-sm">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width:@((Model.AmountCollected / Model.Amount) * 100)%"></div>
                                 </div>
-                                <div class="d-flex d-print-inline-block flex-column mb-4 me-5 d-sm-inline-flex mb-sm-0">
-                                    <dt class="h4 fw-semibold text-nowrap order-2 order-sm-1 mb-1">@DisplayFormatter.Currency(Model.AmountCollected, Model.Currency)</dt>
-                                    <dd class="order-1 order-sm-2 mb-1" text-translate="true">Already claimed</dd>
+                                <div class="flex print:inline-block flex-col mb-6 me-12 sm:inline-flex sm:mb-0">
+                                    <dt class="h4 font-semibold whitespace-nowrap order-2 sm:order-1 mb-1">@DisplayFormatter.Currency(Model.AmountCollected, Model.Currency)</dt>
+                                    <dd class="order-1 sm:order-2 mb-1" text-translate="true">Already claimed</dd>
                                 </div>
-                                <div class="d-flex d-print-inline-block flex-column mb-0 d-sm-inline-flex float-sm-end">
-                                    <dt class="h4 text-sm-end fw-semibold text-nowrap order-2 order-sm-1 mb-1" id="claimLimit">@DisplayFormatter.Currency(Model.Amount, Model.Currency)</dt>
-                                    <dd class="text-sm-end order-1 order-sm-2 mb-1" text-translate="true">Claim limit</dd>
+                                <div class="flex print:inline-block flex-col mb-0 sm:inline-flex sm:float-end">
+                                    <dt class="h4 sm:text-end font-semibold whitespace-nowrap order-2 sm:order-1 mb-1" id="claimLimit">@DisplayFormatter.Currency(Model.Amount, Model.Currency)</dt>
+                                    <dd class="sm:text-end order-1 sm:order-2 mb-1" text-translate="true">Claim limit</dd>
                                 </div>
                             </dl>
                         </div>
@@ -150,7 +150,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="bg-tile h-100 m-0 p-3 p-sm-5 rounded">
+                        <div class="bg-tile h-full m-0 p-4 sm:p-12 rounded">
                             <h2 class="h4 mb-0" text-translate="true">Claims</h2>
                             @if (Model.Payouts.Any())
                             {
@@ -158,10 +158,10 @@
                                     <table class="table my-0">
                                         <thead>
                                             <tr class="table-borderless">
-                                                <th class="fw-normal text-secondary" scope="col" text-translate="true">Destination</th>
-                                                <th class="fw-normal text-secondary" scope="col" text-translate="true">Method</th>
-                                                <th class="fw-normal text-secondary text-end text-nowrap" text-translate="true">Amount requested</th>
-                                                <th class="fw-normal text-secondary text-end" text-translate="true">Status</th>
+                                                <th class="font-normal text-btcpay-body-text-muted" scope="col" text-translate="true">Destination</th>
+                                                <th class="font-normal text-btcpay-body-text-muted" scope="col" text-translate="true">Method</th>
+                                                <th class="font-normal text-btcpay-body-text-muted text-end whitespace-nowrap" text-translate="true">Amount requested</th>
+                                                <th class="font-normal text-btcpay-body-text-muted text-end" text-translate="true">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -171,16 +171,16 @@
                                                     <td class="text-break">
                                                         @invoice.Destination
                                                     </td>
-                                                    <td class="text-nowrap">@invoice.PaymentMethod.ToString()</td>
-                                                    <td class="text-end text-nowrap">@invoice.AmountFormatted</td>
-                                                    <td class="text-end text-nowrap">
+                                                    <td class="whitespace-nowrap">@invoice.PaymentMethod.ToString()</td>
+                                                    <td class="text-end whitespace-nowrap">@invoice.AmountFormatted</td>
+                                                    <td class="text-end whitespace-nowrap">
                                                         @if (!string.IsNullOrEmpty(invoice.Link))
                                                         {
-                                                            <a class="transaction-link text-white badge @StatusTextClass(invoice.Status.ToString())" href="@invoice.Link" rel="noreferrer noopener">@invoice.Status.GetStateString()</a>
+                                                            <a class="transaction-link text-btcpay-white badge @StatusTextClass(invoice.Status.ToString())" href="@invoice.Link" rel="noreferrer noopener">@invoice.Status.GetStateString()</a>
                                                         }
                                                         else
                                                         {
-                                                            <span class="text-white badge @StatusTextClass(invoice.Status.ToString())">@invoice.Status.GetStateString()</span>
+                                                            <span class="text-btcpay-white badge @StatusTextClass(invoice.Status.ToString())">@invoice.Status.GetStateString()</span>
                                                         }
                                                     </td>
                                                 </tr>
@@ -191,7 +191,7 @@
                             }
                             else
                             {
-                                <p class="text-muted mt-3 mb-0" text-translate="true">No claim made yet.</p>
+                                <p class="text-btcpay-body-text-muted mt-4 mb-0" text-translate="true">No claim made yet.</p>
                             }
                         </div>
                     </div>
@@ -240,7 +240,7 @@
         var note = "<p>You can scan or open this link with a <a href='https://github.com/fiatjaf/lnurl-rfc#lnurl-documents' target='_blank' rel='noreferrer noopener'>LNURL-Withdraw</a> enabled wallet.</p>";
         if (!Model.AutoApprove)
         {
-            note += "<p class='fw-semibold'>Please note that this pull payment does not automatically send out funds, but will process the payment after the LNURL-withdraw flow is completed.</p>";
+            note += "<p class='font-semibold'>Please note that this pull payment does not automatically send out funds, but will process the payment after the LNURL-withdraw flow is completed.</p>";
         }
         <script>
             document.addEventListener("DOMContentLoaded", () => {

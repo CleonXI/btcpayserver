@@ -60,7 +60,7 @@
                     <th text-translate="true" class="w-75px">Payment Method</th>
                     <th text-translate="true" class="w-100px">Index</th>
                     <th text-translate="true" class="w-175px">Destination</th>
-                    <th text-translate="true" class="text-nowrap">Payment Proof</th>
+                    <th text-translate="true" class="whitespace-nowrap">Payment Proof</th>
                     @if (hasNetworkFee)
                     {
                         <th class="text-end">
@@ -88,11 +88,11 @@
                         </td>
                         @if (hasNetworkFee)
                         {
-                            <td class="text-end text-nowrap">@payment.NetworkFee</td>
+                            <td class="text-end whitespace-nowrap">@payment.NetworkFee</td>
                         }
                         <td class="text-end">@payment.Confirmations</td>
-                        <td class="payment-value text-end text-nowrap">
-                            <span data-sensitive class="text-success">@DisplayFormatter.Currency(payment.Value, payment.Currency)</span>
+                        <td class="payment-value text-end whitespace-nowrap">
+                            <span data-sensitive class="text-btcpay-success">@DisplayFormatter.Currency(payment.Value, payment.Currency)</span>
                             @if (!string.IsNullOrEmpty(payment.AdditionalInformation))
                             {
                                 <div>(@payment.AdditionalInformation)</div>

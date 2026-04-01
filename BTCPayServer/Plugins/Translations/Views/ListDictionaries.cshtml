@@ -7,7 +7,7 @@
 
 <div class="sticky-header">
 	<h2>@ViewData["Title"]</h2>
-	<div class="d-flex gap-2">
+	<div class="flex gap-2">
 		<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#downloadLanguagePackModal" text-translate="true">
 			Download language pack
 		</button>
@@ -28,7 +28,7 @@
 			<tr>
 				<th text-translate="true">Dictionary</th>
 				<th text-translate="true">Fallback</th>
-				<th class="text-end d-print-none"></th>
+				<th class="text-end print:hidden"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -36,7 +36,7 @@
 			{
 				<tr>
                     <td>
-                        <div class="d-flex flex-wrap align-items-center gap-2">
+                        <div class="flex flex-wrap items-center gap-2">
                             @if (!v.Editable)
                             {
                                 <span >@v.DictionaryName</span>
@@ -47,25 +47,25 @@
                             }
                             @if (v.IsSelected)
                             {
-                                <span class="badge bg-info" text-translate="true">
+                                <span class="badge bg-btcpay-info" text-translate="true">
                                     In use
                                 </span>
                             }
                         </div>
                     </td>
 					<td>@v.Fallback</td>
-					<td class="text-end d-print-none">
-						<div class="d-inline-flex align-items-center gap-3">
+					<td class="text-end print:hidden">
+						<div class="inline-flex items-center gap-4">
 							@if (v.IsDownloadedLanguagePack && v.UpdateAvailable)
 							{
-								<form method="post" asp-action="DownloadLanguagePack" asp-route-language="@v.DictionaryName" class="d-inline">
+								<form method="post" asp-action="DownloadLanguagePack" asp-route-language="@v.DictionaryName" class="inline">
 									<button type="submit" class="btn btn-link p-0">Update</button>
 								</form>
 							}
 							<a asp-action="CreateDictionary" asp-route-fallback="@v.DictionaryName" text-translate="true">Clone</a>
 							@if (!v.IsSelected)
 							{
-                                <form method="post" asp-action="SelectDictionary" asp-route-dictionary="@v.DictionaryName" class="d-inline">
+                                <form method="post" asp-action="SelectDictionary" asp-route-dictionary="@v.DictionaryName" class="inline">
                                     <button id="Select-@v.DictionaryName" type="submit" class="btn btn-link p-0" text-translate="true">Select
                                     </button>
                                 </form>
@@ -96,7 +96,7 @@
 				</div>
 				<div class="modal-body">
 					<p text-translate="true">Select a language to download from the community translation repository.</p>
-					<p class="mb-3">
+					<p class="mb-4">
 						<span text-translate="true">These translations are maintained by the community at</span>
 						<a href="https://github.com/btcpayserver/btcpayserver-translator" target="_blank" rel="noopener noreferrer">btcpayserver-translator</a>.
 					</p>

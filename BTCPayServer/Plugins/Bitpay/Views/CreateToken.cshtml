@@ -34,17 +34,17 @@
                 <label asp-for="Label" class="form-label"></label>
                 @if (ViewBag.HidePublicKey)
                 {
-                    <small class="text-muted" text-translate="true">optional</small>
+                    <small class="text-btcpay-body-text-muted" text-translate="true">optional</small>
                 }
                 <input asp-for="Label" class="form-control" />
-                <span asp-validation-for="Label" class="text-danger"></span>
+                <span asp-validation-for="Label" class="text-btcpay-danger"></span>
             </div>
             @if (!ViewBag.HidePublicKey)
             {
                 <div class="form-group">
                     <label asp-for="PublicKey" class="form-label"></label>
                     <input asp-for="PublicKey" class="form-control" />
-                    <span asp-validation-for="PublicKey" class="text-danger"></span>
+                    <span asp-validation-for="PublicKey" class="text-btcpay-danger"></span>
                     <div class="form-text" text-translate="true">Keep empty for server-initiated pairing.</div>
                 </div>
             }
@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label asp-for="Stores" class="form-label"></label>
                     <select asp-for="StoreId" asp-items="Model.Stores" class="form-select"></select>
-                    <span asp-validation-for="StoreId" class="text-danger"></span>
+                    <span asp-validation-for="StoreId" class="text-btcpay-danger"></span>
                 </div>
             }
             else

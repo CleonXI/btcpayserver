@@ -45,19 +45,19 @@
             <div class="form-group">
                 <label asp-for="Name" class="form-label" data-required></label>
                 <input asp-for="Name" class="form-control" required />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <span asp-validation-for="Name" class="text-btcpay-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SuccessRedirectUrl" class="form-label"></label>
                 <input asp-for="SuccessRedirectUrl" class="form-control" placeholder="https://example.com/success" />
-                <span asp-validation-for="SuccessRedirectUrl" class="text-danger"></span>
+                <span asp-validation-for="SuccessRedirectUrl" class="text-btcpay-danger"></span>
             </div>
         </div>
     </div>
 
 
-    <section id="features" class="mt-4">
-        <div class="d-flex align-items-center gap-4">
+    <section id="features" class="mt-6">
+        <div class="flex items-center gap-6">
             <h4 text-translate="true">Features</h4>
             <button type="submit" name="command" value="AddItem" class="btn btn-outline-secondary" id="AddPlanItem">Add item</button>
         </div>
@@ -81,14 +81,14 @@
                                 <tr>
                                     <td>
                                         <input asp-for="Features[i].Id" class="form-control">
-                                        <span asp-validation-for="Features[i].Id" class="text-danger"></span>
+                                        <span asp-validation-for="Features[i].Id" class="text-btcpay-danger"></span>
                                     </td>
                                     <td>
-                                        <input asp-for="Features[i].ShortDescription" class="form-control w-100">
-                                        <span asp-validation-for="Features[i].ShortDescription" class="text-danger"></span>
+                                        <input asp-for="Features[i].ShortDescription" class="form-control w-full">
+                                        <span asp-validation-for="Features[i].ShortDescription" class="text-btcpay-danger"></span>
                                     </td>
                                     <td>
-                                        <button type="submit" name="removeIndex" value="@i" class="d-inline-block btn text-danger btn-link">
+                                        <button type="submit" name="removeIndex" value="@i" class="inline-block btn text-btcpay-danger btn-link">
                                             <vc:icon symbol="cross" />
                                         </button>
                                     </td>
@@ -101,7 +101,7 @@
             </div>
         }
 
-        <div class="d-grid d-sm-flex flex-wrap gap-3 mt-3">
+        <div class="grid sm:flex flex-wrap gap-4 mt-4">
             <a id="DeleteApp" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#ConfirmModal"
                data-description="The app <strong>@Html.Encode(Model.Name)</strong> and its settings will be permanently deleted."
                data-confirm-input="@StringLocalizer["Delete"]"

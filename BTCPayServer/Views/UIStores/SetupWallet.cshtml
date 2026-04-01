@@ -9,7 +9,7 @@
 
 <h1 class="text-center" text-translate="true">Let's get started</h1>
 <br>
-<div class="mt-5">
+<div class="mt-12">
     <div class="list-group">
         <a asp-controller="UIStores" asp-action="ImportWallet" asp-route-storeId="@Model.StoreId" asp-route-cryptoCode="@Model.CryptoCode" id="ImportWalletOptionsLink" class="list-group-item list-group-item-action">
             <div class="image">
@@ -17,7 +17,7 @@
             </div>
             <div class="content">
 				<h4 text-translate="true">Connect an existing wallet</h4>
-                <p class="mb-0 text-secondary" text-translate="true">Import an existing hardware or software wallet</p>
+                <p class="mb-0 text-btcpay-body-text-muted" text-translate="true">Import an existing hardware or software wallet</p>
             </div>
             <vc:icon symbol="caret-right" />
         </a>
@@ -27,7 +27,7 @@
 @if (Model.CanUseHotWallet || Model.CanCreateNewColdWallet)
 {
     <br>
-    <div class="mt-5">
+    <div class="mt-12">
         <div class="list-group">
             <a asp-controller="UIStores" asp-action="GenerateWallet" asp-route-storeId="@Model.StoreId" asp-route-cryptoCode="@Model.CryptoCode" id="GenerateWalletLink" class="list-group-item list-group-item-action">
                 <div class="image">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="content">
                     <h4 text-translate="true">Create a new wallet</h4>
-                    <p class="mb-0 text-secondary" text-translate="true">Generate a brand-new wallet to use</p>
+                    <p class="mb-0 text-btcpay-body-text-muted" text-translate="true">Generate a brand-new wallet to use</p>
                 </div>
                 <vc:icon symbol="caret-right"/>
             </a>

@@ -8,7 +8,7 @@
     ViewData.SetTitle(Model.Archived ? StringLocalizer["Archived Stores"] : StringLocalizer["Stores"]);
 }
 
-<h2 class="mb-2 mb-lg-3">@ViewData["Title"]</h2>
+<h2 class="mb-2 lg:mb-4">@ViewData["Title"]</h2>
 <partial name="_StatusMessage" />
 @if (Model.Stores.Any())
 {
@@ -36,7 +36,7 @@
 }
 else
 {
-    <p class="text-secondary mt-3">
+    <p class="text-btcpay-body-text-muted mt-4">
         <span text-translate="true">There are no stores yet.</span>
         <span permission="@Policies.CanModifyStoreSettingsUnscoped"><a asp-action="CreateStore" text-translate="true">Create a store</a>.</span>
     </p>

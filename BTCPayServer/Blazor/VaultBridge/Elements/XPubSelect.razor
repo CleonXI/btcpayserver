@@ -1,7 +1,7 @@
 ﻿@using NBitcoin
 @inherits VaultElement
 
-<div id="vault-xpub" class="mt-4">
+<div id="vault-xpub" class="mt-6">
     <div class="form-group">
         <label for="addressType" class="form-label">@ui.StringLocalizer["Address type"]</label>
         <select id="addressType" @bind="AddressType" name="addressType" class="form-select w-auto">
@@ -23,7 +23,7 @@
                style="max-width:12ch;" />
     </div>
 </div>
-<button id="vault-confirm" class="btn btn-primary mt-4" type="button" @onclick="OnConfirmXPubClick">@ui.StringLocalizer["Confirm"]</button>
+<button id="vault-confirm" class="btn btn-primary mt-6" type="button" @onclick="OnConfirmXPubClick">@ui.StringLocalizer["Confirm"]</button>
 
 @code {
     private readonly VaultBridgeUI ui;

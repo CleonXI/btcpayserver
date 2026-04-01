@@ -38,22 +38,22 @@
         #AdditionalData table > tbody > tr:first-child > td > h4, #CartData table > tbody > tr:first-child > td > h4 { margin-top: 0 !important; }
     </style>
 </head>
-<body class="min-vh-100">
+<body class="min-h-screen">
     <div id="InvoiceReceipt" class="public-page-wrap">
-        <main class="flex-grow-1">
-            <div class="d-flex flex-column justify-content-center gap-4">
+        <main class="grow">
+            <div class="flex flex-col justify-center gap-6">
                 <partial name="_StoreHeader" model="(Model.StoreName, Model.StoreBranding)" />
                 <partial name="_StatusMessage" model="@(new ViewDataDictionary(ViewData) { { "Margin", "mb-4" } })"/>
-                <div id="InvoiceSummary" class="tile d-flex flex-wrap align-items-center justify-content-center">
+                <div id="InvoiceSummary" class="tile flex flex-wrap items-center justify-center">
                     @if (isProcessing)
                     {
-                        <div class="lead text-center p-4 fw-semibold" id="invoice-processing">
+                        <div class="lead text-center p-6 font-semibold" id="invoice-processing">
                             The invoice has detected a payment but is still waiting to be settled.
                         </div>
                     }
                     else if (!isSettled)
                     {
-                        <div class="lead text-center p-4 fw-semibold" id="invoice-unsettled">
+                        <div class="lead text-center p-6 font-semibold" id="invoice-unsettled">
                             The invoice is not settled.
                         </div>
                     }
@@ -63,46 +63,46 @@
                         {
                             <vc:qr-code data="@Context.Request.GetCurrentUrl()" />
                         }
-                        <div class="d-flex gap-4 mb-0 flex-fill">
-                            <dl class="d-flex flex-column gap-4 mb-0 flex-fill">
-                                <div class="d-flex flex-column">
-                                    <dd class="text-muted mb-0 fw-semibold">Amount Paid</dd>
-                                    <dt class="fs-2 mb-0 text-nowrap fw-semibold">@DisplayFormatter.Currency(Model.Amount, Model.Currency, DisplayFormatter.CurrencyFormat.Symbol)</dt>
+                        <div class="flex gap-6 mb-0 flex-1">
+                            <dl class="flex flex-col gap-6 mb-0 flex-1">
+                                <div class="flex flex-col">
+                                    <dd class="text-btcpay-body-text-muted mb-0 font-semibold">Amount Paid</dd>
+                                    <dt class="fs-2 mb-0 whitespace-nowrap font-semibold">@DisplayFormatter.Currency(Model.Amount, Model.Currency, DisplayFormatter.CurrencyFormat.Symbol)</dt>
                                 </div>
                                 @if (Model.TaxIncluded != 0.0m)
                                 {
-                                    <div class="d-flex flex-column">
-                                        <dd class="text-muted mb-0 fw-semibold">Total Taxes</dd>
-                                        <dt class="fs-5 mb-0 text-nowrap fw-semibold">@DisplayFormatter.Currency(Model.TaxIncluded, Model.Currency, DisplayFormatter.CurrencyFormat.Symbol)</dt>
+                                    <div class="flex flex-col">
+                                        <dd class="text-btcpay-body-text-muted mb-0 font-semibold">Total Taxes</dd>
+                                        <dt class="fs-5 mb-0 whitespace-nowrap font-semibold">@DisplayFormatter.Currency(Model.TaxIncluded, Model.Currency, DisplayFormatter.CurrencyFormat.Symbol)</dt>
                                     </div>
                                 }
-                                <div class="d-flex flex-column">
-                                    <dd class="text-muted mb-0 fw-semibold">Date</dd>
-                                    <dt class="fs-5 mb-0 text-nowrap fw-semibold">@Model.Timestamp.ToBrowserDate()</dt>
+                                <div class="flex flex-col">
+                                    <dd class="text-btcpay-body-text-muted mb-0 font-semibold">Date</dd>
+                                    <dt class="fs-5 mb-0 whitespace-nowrap font-semibold">@Model.Timestamp.ToBrowserDate()</dt>
                                 </div>
                                 @if (!string.IsNullOrEmpty(Model.OrderId))
                                 {
-                                    <div class="d-flex flex-column">
-                                        <dd class="text-muted mb-0 fw-semibold">Order ID</dd>
-                                        <dt class="fs-5 mb-0 text-break fw-semibold">@Model.OrderId</dt>
+                                    <div class="flex flex-col">
+                                        <dd class="text-btcpay-body-text-muted mb-0 font-semibold">Order ID</dd>
+                                        <dt class="fs-5 mb-0 text-break font-semibold">@Model.OrderId</dt>
                                     </div>
                                 }
                             </dl>
-                            <a href="?print=true" class="flex-grow-0 align-self-start btn btn-secondary d-print-none fs-4" target="_blank" id="ReceiptLinkPrint">Print</a>
+                            <a href="?print=true" class="grow-0 self-start btn btn-secondary print:hidden fs-4" target="_blank" id="ReceiptLinkPrint">Print</a>
                         </div>
                     }
                 </div>
 
                 @if (isProcessing)
                 {
-                    <small class="d-block text-muted text-center px-4">This page will refresh periodically until the invoice is settled.</small>
+                    <small class="block text-btcpay-body-text-muted text-center px-6">This page will refresh periodically until the invoice is settled.</small>
                 }
                 else if (isSettled)
                 {
                     if (Model.AdditionalData?.Any() is true)
                     {
                         <div id="AdditionalData" class="tile">
-                            <h2 class="h4 mb-3">Additional Data</h2>
+                            <h2 class="h4 mb-4">Additional Data</h2>
                             <div class="table-responsive my-0">
                                 <partial name="PosData" model="(Model.AdditionalData, 1)"/>
                             </div>
@@ -111,7 +111,7 @@
                     if (Model.CartData?.Any() is true)
                     {
                         <div id="CartData" class="tile">
-                            <h2 class="h4 mb-3">Cart</h2>
+                            <h2 class="h4 mb-4">Cart</h2>
                             <div class="table-responsive my-0">
                                 <partial name="PosData" model="(Model.CartData, 1)" />
                             </div>
@@ -120,16 +120,16 @@
                     if (Model.Payments?.Any() is true)
                     {
                         <div id="PaymentDetails" class="tile">
-                            <h2 class="h4 mb-3">Payment Details</h2>
-                            <div class="table-responsive my-0 d-print-none">
+                            <h2 class="h4 mb-4">Payment Details</h2>
+                            <div class="table-responsive my-0 print:hidden">
                                 <table class="invoice table table-borderless">
                                     <thead>
 										<tr>
-											<th class="fw-normal text-secondary">Destination</th>
-											<th class="fw-normal text-secondary">Payment</th>
-											<th class="fw-normal text-secondary">Rate</th>
-											<th class="fw-normal text-secondary">Payment Method</th>
-											<th class="fw-normal text-secondary text-nowrap">Date</th>
+											<th class="font-normal text-btcpay-body-text-muted">Destination</th>
+											<th class="font-normal text-btcpay-body-text-muted">Payment</th>
+											<th class="font-normal text-btcpay-body-text-muted">Rate</th>
+											<th class="font-normal text-btcpay-body-text-muted">Payment Method</th>
+											<th class="font-normal text-btcpay-body-text-muted whitespace-nowrap">Date</th>
 										</tr>
                                     </thead>
                                     @foreach (var payment in Model.Payments)
@@ -143,21 +143,21 @@
 													}
 												</td>
 												<td>
-													<span class="d-block fw-semibold text-nowrap">@payment.AmountFormatted</span>
-													<small class="text-muted text-nowrap">@payment.PaidFormatted</small>
+													<span class="block font-semibold whitespace-nowrap">@payment.AmountFormatted</span>
+													<small class="text-btcpay-body-text-muted whitespace-nowrap">@payment.PaidFormatted</small>
 												</td>
-												<td class="text-nowrap">@payment.RateFormatted</td>
-												<td class="text-nowrap">@payment.PaymentMethod</td>
-												<td class="text-nowrap">@payment.ReceivedDate.ToBrowserDate()</td>
+												<td class="whitespace-nowrap">@payment.RateFormatted</td>
+												<td class="whitespace-nowrap">@payment.PaymentMethod</td>
+												<td class="whitespace-nowrap">@payment.ReceivedDate.ToBrowserDate()</td>
 											</tr>
 
 											@if (!string.IsNullOrEmpty(payment.PaymentProof))
 											{
 												<tr>
-													<th class="fw-normal text-nowrap text-secondary">
+													<th class="font-normal whitespace-nowrap text-btcpay-body-text-muted">
 														Payment Proof
 													</th>
-													<td class="fw-normal" colspan="4">
+													<td class="font-normal" colspan="4">
 														<vc:truncate-center text="@payment.PaymentProof" link="@payment.Link" classes="truncate-center-id" />
 													</td>
 												</tr>
@@ -166,10 +166,10 @@
                                     }
                                 </table>
                             </div>
-                            <div class="d-none d-print-block">
+                            <div class="hidden print:block">
                                 @foreach (var payment in Model.Payments)
                                 {
-                                    <div class="mb-4">
+                                    <div class="mb-6">
                                         <strong>@payment.PaidFormatted</strong> = @payment.Amount @payment.PaymentMethod, Rate: @payment.RateFormatted
                                         @if (!string.IsNullOrEmpty(payment.PaymentProof))
                                         {
@@ -183,12 +183,12 @@
                 }
                 @if (!string.IsNullOrEmpty(Model.RedirectUrl))
                 {
-                    <a href="@Model.RedirectUrl" class="btn btn-secondary rounded-pill mx-auto mt-3" rel="noreferrer noopener" target="_blank" id="StoreLink">Return to @(string.IsNullOrEmpty(Model.StoreName) ? "store" : Model.StoreName)</a>
+                    <a href="@Model.RedirectUrl" class="btn btn-secondary rounded-full mx-auto mt-4" rel="noreferrer noopener" target="_blank" id="StoreLink">Return to @(string.IsNullOrEmpty(Model.StoreName) ? "store" : Model.StoreName)</a>
                 }
             </div>
         </main>
         <footer class="store-footer">
-            <p permission="@Policies.CanViewInvoices" class="d-print-none">
+            <p permission="@Policies.CanViewInvoices" class="print:hidden">
                 <a asp-action="Invoice" asp-route-invoiceId="@Model.InvoiceId">
                     Admin details
                 </a>

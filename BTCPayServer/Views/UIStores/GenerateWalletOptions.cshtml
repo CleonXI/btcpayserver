@@ -14,7 +14,7 @@
 
 <h1 class="text-center" text-translate="true">Choose your wallet option</h1>
 
-<div class="list-group mt-5">
+<div class="list-group mt-12">
 	@if (Model.CanUseHotWallet)
 	{
 		<a asp-controller="UIStores" asp-action="GenerateWallet" asp-route-storeId="@Model.StoreId" asp-route-cryptoCode="@Model.CryptoCode" asp-route-method="@WalletSetupMethod.HotWallet.ToString()" id="GenerateHotwalletLink" class="list-group-item list-group-item-action">
@@ -23,7 +23,7 @@
 			</div>
 			<div class="content">
 				<h4 text-translate="true">Hot wallet</h4>
-				<p class="mb-0 text-secondary" text-translate="true">
+				<p class="mb-0 text-btcpay-body-text-muted" text-translate="true">
 					Wallet's private key is stored on the server. Spending the funds you received is convenient. To minimize the risk of theft, regularly withdraw funds to a different wallet.
 				</p>
 			</div>
@@ -32,7 +32,7 @@
 	}
 	else
 	{
-		<div class="list-group-item text-muted">
+		<div class="list-group-item text-btcpay-body-text-muted">
 			<div class="image">
 				<vc:icon symbol="wallet-hot"/>
 			</div>
@@ -44,7 +44,7 @@
 	}
 </div>
 
-<div class="list-group mt-4">
+<div class="list-group mt-6">
 	@if (Model.CanCreateNewColdWallet)
 	{
 		<a asp-controller="UIStores" asp-action="GenerateWallet" asp-route-storeId="@Model.StoreId" asp-route-cryptoCode="@Model.CryptoCode" asp-route-method="@WalletSetupMethod.WatchOnly.ToString()" id="GenerateWatchonlyLink" class="list-group-item list-group-item-action">
@@ -53,7 +53,7 @@
 			</div>
 			<div class="content">
 				<h4 text-translate="true">Watch-only wallet</h4>
-				<p class="mb-0 text-secondary" text-translate="true">
+				<p class="mb-0 text-btcpay-body-text-muted" text-translate="true">
 					Wallet's private key is erased from the server. Higher security. To spend, you have to manually input the private key or import it into an external wallet.
 				</p>
 			</div>
@@ -62,7 +62,7 @@
 	}
 	else
 	{
-		<div class="list-group-item text-muted">
+		<div class="list-group-item text-btcpay-body-text-muted">
 			<div class="image">
 				<vc:icon symbol="wallet-watchonly" />
 			</div>

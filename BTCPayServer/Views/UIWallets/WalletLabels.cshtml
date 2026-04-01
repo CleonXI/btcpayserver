@@ -54,7 +54,7 @@
                         <button class="btn btn-link btn-edit p-0 me-3" type="button"
                                 data-label="@label.Label" text-translate="true">Edit
                         </button>
-                        <form method="post" asp-action="DeleteWalletLabel" asp-route-walletId="@Model.WalletId" asp-route-id="@label.Label" class="d-inline">
+                        <form method="post" asp-action="DeleteWalletLabel" asp-route-walletId="@Model.WalletId" asp-route-id="@label.Label" class="inline">
                             <button class="btn btn-link btn-delete p-0 me-3" type="submit" data-bs-toggle="modal" data-bs-target="#ConfirmModal" data-description="@StringLocalizer["The label {0} will be removed from this wallet and its associated transactions.", Html.Encode(label.Label)]" data-confirm-input="@StringLocalizer["DELETE"]" text-translate="true">Remove</button>
                         </form>
                     </td>
@@ -93,7 +93,7 @@
 }
 else
 {
-    <p class="text-secondary mt-3">
+    <p class="text-btcpay-body-text-muted mt-4">
         @ViewLocalizer["There are no custom labels yet. You can create custom labels by assigning them to your {0}.",
             Html.ActionLink(StringLocalizer["transactions"],
                 "WalletTransactions", "UIWallets", new { walletId })]

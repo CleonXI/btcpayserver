@@ -6,7 +6,7 @@
         .SetCategory(WellKnownCategories.ForWallet(w.CryptoCode)));
 }
 
-<h3 class="mb-3">@ViewData["Title"]</h3>
+<h3 class="mb-4">@ViewData["Title"]</h3>
 @if (!Model.Ok)
 {
     <div class="row">
@@ -15,42 +15,42 @@
             @if (Model.IsFullySync)
             {
                 <p>
-                    <vc:icon symbol="checkmark" css-class="text-success" />
+                    <vc:icon symbol="checkmark" css-class="text-btcpay-success" />
                     <span text-translate="true">The full node is synched</span>
                 </p>
             }
             else
             {
                 <p>
-                    <vc:icon symbol="cross" css-class="text-danger" />
+                    <vc:icon symbol="cross" css-class="text-btcpay-danger" />
                     <span text-translate="true">The full node is not synched</span>
                 </p>
             }
             @if (Model.IsServerAdmin)
             {
                 <p>
-                    <vc:icon symbol="checkmark" css-class="text-success" />
+                    <vc:icon symbol="checkmark" css-class="text-btcpay-success" />
                     <span text-translate="true">You are server administrator</span>
                 </p>
             }
             else
             {
                 <p>
-                    <vc:icon symbol="cross" css-class="text-danger" />
+                    <vc:icon symbol="cross" css-class="text-btcpay-danger" />
                     <span text-translate="true">You are not server administrator</span>
                 </p>
             }
             @if (Model.IsSupportedByCurrency)
             {
                 <p>
-                    <vc:icon symbol="checkmark" css-class="text-success" />
+                    <vc:icon symbol="checkmark" css-class="text-btcpay-success" />
                     <span text-translate="true">This full node support rescan of the UTXO set</span>
                 </p>
             }
             else
             {
                 <p>
-                    <vc:icon symbol="cross" css-class="text-danger" />
+                    <vc:icon symbol="cross" css-class="text-btcpay-danger" />
                     <span text-translate="true">This full node does not support rescan of the UTXO set</span>
                 </p>
             }

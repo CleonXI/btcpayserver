@@ -16,7 +16,7 @@
     <h1>Pay with @Model.StoreName</h1>
     @if (Model.Status == "new")
     {
-		<h1 class="text-danger" text-translate="true">This payment method requires javascript.</h1>
+		<h1 class="text-btcpay-danger" text-translate="true">This payment method requires javascript.</h1>
     }
     else if (Model.Status == "paid" || Model.Status == "complete" || Model.Status == "confirmed")
     {

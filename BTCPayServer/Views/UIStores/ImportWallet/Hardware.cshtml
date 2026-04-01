@@ -15,10 +15,10 @@
 
 <header class="text-center">
     <h1>@ViewData["Title"]</h1>
-    <p class="lead text-secondary mt-3" text-translate="true">In order to securely connect to your hardware wallet you must first download, install, and run the BTCPay Server Vault.</p>
+    <p class="lead text-btcpay-body-text-muted mt-4" text-translate="true">In order to securely connect to your hardware wallet you must first download, install, and run the BTCPay Server Vault.</p>
 </header>
 
-<div class="row mt-5 mb-4">
+<div class="row mt-12 mb-6">
     <div class="col-md-8 mx-auto">
         <component type="typeof(VaultBridgeUI)"
                    param-Controller=@(new GetXPubController()

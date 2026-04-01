@@ -51,7 +51,7 @@
     <h1>@ViewData["Title"]</h1>
 </header>
 
-<form method="post" asp-action="WalletSend" asp-route-walletId="@walletId" class="my-5" id="SendForm">
+<form method="post" asp-action="WalletSend" asp-route-walletId="@walletId" class="my-12" id="SendForm">
     <input type="hidden" asp-for="InputSelection" />
     <input type="hidden" asp-for="FiatDivisibility" />
     <input type="hidden" asp-for="CryptoDivisibility" />
@@ -67,7 +67,7 @@
 
     @if (!ViewContext.ModelState.IsValid)
     {
-        <ul class="text-danger">
+        <ul class="text-btcpay-danger">
             @foreach (var errors in ViewData.ModelState.Where(pair => pair.Key == string.Empty && pair.Value.ValidationState == ModelValidationState.Invalid))
             {
                 foreach (var error in errors.Value.Errors)
@@ -81,29 +81,29 @@
         @for (var index = 0; index < Model.Outputs.Count; index++)
         {
             <input type="hidden" asp-for="Outputs[index].PayoutId" />
-            <div class="list-group-item d-block px-0 pt-0 pb-3 mb-3">
+            <div class="list-group-item block px-0 pt-0 pb-4 mb-4">
                 <div class="form-group">
-                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="flex items-center justify-between">
                         <label asp-for="Outputs[index].DestinationAddress" class="form-label"></label>
                         @if (Model.Outputs.Count > 1)
                         {
-                            <button type="submit" name="command" value="@($"remove-output:{index}")" class="d-inline-block ms-2 btn text-danger btn-link p-0 mb-2">
+                            <button type="submit" name="command" value="@($"remove-output:{index}")" class="inline-block ms-2 btn text-btcpay-danger btn-link p-0 mb-2">
                                 <vc:icon symbol="cross" />
                                 <span text-translate="true">Remove Destination</span>
                             </button>
                         }
                     </div>
                     <div class="input-group">
-                        <input asp-for="Outputs[index].DestinationAddress" class="form-control font-monospace flex-grow-1" autocomplete="off" autofocus="@(index == Model.Outputs.Count - 1 ? "autofocus" : null)"/>
-                        <button type="button" id="scanqrcode" class="btn btn-secondary px-3 d-flex align-items-center justify-content-center only-for-js" data-bs-toggle="modal" data-bs-target="#scanModal" title="@StringLocalizer["Scan with camera"]" data-index="@index">
+                        <input asp-for="Outputs[index].DestinationAddress" class="form-control font-btcpay-mono grow" autocomplete="off" autofocus="@(index == Model.Outputs.Count - 1 ? "autofocus" : null)"/>
+                        <button type="button" id="scanqrcode" class="btn btn-secondary px-3 flex items-center justify-center only-for-js" data-bs-toggle="modal" data-bs-target="#scanModal" title="@StringLocalizer["Scan with camera"]" data-index="@index">
                             <vc:icon symbol="scan-qr" />
                         </button>
                     </div>
-                    <span asp-validation-for="Outputs[index].DestinationAddress" class="text-danger"></span>
+                    <span asp-validation-for="Outputs[index].DestinationAddress" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-group">
                     <label class="form-label" text-translate="true">Labels</label>
-                    <select asp-for="Outputs[index].Labels" class="d-none">
+                    <select asp-for="Outputs[index].Labels" class="hidden">
                         @foreach (var t in Model.Outputs[index].Labels)
                         {
                             <option value="@t" selected></option>
@@ -134,18 +134,18 @@
                             <span><br>@StringLocalizer["Note: {0} are still immature and require additional confirmations.", $"{Model.ImmatureBalance} {Model.CryptoCode}"]</span>
                         }
                     </div>
-                    <span asp-validation-for="Outputs[index].Amount" class="text-danger"></span>
+                    <span asp-validation-for="Outputs[index].Amount" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-check mb-0">
                     <input type="checkbox" asp-for="Outputs[index].SubtractFeesFromOutput" class="form-check-input subtract-fees" />
                     <label asp-for="Outputs[index].SubtractFeesFromOutput" class="form-check-label"></label>
-                    <span asp-validation-for="Outputs[index].SubtractFeesFromOutput" class="text-danger"></span>
+                    <span asp-validation-for="Outputs[index].SubtractFeesFromOutput" class="text-btcpay-danger"></span>
                 </div>
             </div>
         }
     </div>
 
-    <div class="d-grid d-sm-flex flex-wrap gap-3 mb-3 buttons">
+    <div class="grid sm:flex flex-wrap gap-4 mb-4 buttons">
         <button type="submit" name="command" value="add-output" class="btn btn-secondary" text-translate="true">Add destination</button>
         <button type="submit" name="command" value="toggle-input-selection" class="btn btn-secondary" id="toggleInputSelection">@(Model.InputSelection ? StringLocalizer["Hide coin selection"] : StringLocalizer["Show coin selection"])</button>
         <a asp-controller="UIWallets" asp-action="WalletPSBT" asp-route-walletId="@walletId" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-secondary" id="PSBT" text-translate="true">Use PSBT</a>
@@ -154,25 +154,25 @@
 
     @if (Model.InputSelection)
     {
-        <div class="my-5">
+        <div class="my-12">
             <partial name="CoinSelection" />
         </div>
     }
 
-    <div class="d-flex flex-wrap gap-3 my-4">
+    <div class="flex flex-wrap gap-4 my-6">
         <div>
             <label asp-for="FeeSatoshiPerByte" class="form-label">
                 <span text-translate="true">Fee rate</span>
-                <span class="text-secondary">(sat/vB)</span>
+                <span class="text-btcpay-body-text-muted">(sat/vB)</span>
             </label>
             <input asp-for="FeeSatoshiPerByte" type="number" inputmode="numeric" min="0" step="any" class="form-control" style="max-width:14ch;" />
-            <span asp-validation-for="FeeSatoshiPerByte" class="text-danger"></span>
-            <span id="FeeRate-Error" class="text-danger"></span>
+            <span asp-validation-for="FeeSatoshiPerByte" class="text-btcpay-danger"></span>
+            <span id="FeeRate-Error" class="text-btcpay-danger"></span>
         </div>
         @if (Model.RecommendedSatoshiPerByte.Any())
         {
             <div>
-                <div class="form-label text-secondary" text-translate="true">Confirm in the next …</div>
+                <div class="form-label text-btcpay-body-text-muted" text-translate="true">Confirm in the next …</div>
                 <div class="btn-group btn-group-toggle feerate-options" role="group" data-bs-toggle="buttons">
                     @for (var index = 0; index < Model.RecommendedSatoshiPerByte.Count; index++)
                     {
@@ -191,39 +191,39 @@
     <div class="form-group">
         <label asp-for="Comment" class="form-label"></label>
         <textarea asp-for="Comment" class="form-control" rows="2" maxlength="200" placeholder="@StringLocalizer["Optional note about this transaction"]"></textarea>
-        <span asp-validation-for="Comment" class="text-danger"></span>
+        <span asp-validation-for="Comment" class="text-btcpay-danger"></span>
     </div>
 
-    <div class="my-4">
-        <button class="d-inline-flex align-items-center btn btn-link text-primary fw-semibold p-0" type="button" id="AdvancedSettingsButton" data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
+    <div class="my-6">
+        <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="AdvancedSettingsButton" data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
             <vc:icon symbol="caret-down"/>
             <span class="ms-1" text-translate="true">Advanced settings</span>
         </button>
         <div id="AdvancedSettings" class="collapse">
-            <div class="pt-3">
-                <div class="d-flex mb-3">
-                    <input asp-for="NoChange" class="btcpay-toggle me-3" />
+            <div class="pt-4">
+                <div class="flex mb-4">
+                    <input asp-for="NoChange" class="btcpay-toggle me-4" />
                     <label asp-for="NoChange" class="form-check-label me-1"></label>
                     <a href="https://docs.btcpayserver.org/Wallet/#dont-create-utxo-change" target="_blank" rel="noreferrer noopener">
                         <vc:icon symbol="info" />
                     </a>
                 </div>
-                <div class="d-flex mb-3">
-                    <input asp-for="AlwaysIncludeNonWitnessUTXO" class="btcpay-toggle me-3"/>
+                <div class="flex mb-4">
+                    <input asp-for="AlwaysIncludeNonWitnessUTXO" class="btcpay-toggle me-4"/>
                     <label asp-for="AlwaysIncludeNonWitnessUTXO" class="form-check-label"></label>
                 </div>
 
                 @if (!string.IsNullOrEmpty(Model.PayJoinBIP21))
                 {
-                    <div class="d-flex mb-3">
-                        <input asp-for="PayJoinBIP21" class="btcpay-toggle me-3" />
+                    <div class="flex mb-4">
+                        <input asp-for="PayJoinBIP21" class="btcpay-toggle me-4" />
                         <label asp-for="PayJoinBIP21" class="form-label"></label>
                     </div>
                 }
             </div>
         </div>
     </div>
-    <div class="d-grid d-sm-flex flex-wrap gap-3 buttons">
+    <div class="grid sm:flex flex-wrap gap-4 buttons">
         @Html.HiddenFor(a=>a.IsMultiSigOnServer)
         @if (Model.IsMultiSigOnServer)
         {

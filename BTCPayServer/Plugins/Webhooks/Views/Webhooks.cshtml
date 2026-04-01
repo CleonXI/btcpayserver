@@ -23,7 +23,7 @@
                         <tr>
                             <th text-translate="true">Status</th>
                             <th text-translate="true">Url</th>
-                            <th class="text-end d-print-none" permission="@Policies.CanModifyStoreSettings" text-translate="true">Actions</th>
+                            <th class="text-end print:hidden" permission="@Policies.CanModifyStoreSettings" text-translate="true">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,7 +36,7 @@
                                         <span id="delivery-status-icon"
                                               data-bs-toggle="tooltip"
                                               title="@(wh.LastDeliveryTimeStamp == null ? StringLocalizer["No deliveries for this webhook yet"] : StringLocalizer["Last delivery {0}", wh.LastDeliveryTimeStamp.Value.ToTimeAgo()])">
-                                            <vc:icon symbol="checkmark" css-class="text-success" />
+                                            <vc:icon symbol="checkmark" css-class="text-btcpay-success" />
                                         </span>
                                     }
                                     else
@@ -45,12 +45,12 @@
                                               data-bs-toggle="tooltip"
                                               data-bs-html="true"
                                               title="Error: @wh.LastDeliveryErrorMessage. <br/> Delivery last attempted <span id='last-delivery-time'>@wh.LastDeliveryTimeStamp?.ToTimeAgo()</span>">
-                                            <vc:icon symbol="cross" css-class="text-danger" />
+                                            <vc:icon symbol="cross" css-class="text-btcpay-danger" />
                                         </span>
                                     }
                                 </td>
-                                <td class="d-block text-break">@wh.Url</td>
-                                <td class="text-end d-print-none text-md-nowrap" permission="@Policies.CanModifyStoreSettings">
+                                <td class="block text-break">@wh.Url</td>
+                                <td class="text-end print:hidden text-md-nowrap" permission="@Policies.CanModifyStoreSettings">
                                     <a asp-action="ModifyWebhook" asp-route-storeId="@Context.GetRouteValue("storeId")" asp-route-webhookId="@wh.Id" text-translate="true">Modify</a> -
                                     <a asp-action="DeleteWebhook" asp-route-storeId="@Context.GetRouteValue("storeId")" asp-route-webhookId="@wh.Id" data-bs-toggle="modal" data-bs-target="#ConfirmModal" data-confirm-input="@StringLocalizer["Delete"]" text-translate="true">Delete</a>
                                 </td>
@@ -63,7 +63,7 @@
         }
         else
         {
-            <p class="text-secondary mt-3" text-translate="true">
+            <p class="text-btcpay-body-text-muted mt-4" text-translate="true">
                 There are no webhooks yet.
             </p>
         }

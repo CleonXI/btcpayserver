@@ -52,7 +52,7 @@
             </tbody>
         </table>
 
-        <div class="d-flex flex-wrap gap-3 justify-content-between mt-3 align-items-center">
+        <div class="flex flex-wrap gap-4 justify-between mt-4 items-center">
             <ul class="pagination mb-0">
                 <li class="page-item" :class="{ disabled: pageStart === 0 }">
                     <a class="page-link p-0" href="#" v-on:click.prevent="page = page - 1">«</a>
@@ -65,8 +65,8 @@
                 </li>
             </ul>
 
-            <div class="d-flex gap-2 align-items-center">
-                <span class="text-muted" text-translate="true">Page Size:</span>
+            <div class="flex gap-2 items-center">
+                <span class="text-btcpay-body-text-muted" text-translate="true">Page Size:</span>
                 <div class="btn-group gap-2" role="group">
                     <button type="button" class="btn btn-link p-0" :class="{active: pageSize === 10}" v-on:click="setPageSize(10)">10</button>
                     <button type="button" class="btn btn-link p-0" :class="{active: pageSize === 25}" v-on:click="setPageSize(25)">25</button>

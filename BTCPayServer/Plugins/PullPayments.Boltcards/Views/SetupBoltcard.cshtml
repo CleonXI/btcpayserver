@@ -22,10 +22,10 @@
         <h1 text-translate="true">Reset Boltcard</h1>
     }
 
-    <p class="lead text-secondary mt-3" text-translate="true">Using BTCPay Server Vault (NFC)</p>
+    <p class="lead text-btcpay-body-text-muted mt-4" text-translate="true">Using BTCPay Server Vault (NFC)</p>
 </header>
 
-<div class="row mt-5 mb-4">
+<div class="row mt-12 mb-6">
     <div class="col-md-8 mx-auto">
         <component type="typeof(VaultBridgeUI)"
                    param-Controller="@(new BoltcardVaultController()
@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div id="body" class="my-4">
+<div id="body" class="my-6">
 	<form id="broadcastForm" method="post" style="display:none;">
     </form>
 </div>

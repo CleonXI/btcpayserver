@@ -11,16 +11,16 @@
     <partial name="LayoutHead"/>
     <style>#app { --wrap-max-width: 400px; }</style>
 </head>
-<body class="min-vh-100">
+<body class="min-h-screen">
     <div id="app" class="public-page-wrap">
-        <main class="flex-grow-1">
-            <div class="d-flex flex-column justify-content-center gap-4">
+        <main class="grow">
+            <div class="flex flex-col justify-center gap-6">
                 <partial name="_StoreHeader" model="(Model.StoreName, Model.StoreBranding)" />
                 <section class="tile">
-                    <h2 class="h4 card-subtitle text-center text-secondary mt-1 mb-3" id="LightningNodeTitle">
+                    <h2 class="h4 card-subtitle text-center text-btcpay-body-text-muted mt-1 mb-4" id="LightningNodeTitle">
                         @StringLocalizer["{0} Lightning Node", Model.CryptoCode]
                     </h2>
-                    <h4 class="d-flex align-items-center justify-content-center gap-2 my-4">
+                    <h4 class="flex items-center justify-center gap-2 my-6">
                         <span class="btcpay-status btcpay-status--@(Model.Available ? "enabled" : "disabled")" style="margin-top:.1rem;"></span>
                         <span id="LightningNodeStatus">@(Model.Available ? StringLocalizer["Online"] : StringLocalizer["Unavailable"])</span>
                     </h4>
@@ -30,7 +30,7 @@
                         {
                             @if (Model.NodeInfo.Length > 1)
                             {
-                                <div class="nav btcpay-pills justify-content-center gap-3 my-4" id="nodeInfo-tab" role="tablist">
+                                <div class="nav btcpay-pills justify-center gap-4 my-6" id="nodeInfo-tab" role="tablist">
                                     @for (var i = 0; i < Model.NodeInfo.Length; i++)
                                     {
                                         var nodeInfo = Model.NodeInfo[i];
@@ -55,7 +55,7 @@
 													<img src="@Model.CryptoImage" alt="@Model.CryptoCode" class="qr-icon" loading="lazy" />
 												}
 											</div>
-                                            <div class="input-group mt-3">
+                                            <div class="input-group mt-4">
                                                 <div class="form-floating">
                                                     <vc:truncate-center text="@value" padding="15" elastic="true" classes="form-control-plaintext" id="@id"/>
                                                     <label>@title</label>

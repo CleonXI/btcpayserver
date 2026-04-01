@@ -4,7 +4,7 @@
 @if (Model.Services != null && Model.Services.Any())
 {
     <div permission="@Policies.CanModifyServerSettings" id="StoreLightningServices-@Model.StoreId" class="widget store-lightning-services">
-        <header class="mb-4">
+        <header class="mb-6">
             <h6 text-translate="true">Lightning Services</h6>
             <a
                 asp-controller="UIPublicLightningNodeInfo"
@@ -24,7 +24,7 @@
                 {
                     <div class="service" id="@($"Service-{service.ServiceName}")">
                         <img src="@($"~/img/{service.Type.ToLower()}.png")" asp-append-version="true" alt="@service.DisplayName" loading="lazy" />
-                        <small class="d-block mt-3 lh-sm fw-semibold text-danger">@service.Error</small>
+                        <small class="block mt-4 lh-sm font-semibold text-btcpay-danger">@service.Error</small>
                     </div>
                 }
                 else if (string.IsNullOrEmpty(service.Link))

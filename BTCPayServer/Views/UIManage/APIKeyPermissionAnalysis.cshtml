@@ -19,15 +19,15 @@
     </nav>
 </div>
 
-<div class="row g-3 mb-4">
+<div class="row g-3 mb-6">
     <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
+        <div class="card h-full border-0 shadow-sm">
             <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small" text-translate="true">Total Permissions</span>
-                    <i class="bi bi-key fs-5 text-muted"></i>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-btcpay-body-text-muted small" text-translate="true">Total Permissions</span>
+                    <i class="bi bi-key fs-5 text-btcpay-body-text-muted"></i>
                 </div>
-                <div class="display-6 fw-bold mb-2">@Model.TotalPermissions</div>
+                <div class="display-6 font-bold mb-2">@Model.TotalPermissions</div>
                 <div class="progress" style="height:4px">
                     <div class="progress-bar" style="width:100%"></div>
                 </div>
@@ -35,14 +35,14 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
+        <div class="card h-full border-0 shadow-sm">
             <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small" text-translate="true">Used Permissions</span>
-                    <i class="bi bi-check-circle fs-5 text-muted"></i>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-btcpay-body-text-muted small" text-translate="true">Used Permissions</span>
+                    <i class="bi bi-check-circle fs-5 text-btcpay-body-text-muted"></i>
                 </div>
-                <div class="display-6 fw-bold mb-1">@Model.UsedPermissions.Count</div>
-                <div class="small text-muted mb-2">@usedPermissionsPercentage% of total</div>
+                <div class="display-6 font-bold mb-1">@Model.UsedPermissions.Count</div>
+                <div class="small text-btcpay-body-text-muted mb-2">@usedPermissionsPercentage% of total</div>
                 <div class="progress" style="height:4px">
                     <div class="progress-bar" style="width:@usedPermissionsPercentage%"></div>
                 </div>
@@ -50,14 +50,14 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card h-100 border-0 shadow-sm">
+        <div class="card h-full border-0 shadow-sm">
             <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted small" text-translate="true">Unused Permissions</span>
-                    <i class="bi bi-exclamation-circle fs-5 text-muted"></i>
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-btcpay-body-text-muted small" text-translate="true">Unused Permissions</span>
+                    <i class="bi bi-exclamation-circle fs-5 text-btcpay-body-text-muted"></i>
                 </div>
-                <div class="display-6 fw-bold mb-1">@Model.UnusedPermissions.Count</div>
-                <div class="small text-muted mb-2">@(100 - usedPermissionsPercentage)% of total</div>
+                <div class="display-6 font-bold mb-1">@Model.UnusedPermissions.Count</div>
+                <div class="small text-btcpay-body-text-muted mb-2">@(100 - usedPermissionsPercentage)% of total</div>
                 <div class="progress" style="height:4px">
                     <div class="progress-bar" style="width:@(100 - usedPermissionsPercentage)%"></div>
                 </div>
@@ -112,21 +112,21 @@
                                     <td>
                                         @if (isUsed)
                                         {
-                                            <span class="fw-semibold">@usage.UsageCount.ToString("N0")</span>
+                                            <span class="font-semibold">@usage.UsageCount.ToString("N0")</span>
                                         }
                                         else
                                         {
-                                            <span class="text-muted">—</span>
+                                            <span class="text-btcpay-body-text-muted">—</span>
                                         }
                                     </td>
                                     <td>
                                         @if (isUsed)
                                         {
-                                            <span class="text-muted">@usage.LastUsed.ToTimeAgo()</span>
+                                            <span class="text-btcpay-body-text-muted">@usage.LastUsed.ToTimeAgo()</span>
                                         }
                                         else
                                         {
-                                            <span class="text-muted" text-translate="true">Never</span>
+                                            <span class="text-btcpay-body-text-muted" text-translate="true">Never</span>
                                         }
                                     </td>
                                     <td>
@@ -136,7 +136,7 @@
                                         }
                                         else if (isStale)
                                         {
-                                            <span class="badge bg-warning text-dark" text-translate="true">Stale</span>
+                                            <span class="badge bg-btcpay-warning text-btcpay-dark" text-translate="true">Stale</span>
                                         }
                                         else
                                         {
@@ -150,8 +150,8 @@
                 }
                 else
                 {
-                    <div class="text-center py-5 text-muted">
-                        <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                    <div class="text-center py-12 text-btcpay-body-text-muted">
+                        <i class="bi bi-inbox fs-1 block mb-2"></i>
                         <span text-translate="true">No Permission Usage Recorded</span>
                     </div>
                 }
@@ -175,12 +175,12 @@
                                 var isStale = (DateTimeOffset.UtcNow - permission.LastUsed).TotalDays > staleThresholdDays;
                                 <tr>
                                     <td><code>@permission.Permission</code></td>
-                                    <td><span class="fw-semibold">@permission.UsageCount.ToString("N0")</span></td>
-                                    <td><span class="text-muted">@permission.LastUsed.ToTimeAgo()</span></td>
+                                    <td><span class="font-semibold">@permission.UsageCount.ToString("N0")</span></td>
+                                    <td><span class="text-btcpay-body-text-muted">@permission.LastUsed.ToTimeAgo()</span></td>
                                     <td>
                                         @if (isStale)
                                         {
-                                            <span class="badge bg-warning text-dark" text-translate="true">Stale</span>
+                                            <span class="badge bg-btcpay-warning text-btcpay-dark" text-translate="true">Stale</span>
                                         }
                                         else
                                         {
@@ -194,8 +194,8 @@
                 }
                 else
                 {
-                    <div class="text-center py-5 text-muted">
-                        <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                    <div class="text-center py-12 text-btcpay-body-text-muted">
+                        <i class="bi bi-inbox fs-1 block mb-2"></i>
                         <span text-translate="true">No Permission Usage Recorded</span>
                     </div>
                 }
@@ -224,15 +224,15 @@
                 }
                 else
                 {
-                    <div class="text-center py-5">
-                        <i class="bi bi-shield-check text-success fs-1 d-block mb-2"></i>
+                    <div class="text-center py-12">
+                        <i class="bi bi-shield-check text-btcpay-success fs-1 block mb-2"></i>
                         @if (Model.TotalPermissions > 0)
                         {
-                            <span class="fw-semibold" text-translate="true">All permissions are in use!</span>
+                            <span class="font-semibold" text-translate="true">All permissions are in use!</span>
                         }
                         else
                         {
-                            <span class="text-muted" text-translate="true">No Permission Usage Recorded</span>
+                            <span class="text-btcpay-body-text-muted" text-translate="true">No Permission Usage Recorded</span>
                         }
                     </div>
                 }

@@ -58,11 +58,11 @@
                             <td class="text-center">
                                 @if (service.Settings.Enabled)
                                 {
-                                    <vc:icon symbol="checkmark" css-class="text-success" />
+                                    <vc:icon symbol="checkmark" css-class="text-btcpay-success" />
                                 }
                                 else
                                 {
-                                    <vc:icon symbol="cross" css-class="text-danger" />
+                                    <vc:icon symbol="cross" css-class="text-btcpay-danger" />
                                 }
                             </td>
                             <td class="text-end">
@@ -78,7 +78,7 @@
         }
         else
         {
-            <p class="text-secondary mt-3" text-translate="true">
+            <p class="text-btcpay-body-text-muted mt-6" text-translate="true">
                 There are no dynamic DNS services yet.
             </p>
         }

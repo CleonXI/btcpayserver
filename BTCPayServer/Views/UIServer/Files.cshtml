@@ -6,7 +6,7 @@
 
 <div class="sticky-header">
 	<h2 class="my-1">@ViewData["Title"]</h2>
-    <a asp-action="storage" asp-route-forceChoice="true" asp-route-returnurl="@ViewData["ReturnUrl"]" class="btn btn-secondary d-flex align-items-center">
+    <a asp-action="storage" asp-route-forceChoice="true" asp-route-returnurl="@ViewData["ReturnUrl"]" class="btn btn-secondary flex items-center">
         <vc:icon symbol="settings" />
     </a>
 </div>
@@ -33,9 +33,9 @@ else
     @if (Model.StorageConfigured)
     {
         <form asp-action="CreateFiles" method="post" enctype="multipart/form-data">
-            <div class="d-flex">
-                <input multiple type="file" class="form-control mb-3" name="files" id="files" required>
-                <button class="btn btn-primary mb-3 ms-3" role="button" text-translate="true">Upload</button>
+            <div class="flex">
+                <input multiple type="file" class="form-control mb-4" name="files" id="files" required>
+                <button class="btn btn-primary mb-4 ms-4" role="button" text-translate="true">Upload</button>
             </div>
         </form>
     }
@@ -47,7 +47,7 @@ else
             var fileId = fileUrlPair.Key;
             var file = Model.Files.Single(storedFile => storedFile.Id.Equals(fileId, StringComparison.InvariantCultureIgnoreCase));
             var url = Url.Action("GetFile", "UIStorage", new { fileId }, Context.Request.Scheme, Context.Request.Host.ToString());
-            <div class="border border-light rounded bg-tile mt-3">
+            <div class="border border-light rounded bg-tile mt-4">
                 <div class="row">
                     <div class="col-sm-12 col-md-4">
                         <div class="input-group">
@@ -112,7 +112,7 @@ else
                         <td>@file.Timestamp.ToBrowserDate()</td>
                         <td>@file.ApplicationUser.UserName</td>
                         <td class="text-end">
-                            <a href="@Url.Action("Files", "UIServer", new {fileIds = new [] { file.Id }})" class="text-nowrap" text-translate="true">Get Link</a>
+                            <a href="@Url.Action("Files", "UIServer", new {fileIds = new [] { file.Id }})" class="whitespace-nowrap" text-translate="true">Get Link</a>
                             - <a asp-action="DeleteFile" asp-route-fileId="@file.Id" text-translate="true">Remove</a>
                         </td>
                     </tr>
@@ -123,6 +123,6 @@ else
     }
     else
     {
-        <p class="text-secondary mt-3" text-translate="true">There are no files yet.</p>
+        <p class="text-btcpay-body-text-muted mt-6" text-translate="true">There are no files yet.</p>
     }
 }

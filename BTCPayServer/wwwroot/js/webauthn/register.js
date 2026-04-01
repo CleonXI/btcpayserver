@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isSafari()) {
             startButton.addEventListener("click", ev => {
                 register(makeCredentialOptions);
-                infoMessage.classList.remove("d-none");
-                startButton.classList.add("d-none");
+                infoMessage.classList.remove("hidden");
+                startButton.classList.add("hidden");
             });
-            startButton.classList.remove("d-none");
+            startButton.classList.remove("hidden");
         } else {
-            infoMessage.classList.remove("d-none");
+            infoMessage.classList.remove("hidden");
             register(makeCredentialOptions);
         }
     }

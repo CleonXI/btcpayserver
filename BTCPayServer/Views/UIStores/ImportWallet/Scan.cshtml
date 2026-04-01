@@ -14,7 +14,7 @@
 
 <header class="text-center">
     <h1>@ViewData["Title"]</h1>
-    <p class="lead text-secondary mt-3" text-translate="true">Scan the extended public key, also called "xpub", shown on your wallet's display.</p>
+    <p class="lead text-btcpay-body-text-muted mt-4" text-translate="true">Scan the extended public key, also called "xpub", shown on your wallet's display.</p>
 </header>
 
 @if (!ViewContext.ModelState.IsValid)
@@ -22,14 +22,14 @@
     <div asp-validation-summary="All"></div>
 }
 
-<div class="my-5">
+<div class="my-12">
     <partial name="CameraScanner"/>
     <form id="qr-import-form" method="post">
         <input asp-for="WalletFileContent" type="hidden" />
     </form>
 </div>
 
-<p class="mt-5" text-translate="true">
+<p class="mt-12" text-translate="true">
     Generate a QR code of the extended public key in your wallet (see instructions for supported wallets below).
     Allow the browser access to your camera and hold the code to the camera when the scan prompt appears.
 </p>
@@ -47,11 +47,11 @@
         <td>Open Wallet Settings ❯ Show Wallet XPUB</td>
     </tr>
     <tr>
-        <td class="text-nowrap">Cobo Vault</td>
+        <td class="whitespace-nowrap">Cobo Vault</td>
         <td>Open Wallet Settings ❯ Show/Export XPUB</td>
     </tr>
     <tr>
-        <td class="text-nowrap">Keystone Vault</td>
+        <td class="whitespace-nowrap">Keystone Vault</td>
         <td>Open Wallet Settings ❯ Show/Export XPUB</td>
     </tr>
     <tr>

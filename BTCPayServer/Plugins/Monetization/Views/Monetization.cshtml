@@ -27,11 +27,11 @@
     {
         if (checkmark)
         {
-            <vc:icon symbol="checkmark" css-class="text-success mr-1"></vc:icon>
+            <vc:icon symbol="checkmark" css-class="text-btcpay-success mr-1"></vc:icon>
         }
         else
         {
-            <vc:icon symbol="cross" css-class="text-danger mr-1"></vc:icon>
+            <vc:icon symbol="cross" css-class="text-btcpay-danger mr-1"></vc:icon>
         }
     }
 
@@ -70,7 +70,7 @@
                 <button class="accordion-button @(Model.Step == MonetizationViewModel.InstallStatus.SetOffering ? "" : "collapsed")"
                         type="button" data-bs-toggle="collapse" data-bs-target="#activate-collapse"
                         aria-expanded="@(Model.Step == MonetizationViewModel.InstallStatus.SetOffering)" aria-controls="activate-collapse">
-                    <h5 class="d-flex content-center gap-3">
+                    <h5 class="flex content-center gap-4">
                         @{ await PrintStatus(Model.Step != MonetizationViewModel.InstallStatus.SetOffering); }
                         <span>Set up the offering</span>
                     </h5>
@@ -92,7 +92,7 @@
                                asp-route-offeringId="@Model.Offering.Id"
                                asp-route-section="Plans">here</a> to go to the offering page.</p>
 
-                        <div class="d-flex gap-3">
+                        <div class="flex gap-4">
                             <a id="demonetize-button"
                                class="btn btn-outline-danger" role="button"
                                data-bs-toggle="modal" data-bs-target="#ConfirmModal" text-translate="true">Demonetize</a>
@@ -109,7 +109,7 @@
                     else
                     {
                         <p>Monetization will delegate access to your server to an offering.</p>
-                        <div class="d-flex gap-3">
+                        <div class="flex gap-4">
                             @{ await CreateNewOffering(false); }
                             @if (Model.SelectExistingOfferingModal is not null)
                             {
@@ -131,7 +131,7 @@
                 <button class="accordion-button @(Model.Step == MonetizationViewModel.InstallStatus.ConfigureServerEmail ? "" : "collapsed")"
                         type="button" data-bs-toggle="collapse" data-bs-target="#server-email-collapse"
                         aria-expanded="@(Model.Step == MonetizationViewModel.InstallStatus.ConfigureServerEmail)" aria-controls="server-email-collapse">
-                    <h5 class="d-flex content-center gap-3">
+                    <h5 class="flex content-center gap-4">
                         @{ await PrintStatus(Model.EmailServerConfigured); }
                         <span>Configure server email settings</span>
                     </h5>
@@ -161,7 +161,7 @@
                 <button class="accordion-button @(Model.Step == MonetizationViewModel.InstallStatus.ConfigureStoreEmail ? "" : "collapsed")"
                         type="button" data-bs-toggle="collapse" data-bs-target="#store-email-collapse"
                         aria-expanded="@(Model.Step == MonetizationViewModel.InstallStatus.ConfigureStoreEmail)" aria-controls="store-email-collapse">
-                    <h5 class="d-flex content-center gap-3">
+                    <h5 class="flex content-center gap-4">
                         @{ await PrintStatus(Model.EmailStoreConfigured); }
                         <span>Configure store email settings</span>
                     </h5>
@@ -183,7 +183,7 @@
                         }
                         else
                         {
-                            <div class="d-flex gap-3">
+                            <div class="flex gap-4">
                                 <a class="btn btn-success" role="button" asp-area="@EmailsPlugin.Area" asp-controller="UIStoresEmail"
                                    asp-route-storeId="@Model.Offering.App.StoreDataId" asp-action="StoreEmailSettings">Go to store email settings</a>
                                 <form method="post">

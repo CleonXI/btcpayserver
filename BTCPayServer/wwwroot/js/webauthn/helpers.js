@@ -75,13 +75,13 @@ function showErrorAlert(message, error) {
     console.error(message, footermsg);
 
     const $info = document.getElementById("info-message");
-    if ($info) $info.classList.add("d-none");
-    document.getElementById("btn-retry").classList.remove("d-none");
+    if ($info) $info.classList.add("hidden");
+    document.getElementById("btn-retry").classList.remove("hidden");
     document.getElementById("error-message").textContent = message;
     for(const el of document.getElementsByClassName("fido-running")){
-        el.classList.add("d-none");
+        el.classList.add("hidden");
     }
-    document.getElementById("error-message").classList.remove("d-none");
+    document.getElementById("error-message").classList.remove("hidden");
 }
 
 function detectFIDOSupport() {
@@ -91,7 +91,7 @@ function detectFIDOSupport() {
         el.textContent = location.protocol === "http:"
             ? "FIDO2/WebAuthN requires HTTPS"
             : "Your browser does not support FIDO2/WebAuthN";
-        el.classList.remove("d-none");
+        el.classList.remove("hidden");
         return false;
     }
     return true;

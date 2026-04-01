@@ -40,7 +40,7 @@
                     asp-action="ListRoles"
                     asp-route-storeId="@storeId"
                     asp-route-sortOrder="@(nextRoleSortOrder ?? "asc")"
-                    class="text-nowrap"
+                    class="whitespace-nowrap"
                     title="@(nextRoleSortOrder == "desc" ? sortByAsc : sortByDesc)">
                     <span text-translate="true">Role</span>
                     <vc:icon symbol="actions-sort-alpha-@(roleSortOrder ?? nextRoleSortOrder ?? "desc")" />
@@ -52,7 +52,7 @@
             {
                 <th class="text-center w-75px" text-translate="true">In use</th>
             }
-            <th class="text-end d-print-none" permission="@permission" text-translate="true">Actions</th>
+            <th class="text-end print:hidden" permission="@permission" text-translate="true">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -60,11 +60,11 @@
         {
             <tr>
                 <td>
-                    <div class="d-flex flex-wrap align-items-center gap-2">
+                    <div class="flex flex-wrap items-center gap-2">
                         <span>@role.Role</span>
                         @if (Model.DefaultRole == role.Id)
                         {
-                            <span class="badge bg-info" text-translate="true">
+                            <span class="badge bg-btcpay-info" text-translate="true">
                                 Default
                             </span>
                         }
@@ -73,13 +73,13 @@
                 <td>
                     @if (role.IsServerRole)
                     {
-                        <span class="badge bg-dark" text-translate="true">
+                        <span class="badge bg-btcpay-dark" text-translate="true">
                             Server-wide
                         </span>
                     }
                     else
                     {
-                        <span class="badge bg-light" text-translate="true">
+                        <span class="badge bg-btcpay-light" text-translate="true">
                             Store-level
                         </span>
                     }
@@ -87,7 +87,7 @@
                 <td>
                     @if (!role.Permissions.Any())
                     {
-                        <span class="info-note text-warning">
+                        <span class="info-note text-btcpay-warning">
                             <vc:icon symbol="warning"/>
                             <span text-translate="true">No policies</span>
                         </span>
@@ -96,7 +96,7 @@
                     {
                         @foreach (var policy in role.Permissions)
                         {
-                            <code class="d-block text-break">@(PermissionService.TryGetDefinition(policy)?.Display?.Title ?? policy)</code>
+                            <code class="block break-words">@(PermissionService.TryGetDefinition(policy)?.Display?.Title ?? policy)</code>
                         }
                     }
                 </td>
@@ -105,16 +105,16 @@
                     <td class="text-center">
                         @if (role.IsUsed is true)
                         {
-                            <vc:icon symbol="checkmark" css-class="text-success"/>
+                            <vc:icon symbol="checkmark" css-class="text-btcpay-success"/>
                         }
                         else
                         {
-                            <vc:icon symbol="cross" css-class="text-danger"/>
+                            <vc:icon symbol="cross" css-class="text-btcpay-danger"/>
                         }
                     </td>
                 }
-                <td class="text-end d-print-none" permission="@permission">
-                    <div class="d-inline-flex align-items-center gap-3">
+                <td class="text-end print:hidden" permission="@permission">
+                    <div class="inline-flex items-center gap-4">
                         @if (role.IsServerRole && Model.DefaultRole != role.Id)
                         {
                             <a permission="@Policies.CanModifyServerSettings" asp-action="SetDefaultRole" asp-route-role="@role.Role" asp-controller="UIServer" id="SetDefault" text-translate="true">Set as default</a>

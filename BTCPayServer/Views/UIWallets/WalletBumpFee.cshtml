@@ -47,7 +47,7 @@
 	<h1>@ViewData["Title"]</h1>
 </header>
 
-<form method="post" asp-action="WalletBumpFee" asp-route-walletId="@walletId" asp-route-transactionId="@Model.TransactionId" class="my-5" id="SendForm">
+<form method="post" asp-action="WalletBumpFee" asp-route-walletId="@walletId" asp-route-transactionId="@Model.TransactionId" class="my-12" id="SendForm">
 	<input type="hidden" asp-for="ReturnUrl" />
 
 	@if (Model.TransactionHashes is not null)
@@ -74,36 +74,36 @@
 			<div>
 				<label asp-for="TransactionId" class="form-label"></label>
 				<input name="txId" value="@txId" readonly class="form-control" disabled />
-				<span asp-validation-for="TransactionId" class="text-danger"></span>
+				<span asp-validation-for="TransactionId" class="text-btcpay-danger"></span>
 			</div>
 		</div>
 	}
 	@if (Model.CurrentFeeSatoshiPerByte is not null)
 	{
-		<div class="d-flex flex-wrap gap-3 my-4">
+		<div class="flex flex-wrap gap-4 my-6">
 			<div>
 				<label asp-for="CurrentFeeSatoshiPerByte" class="form-label">
 					<span text-translate="true">Current effective fee rate</span>
-					<span class="text-secondary">(sat/vB)</span>
+					<span class="text-btcpay-body-text-muted">(sat/vB)</span>
 				</label>
 				<input asp-for="CurrentFeeSatoshiPerByte" type="number" min="0" step="any" readonly class="form-control" disabled style="max-width:14ch;" />
 			</div>
 		</div>
 	}
-	<div class="d-flex flex-wrap gap-3 my-4">
+	<div class="flex flex-wrap gap-4 my-6">
 		<div>
 			<label asp-for="FeeSatoshiPerByte" class="form-label">
 				<span text-translate="true">New effective fee rate</span>
-				<span class="text-secondary">(sat/vB)</span>
+				<span class="text-btcpay-body-text-muted">(sat/vB)</span>
 			</label>
 			<input asp-for="FeeSatoshiPerByte" type="number" inputmode="numeric" min="0" step="any" class="form-control" style="max-width:14ch;" />
-			<span asp-validation-for="FeeSatoshiPerByte" class="text-danger"></span>
-			<span id="FeeRate-Error" class="text-danger"></span>
+			<span asp-validation-for="FeeSatoshiPerByte" class="text-btcpay-danger"></span>
+			<span id="FeeRate-Error" class="text-btcpay-danger"></span>
 		</div>
 		@if (Model.RecommendedSatoshiPerByte.Any())
 		{
 			<div>
-				<div class="form-label text-secondary" text-translate="true">Confirm in the next …</div>
+				<div class="form-label text-btcpay-body-text-muted" text-translate="true">Confirm in the next …</div>
 				<div class="btn-group btn-group-toggle feerate-options" role="group" data-bs-toggle="buttons">
 					@for (var index = 0; index < Model.RecommendedSatoshiPerByte.Count; index++)
 					{
@@ -118,7 +118,7 @@
 			</div>
 		}
 	</div>
-	<div class="d-flex flex-wrap gap-3 my-4">
+	<div class="flex flex-wrap gap-4 my-6">
 		<div>
 			<div class="form-group">
 				<label asp-for="BumpMethod" class="form-label"></label>
@@ -130,7 +130,7 @@
 	</div>
 
 
-	<div class="d-grid d-sm-flex flex-wrap gap-3 buttons">
+	<div class="grid sm:flex flex-wrap gap-4 buttons">
 		@Html.HiddenFor(a => a.IsMultiSigOnServer)
 		@if (Model.IsMultiSigOnServer)
 		{

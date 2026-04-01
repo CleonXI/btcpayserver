@@ -2,7 +2,7 @@
 @model BTCPayServer.Components.AppTopItems.AppTopItemsViewModel
 
 <div id="AppTopItems-@Model.Id" class="widget app-top-items">
-    <header class="mb-3">
+    <header class="mb-4">
         <h3>
             @if (Model.AppType == CrowdfundAppType.AppType)
             {
@@ -16,9 +16,9 @@
     </header>
     @if (Model.InitialRendering)
     {
-        <div class="loading d-flex justify-content-center p-3">
+        <div class="loading flex justify-center p-4">
             <div class="spinner-border text-light" role="status">
-                <span class="visually-hidden" text-translate="true">Loading...</span>
+                <span class="sr-only" text-translate="true">Loading...</span>
             </div>
         </div>
         <script src="~/Components/AppTopItems/Default.cshtml.js" asp-append-version="true"></script>
@@ -37,7 +37,7 @@
     }
     else if (Model.Entries.Any())
     {
-        <div class="ct-chart mb-3"></div>
+        <div class="ct-chart mb-4"></div>
         <template>
             @Safe.Json(Model)
         </template>
@@ -51,7 +51,7 @@
                         @entry.Title
                     </span>
                     <span class="app-item-value" data-sensitive>
-                        <span class="text-muted">
+                        <span class="text-btcpay-body-text-muted">
                             @entry.SalesCount
                             @if (Model.AppType == CrowdfundAppType.AppType)
                             {
@@ -84,7 +84,7 @@
     }
     else
     {
-        <p class="text-secondary mt-3">
+        <p class="text-btcpay-body-text-muted mt-4">
             @if (Model.AppType == CrowdfundAppType.AppType)
             {
                 <span text-translate="true">No contributions have been made yet.</span>

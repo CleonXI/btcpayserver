@@ -15,13 +15,13 @@
     <partial name="LayoutHead" />
     @await RenderSectionAsync("PageHeadContent", false)
 </head>
-<body class="d-flex flex-column flex-lg-row min-vh-100">
-<a href="#mainContent" class="visually-hidden-focusable px-3 py-2">Skip to content</a>
-<header id="mainMenu" class="btcpay-header d-flex flex-column d-print-none" v-pre>
+<body class="flex flex-col lg:flex-row min-h-screen">
+<a href="#mainContent" class="sr-only focus:not-sr-only focus:absolute focus:w-auto focus:h-auto focus:overflow-visible focus:clip-auto px-4 py-2">Skip to content</a>
+<header id="mainMenu" class="btcpay-header flex flex-col print:hidden" v-pre>
     <vc:main-nav />
 </header>
 <template id="badUrl">
-	<div class="alert alert-danger alert-dismissible m-3" role="alert">
+	<div class="alert alert-danger alert-dismissible m-4" role="alert">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close"/>
         </button>

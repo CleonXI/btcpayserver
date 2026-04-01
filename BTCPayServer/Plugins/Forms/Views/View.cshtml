@@ -12,24 +12,24 @@
     <meta name="robots" content="noindex,nofollow">
     <style>#FormView { --wrap-max-width: 576px; }</style>
 </head>
-<body class="min-vh-100">
+<body class="min-h-screen">
     <div id="FormView" class="public-page-wrap">
-        <partial name="_StatusMessage" model="@(new ViewDataDictionary(ViewData) { { "Margin", "mb-4" } })" />
+        <partial name="_StatusMessage" model="@(new ViewDataDictionary(ViewData) { { "Margin", "mb-6" } })" />
         @if (!string.IsNullOrEmpty(Model.StoreName) || !string.IsNullOrEmpty(Model.StoreBranding.LogoUrl))
         {
             <partial name="_StoreHeader" model="(Model.StoreName, Model.StoreBranding)" />
         }
         else
         {
-            <h1 class="h3 text-center mt-3">@ViewData["Title"]</h1>
+            <h1 class="h3 text-center mt-4">@ViewData["Title"]</h1>
         }
-        <main class="flex-grow-1">
+        <main class="grow">
             @if (!ViewContext.ModelState.IsValid)
             {
                 <div asp-validation-summary="ModelOnly"></div>
             }
             <partial name="_FormTopMessages" model="@Model.Form" />
-            <div class="d-flex flex-column justify-content-center gap-4">
+            <div class="flex flex-col justify-center gap-6">
                 <div class="tile">
                     @if (string.IsNullOrEmpty(Model.AspAction))
                     {

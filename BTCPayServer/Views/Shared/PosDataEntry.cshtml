@@ -22,7 +22,7 @@ else if (Model.Value is Dictionary<string, object> { Count: > 0 } subItems)
         @{
             @if (!string.IsNullOrEmpty(Model.Key))
             {
-                Write(Html.Raw($"<h{Model.Level + 3} class=\"mb-3 fw-semibold\">"));
+                Write(Html.Raw($"<h{Model.Level + 3} class=\"mb-4 font-semibold\">"));
                 Write(Model.Key);
                 Write(Html.Raw($"</h{Model.Level + 3}>"));
             }
@@ -36,7 +36,7 @@ else if (Model.Value is IEnumerable<object> valueArray)
         @{
             @if (!string.IsNullOrEmpty(Model.Key))
             {
-                Write(Html.Raw($"<h{Model.Level + 3} class=\"mb-3 fw-semibold\">"));
+                Write(Html.Raw($"<h{Model.Level + 3} class=\"mb-4 font-semibold\">"));
                 Write(Model.Key);
                 Write(Html.Raw($"</h{Model.Level + 3}>"));
             }

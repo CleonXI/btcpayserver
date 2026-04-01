@@ -20,7 +20,7 @@
                             <label asp-for="SelectedStoreId" class="form-label" text-translate="true">Store</label>
                             <select asp-for="SelectedStoreId" class="form-control" asp-items="Model.Stores"></select>
                         </div>
-                        <div class="d-flex gap-3">
+                        <div class="flex gap-4">
                             <div class="form-group">
                                 <label asp-for="StarterPlanCost" class="form-label" text-translate="true">Starter plan monthly cost</label>
                                 <input inputmode="decimal" asp-for="StarterPlanCost" class="form-control"></input>
@@ -31,7 +31,7 @@
                                     <input asp-for="TrialDays" class="form-control" min="0" placeholder="7" />
                                     <span class="input-group-text" text-translate="true">days</span>
                                 </div>
-                                <span asp-validation-for="TrialDays" class="text-danger"></span>
+                                <span asp-validation-for="TrialDays" class="text-btcpay-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -39,7 +39,7 @@
                                 <input class="form-check-input" asp-for="MigrateExistingUsers" />
                                 <label class="form-check-label" asp-for="MigrateExistingUsers"></label>
                             </div>
-                            <p class="text-muted" text-translate="true">Those initial settings can be modified later.</p>
+                            <p class="text-btcpay-body-text-muted" text-translate="true">Those initial settings can be modified later.</p>
                         </div>
                     </div>
                 </div>

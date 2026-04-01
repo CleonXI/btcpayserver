@@ -12,6 +12,7 @@
 
 @section PageFootContent {
     <partial name="_ValidationScriptsPartial"/>
+    <script src="~/vendor/bootstrap/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/vendor/summernote/summernote-bs5.js" asp-append-version="true"></script>
 }
 
@@ -36,29 +37,29 @@
             <div class="form-group">
                 <label asp-for="Name" class="form-label"></label>
                 <input asp-for="Name" class="form-control"/>
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <span asp-validation-for="Name" class="text-btcpay-danger"></span>
             </div>
             <div class="row">
                 <div class="form-group col-8">
                     <label asp-for="Amount" class="form-label" data-required></label>
                     <input asp-for="Amount" class="form-control" inputmode="decimal"/>
-                    <span asp-validation-for="Amount" class="text-danger"></span>
+                    <span asp-validation-for="Amount" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="Currency" class="form-label"></label>
                     <input asp-for="Currency" class="form-control w-auto" currency-selection />
-                    <span asp-validation-for="Currency" class="text-danger"></span>
+                    <span asp-validation-for="Currency" class="text-btcpay-danger"></span>
                 </div>
 
                 <div class="form-group col-12" permission="@Policies.CanCreatePullPayments">
                     <div class="form-check ">
                         <input asp-for="AutoApproveClaims" type="checkbox" class="form-check-input"/>
                         <label asp-for="AutoApproveClaims" class="form-check-label"></label>
-                        <span asp-validation-for="AutoApproveClaims" class="text-danger"></span>
+                        <span asp-validation-for="AutoApproveClaims" class="text-btcpay-danger"></span>
                     </div>
                 </div>
             </div>
-            <div class="form-group mb-4">
+            <div class="form-group mb-6">
                 <label asp-for="PayoutMethods" class="form-label"></label>
                 @foreach (var item in Model.PayoutMethodsItem)
                 {
@@ -69,17 +70,17 @@
                         </label>
                     </div>
                 }
-                <span asp-validation-for="PayoutMethods" class="text-danger mt-0"></span>
+                <span asp-validation-for="PayoutMethods" class="text-btcpay-danger mt-0"></span>
             </div>
         </div>
         <div class="col-lg-9">
-            <div class="form-group mb-4">
+            <div class="form-group mb-6">
                 <label asp-for="Description" class="form-label"></label>
                 <textarea asp-for="Description" class="form-control richtext"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <span asp-validation-for="Description" class="text-btcpay-danger"></span>
             </div>
 
-            <h4 class="mt-5 mb-2" text-translate="true">Additional Options</h4>
+            <h4 class="mt-12 mb-2" text-translate="true">Additional Options</h4>
             <div class="form-group">
                 <div class="accordion" id="additional">
                     <div class="accordion-item">
@@ -97,7 +98,7 @@
                                         <input inputmode="numeric" asp-for="BOLT11Expiration" class="form-control" style="max-width:12ch;" />
                                         <span class="input-group-text" text-translate="true">days</span>
                                     </div>
-                                    <span asp-validation-for="BOLT11Expiration" class="text-danger"></span>
+                                    <span asp-validation-for="BOLT11Expiration" class="text-btcpay-danger"></span>
                                 </div>
                             </div>
                         </div>

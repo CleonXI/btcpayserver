@@ -24,8 +24,8 @@
     {
         <div class="form-group">
             <label asp-for="ExistingMnemonic" class="form-label" text-translate="true">Wallet Recovery Seed</label>
-            <textarea asp-for="ExistingMnemonic" class="form-control font-monospace py-2" rows="2" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
-            <span asp-validation-for="ExistingMnemonic" class="text-danger"></span>
+            <textarea asp-for="ExistingMnemonic" class="form-control font-btcpay-mono py-2" rows="2" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+            <span asp-validation-for="ExistingMnemonic" class="text-btcpay-danger"></span>
         </div>
     }
 
@@ -48,18 +48,18 @@
                 <option value="@ScriptPubKeyType.TaprootBIP86" text-translate="true">Taproot (For advanced users)</option>
             }
         </select>
-        <span asp-validation-for="ScriptPubKeyType" class="text-danger"></span>
+        <span asp-validation-for="ScriptPubKeyType" class="text-btcpay-danger"></span>
     </div>
 
     @if (isImport && canUseHotWallet)
     {
-        <div class="form-group mt-4">
-            <label class="d-flex align-items-center">
-                <input type="checkbox" asp-for="SavePrivateKeys" class="btcpay-toggle me-3" />
+        <div class="form-group mt-6">
+            <label class="flex items-center">
+                <input type="checkbox" asp-for="SavePrivateKeys" class="btcpay-toggle me-4" />
                 <div>
                     <label asp-for="SavePrivateKeys" class="form-check-label" text-translate="true">Is hot wallet</label>
-                    <span asp-validation-for="SavePrivateKeys" class="text-danger"></span>
-                    <p class="text-muted pt-2 mb-0" text-translate="true">If checked, each private key associated with an address generated will be stored as metadata and would be accessible to anyone with admin access to your server. Enable at your own risk!</p>
+                    <span asp-validation-for="SavePrivateKeys" class="text-btcpay-danger"></span>
+                    <p class="text-btcpay-body-text-muted pt-2 mb-0" text-translate="true">If checked, each private key associated with an address generated will be stored as metadata and would be accessible to anyone with admin access to your server. Enable at your own risk!</p>
                 </div>
             </label>
         </div>
@@ -70,13 +70,13 @@
 
         @if (Model.CanUsePayJoin)
         {
-            <div class="form-group mt-3">
-                <label class="d-flex align-items-center">
-                    <input type="checkbox" asp-for="PayJoinEnabled" class="btcpay-toggle me-3" />
+            <div class="form-group mt-4">
+                <label class="flex items-center">
+                    <input type="checkbox" asp-for="PayJoinEnabled" class="btcpay-toggle me-4" />
                     <div>
                         <span text-translate="true">Enable PayJoin</span>
-                        <span asp-validation-for="PayJoinEnabled" class="text-danger"></span>
-                        <p class="text-muted pt-2 mb-0">
+                        <span asp-validation-for="PayJoinEnabled" class="text-btcpay-danger"></span>
+                        <p class="text-btcpay-body-text-muted pt-2 mb-0">
                             <span text-translate="true">PayJoin enhances the privacy for you and your customers. Enabling it gives your customers the option to use PayJoin during checkout.</span>
                             <a href="https://docs.btcpayserver.org/Payjoin/" target="_blank" rel="noreferrer noopener">
                                 <vc:icon symbol="info" />
@@ -88,41 +88,41 @@
         }
     }
     
-    <div class="mb-4">
-        <button class="d-inline-flex align-items-center btn btn-link text-primary fw-semibold p-0" type="button" id="AdvancedSettingsButton" data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
+    <div class="mb-6">
+        <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="AdvancedSettingsButton" data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
             <vc:icon symbol="caret-down"/>
             <span class="ms-1" text-translate="true">Advanced settings</span>
         </button>
         <div id="AdvancedSettings" class="collapse @(string.IsNullOrEmpty(Model.Passphrase) && !Model.ImportKeysToRPC ? "" : "show")">
-            <div class="pt-3">
+            <div class="pt-4">
                 @if (isImport) // hide account option when creating a wallet
                 {
                     <div class="form-group">
                         <label asp-for="AccountNumber" class="form-label" text-translate="true">Account</label>
                         <input asp-for="AccountNumber" class="form-control" style="max-width:10ch" min="0" step="1">
-                        <span asp-validation-for="AccountNumber" class="text-danger"></span>
+                        <span asp-validation-for="AccountNumber" class="text-btcpay-danger"></span>
                     </div>
                 }
                 <div class="form-group">
                     <label asp-for="Passphrase" class="form-label" text-translate="true">Optional passphrase (BIP39)</label>
                     <input type="text" asp-for="Passphrase" class="form-control" autocomplete="off"/>
-                    <span asp-validation-for="Passphrase" class="text-danger"></span>
+                    <span asp-validation-for="Passphrase" class="text-btcpay-danger"></span>
                 </div>
                 <div class="form-group">
                     <label for="passphrase_conf" class="form-label" text-translate="true">Confirm passphrase</label>
                     <input type="text" name="passphrase_conf" id="passphrase_conf" class="form-control"/>
-                    <span class="text-danger field-validation-valid" id="passphrase_conf_validation"></span>
+                    <span class="text-btcpay-danger field-validation-valid" id="passphrase_conf_validation"></span>
                 </div>
 
                 @if (canUseRpcImport)
                 {
-                    <div class="form-group mt-4">
-                        <label class="d-flex align-items-center">
-                            <input type="checkbox" asp-for="ImportKeysToRPC" class="btcpay-toggle me-3"/>
+                    <div class="form-group mt-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" asp-for="ImportKeysToRPC" class="btcpay-toggle me-4"/>
                             <div>
                                 <label asp-for="ImportKeysToRPC" class="form-check-label" text-translate="true">Import keys to RPC</label>
-                                <span asp-validation-for="ImportKeysToRPC" class="text-danger"></span>
-                                <p class="text-muted pt-2 mb-0">
+                                <span asp-validation-for="ImportKeysToRPC" class="text-btcpay-danger"></span>
+                                <p class="text-btcpay-body-text-muted pt-2 mb-0">
                                     <span text-translate="true">Each address generated will be imported into the node wallet and you can view your balance through the node.</span>
                                     @if (isImport || isHotWallet)
                                     {

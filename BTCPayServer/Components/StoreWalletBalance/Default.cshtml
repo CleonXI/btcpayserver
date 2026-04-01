@@ -1,7 +1,7 @@
 @using BTCPayServer.Client.Models
 @model BTCPayServer.Components.StoreWalletBalance.StoreWalletBalanceViewModel
 <div id="StoreWalletBalance-@Model.StoreId-@Model.CryptoCode" class="widget store-wallet-balance">
-    <div class="d-flex gap-3 align-items-center justify-content-between mb-2">
+    <div class="flex gap-4 items-center justify-between mb-2">
         <h6 text-translate="true">Wallet Balance</h6>
         @if (Model.CryptoCode != Model.DefaultCurrency)
         {
@@ -13,12 +13,12 @@
             </div>
         }
     </div>
-    <header class="mb-3">
+    <header class="mb-4">
         @if (Model.Balance != null)
         {
-            <div class="balance d-flex align-items-baseline gap-1">
-                <h3 class="d-inline-block me-1" data-balance="@Model.Balance" data-sensitive>@Model.Balance</h3>
-                <span class="text-secondary fw-semibold currency">@Model.CryptoCode</span>
+            <div class="balance flex items-baseline gap-1">
+                <h3 class="inline-block mr-1" data-balance="@Model.Balance" data-sensitive>@Model.Balance</h3>
+                <span class="text-btcpay-body-text-muted font-semibold currency">@Model.CryptoCode</span>
             </div>
         }
         @if (Model.Series != null)

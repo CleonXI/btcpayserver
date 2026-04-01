@@ -28,36 +28,36 @@
 
 <div id="camera-qr-scanner-modal-app" v-cloak class="only-for-js">
     <scanner-wrap v-bind="$data" v-on:close="close">
-        <div class="d-flex justify-content-center align-items-center" :class="{'border border-secondary': !isModal}">
-            <div class="spinner-border text-secondary position-absolute" role="status"></div>
+        <div class="flex justify-center items-center" :class="{'border border-secondary': !isModal}">
+            <div class="spinner-border text-btcpay-body-text-muted absolute" role="status"></div>
             <qrcode-drop-zone v-on:decode="onDecode" v-on:init="logErrors">
                 <qrcode-stream v-on:decode="onDecode" v-on:init="onInit" :camera="cameraOff? 'off': cameras[camera]" :device-id="cameras[camera]" :track="paint"/>
             </qrcode-drop-zone>
             <qrcode-capture v-if="noStreamApiSupport" v-on:decode="onDecode" :camera="cameraOff? 'off': cameras[camera]" :device-id="cameras[camera]"/>
         </div>
         <div v-if="isLoaded">
-            <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
+            <div v-if="errorMessage" class="alert alert-danger mt-4" role="alert">
                 {{errorMessage}}
             </div>
-            <div v-if="successMessage" class="alert alert-success mt-3" role="alert">
+            <div v-if="successMessage" class="alert alert-success mt-4" role="alert">
                 {{successMessage}}
             </div>
-            <div v-else-if="qrData" class="alert alert-info font-monospace text-truncate mt-3">
+            <div v-else-if="qrData" class="alert alert-info font-btcpay-mono truncate mt-4">
                 {{qrData}}
             </div>
             <div v-else-if="decoder">
-                <div class="my-3">BC UR: {{decoder.expectedPartCount()}} parts, {{decoder.getProgress() * 100}}% completed</div>
+                <div class="my-4">BC UR: {{decoder.expectedPartCount()}} parts, {{decoder.getProgress() * 100}}% completed</div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: `${decoder.getProgress() * 100}%`}" id="progressbar"></div>
                 </div>
             </div>
             <div v-else-if="bbqrDecoder">
-                <div class="my-3">BBQR: {{bbqrDecoder.total}} parts, {{bbqrDecoder.progress * 100}}% completed</div>
+                <div class="my-4">BBQR: {{bbqrDecoder.total}} parts, {{bbqrDecoder.progress * 100}}% completed</div>
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: `${bbqrDecoder.progress * 100}%`}" id="progressbar"></div>
                 </div>
             </div>
-            <div class="mt-3 text-center">
+            <div class="mt-4 text-center">
                 <button type="button" class="btn btn-primary me-1" v-if="qrData" v-on:click="submitData">Submit</button>
                 <button type="button" class="btn btn-secondary me-1" v-if="qrData" v-on:click="retry">Retry</button>
                 <button type="button" class="btn btn-secondary" v-if="requestInput && cameras.length > 2" v-on:click="nextCamera">Switch camera</button>
