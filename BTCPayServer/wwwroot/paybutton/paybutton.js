@@ -89,7 +89,7 @@ function inputChanges(vueApp, event, buttonSize) {
         }
     }
     
-    var html =
+    let html =
         // Styles
         getStyles('template-paybutton-styles') + (srvModel.buttonType == '2' ? getStyles('template-slider-styles') : '') +
         // Form

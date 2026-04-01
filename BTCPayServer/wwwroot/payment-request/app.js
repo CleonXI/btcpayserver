@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded",function (ev) {
                 endDiff: "",
                 active: true,
                 loading: false,
-                timeoutState: "",
                 customAmount: null,
                 detailsShown: {}
             }
@@ -55,25 +54,15 @@ document.addEventListener("DOMContentLoaded",function (ev) {
             },
             setLoading: function (val) {
                 this.loading = val;
-                if (this.timeoutState) {
-                    clearTimeout(this.timeoutState);
-                }
             },
             pay: function (amount) {
                 this.setLoading(true);
-                const self = this;
-                self.timeoutState = setTimeout(function () {
-                    self.setLoading(false);
-                }, 5000);
-
+                debounce('payment-loading', () => this.setLoading(false), 5000);
                 eventAggregator.$emit("pay", amount);
             },
             cancelPayment: function (amount) {
                 this.setLoading(true);
-                const self = this;
-                self.timeoutState = setTimeout(function () {
-                    self.setLoading(false);
-                }, 5000);
+                debounce('payment-loading', () => this.setLoading(false), 5000);
                 eventAggregator.$emit("cancel-invoice", amount);
             },
             formatDate: function (date) {

@@ -1,6 +1,6 @@
-var hubListener = function () {
+const hubListener = function () {
 
-    var connection = new signalR.HubConnectionBuilder().withUrl(srvModel.hubPath).build();
+    const connection = new signalR.HubConnectionBuilder().withUrl(srvModel.hubPath).build();
 
     connection.onclose(function () {
         eventAggregator.$emit("connection-lost");

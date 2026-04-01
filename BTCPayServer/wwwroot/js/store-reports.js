@@ -154,14 +154,11 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchStoreReports();
 });
 
-const dtFormatter = new Intl.DateTimeFormat('default', {dateStyle: 'short', timeStyle: 'short'});
-
 function displayDate(val) {
     if (!val) {
         return val;
     }
-    const date = new Date(val);
-    return dtFormatter.format(date);
+    return formatShortDateTime(val);
 }
 
 function displayValue(val) {

@@ -159,7 +159,6 @@ const posCommon = {
             amounts: [null],
             recentTransactions: [],
             recentTransactionsLoading: false,
-            dateFormatter: new Intl.DateTimeFormat('default', { dateStyle: 'short', timeStyle: 'short' }),
         }
     },
     computed: {
@@ -386,8 +385,7 @@ const posCommon = {
             bootstrap.Modal.getInstance(this.$refs.RecentTransactions).hide();
         },
         displayDate(val) {
-            const date = new Date(val);
-            return this.dateFormatter.format(date);
+            return formatShortDateTime(val);
         },
         async loadRecentTransactions() {
             this.recentTransactionsLoading = true;

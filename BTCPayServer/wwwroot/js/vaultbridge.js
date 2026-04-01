@@ -1,4 +1,4 @@
-var vault = (function () {
+const vault = (function () {
         async function sendRequest(req)
         {
             
@@ -26,7 +26,7 @@ var vault = (function () {
 
         async function askVaultPermission(url) {
             url = url + "/request-permission";
-            var browser = "other";
+            let browser = "other";
             if (window.safari !== undefined)
                 browser = "safari";
             if (navigator.brave !== undefined)

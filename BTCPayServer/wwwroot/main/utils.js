@@ -85,7 +85,7 @@ function formatFullDateTime(dateStr) {
 }
 
 function formatShortDateTime(dateStr) {
-    return new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(dateStr));
+    return new Intl.DateTimeFormat('default', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(dateStr));
 }
 
 function formatCSVDateTime(dateStr) {
