@@ -694,11 +694,6 @@
     margin: 0 !important;
   }
 
-  .btcpay-theme-switch:hover .btcpay-theme-switch-light,
-  .btcpay-theme-switch:hover .btcpay-theme-switch-dark {
-    fill: currentColor;
-  }
-
   :root:not([data-btcpay-theme]) .btcpay-theme-switch [data-theme="system"],
   :root[data-btcpay-theme="light"] .btcpay-theme-switch [data-theme="light"],
   :root[data-btcpay-theme="dark"] .btcpay-theme-switch [data-theme="dark"] {
@@ -897,11 +892,6 @@
       transform: none;
     }
 
-    #mainMenu .offcanvas-backdrop {
-      top: var(--mobile-header-height);
-      transition-duration: var(--btcpay-transition-duration-fast);
-    }
-
     #StoreSelector {
       margin: 0 auto;
       max-width: 60vw;
@@ -1041,8 +1031,7 @@
       min-width: 100%;
     }
 
-    #mainMenuToggle,
-    #mainMenu .offcanvas-backdrop {
+    #mainMenuToggle {
       display: none !important;
     }
 
@@ -1100,9 +1089,6 @@
     #StoreSelector {
       max-width: 40vw;
       flex-shrink: 1;
-    }
-    #StoreSelectorToggle .icon.icon-store {
-      display: none;
     }
   }
 
@@ -1331,9 +1317,6 @@
     .table td,
     .table th {
       background: transparent;
-    }
-    .bg-tile.h-100.p-3 {
-      padding: 1rem 0 !important;
     }
     .text-print-default {
       color: inherit !important;
@@ -1714,7 +1697,6 @@
       padding: var(--wrap-padding-vertical) var(--wrap-padding-horizontal);
     }
 
-    .min-vh-100,
     .public-page-wrap {
       min-height: 100dvh;
     }
@@ -2743,11 +2725,6 @@
     padding-top: 0;
   }
 
-  #PosCart .offcanvas-backdrop {
-    top: var(--mobile-header-height);
-    transition-duration: var(--btcpay-transition-duration-fast);
-  }
-
   #Categories.scrollable:before,
   #Categories.scrollable:after {
     content: '';
@@ -2796,18 +2773,9 @@
   }
 
   @media screen and (max-width: 400px) {
-    .pos-cart-header {
-      padding-left: .5rem;
-      padding-right: .5rem;
-    }
     #RecentTransactionsToggle {
       left: -.125rem;
     }
-  }
-
-  .pos-cart-header .cart-toggle-btn {
-    --icon-size: 2rem;
-    right: 0;
   }
 
   #RecentTransactionsToggle .icon,
@@ -3011,14 +2979,16 @@
   }
 
   /* --- Composite utility classes --- */
+  .btn-link,
   .btn-action,
   .btn-action-danger {
-    --btcpay-btn-padding-x: 0;
-    --btcpay-btn-padding-y: 0;
     --btcpay-btn-font-weight: var(--btcpay-font-weight-normal);
+    --btcpay-btn-color: var(--btcpay-body-link);
     --btcpay-btn-bg: transparent;
     --btcpay-btn-border-color: transparent;
+    --btcpay-btn-hover-color: var(--btcpay-body-link-accent);
     --btcpay-btn-hover-border-color: transparent;
+    --btcpay-btn-active-color: var(--btcpay-body-link-accent);
     --btcpay-btn-active-border-color: transparent;
     --btcpay-btn-disabled-color: var(--btcpay-body-text-muted);
     --btcpay-btn-disabled-border-color: transparent;
@@ -3027,23 +2997,26 @@
     text-decoration: none;
   }
 
-  .btn-action {
-    --btcpay-btn-color: var(--btcpay-body-link);
-    --btcpay-btn-hover-color: var(--btcpay-body-link-accent);
-    --btcpay-btn-active-color: var(--btcpay-body-link-accent);
-  }
-
+  .btn-link:hover, .btn-link:focus-visible,
   .btn-action:hover, .btn-action:focus-visible,
   .btn-action-danger:hover, .btn-action-danger:focus-visible {
     text-decoration: none;
   }
 
+  .btn-link:focus-visible,
   .btn-action:focus-visible {
     color: var(--btcpay-btn-color);
   }
 
+  .btn-link:hover,
   .btn-action:hover {
     color: var(--btcpay-btn-hover-color);
+  }
+
+  .btn-action,
+  .btn-action-danger {
+    --btcpay-btn-padding-x: 0;
+    --btcpay-btn-padding-y: 0;
   }
 
   .btn-action-danger {
@@ -3052,26 +3025,6 @@
     --btcpay-btn-active-color: var(--btcpay-danger);
   }
 
-
-  .flex-row-gap-2 {
-    @apply flex items-center gap-2;
-  }
-
-  .flex-row-gap-4 {
-    @apply flex items-center gap-4;
-  }
-
-  .inline-flex-row-gap-2 {
-    @apply inline-flex items-center gap-2;
-  }
-
-  .inline-flex-row-gap-4 {
-    @apply inline-flex items-center gap-4;
-  }
-
-  .flex-between-gap-2 {
-    @apply flex items-center justify-between gap-2;
-  }
 
   .page-subtitle {
     max-width: 36em;
@@ -3096,20 +3049,22 @@
     text-align: end;
   }
 
-  .tile-card {
-    display: flex;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
+  .tile-card,
+  .tile-section {
     background-color: var(--btcpay-bg-tile);
     border-radius: 0.25rem;
   }
 
+  .tile-card {
+    display: flex;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
   .tile-section {
-    background-color: var(--btcpay-bg-tile);
     height: 100%;
     margin: 0;
     padding: 1rem;
-    border-radius: 0.25rem;
   }
 
   @media (min-width: 576px) {
@@ -3130,9 +3085,14 @@
   .h-logo { height: 2.1rem; }
 
   .container,
-  .container-fluid {
+  .container-fluid,
+  .row {
     --btcpay-gutter-x: 1.5rem;
     --btcpay-gutter-y: 0;
+  }
+
+  .container,
+  .container-fluid {
     width: 100%;
     padding-right: calc(var(--btcpay-gutter-x) * 0.5);
     padding-left: calc(var(--btcpay-gutter-x) * 0.5);
@@ -3141,8 +3101,6 @@
   }
 
   .row {
-    --btcpay-gutter-x: 1.5rem;
-    --btcpay-gutter-y: 0;
     display: flex;
     flex-wrap: wrap;
     margin-top: calc(-1 * var(--btcpay-gutter-y));
@@ -3160,63 +3118,72 @@
   }
 
   .col { flex: 1 0 0%; }
-  .col-auto { flex: 0 0 auto; width: auto; }
-  .col-4 { flex: 0 0 auto; width: 33.33333%; }
-  .col-8 { flex: 0 0 auto; width: 66.66667%; }
-  .col-12 { flex: 0 0 auto; width: 100%; }
+  .col-auto, .col-4, .col-8, .col-12 { flex: 0 0 auto; }
+  .col-auto { width: auto; }
+  .col-4 { width: 33.33333%; }
+  .col-8 { width: 66.66667%; }
+  .col-12 { width: 100%; }
 
   @media (min-width: 576px) {
     .container { max-width: 540px; }
     .col-sm { flex: 1 0 0%; }
-    .col-sm-auto { flex: 0 0 auto; width: auto; }
-    .col-sm-1 { flex: 0 0 auto; width: 8.33333%; }
-    .col-sm-3 { flex: 0 0 auto; width: 25%; }
-    .col-sm-6 { flex: 0 0 auto; width: 50%; }
-    .col-sm-8 { flex: 0 0 auto; width: 66.66667%; }
-    .col-sm-9 { flex: 0 0 auto; width: 75%; }
-    .col-sm-10 { flex: 0 0 auto; width: 83.33333%; }
-    .col-sm-12 { flex: 0 0 auto; width: 100%; }
+    .col-sm-auto, .col-sm-3, .col-sm-6, .col-sm-8,
+    .col-sm-9, .col-sm-10, .col-sm-12 { flex: 0 0 auto; }
+    .col-sm-auto { width: auto; }
+    .col-sm-3 { width: 25%; }
+    .col-sm-6 { width: 50%; }
+    .col-sm-8 { width: 66.66667%; }
+    .col-sm-9 { width: 75%; }
+    .col-sm-10 { width: 83.33333%; }
+    .col-sm-12 { width: 100%; }
   }
 
   @media (min-width: 768px) {
     .container { max-width: 720px; }
-    .col-md-auto { flex: 0 0 auto; width: auto; }
-    .col-md-4 { flex: 0 0 auto; width: 33.33333%; }
-    .col-md-6 { flex: 0 0 auto; width: 50%; }
-    .col-md-7 { flex: 0 0 auto; width: 58.33333%; }
-    .col-md-8 { flex: 0 0 auto; width: 66.66667%; }
-    .col-md-9 { flex: 0 0 auto; width: 75%; }
-    .col-md-10 { flex: 0 0 auto; width: 83.33333%; }
-    .col-md-12 { flex: 0 0 auto; width: 100%; }
+    .col-md-auto, .col-md-4, .col-md-6, .col-md-7,
+    .col-md-8, .col-md-9, .col-md-10, .col-md-12 { flex: 0 0 auto; }
+    .col-md-auto { width: auto; }
+    .col-md-4 { width: 33.33333%; }
+    .col-md-6 { width: 50%; }
+    .col-md-7 { width: 58.33333%; }
+    .col-md-8 { width: 66.66667%; }
+    .col-md-9 { width: 75%; }
+    .col-md-10 { width: 83.33333%; }
+    .col-md-12 { width: 100%; }
   }
 
   @media (min-width: 992px) {
     .container { max-width: 960px; }
-    .col-lg-3 { flex: 0 0 auto; width: 25%; }
-    .col-lg-4 { flex: 0 0 auto; width: 33.33333%; }
-    .col-lg-5 { flex: 0 0 auto; width: 41.66667%; }
-    .col-lg-6 { flex: 0 0 auto; width: 50%; }
-    .col-lg-7 { flex: 0 0 auto; width: 58.33333%; }
-    .col-lg-8 { flex: 0 0 auto; width: 66.66667%; }
-    .col-lg-9 { flex: 0 0 auto; width: 75%; }
-    .col-lg-12 { flex: 0 0 auto; width: 100%; }
+    .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,
+    .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-12 { flex: 0 0 auto; }
+    .col-lg-3 { width: 25%; }
+    .col-lg-4 { width: 33.33333%; }
+    .col-lg-5 { width: 41.66667%; }
+    .col-lg-6 { width: 50%; }
+    .col-lg-7 { width: 58.33333%; }
+    .col-lg-8 { width: 66.66667%; }
+    .col-lg-9 { width: 75%; }
+    .col-lg-12 { width: 100%; }
   }
 
   @media (min-width: 1200px) {
     .container { max-width: 1140px; }
-    .col-xl-4 { flex: 0 0 auto; width: 33.33333%; }
-    .col-xl-6 { flex: 0 0 auto; width: 50%; }
-    .col-xl-7 { flex: 0 0 auto; width: 58.33333%; }
-    .col-xl-8 { flex: 0 0 auto; width: 66.66667%; }
-    .col-xl-10 { flex: 0 0 auto; width: 83.33333%; }
+    .col-xl-4, .col-xl-6, .col-xl-7,
+    .col-xl-8, .col-xl-10 { flex: 0 0 auto; }
+    .col-xl-4 { width: 33.33333%; }
+    .col-xl-6 { width: 50%; }
+    .col-xl-7 { width: 58.33333%; }
+    .col-xl-8 { width: 66.66667%; }
+    .col-xl-10 { width: 83.33333%; }
   }
 
   @media (min-width: 1400px) {
     .container { max-width: 1320px; }
     .content-constrain-xxl { max-width: 984px; }
-    .col-xxl-4 { flex: 0 0 auto; width: 33.33333%; }
-    .col-xxl-6 { flex: 0 0 auto; width: 50%; }
-    .col-xxl-8 { flex: 0 0 auto; width: 66.66667%; }
+    .col-xxl-4, .col-xxl-6, .col-xxl-8 { flex: 0 0 auto; }
+    .col-xxl-4 { width: 33.33333%; }
+    .col-xxl-6 { width: 50%; }
+    .col-xxl-8 { width: 66.66667%; }
   }
 
   .g-3 { --btcpay-gutter-x: 1rem; --btcpay-gutter-y: 1rem; }
@@ -3366,33 +3333,6 @@
     --btcpay-btn-disabled-border-color: var(--_c-border);
   }
 
-  .btn-link {
-    --btcpay-btn-font-weight: var(--btcpay-font-weight-normal);
-    --btcpay-btn-color: var(--btcpay-body-link);
-    --btcpay-btn-bg: transparent;
-    --btcpay-btn-border-color: transparent;
-    --btcpay-btn-hover-color: var(--btcpay-body-link-accent);
-    --btcpay-btn-hover-border-color: transparent;
-    --btcpay-btn-active-color: var(--btcpay-body-link-accent);
-    --btcpay-btn-active-border-color: transparent;
-    --btcpay-btn-disabled-color: var(--btcpay-body-text-muted);
-    --btcpay-btn-disabled-border-color: transparent;
-    --btcpay-btn-box-shadow: 0 0 0 var(--btcpay-black);
-    --btcpay-btn-focus-shadow-rgb: var(--btcpay-primary-shadow);
-    text-decoration: none;
-  }
-
-  .btn-link:hover, .btn-link:focus-visible {
-    text-decoration: none;
-  }
-
-  .btn-link:focus-visible {
-    color: var(--btcpay-btn-color);
-  }
-
-  .btn-link:hover {
-    color: var(--btcpay-btn-hover-color);
-  }
 
   .btn-close {
     --btcpay-btn-close-color: var(--btcpay-body-text);
@@ -5095,4 +5035,24 @@
   .bg-info { background-color: var(--btcpay-info); }
   .bg-warning { background-color: var(--btcpay-warning); }
   .bg-danger { background-color: var(--btcpay-danger); }
+}
+
+@utility flex-row-gap-2 {
+  @apply flex items-center gap-2;
+}
+
+@utility flex-row-gap-4 {
+  @apply flex items-center gap-4;
+}
+
+@utility inline-flex-row-gap-2 {
+  @apply inline-flex items-center gap-2;
+}
+
+@utility inline-flex-row-gap-4 {
+  @apply inline-flex items-center gap-4;
+}
+
+@utility flex-between-gap-2 {
+  @apply flex items-center justify-between gap-2;
 }
