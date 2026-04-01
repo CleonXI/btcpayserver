@@ -365,10 +365,14 @@ function initApp() {
                 if (this.isPluginPaymentMethod) return;
 
                 const url = `${statusUrl}&paymentMethodId=${this.pmId}`;
-                const response = await fetch(url);
-                if (response.ok) {
-                    const data = await response.json();
-                    this.updateData(data);
+                try {
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.updateData(data);
+                    }
+                } catch (err) {
+                    console.error('Error fetching invoice data:', err);
                 }
             },
             updateData (data) {

@@ -57,10 +57,9 @@ async function initLabelManager (elementId) {
     };
 
     const items = element.value.split(',').filter(x => !!x);
-    const options = await fetchWalletLabels().then(serverLabels => {
-        const newItems = items.filter(item => !serverLabels.find(label => label.label === item));
-        return [...serverLabels, ...newItems.map(item => ({ label: item }))];
-    });
+    const serverLabels = await fetchWalletLabels();
+    const newItems = items.filter(item => !serverLabels.find(label => label.label === item));
+    const options = [...serverLabels, ...newItems.map(item => ({ label: item }))];
     const richInfo = labels ? JSON.parse(labels) : {};
     const refreshLabelOptions = async () => {
         if (!fetchUrl || !select) return;
@@ -213,7 +212,8 @@ async function initLabelManager (elementId) {
                 }
 
                 await refreshLabelOptions();
-            } catch {
+            } catch (err) {
+                showToast("Label update failed", { type: 'error' });
             } finally {
                 select.unlock();
             }

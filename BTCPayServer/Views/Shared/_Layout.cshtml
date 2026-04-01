@@ -52,10 +52,10 @@
     @if (!notificationDisabled)
     {
         <script>
-			var mainContent = document.getElementById("mainContent");
+			const mainContent = document.getElementById("mainContent");
 			if (window.location.protocol != "@(expectedScheme):" || window.location.host.toLowerCase() != "@expectedHost")
 			{
-				var tmpl = document.getElementById("badUrl");
+				const tmpl = document.getElementById("badUrl");
 				mainContent.prepend(tmpl.content.cloneNode(true));
 			}
         </script>
