@@ -3223,12 +3223,7 @@
   .h-logo { height: 2.1rem; }
 
   .container,
-  .container-fluid,
-  .container-sm,
-  .container-md,
-  .container-lg,
-  .container-xl,
-  .container-xxl {
+  .container-fluid {
     --btcpay-gutter-x: 1.5rem;
     --btcpay-gutter-y: 0;
     width: 100%;
@@ -3239,19 +3234,19 @@
   }
 
   @media (min-width: 576px) {
-    .container, .container-sm { max-width: 540px; }
+    .container { max-width: 540px; }
   }
   @media (min-width: 768px) {
-    .container, .container-sm, .container-md { max-width: 720px; }
+    .container { max-width: 720px; }
   }
   @media (min-width: 992px) {
-    .container, .container-sm, .container-md, .container-lg { max-width: 960px; }
+    .container { max-width: 960px; }
   }
   @media (min-width: 1200px) {
-    .container, .container-sm, .container-md, .container-lg, .container-xl { max-width: 1140px; }
+    .container { max-width: 1140px; }
   }
   @media (min-width: 1400px) {
-    .container, .container-sm, .container-md, .container-lg, .container-xl, .container-xxl { max-width: 1320px; }
+    .container { max-width: 1320px; }
   }
 
   .row {
@@ -3402,6 +3397,7 @@
     --btcpay-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
     --btcpay-btn-disabled-opacity: 0.65;
     --btcpay-btn-focus-box-shadow: 0 0 0 2px rgba(var(--btcpay-btn-focus-shadow-rgb), .5);
+    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     display: inline-block;
     padding: var(--btcpay-btn-padding-y) var(--btcpay-btn-padding-x);
     font-family: var(--btcpay-btn-font-family);
@@ -3483,7 +3479,6 @@
     --btcpay-btn-active-color: var(--btcpay-primary-text-active);
     --btcpay-btn-active-bg: var(--btcpay-primary-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-primary-border-active);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-primary-text);
     --btcpay-btn-disabled-bg: var(--btcpay-primary);
     --btcpay-btn-disabled-border-color: var(--btcpay-primary-border);
@@ -3500,7 +3495,6 @@
     --btcpay-btn-active-color: var(--btcpay-secondary-text-active);
     --btcpay-btn-active-bg: var(--btcpay-secondary-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-secondary-border-active);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-secondary-text);
     --btcpay-btn-disabled-bg: var(--btcpay-secondary);
     --btcpay-btn-disabled-border-color: var(--btcpay-secondary-border);
@@ -3517,7 +3511,6 @@
     --btcpay-btn-active-color: var(--btcpay-success-text-active);
     --btcpay-btn-active-bg: var(--btcpay-success-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-success-border-active);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-success-text);
     --btcpay-btn-disabled-bg: var(--btcpay-success);
     --btcpay-btn-disabled-border-color: var(--btcpay-success-border);
@@ -3534,7 +3527,6 @@
     --btcpay-btn-active-color: var(--btcpay-danger-text-active);
     --btcpay-btn-active-bg: var(--btcpay-danger-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-danger-border-active);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-danger-text);
     --btcpay-btn-disabled-bg: var(--btcpay-danger);
     --btcpay-btn-disabled-border-color: var(--btcpay-danger-border);
@@ -3551,7 +3543,6 @@
     --btcpay-btn-active-color: var(--btcpay-warning-text-active);
     --btcpay-btn-active-bg: var(--btcpay-warning-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-warning-border-hover);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-warning-text);
     --btcpay-btn-disabled-bg: var(--btcpay-warning);
     --btcpay-btn-disabled-border-color: var(--btcpay-warning-border);
@@ -3568,7 +3559,6 @@
     --btcpay-btn-active-color: var(--btcpay-info-text-active);
     --btcpay-btn-active-bg: var(--btcpay-info-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-info-border-hover);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-info-text);
     --btcpay-btn-disabled-bg: var(--btcpay-info);
     --btcpay-btn-disabled-border-color: var(--btcpay-info-border);
@@ -3585,7 +3575,6 @@
     --btcpay-btn-active-color: var(--btcpay-light-text-active);
     --btcpay-btn-active-bg: var(--btcpay-light-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-light-border-active);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-light-text);
     --btcpay-btn-disabled-bg: var(--btcpay-light);
     --btcpay-btn-disabled-border-color: var(--btcpay-light-border);
@@ -3601,7 +3590,6 @@
     --btcpay-btn-active-color: var(--btcpay-primary-text-active);
     --btcpay-btn-active-bg: var(--btcpay-primary-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-primary-border);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-primary-text);
     --btcpay-btn-disabled-bg: var(--btcpay-primary);
     --btcpay-btn-disabled-border-color: var(--btcpay-primary-border);
@@ -3617,7 +3605,6 @@
     --btcpay-btn-active-color: var(--btcpay-secondary-text-active);
     --btcpay-btn-active-bg: var(--btcpay-secondary-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-secondary-border);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-secondary-text);
     --btcpay-btn-disabled-bg: var(--btcpay-secondary);
     --btcpay-btn-disabled-border-color: var(--btcpay-secondary-border);
@@ -3633,7 +3620,6 @@
     --btcpay-btn-active-color: var(--btcpay-danger-text-active);
     --btcpay-btn-active-bg: var(--btcpay-danger-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-danger-border);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-danger-text);
     --btcpay-btn-disabled-bg: var(--btcpay-danger);
     --btcpay-btn-disabled-border-color: var(--btcpay-danger-border);
@@ -3649,7 +3635,6 @@
     --btcpay-btn-active-color: var(--btcpay-info-text-active);
     --btcpay-btn-active-bg: var(--btcpay-info-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-info-border);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-info-text);
     --btcpay-btn-disabled-bg: var(--btcpay-info);
     --btcpay-btn-disabled-border-color: var(--btcpay-info-border);
@@ -3665,7 +3650,6 @@
     --btcpay-btn-active-color: var(--btcpay-warning-text-active);
     --btcpay-btn-active-bg: var(--btcpay-warning-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-warning-border);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-warning-text);
     --btcpay-btn-disabled-bg: var(--btcpay-warning);
     --btcpay-btn-disabled-border-color: var(--btcpay-warning-border);
@@ -3681,7 +3665,6 @@
     --btcpay-btn-active-color: var(--btcpay-success-text-active);
     --btcpay-btn-active-bg: var(--btcpay-success-bg-active);
     --btcpay-btn-active-border-color: var(--btcpay-success-border);
-    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --btcpay-btn-disabled-color: var(--btcpay-success-text);
     --btcpay-btn-disabled-bg: var(--btcpay-success);
     --btcpay-btn-disabled-border-color: var(--btcpay-success-border);
@@ -4022,11 +4005,6 @@
 
   .form-check-label {
     color: var(--btcpay-body-text);
-  }
-
-  .form-check-inline {
-    display: inline-block;
-    margin-right: 1rem;
   }
 
   .form-floating {
@@ -4465,23 +4443,6 @@
     transform: none;
   }
 
-  .modal.modal-static .modal-dialog {
-    transform: scale(1.02);
-  }
-
-  .modal-dialog-scrollable {
-    height: calc(100% - var(--btcpay-modal-margin) * 2);
-  }
-
-  .modal-dialog-scrollable .modal-content {
-    max-height: 100%;
-    overflow: hidden;
-  }
-
-  .modal-dialog-scrollable .modal-body {
-    overflow-y: auto;
-  }
-
   .modal-dialog-centered {
     display: flex;
     align-items: center;
@@ -4600,18 +4561,8 @@
     transition: height 0.35s ease;
   }
 
-  .collapsing.collapse-horizontal {
-    width: 0;
-    height: auto;
-    transition: width 0.35s ease;
-  }
-
   .dropup,
-  .dropend,
-  .dropdown,
-  .dropstart,
-  .dropup-center,
-  .dropdown-center {
+  .dropdown {
     position: relative;
   }
 
@@ -5359,7 +5310,7 @@
     word-wrap: break-word;
   }
 
-  .offcanvas-sm, .offcanvas-md, .offcanvas-lg, .offcanvas-xl, .offcanvas-xxl, .offcanvas {
+  .offcanvas {
     --btcpay-offcanvas-zindex: 1045;
     --btcpay-offcanvas-width: 400px;
     --btcpay-offcanvas-height: auto;
@@ -5403,25 +5354,6 @@
     width: var(--btcpay-offcanvas-width);
     border-left: var(--btcpay-offcanvas-border-width) solid var(--btcpay-offcanvas-border-color);
     transform: translateX(100%);
-  }
-
-  .offcanvas.offcanvas-top {
-    top: 0;
-    right: 0;
-    left: 0;
-    height: var(--btcpay-offcanvas-height);
-    max-height: 100%;
-    border-bottom: var(--btcpay-offcanvas-border-width) solid var(--btcpay-offcanvas-border-color);
-    transform: translateY(-100%);
-  }
-
-  .offcanvas.offcanvas-bottom {
-    right: 0;
-    left: 0;
-    height: var(--btcpay-offcanvas-height);
-    max-height: 100%;
-    border-top: var(--btcpay-offcanvas-border-width) solid var(--btcpay-offcanvas-border-color);
-    transform: translateY(100%);
   }
 
   .offcanvas.showing, .offcanvas.show:not(.hiding) {
@@ -5507,7 +5439,6 @@
   }
 
   .visually-hidden,
-  .visually-hidden-focusable:not(:focus):not(:focus-within),
   .sr-only {
     width: 1px !important;
     height: 1px !important;
@@ -5520,20 +5451,8 @@
   }
 
   .visually-hidden:not(caption),
-  .visually-hidden-focusable:not(:focus):not(:focus-within):not(caption),
   .sr-only:not(caption) {
     position: absolute !important;
-  }
-
-  .visually-hidden-focusable:focus,
-  .visually-hidden-focusable:focus-within {
-    width: auto !important;
-    height: auto !important;
-    padding: inherit !important;
-    margin: inherit !important;
-    overflow: visible !important;
-    clip: auto !important;
-    white-space: normal !important;
   }
 
   .text-danger {
