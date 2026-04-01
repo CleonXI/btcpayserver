@@ -267,6 +267,11 @@ h2 .icon.icon-info {
     margin-top: .5rem;
 }
 
+.form-control-constrained { max-width: 12ch; }
+.form-control-narrow { max-width: 10ch; }
+.store-logo-preview { height: 2.1rem; max-width: 10.5rem; }
+.progress-thin { height: 5px; }
+
 /* Print */
 @media print {
     section,
@@ -536,7 +541,7 @@ h2 .icon.icon-info {
     font-weight: var(--btcpay-font-weight-semibold);
 }
 
-@media (max-width: 575px) {
+@media (max-width: 575.98px) {
     .widget.store-lightning-services .services-list .service {
         --service-width: 3rem;
     }
@@ -552,7 +557,7 @@ h2 .icon.icon-info {
     }
 }
 
-@media (min-width: 576px) and (max-width: 1199px) {
+@media (min-width: 576px) and (max-width: 1199.98px) {
     .widget.store-lightning-services .services-list {
         gap: 1.5rem;
     }
@@ -561,7 +566,7 @@ h2 .icon.icon-info {
     }
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1199.98px) {
     /* Reorder so that Lightning is below the wallet balance */
     .widget.store-wallet-balance {
         order: -3;
@@ -664,7 +669,7 @@ label.btcpay-list-select-item:hover {
     background-color: var(--btcpay-form-bg-disabled);
     pointer-events: none;
 }
-@media (max-width: 575px) {
+@media (max-width: 575.98px) {
     .btcpay-list-select-item {
         flex-basis: 100%;
     }
@@ -703,8 +708,7 @@ input:checked + label.btcpay-list-select-item {
     /* gradually try to set better but less supported values and units */
     .min-vh-100,
     .public-page-wrap {
-        min-height: -webkit-fill-available !important;
-        min-height: 100dvh !important;
+        min-height: 100dvh;
     }
     .tile {
         --tile-padding: 1.5rem;

@@ -67,7 +67,7 @@
 }
 
 #mainNav .accordion-item {
-    border: none !important;
+    border: none;
 }
 
 #mainNav .navbar-nav > li.nav-item .nav-link {
@@ -84,7 +84,7 @@
 }
 
 #mainNav .navbar-nav > li.nav-item-sub {
-    padding-left:calc(1.5rem + var(--btcpay-space-xs))
+    padding-left:calc(1.5rem + var(--btcpay-space-xs));
 }
 
 #mainNav .navbar-nav > li.nav-item .nav-link span {
@@ -328,7 +328,7 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 16%);
     padding: 0;
     z-index: 2000;
-    top: var(--btcpay-space-xs) !important;
+    top: var(--btcpay-space-xs);
     border: 1px solid var(--btcpay-body-border-medium);
 }
 
@@ -486,8 +486,8 @@
         transform: translateX(-100%);
         transition: transform var(--btcpay-transition-duration-fast) ease-in-out;
         /* Fixes https://github.com/btcpayserver/btcpayserver/issues/3807 */
-        height: calc(100vh - var(--mobile-header-height)); /* This line is a fallback for browsers which don't support "fill-available" */
-        height: -webkit-fill-available;
+        height: calc(100vh - var(--mobile-header-height));
+        height: 100dvh;
         /* Since we can't do "calc(fill-available - var(--mobile-header-height));" I'm using "padding-bottom" instead */
         padding-bottom: var(--mobile-header-height);
         /* END FIX */
@@ -573,8 +573,7 @@
         --btcpay-scrollbar-color: transparent;
 
         flex-wrap: nowrap;
-        overflow: auto visible;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: auto;
         margin-left: calc(var(--scroll-indicator-spacing) * -1);
         margin-right: calc(var(--scroll-indicator-spacing) * -1);
         padding: 0 var(--scroll-indicator-spacing);

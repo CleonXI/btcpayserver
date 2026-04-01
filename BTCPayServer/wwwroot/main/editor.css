@@ -17,7 +17,7 @@
     --image-size: 3rem;
     border: none;
     margin: 0;
-    padding: var(--btcpay-space-m) var(--btcpay-space-m) var(--btcpay-space-m) var(--btcpay-space-s) !important;
+    padding: var(--btcpay-space-m) var(--btcpay-space-m) var(--btcpay-space-m) var(--btcpay-space-s);
 }
 
 .editor .list-group-item + .list-group-item.active {
@@ -78,7 +78,7 @@
     background-color: var(--btcpay-form-bg-disabled);
 }
 
-:disabled .editor .control,
-:disabled .editor button {
-    display: none !important;
+fieldset:disabled .editor .control,
+fieldset:disabled .editor button {
+    display: none;
 }
