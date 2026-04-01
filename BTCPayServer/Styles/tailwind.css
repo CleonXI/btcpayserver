@@ -3103,6 +3103,65 @@
     border-bottom-left-radius: var(--btcpay-card-inner-border-radius);
   }
 
+  /* --- Composite utility classes --- */
+  .btn-action {
+    --btcpay-btn-padding-x: 0;
+    --btcpay-btn-padding-y: 0;
+    --btcpay-btn-font-weight: var(--btcpay-font-weight-normal);
+    --btcpay-btn-color: var(--btcpay-body-link);
+    --btcpay-btn-bg: transparent;
+    --btcpay-btn-border-color: transparent;
+    --btcpay-btn-hover-color: var(--btcpay-body-link-accent);
+    --btcpay-btn-hover-border-color: transparent;
+    --btcpay-btn-active-color: var(--btcpay-body-link-accent);
+    --btcpay-btn-active-border-color: transparent;
+    --btcpay-btn-disabled-color: var(--btcpay-body-text-muted);
+    --btcpay-btn-disabled-border-color: transparent;
+    --btcpay-btn-box-shadow: 0 0 0 var(--btcpay-black);
+    --btcpay-btn-focus-shadow-rgb: var(--btcpay-primary-shadow);
+    text-decoration: none;
+  }
+
+  .btn-action:hover, .btn-action:focus-visible {
+    text-decoration: none;
+  }
+
+  .btn-action:focus-visible {
+    color: var(--btcpay-btn-color);
+  }
+
+  .btn-action:hover {
+    color: var(--btcpay-btn-hover-color);
+  }
+
+  .btn-action-danger {
+    --btcpay-btn-padding-x: 0;
+    --btcpay-btn-padding-y: 0;
+    --btcpay-btn-font-weight: var(--btcpay-font-weight-normal);
+    --btcpay-btn-color: var(--btcpay-danger);
+    --btcpay-btn-bg: transparent;
+    --btcpay-btn-border-color: transparent;
+    --btcpay-btn-hover-color: var(--btcpay-danger);
+    --btcpay-btn-hover-border-color: transparent;
+    --btcpay-btn-active-color: var(--btcpay-danger);
+    --btcpay-btn-active-border-color: transparent;
+    --btcpay-btn-disabled-color: var(--btcpay-body-text-muted);
+    --btcpay-btn-disabled-border-color: transparent;
+    --btcpay-btn-box-shadow: 0 0 0 var(--btcpay-black);
+    --btcpay-btn-focus-shadow-rgb: var(--btcpay-primary-shadow);
+    text-decoration: none;
+  }
+
+  .btn-action-danger:hover, .btn-action-danger:focus-visible {
+    text-decoration: none;
+  }
+
+  .loading-indicator {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+  }
+
   /* --- Utility replacements --- */
   @media (min-width: 1400px) {
     .content-constrain-xxl { max-width: 984px; }
@@ -3110,7 +3169,10 @@
   .min-w-date-col { min-width: 8rem; }
   .max-w-input-12ch { max-width: 12ch; }
   .max-w-input-10ch { max-width: 10ch; }
+  .max-w-input-14ch { max-width: 14ch; }
+  .max-w-input-16ch { max-width: 16ch; }
   .max-w-logo { max-width: 10.5rem; }
+  .max-w-form-narrow { max-width: 540px; }
   .h-progress-sm { height: 5px; }
   .h-logo { height: 2.1rem; }
 
