@@ -39,9 +39,6 @@ button[data-bs-toggle] .icon {
 #PosItems .img img {
     width: var(--image-size);
     height: var(--image-size);
-}
-
-#PosItems .img img {
     max-width: var(--image-size);
     max-height: var(--image-size);
     object-fit: scale-down;

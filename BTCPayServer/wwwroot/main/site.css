@@ -207,7 +207,7 @@ h2 .icon.icon-info {
 
 /* Prevent layout from breaking on hyperlinks with very long URLs as the visible text */
 .invoice-details a {
-    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 #qrCode {
@@ -281,7 +281,6 @@ h2 .icon.icon-info {
         max-width: none !important;
         white-space: unset !important;
         word-wrap: break-word !important;
-        word-break: break-word !important;
     }
     .table td,
     .table th {
@@ -400,7 +399,7 @@ h2 .icon.icon-info {
 
 .widget header a,
 .widget header .btn-link {
-    margin-top: var(--btcpay-space-xs);
+    margin-top: 0;
     font-weight: var(--btcpay-font-weight-semibold);
 }
 
@@ -469,11 +468,6 @@ h2 .icon.icon-info {
 
 .widget.store-numbers header h6 {
     margin-right: var(--btcpay-space-s);
-}
-
-.widget header a,
-.widget header .btn-link {
-    margin-top: 0;
 }
 
 .widget .store-number {
@@ -948,7 +942,7 @@ input.ts-wrapper.form-control:not(.ts-hidden-accessible,.ts-inline) {
     margin: 0;
     padding: 1px var(--btcpay-space-s);
     text-align: left;
-    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .transaction-label a {
@@ -1049,7 +1043,6 @@ input.ts-wrapper.form-control:not(.ts-hidden-accessible,.ts-inline) {
 
 .truncate-center-text {
     word-wrap: break-word;
-    word-break: break-word;
 }
 
 .truncate-center a,

@@ -71,7 +71,6 @@ section dl > div dt {
 section dl > div dd {
     text-align: end;
     word-wrap: break-word;
-    word-break: break-word;
     max-width: 62.5%;
 }
 .info {

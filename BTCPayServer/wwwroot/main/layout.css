@@ -323,7 +323,6 @@
 }
 
 #NotificationsDropdown {
-    border: 0;
     border-radius: var(--btcpay-border-radius-l);
     background-color: var(--btcpay-body-bg);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 16%);
@@ -489,7 +488,6 @@
         /* Fixes https://github.com/btcpayserver/btcpayserver/issues/3807 */
         height: calc(100vh - var(--mobile-header-height)); /* This line is a fallback for browsers which don't support "fill-available" */
         height: -webkit-fill-available;
-        height: fill-available;
         /* Since we can't do "calc(fill-available - var(--mobile-header-height));" I'm using "padding-bottom" instead */
         padding-bottom: var(--mobile-header-height);
         /* END FIX */
@@ -681,9 +679,6 @@
 
     #SectionNav .nav {
         margin-top: calc(var(--btcpay-space-m) * -1);
-    }
-
-    #SectionNav .nav {
         border-bottom: var(--border-size) solid var(--btcpay-body-border-light);
     }
 
