@@ -57,7 +57,7 @@
     {
         <div asp-validation-summary="All" class="@(ViewContext.ModelState.ErrorCount.Equals(1) ? "no-marker" : "")"></div>
     }
-    <div class="row" style="max-width:540px;">
+    <div class="row max-w-form-narrow">
         <div class="col-sm-6">
             <div class="form-group">
                 <label asp-for="AppName" class="form-label" data-required></label>

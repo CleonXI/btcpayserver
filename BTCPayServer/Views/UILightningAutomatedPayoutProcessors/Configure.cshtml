@@ -35,7 +35,7 @@
             <div class="form-group">
                 <label asp-for="IntervalMinutes" class="form-label" data-required text-translate="true">Interval</label>
                 <div class="input-group">
-                    <input asp-for="IntervalMinutes" class="form-control" inputmode="numeric" style="max-width:12ch;">
+                    <input asp-for="IntervalMinutes" class="form-control max-w-input-12ch" inputmode="numeric">
                     <span class="input-group-text" text-translate="true">minutes</span>
                     <span asp-validation-for="IntervalMinutes" class="text-btcpay-danger"></span>
                 </div>

@@ -86,7 +86,7 @@
 					<span text-translate="true">Current effective fee rate</span>
 					<span class="text-btcpay-body-text-muted">(sat/vB)</span>
 				</label>
-				<input asp-for="CurrentFeeSatoshiPerByte" type="number" min="0" step="any" readonly class="form-control" disabled style="max-width:14ch;" />
+				<input asp-for="CurrentFeeSatoshiPerByte" type="number" min="0" step="any" readonly class="form-control max-w-input-14ch" disabled />
 			</div>
 		</div>
 	}
@@ -96,7 +96,7 @@
 				<span text-translate="true">New effective fee rate</span>
 				<span class="text-btcpay-body-text-muted">(sat/vB)</span>
 			</label>
-			<input asp-for="FeeSatoshiPerByte" type="number" inputmode="numeric" min="0" step="any" class="form-control" style="max-width:14ch;" />
+			<input asp-for="FeeSatoshiPerByte" type="number" inputmode="numeric" min="0" step="any" class="form-control max-w-input-14ch" />
 			<span asp-validation-for="FeeSatoshiPerByte" class="text-btcpay-danger"></span>
 			<span id="FeeRate-Error" class="text-btcpay-danger"></span>
 		</div>
