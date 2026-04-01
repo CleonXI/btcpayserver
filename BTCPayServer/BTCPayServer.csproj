@@ -73,7 +73,7 @@
 
   <!-- Tailwind CSS v4 Build -->
   <PropertyGroup>
-    <TailwindVersion>4.1.4</TailwindVersion>
+    <TailwindVersion>4.2.2</TailwindVersion>
     <TailwindInput>$(MSBuildProjectDirectory)/Styles/tailwind.css</TailwindInput>
     <TailwindOutput>$(MSBuildProjectDirectory)/wwwroot/main/tailwind-output.css</TailwindOutput>
   </PropertyGroup>
