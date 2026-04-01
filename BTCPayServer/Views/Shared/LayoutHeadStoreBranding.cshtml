@@ -116,6 +116,6 @@
 }
 @if (!string.IsNullOrEmpty(Model.LogoUrl))
 {
-    <link rel="icon" href="@Model.LogoUrl">
-    <link rel="apple-touch-icon" href="@Model.LogoUrl">
+    <link rel="icon" href="@Model.LogoUrl" asp-append-version="true">
+    <link rel="apple-touch-icon" href="@Model.LogoUrl" asp-append-version="true">
 }
