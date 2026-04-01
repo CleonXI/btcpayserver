@@ -36,6 +36,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using NBXplorer;
 using NicolasDorier.RateLimits;
+using Vite.AspNetCore;
 
 namespace BTCPayServer.Hosting
 {
@@ -118,6 +119,13 @@ namespace BTCPayServer.Hosting
             services.Configure<SecurityStampValidatorOptions>(opts =>
             {
                 opts.ValidationInterval = TimeSpan.FromMinutes(5.0);
+            });
+
+            services.AddViteServices(options =>
+            {
+                options.Server.AutoRun = true;
+                options.Server.Port = 5173;
+                options.Base = "/dist/";
             });
 
             services.AddBTCPayServer(Configuration, Logs);
@@ -332,6 +340,11 @@ namespace BTCPayServer.Hosting
             app.UsePayServer();
             app.UseRouting();
             app.UseCors(CorsPolicies.All);
+
+            if (env.IsDevelopment())
+            {
+                app.UseViteDevelopmentServer();
+            }
 
             app.UseStaticFiles(new StaticFileOptions
             {

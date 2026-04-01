@@ -298,9 +298,13 @@ BTCPayServer/testpwd
 Packed Plugins
 Plugins/packed
 
-# Tailwind CSS
+# Tailwind CSS (legacy, replaced by Vite)
 Build/tools/
 BTCPayServer/wwwroot/main/tailwind-output.css
+
+# Vite
+BTCPayServer/node_modules/
+BTCPayServer/wwwroot/dist/
 
 BTCPayServer/wwwroot/swagger/v1/openapi.json
 BTCPayServer/appsettings.dev.json

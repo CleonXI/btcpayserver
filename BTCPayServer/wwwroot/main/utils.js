@@ -136,3 +136,19 @@ function formatDateTimes(format, root) {
         if ($el.dataset[mode]) $el.innerText = $el.dataset[mode];
     });
 }
+
+window.delegate = delegate;
+window.debounce = debounce;
+window.noExponents = noExponents;
+window.timeAgo = timeAgo;
+window.calendarDate = calendarDate;
+window.ordinalSuffix = ordinalSuffix;
+window.formatLongDate = formatLongDate;
+window.formatFullDateTime = formatFullDateTime;
+window.formatShortDateTime = formatShortDateTime;
+window.formatCSVDateTime = formatCSVDateTime;
+window.timeDiffString = timeDiffString;
+window.toUnix = toUnix;
+window.fromUnix = fromUnix;
+window.endOfDayUnix = endOfDayUnix;
+window.formatDateTimes = formatDateTimes;

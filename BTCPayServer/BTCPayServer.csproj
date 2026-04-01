@@ -35,6 +35,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="NBitcoin" Version="9.0.5" />
+    <PackageReference Include="Vite.AspNetCore" Version="2.4.1" />
     <PackageReference Include="YamlDotNet" Version="16.3.0" />
     <PackageReference Include="BIP78.Sender" Version="0.2.5" />
     <PackageReference Include="BTCPayServer.Hwi" Version="2.0.6" />
@@ -71,46 +72,18 @@
 	  <ProjectReference Include="..\BTCPayServer.Common\BTCPayServer.Common.csproj" />
 	</ItemGroup>
 
-  <!-- Tailwind CSS v4 Build -->
-  <PropertyGroup>
-    <TailwindVersion>4.2.2</TailwindVersion>
-    <TailwindInput>$(MSBuildProjectDirectory)/Styles/tailwind.css</TailwindInput>
-    <TailwindOutput>$(MSBuildProjectDirectory)/wwwroot/main/tailwind-output.css</TailwindOutput>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
-    <TailwindPlatform>windows-x64</TailwindPlatform>
-    <TailwindExeSuffix>.exe</TailwindExeSuffix>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
-    <TailwindPlatform>linux-x64</TailwindPlatform>
-    <TailwindExeSuffix></TailwindExeSuffix>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX')) And '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">
-    <TailwindPlatform>macos-arm64</TailwindPlatform>
-    <TailwindExeSuffix></TailwindExeSuffix>
-  </PropertyGroup>
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX')) And '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' != 'Arm64'">
-    <TailwindPlatform>macos-x64</TailwindPlatform>
-    <TailwindExeSuffix></TailwindExeSuffix>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <TailwindToolDir>$(MSBuildProjectDirectory)/../Build/tools/</TailwindToolDir>
-    <TailwindExe>$(TailwindToolDir)tailwindcss$(TailwindExeSuffix)</TailwindExe>
-  </PropertyGroup>
-
-  <Target Name="DownloadTailwindCli" BeforeTargets="BuildTailwind" Condition="!Exists('$(TailwindExe)')">
-    <MakeDir Directories="$(TailwindToolDir)" />
-    <DownloadFile
-      SourceUrl="https://github.com/tailwindlabs/tailwindcss/releases/download/v$(TailwindVersion)/tailwindcss-$(TailwindPlatform)$(TailwindExeSuffix)"
-      DestinationFolder="$(TailwindToolDir)"
-      DestinationFileName="tailwindcss$(TailwindExeSuffix)" />
-    <Exec Command="chmod +x '$(TailwindExe)'" Condition="!$([MSBuild]::IsOSPlatform('Windows'))" />
+  <!-- Vite Build -->
+  <Target Name="NpmInstall" BeforeTargets="ViteBuild" Condition="!Exists('$(MSBuildProjectDirectory)/node_modules/.package-lock.json')">
+    <Exec Command="npm ci" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
-  <Target Name="BuildTailwind" BeforeTargets="Build">
-    <Exec Command="&quot;$(TailwindExe)&quot; -i &quot;$(TailwindInput)&quot; -o &quot;$(TailwindOutput)&quot; --minify" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  <Target Name="ViteBuild" BeforeTargets="Build" Condition="!Exists('$(MSBuildProjectDirectory)/wwwroot/dist/.vite/manifest.json')">
+    <Exec Command="npx vite build" WorkingDirectory="$(MSBuildProjectDirectory)" />
+  </Target>
+
+  <Target Name="ViteBuildPublish" BeforeTargets="Publish">
+    <Exec Command="npm ci" WorkingDirectory="$(MSBuildProjectDirectory)" Condition="!Exists('$(MSBuildProjectDirectory)/node_modules/.package-lock.json')" />
+    <Exec Command="npx vite build" WorkingDirectory="$(MSBuildProjectDirectory)" />
   </Target>
 
   <ProjectExtensions><VisualStudio><UserProperties wwwroot_4swagger_4v1_4swagger_1template_1invoices_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" wwwroot_4swagger_4v1_4swagger_1template_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" wwwroot_4swagger_4v1_4swagger_1template_1misc_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" wwwroot_4swagger_4v1_4swagger_1template_1pull-payments_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" wwwroot_4swagger_4v1_4swagger_1template_1serverinfo_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" wwwroot_4swagger_4v1_4swagger_1template_1stores_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" wwwroot_4swagger_4v1_4swagger_1template_1stores-payment-methods_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" wwwroot_4swagger_4v1_4swagger_1template_1stores-users_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" wwwroot_4swagger_4v1_4swagger_1template_1users_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" wwwroot_4swagger_4v1_4swagger_1template_1webhooks_1json__JsonSchema="https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/schemas/v3.0/schema.json" /></VisualStudio></ProjectExtensions>

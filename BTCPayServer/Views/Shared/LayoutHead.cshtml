@@ -13,6 +13,7 @@
 }
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="btcpay-base-url" content="@Url.Content("~").TrimEnd('/')" />
 @if (PoliciesSettings.DiscourageSearchEngines)
 {
 <meta name="robots" content="noindex">
@@ -21,7 +22,7 @@
 @* CSS *@
 <link href="~/vendor/flatpickr/flatpickr.css" asp-append-version="true"  rel="stylesheet" />
 <link href="~/main/fonts/OpenSans.css" asp-append-version="true"  rel="stylesheet" />
-<link href="~/main/tailwind-output.css" asp-append-version="true" rel="stylesheet" />
+<link rel="stylesheet" vite-href="~/Styles/tailwind.css" />
 
 <partial name="LayoutHeadTheme" />
 @if (storeBranding != null)

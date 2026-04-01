@@ -36,3 +36,5 @@ function createToastContainer(position) {
     document.body.appendChild(container);
     return container;
 }
+
+window.showToast = showToast;

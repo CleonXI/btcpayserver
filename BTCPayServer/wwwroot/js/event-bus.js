@@ -19,3 +19,5 @@ function createEventBus() {
         }
     };
 }
+
+window.createEventBus = createEventBus;

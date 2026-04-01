@@ -1,4 +1,4 @@
-const baseUrl = Object.values(document.scripts).find(s => s.src.includes('/main/site.js'))?.src.split('/main/site.js').shift() ?? '';
+const baseUrl = document.querySelector('meta[name="btcpay-base-url"]')?.content || '';
 
 const flatpickrInstances = [];
 
@@ -513,6 +513,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+window.switchTimeFormat = switchTimeFormat;
+window.initLabelManager = initLabelManager;
+window.initLabelManagers = initLabelManagers;
 
 // Initialize Blazor
 if (window.Blazor) {

@@ -1,4 +1,7 @@
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0.201-noble AS builder
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y --no-install-recommends nodejs && \
+    rm -rf /var/lib/apt/lists/*
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
 WORKDIR /source
 COPY nuget.config nuget.config
@@ -10,6 +13,8 @@ COPY BTCPayServer.Rating/BTCPayServer.Rating.csproj BTCPayServer.Rating/BTCPaySe
 COPY BTCPayServer.Data/BTCPayServer.Data.csproj BTCPayServer.Data/BTCPayServer.Data.csproj
 COPY BTCPayServer.Client/BTCPayServer.Client.csproj BTCPayServer.Client/BTCPayServer.Client.csproj
 RUN cd BTCPayServer && dotnet restore
+COPY BTCPayServer/package.json BTCPayServer/package-lock.json BTCPayServer/
+RUN cd BTCPayServer && npm ci
 COPY BTCPayServer.Common/. BTCPayServer.Common/.
 COPY BTCPayServer.Rating/. BTCPayServer.Rating/.
 COPY BTCPayServer.Data/. BTCPayServer.Data/.
