@@ -58,7 +58,7 @@
                 <input asp-for="ImageFile" type="file" class="form-control flex-grow">
                 @if (!string.IsNullOrEmpty(Model.ImageUrl))
                 {
-                    <img src="@Model.ImageUrl" alt="Profile picture" class="profile-picture" />
+                    <img src="@Model.ImageUrl" alt="Profile picture" class="profile-picture" loading="lazy" />
                 }
             </div>
             <span asp-validation-for="ImageFile" class="text-danger"></span>

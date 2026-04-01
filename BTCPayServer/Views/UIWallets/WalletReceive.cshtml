@@ -38,10 +38,10 @@
     {
         <noscript>
             <div class="form-group">
-                <input type="text" class="form-control " readonly="readonly" asp-for="Address" id="address"/>
+                <input type="text" class="form-control " readonly asp-for="Address" id="address"/>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" readonly="readonly" asp-for="PaymentLink" id="payment-link"/>
+                <input type="text" class="form-control" readonly asp-for="PaymentLink" id="payment-link"/>
             </div>
             <div class="row mt-4">
                 <button type="submit" name="command" value="generate-new-address" class="btn btn-primary w-100" text-translate="true">Generate another address</button>
@@ -58,7 +58,7 @@
                         <vc:qr-code data="@Model.PaymentLink"/>
 						@if (Model.CryptoImage is not null)
 						{
-							<img src="@Model.CryptoImage" class="qr-icon" alt="@Model.CryptoCode"/>
+							<img src="@Model.CryptoImage" class="qr-icon" alt="@Model.CryptoCode" loading="lazy"/>
 						}
 					</div>
                     <div class="input-group mt-3">
@@ -73,7 +73,7 @@
                         <vc:qr-code data="@Model.Address"/>
 						@if (Model.CryptoImage is not null)
 						{
-							<img src="@Model.CryptoImage" class="qr-icon" alt="@Model.CryptoCode"/>
+							<img src="@Model.CryptoImage" class="qr-icon" alt="@Model.CryptoCode" loading="lazy"/>
 						}
 					</div>
                     <div class="input-group mt-3">

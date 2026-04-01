@@ -3,7 +3,7 @@
 <header class="store-header" v-pre>
     @if (!string.IsNullOrEmpty(Model.StoreBranding.LogoUrl))
     {
-        <img src="@Model.StoreBranding.LogoUrl" alt="@Model.Title" class="store-logo"/>
+        <img src="@Model.StoreBranding.LogoUrl" alt="@Model.Title" class="store-logo" loading="lazy"/>
     }
     <h1 class="store-name">@Model.Title</h1>
 </header>

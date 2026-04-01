@@ -71,7 +71,7 @@
                         <input asp-for="LogoFile" type="file" class="form-control flex-grow">
                         @if (!string.IsNullOrEmpty(Model.LogoUrl))
                         {
-                            <img src="@Model.LogoUrl" alt="@Model.StoreName Logo" style="height:2.1rem;max-width:10.5rem;"/>
+                            <img src="@Model.LogoUrl" alt="@Model.StoreName Logo" class="store-logo-preview" loading="lazy"/>
                         }
                     </div>
                     <span asp-validation-for="LogoFile" class="text-danger"></span>
@@ -142,7 +142,7 @@
                     <vc:icon symbol="info"/>
                 </a>
                 <div class="input-group">
-                    <input inputmode="numeric" asp-for="InvoiceExpiration" class="form-control" style="max-width:12ch;"/>
+                    <input inputmode="numeric" asp-for="InvoiceExpiration" class="form-control form-control-constrained"/>
                     <span class="input-group-text" text-translate="true">minutes</span>
                 </div>
                 <span asp-validation-for="InvoiceExpiration" class="text-danger"></span>
@@ -153,7 +153,7 @@
                     <vc:icon symbol="info"/>
                 </a>
                 <div class="input-group">
-                    <input inputmode="decimal" asp-for="PaymentTolerance" class="form-control" style="max-width:12ch;"/>
+                    <input inputmode="decimal" asp-for="PaymentTolerance" class="form-control form-control-constrained"/>
                     <span class="input-group-text" text-translate="true">percent</span>
                 </div>
                 <span asp-validation-for="PaymentTolerance" class="text-danger"></span>
@@ -161,7 +161,7 @@
             <div class="form-group">
                 <label asp-for="BOLT11Expiration" class="form-label"></label>
                 <div class="input-group">
-                    <input inputmode="numeric" asp-for="BOLT11Expiration" class="form-control" style="max-width:12ch;"/>
+                    <input inputmode="numeric" asp-for="BOLT11Expiration" class="form-control form-control-constrained"/>
 					<span class="input-group-text" text-translate="true">days</span>
                 </div>
                 <span asp-validation-for="BOLT11Expiration" class="text-danger"></span>
@@ -172,7 +172,7 @@
                     <vc:icon symbol="info"/>
                 </a>
                 <div class="input-group">
-                    <input inputmode="numeric" asp-for="MonitoringExpiration" class="form-control" style="max-width:10ch;"/>
+                    <input inputmode="numeric" asp-for="MonitoringExpiration" class="form-control form-control-narrow"/>
                     <span class="input-group-text" text-translate="true">minutes</span>
                 </div>
                 <span asp-validation-for="MonitoringExpiration" class="text-danger"></span>
@@ -211,7 +211,7 @@
             <div class="form-group">
                 <label asp-for="RecommendedFeeBlockTarget" class="form-label"></label>
                 <div class="input-group">
-                    <input inputmode="numeric" asp-for="RecommendedFeeBlockTarget" class="form-control" min="1" style="max-width:10ch" />
+                    <input inputmode="numeric" asp-for="RecommendedFeeBlockTarget" class="form-control form-control-narrow" min="1" />
 					<span class="input-group-text" text-translate="true">blocks</span>
                 </div>
                 <span asp-validation-for="RecommendedFeeBlockTarget" class="text-danger"></span>

@@ -63,7 +63,7 @@
                         <input asp-for="LogoFile" type="file" class="form-control flex-grow">
                         @if (!string.IsNullOrEmpty(Model.LogoUrl))
                         {
-                            <img src="@Model.LogoUrl" alt="Logo" style="height:2.1rem;max-width:10.5rem;"/>
+                            <img src="@Model.LogoUrl" alt="Logo" class="store-logo-preview" loading="lazy"/>
                         }
                     </div>
                     <span asp-validation-for="LogoFile" class="text-danger"></span>
