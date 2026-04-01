@@ -1,4 +1,4 @@
-const baseUrl = Object.values(document.scripts).find(s => s.src.includes('/main/site.js')).src.split('/main/site.js').shift();
+const baseUrl = Object.values(document.scripts).find(s => s.src.includes('/main/site.js'))?.src.split('/main/site.js').shift() ?? '';
 
 const flatpickrInstances = [];
 
@@ -214,8 +214,7 @@ async function initLabelManager (elementId) {
                 }
 
                 await refreshLabelOptions();
-            } catch (error) {
-                console.error('There has been a problem with your fetch operation:', error);
+            } catch {
             } finally {
                 select.unlock();
             }
@@ -281,11 +280,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initLabelManagers();
 
+    let timeAgoTimer;
     function updateTimeAgo(){
-        document.querySelectorAll("[data-timeago-unixms]").forEach(el => {
+        const elements = document.querySelectorAll("[data-timeago-unixms]");
+        if (elements.length === 0) return;
+        elements.forEach(el => {
             el.textContent = timeAgo(parseInt(el.dataset.timeagoUnixms));
         });
-        setTimeout(updateTimeAgo, 1000);
+        timeAgoTimer = setTimeout(updateTimeAgo, 1000);
     }
     updateTimeAgo();
 
@@ -399,7 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
             newBadge.focus();
         } else {
             $badge.classList.remove('pe-none');
-            alert("Invoice state update failed");
+            showToast("Invoice state update failed", { type: 'error' });
         }
     })
 

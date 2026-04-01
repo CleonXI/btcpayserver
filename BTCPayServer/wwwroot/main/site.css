@@ -1107,12 +1107,14 @@ input.ts-wrapper.form-control:not(.ts-hidden-accessible,.ts-inline) {
     color: var(--btcpay-body-text-muted);
 }
 
-.clipboard-button:hover {
-    color: rgba(var(--btcpay-body-link-rgb), var(--btcpay-link-opacity, 1)) !important;
+.clipboard-button:hover,
+.clipboard-button.btn-link:hover {
+    color: rgba(var(--btcpay-body-link-rgb), var(--btcpay-link-opacity, 1));
 }
 
-.clipboard-button[data-clipboard-confirming] {
-    color: var(--btcpay-success) !important;
+.clipboard-button[data-clipboard-confirming],
+.clipboard-button.btn-link[data-clipboard-confirming] {
+    color: var(--btcpay-success);
 }
 
 .clipboard-button[data-clipboard-confirming]::before {

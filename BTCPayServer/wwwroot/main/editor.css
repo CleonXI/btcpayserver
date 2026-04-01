@@ -26,11 +26,6 @@
 }
 
 .editor .list-group-item .img img {
-    width: var(--image-size);
-    height: var(--image-size);
-}
-
-.editor .list-group-item .img img {
     max-width: var(--image-size);
     max-height: var(--image-size);
     object-fit: scale-down;

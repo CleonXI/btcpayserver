@@ -275,7 +275,7 @@
 }
 
 .btcpay-theme-switch-themes button {
-    --icon-size: 1.25rem !important;
+    --icon-size: 1.25rem;
     background: none;
     padding: 0;
     border: 0;

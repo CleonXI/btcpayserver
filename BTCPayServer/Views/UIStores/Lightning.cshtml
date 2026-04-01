@@ -56,7 +56,7 @@
                     @if (!string.IsNullOrEmpty(service.Error))
                     {
                         <div class="service" id="@($"Service-{service.ServiceName}")">
-                            <img src="@($"~/img/{service.Type.ToLower()}.png")" asp-append-version="true" alt="@service.DisplayName" />
+                            <img src="@($"~/img/{service.Type.ToLower()}.png")" asp-append-version="true" alt="@service.DisplayName" loading="lazy" />
                             <h6>@service.DisplayName</h6>
                             <small class="d-block mt-3 lh-sm fw-semibold text-danger">@service.Error</small>
                         </div>
@@ -64,14 +64,14 @@
                     else if (string.IsNullOrEmpty(service.Link))
                     {
                         <a asp-controller="UIServer" asp-action="Service" asp-route-serviceName="@service.ServiceName" asp-route-cryptoCode="@service.CryptoCode" class="service" id="@($"Service-{service.ServiceName}")">
-                            <img src="@($"~/img/{service.Type.ToLower()}.png")" asp-append-version="true" alt="@service.DisplayName" />
+                            <img src="@($"~/img/{service.Type.ToLower()}.png")" asp-append-version="true" alt="@service.DisplayName" loading="lazy" />
                             <h6>@service.DisplayName</h6>
                         </a>
                     }
                     else
                     {
                         <a href="@service.Link" target="_blank" rel="noreferrer noopener" class="service" id="@($"Service-{service.ServiceName}")">
-                            <img src="@($"~/img/{service.Type.ToLower()}.png")" asp-append-version="true" alt="@service.DisplayName" />
+                            <img src="@($"~/img/{service.Type.ToLower()}.png")" asp-append-version="true" alt="@service.DisplayName" loading="lazy" />
                             <h6>@service.DisplayName</h6>
                         </a>
                     }
