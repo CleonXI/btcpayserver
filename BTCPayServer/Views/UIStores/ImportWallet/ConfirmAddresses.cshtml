@@ -12,7 +12,7 @@
 
 <header class="text-center">
     <h1>@ViewData["Title"]</h1>
-    <p class="lead text-btcpay-body-text-muted mt-4" text-translate="true">Please check that your wallet is generating the same addresses as below.</p>
+    <p class="page-subtitle" text-translate="true">Please check that your wallet is generating the same addresses as below.</p>
 </header>
 
 <form method="post" asp-controller="UIStores" asp-action="UpdateWallet" asp-route-storeId="@Model.StoreId" asp-route-cryptoCode="@Model.CryptoCode">

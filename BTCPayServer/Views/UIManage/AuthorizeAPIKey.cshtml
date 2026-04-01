@@ -41,7 +41,7 @@
     <input type="hidden" asp-for="ApplicationIdentifier" value="@Model.ApplicationIdentifier"/>
     <header class="text-center">
         <h1>@ViewData["Title"]</h1>
-        <p class="lead text-btcpay-body-text-muted mt-4">@(displayName ?? "An application") is requesting access to your BTCPay Server account.</p>
+        <p class="page-subtitle">@(displayName ?? "An application") is requesting access to your BTCPay Server account.</p>
     </header>
     @if (!ViewContext.ModelState.IsValid)
     {

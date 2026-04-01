@@ -230,8 +230,8 @@
                                 <thead>
                                 <tr>
                                     <th class="font-normal text-btcpay-body-text-muted" scope="col" text-translate="true">Invoice Id</th>
-                                    <th class="font-normal text-btcpay-body-text-muted text-end whitespace-nowrap w-125px" text-translate="true">Amount</th>
-                                    <th class="font-normal text-btcpay-body-text-muted text-end w-225px" text-translate="true">Status</th>
+                                    <th class="th-muted-end whitespace-nowrap w-125px" text-translate="true">Amount</th>
+                                    <th class="th-muted-end w-225px" text-translate="true">Status</th>
                                     <th class="w-50px text-end print:hidden"></th>
                                 </tr>
                                 </thead>
@@ -243,7 +243,7 @@
                                             <span class="badge" :class="`badge-${statusClass(invoice.stateFormatted)}`">{{invoice.stateFormatted}}</span>
                                         </td>
                                         <td class="align-middle text-end print:hidden">
-                                            <div class="inline-flex items-center gap-2">
+                                            <div class="inline-flex-row-gap-2">
                                                 <button class="accordion-button collapsed only-for-js ms-0 inline-block" type="button" :aria-controls="`invoice_details_${invoice.id}`" :aria-expanded="showDetails(invoice.id) ? 'true' : 'false'" v-if="invoice.payments && invoice.payments.length > 0" v-on:click="toggleDetails(invoice.id)">
                                                     <vc:icon symbol="caret-down" />
                                                 </button>
@@ -252,8 +252,8 @@
                                     </tr>
                                     <tr v-collapsible="showDetails(invoice.id)" :id="`invoice_details_${invoice.id}`" v-if="invoice.payments && invoice.payments.length > 0">
                                         <th class="font-normal text-btcpay-body-text-muted" text-translate="true">Transaction</th>
-                                        <th class="font-normal text-btcpay-body-text-muted text-end whitespace-nowrap" text-translate="true">Paid</th>
-                                        <th class="font-normal text-btcpay-body-text-muted text-end" text-translate="true">Payment</th>
+                                        <th class="th-muted-end whitespace-nowrap" text-translate="true">Paid</th>
+                                        <th class="th-muted-end" text-translate="true">Payment</th>
                                     </tr>
                                     <tr v-collapsible="showDetails(invoice.id)" v-for="payment of invoice.payments" :key="`invoice_payment_${payment.id}`">
                                         <td class="text-break"><vc:truncate-center is-vue="true" text="payment.id" link="payment.link" padding="7" classes="truncate-center-id" /></td>
@@ -278,8 +278,8 @@
                                         <thead>
                                         <tr>
                                             <th class="font-normal text-btcpay-body-text-muted" scope="col" text-translate="true">Invoice Id</th>
-                                            <th class="font-normal text-btcpay-body-text-muted text-end whitespace-nowrap w-125px" text-translate="true">Amount</th>
-                                            <th class="font-normal text-btcpay-body-text-muted text-end" text-translate="true">Status</th>
+                                            <th class="th-muted-end whitespace-nowrap w-125px" text-translate="true">Amount</th>
+                                            <th class="th-muted-end" text-translate="true">Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -294,8 +294,8 @@
                                         {
                                             <tr>
                                                 <th class="font-normal text-btcpay-body-text-muted" text-translate="true">Transaction</th>
-                                                <th class="font-normal text-btcpay-body-text-muted text-end whitespace-nowrap" text-translate="true">Paid</th>
-                                                <th class="font-normal text-btcpay-body-text-muted text-end" text-translate="true">Payment</th>
+                                                <th class="th-muted-end whitespace-nowrap" text-translate="true">Paid</th>
+                                                <th class="th-muted-end" text-translate="true">Payment</th>
                                             </tr>
                                             @foreach (var payment in invoice.Payments)
                                             {

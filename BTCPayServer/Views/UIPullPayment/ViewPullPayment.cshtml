@@ -89,16 +89,16 @@
 
                 <div class="row">
                     <div class="col col-12 col-lg-6 mb-6">
-                        <div class="bg-tile h-full m-0 p-4 sm:p-12 rounded">
+                        <div class="tile-section">
                             @if (!string.IsNullOrWhiteSpace(Model.Title))
                             {
                                 <h2 class="h4 mb-4" data-testid="title">@Model.Title</h2>
                             }
-                            <div class="flex items-center gap-2">
+                            <div class="flex-row-gap-2">
                                 <span class="text-btcpay-body-text-muted whitespace-nowrap" text-translate="true">Start Date</span>
                                 <span class="whitespace-nowrap">@Model.StartDate.ToBrowserDate()</span>
                             </div>
-                            <div class="flex items-center gap-2">
+                            <div class="flex-row-gap-2">
                                 <span class="text-btcpay-body-text-muted whitespace-nowrap" text-translate="true">Last Updated</span>
                                 <span class="whitespace-nowrap">@Model.LastRefreshed.ToBrowserDate()</span>
                             </div>
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <div class="col col-12 col-lg-6 mb-6">
-                        <div class="bg-tile h-full m-0 p-4 sm:p-12 rounded">
+                        <div class="tile-section">
                             <h2 class="h4 mb-4" text-translate="true">Payment Details</h2>
                             <dl class="mb-0 md:mt-6">
                                 <div class="flex print:inline-block flex-col mb-6 me-12">
@@ -150,7 +150,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="bg-tile h-full m-0 p-4 sm:p-12 rounded">
+                        <div class="tile-section">
                             <h2 class="h4 mb-0" text-translate="true">Claims</h2>
                             @if (Model.Payouts.Any())
                             {
@@ -160,8 +160,8 @@
                                             <tr class="table-borderless">
                                                 <th class="font-normal text-btcpay-body-text-muted" scope="col" text-translate="true">Destination</th>
                                                 <th class="font-normal text-btcpay-body-text-muted" scope="col" text-translate="true">Method</th>
-                                                <th class="font-normal text-btcpay-body-text-muted text-end whitespace-nowrap" text-translate="true">Amount requested</th>
-                                                <th class="font-normal text-btcpay-body-text-muted text-end" text-translate="true">Status</th>
+                                                <th class="th-muted-end whitespace-nowrap" text-translate="true">Amount requested</th>
+                                                <th class="th-muted-end" text-translate="true">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
