@@ -10,7 +10,17 @@ function showToast(message, options = {}) {
     const toastEl = document.createElement('div');
     toastEl.className = `toast align-items-center border-0 ${typeClasses[type] || typeClasses.info}`;
     toastEl.setAttribute('role', 'alert');
-    toastEl.innerHTML = `<div class="d-flex"><div class="toast-body">${message}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
+    const wrapper = document.createElement('div');
+    wrapper.className = 'd-flex';
+    const body = document.createElement('div');
+    body.className = 'toast-body';
+    body.textContent = message;
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'btn-close btn-close-white me-2 m-auto';
+    closeBtn.setAttribute('data-bs-dismiss', 'toast');
+    wrapper.append(body, closeBtn);
+    toastEl.appendChild(wrapper);
     container.appendChild(toastEl);
     const toast = new bootstrap.Toast(toastEl, { delay: duration });
     toastEl.addEventListener('hidden.bs.toast', () => toastEl.remove());
