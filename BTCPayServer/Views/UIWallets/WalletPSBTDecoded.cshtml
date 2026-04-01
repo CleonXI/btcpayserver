@@ -122,7 +122,7 @@ else if (isReady)
         <div class="flex flex-col sm:flex-row flex-wrap justify-center sm:items-center">
             @if (!string.IsNullOrEmpty(Model.SigningContext?.PayJoinBIP21))
             {
-                <button type="submit" class="btn btn-primary mb-3 mb-sm-0 me-sm-2" name="command" value="payjoin" text-translate="true">Broadcast (Payjoin)</button>
+                <button type="submit" class="btn btn-primary mb-3 sm:mb-0 sm:me-2" name="command" value="payjoin" text-translate="true">Broadcast (Payjoin)</button>
                 <span class="mx-2">or</span>
                 <button type="submit" class="btn btn-secondary" name="command" value="broadcast" text-translate="true">Broadcast (Simple)</button>
             }
@@ -154,8 +154,8 @@ else
                     <input type="hidden" asp-for="ReturnUrl" />
                     <input type="hidden" asp-for="BackUrl" />
                     <div class="flex flex-col sm:flex-row flex-wrap sm:items-center">
-                        <button name="command" type="submit" class="btn btn-primary mb-4 sm:mb-0 me-sm-2" value="save-psbt" text-translate="true">Download PSBT file</button>
-                        <button name="command" type="button" class="btn btn-primary mb-4 sm:mb-0 me-sm-2 only-for-js" data-bs-toggle="modal" data-bs-target="#scan-qr-modal" text-translate="true">Show QR for wallet camera</button>
+                        <button name="command" type="submit" class="btn btn-primary mb-4 sm:mb-0 sm:me-2" value="save-psbt" text-translate="true">Download PSBT file</button>
+                        <button name="command" type="button" class="btn btn-primary mb-4 sm:mb-0 sm:me-2 only-for-js" data-bs-toggle="modal" data-bs-target="#scan-qr-modal" text-translate="true">Show QR for wallet camera</button>
                         <a id="ShowRawVersion" href="#ExportOptions" data-bs-toggle="collapse" class="btn btn-link text-btcpay-body-text-muted" text-translate="true">Show raw versions</a>
                     </div>
                 </form>
@@ -214,11 +214,11 @@ else
                         <div class="flex flex-col sm:flex-row flex-wrap sm:items-center">
                             @if (this.Model.SigningContext.PendingTransactionId is not null)
                             {
-                                <button type="submit" name="command" value="collect" class="btn btn-primary mb-4 sm:mb-0 me-sm-2 camera-submit" id="Collect" text-translate="true">Collect signatures</button>
+                                <button type="submit" name="command" value="collect" class="btn btn-primary mb-4 sm:mb-0 sm:me-2 camera-submit" id="Collect" text-translate="true">Collect signatures</button>
                             }
                             else
                             {
-                                <button type="submit" name="command" value="decode" class="btn btn-primary mb-4 sm:mb-0 me-sm-2 camera-submit" id="Decode" text-translate="true">Decode PSBT</button>
+                                <button type="submit" name="command" value="decode" class="btn btn-primary mb-4 sm:mb-0 sm:me-2 camera-submit" id="Decode" text-translate="true">Decode PSBT</button>
                             }
                             <button type="button" id="scanqrcode" class="btn btn-primary only-for-js" data-bs-toggle="modal" data-bs-target="#scanModal" text-translate="true">Scan wallet QR with camera</button>
                         </div>
