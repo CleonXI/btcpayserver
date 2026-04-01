@@ -1240,11 +1240,6 @@
     background: var(--btcpay-bg-tile);
   }
 
-  .badge .dropdown-toggle {
-    cursor: pointer;
-    padding: 0;
-  }
-
   .invoice-details a {
     overflow-wrap: break-word;
   }
@@ -1268,8 +1263,6 @@
   }
 
   [v-cloak] { display: none !important; }
-  [v-cloak-loading] > * { display: none !important; }
-  [v-cloak-loading]::before { content: "loading…" }
 
   .list-group-item a:not(.btn) {
     color: inherit;
@@ -1493,10 +1486,6 @@
 
   .widget .store-number {
     flex: 0 1 calc(50% - var(--btcpay-space-xl) / 2);
-  }
-
-  .widget .number {
-    font-weight: var(--btcpay-font-weight-bold);
   }
 
   .widget *:not([class*='table-responsive']) > .table {
@@ -2424,10 +2413,6 @@
     color: var(--btcpay-white);
   }
 
-  .payment-box .plugins > .payment {
-    margin-top: var(--btcpay-space-l);
-  }
-
   .checkout-text {
     white-space: pre-wrap;
     overflow-wrap: break-word;
@@ -2778,8 +2763,7 @@
     }
   }
 
-  #RecentTransactionsToggle .icon,
-  .cart-toggle-btn .icon-pos-cart {
+  #RecentTransactionsToggle .icon {
     width: var(--icon-size);
     height: var(--icon-size);
   }
@@ -2943,12 +2927,6 @@
     }
     .store-footer {
       display: none !important;
-    }
-  }
-
-  @media (hover: none) {
-    .actions .btn-secondary:hover {
-      border-color: var(--btcpay-secondary-border-active) !important;
     }
   }
 
