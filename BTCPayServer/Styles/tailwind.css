@@ -3489,7 +3489,7 @@
     --btcpay-btn-focus-shadow-rgb: var(--btcpay-warning-shadow);
     --btcpay-btn-active-color: var(--btcpay-warning-text-active);
     --btcpay-btn-active-bg: var(--btcpay-warning-bg-active);
-    --btcpay-btn-active-border-color: var(--btcpay-warning-border-hover);
+    --btcpay-btn-active-border-color: var(--btcpay-warning-border-active);
   }
 
   .btn-info {
@@ -3502,7 +3502,7 @@
     --btcpay-btn-focus-shadow-rgb: var(--btcpay-info-shadow);
     --btcpay-btn-active-color: var(--btcpay-info-text-active);
     --btcpay-btn-active-bg: var(--btcpay-info-bg-active);
-    --btcpay-btn-active-border-color: var(--btcpay-info-border-hover);
+    --btcpay-btn-active-border-color: var(--btcpay-info-border-active);
   }
 
   .btn-light {
@@ -3691,6 +3691,7 @@
     position: relative;
     display: inline-flex;
     vertical-align: middle;
+    border-radius: var(--btcpay-border-radius);
   }
 
   .btn-group > .btn {
@@ -3705,10 +3706,6 @@
   .btn-group > .btn:active,
   .btn-group > .btn.active {
     z-index: 1;
-  }
-
-  .btn-group {
-    border-radius: var(--btcpay-border-radius);
   }
 
   .btn-group > :not(.btn-check:first-child) + .btn,
@@ -4297,14 +4294,6 @@
 
   .table-sm > :not(caption) > * > * {
     padding: 0.25rem 0.25rem;
-  }
-
-  .table-bordered > :not(caption) > * {
-    border-width: var(--btcpay-border-width) 0;
-  }
-
-  .table-bordered > :not(caption) > * > * {
-    border-width: 0 var(--btcpay-border-width);
   }
 
   .table-borderless > :not(caption) > * > * {
@@ -5255,9 +5244,6 @@
     --btcpay-offcanvas-box-shadow: none;
     --btcpay-offcanvas-transition: transform var(--btcpay-transition-duration-default) ease-in-out;
     --btcpay-offcanvas-title-line-height: 1.6;
-  }
-
-  .offcanvas {
     position: fixed;
     bottom: 0;
     z-index: var(--btcpay-offcanvas-zindex);
