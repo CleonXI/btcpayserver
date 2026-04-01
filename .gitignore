@@ -298,6 +298,10 @@ BTCPayServer/testpwd
 Packed Plugins
 Plugins/packed
 
+# Tailwind CSS
+Build/tools/
+BTCPayServer/wwwroot/main/tailwind-output.css
+
 BTCPayServer/wwwroot/swagger/v1/openapi.json
 BTCPayServer/appsettings.dev.json
 BTCPayServer.Tests/monero_wallet

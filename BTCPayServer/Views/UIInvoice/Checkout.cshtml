@@ -20,7 +20,6 @@
 <head>
     <partial name="LayoutHead"/>
     <meta name="robots" content="noindex,nofollow">
-    <link href="~/checkout/checkout.css" asp-append-version="true" rel="stylesheet" />
     @if (!string.IsNullOrEmpty(Model.PaymentSoundUrl))
     {
         <link rel="preload" href="@Model.PaymentSoundUrl" as="audio" />
