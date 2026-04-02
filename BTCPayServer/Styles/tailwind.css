@@ -1318,8 +1318,7 @@
     a {
       text-decoration: none !important;
     }
-    .buttons,
-    .toasted-container {
+    .buttons {
       display: none !important;
     }
     .truncate-center a,
