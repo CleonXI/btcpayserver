@@ -3555,7 +3555,8 @@
     box-shadow: 0 0 0 2px var(--btcpay-form-shadow-focus);
   }
 
-  .form-check-input:checked {
+  .form-check-input:checked,
+  .form-check-input[type="checkbox"]:indeterminate {
     background-color: var(--btcpay-primary);
     border-color: var(--btcpay-primary-border);
   }
@@ -3569,8 +3570,6 @@
   }
 
   .form-check-input[type="checkbox"]:indeterminate {
-    background-color: var(--btcpay-primary);
-    border-color: var(--btcpay-primary-border);
     --btcpay-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
   }
 
@@ -3838,11 +3837,15 @@
     margin-bottom: 0;
   }
 
-  .card-header {
+  .card-header,
+  .card-footer {
     padding: var(--btcpay-card-cap-padding-y) var(--btcpay-card-cap-padding-x);
-    margin-bottom: 0;
     color: var(--btcpay-card-cap-color);
     background-color: var(--btcpay-card-cap-bg);
+  }
+
+  .card-header {
+    margin-bottom: 0;
     border-bottom: var(--btcpay-card-border-width) solid var(--btcpay-card-border-color);
   }
 
@@ -3851,9 +3854,6 @@
   }
 
   .card-footer {
-    padding: var(--btcpay-card-cap-padding-y) var(--btcpay-card-cap-padding-x);
-    color: var(--btcpay-card-cap-color);
-    background-color: var(--btcpay-card-cap-bg);
     border-top: var(--btcpay-card-border-width) solid var(--btcpay-card-border-color);
   }
 
