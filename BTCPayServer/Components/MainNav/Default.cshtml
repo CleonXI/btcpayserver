@@ -13,7 +13,6 @@
 @inject BTCPayServerEnvironment Env
 @inject SignInManager<ApplicationUser> SignInManager
 @inject PoliciesSettings PoliciesSettings
-@inject ThemeSettings Theme
 @inject PluginService PluginService
 @inject PrettyNameProvider PrettyName
 
@@ -375,12 +374,9 @@
                             }
                         </div>
                     </li>
-                    @if (!Theme.CustomTheme)
-                    {
-                        <li class="py-1 px-4">
-                            <vc:theme-switch css-class="w-full pt-2"/>
-                        </li>
-                    }
+                    <li class="py-1 px-4">
+                        <vc:theme-switch css-class="w-full pt-2"/>
+                    </li>
                     <li class="py-1 px-4">
                         <label class="flex items-center justify-between gap-4 nav-link">
                             <span class="font-semibold" text-translate="true">Hide Sensitive Info</span>

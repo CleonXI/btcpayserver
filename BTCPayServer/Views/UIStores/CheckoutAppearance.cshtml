@@ -21,13 +21,6 @@
 @section PageFootContent {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        delegate('click', '.setTheme', e => {
-            e.preventDefault();
-            const { theme } = e.target.dataset;
-            document.getElementById('CustomCSS').value = ['dark', 'legacy'].includes(theme)
-                ? `/checkout/css/themes/${theme}.css`
-                : ''
-        });
 		delegate('click', '#Presets_InStore', e => {
 			$("#CheckNFC").removeClass('hidden');
 			$("#PlaySoundOnPayment").prop('checked', true);

@@ -218,13 +218,8 @@ namespace BTCPayServer.Data
         [JsonConverter(typeof(TimeSpanJsonConverter.Days))]
         public TimeSpan RefundBOLT11Expiration { get; set; }
 
-        public string BrandColor { get; set; }
-        public bool ApplyBrandColorToBackend { get; set; }
-
         [JsonConverter(typeof(UnresolvedUriJsonConverter))]
         public UnresolvedUri LogoUrl { get; set; }
-        [JsonConverter(typeof(UnresolvedUriJsonConverter))]
-        public UnresolvedUri CssUrl { get; set; }
 
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]

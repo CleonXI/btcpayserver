@@ -1,24 +1,7 @@
-@using BTCPayServer.Services
-@inject ThemeSettings Theme
-@inject UriResolver UriResolver
-
 <script>
     if (window.localStorage.getItem('btcpay-hide-sensitive-info') === 'true') { document.documentElement.setAttribute('data-hide-sensitive-info', 'true')}
     if (window.location !== window.parent.location) { window.addEventListener('message', function(event) { try { const data = JSON.parse(event.data); if (data.context) { document.documentElement.setAttribute('data-context', data.context) } } catch {} }, false); }
     (function(){var t=window.localStorage.getItem('btcpay-theme');if(t){document.documentElement.setAttribute('data-btcpay-theme',t)}else if(window.matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.setAttribute('data-btcpay-theme','dark')}})();
 </script>
-@if (Theme.CustomTheme && Theme.CustomThemeCssUrl is not null)
-{
-    @if (Theme.CustomThemeExtension == ThemeExtension.Dark)
-    {
-        <script>document.documentElement.setAttribute('data-btcpay-theme', 'dark');</script>
-    }
-    var themeUrl = await UriResolver.Resolve(this.Context.Request.GetAbsoluteRootUri(), Theme.CustomThemeCssUrl);
-    <link href="@themeUrl" rel="stylesheet" asp-append-version="true" />
-}
-else
-{
-    <script type="module" vite-src="~/wwwroot/js/theme-switch.js"></script>
-    <noscript><style>.btcpay-theme-switch { display: none !important; }</style></noscript>
-}
-
+<script type="module" vite-src="~/wwwroot/js/theme-switch.js"></script>
+<noscript><style>.btcpay-theme-switch { display: none !important; }</style></noscript>

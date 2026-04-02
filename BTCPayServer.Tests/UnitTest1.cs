@@ -2096,7 +2096,6 @@ namespace BTCPayServer.Tests
             var controller = tester.PayTester.GetController<UIStoresController>(user.UserId, user.StoreId);
             var vm = await controller.GeneralSettings(user.StoreId).AssertViewModelAsync<GeneralSettingsViewModel>();
             Assert.Equal(tester.PayTester.ServerUriWithIP + "LocalStorage/8f890691-87f9-4c65-80e5-3b7ffaa3551f-store.png", vm.LogoUrl);
-            Assert.Equal(tester.PayTester.ServerUriWithIP + "LocalStorage/2a51c49a-9d54-4013-80a2-3f6e69d08523-store.css", vm.CssUrl);
 
             var vm2 = await controller.CheckoutAppearance().AssertViewModelAsync<CheckoutAppearanceViewModel>();
             Assert.Equal(tester.PayTester.ServerUriWithIP + "LocalStorage/62bc4757-b92b-4a3b-a8ab-0e9b693d6a29-store.mp3", vm2.PaymentSoundUrl);
@@ -2105,7 +2104,6 @@ namespace BTCPayServer.Tests
             var branding = await serverController.Branding().AssertViewModelAsync<BrandingViewModel>();
 
             Assert.Equal(tester.PayTester.ServerUriWithIP + "LocalStorage/ce71d90a-dd90-40a3-b1f0-96d00c9abb52-admin.png", branding.LogoUrl);
-            Assert.Equal(tester.PayTester.ServerUriWithIP + "LocalStorage/9b00f4ed-914b-437b-abd2-9a90c1b22c34-admin.css", branding.CustomThemeCssUrl);
         }
 
         [Fact(Timeout = LongRunningTestTimeout)]

@@ -184,10 +184,7 @@ namespace BTCPayServer.Controllers.Greenfield
                 Name = data.StoreName,
                 Website = data.StoreWebsite,
                 Archived = data.Archived,
-                BrandColor = storeBlob.BrandColor,
                 RefundBOLT11Expiration = storeBlob.RefundBOLT11Expiration,
-                ApplyBrandColorToBackend = storeBlob.ApplyBrandColorToBackend,
-                CssUrl = storeBlob.CssUrl == null ? null : await _uriResolver.Resolve(Request.GetAbsoluteRootUri(), storeBlob.CssUrl),
                 LogoUrl = storeBlob.LogoUrl == null ? null : await _uriResolver.Resolve(Request.GetAbsoluteRootUri(), storeBlob.LogoUrl),
                 PaymentSoundUrl = storeBlob.PaymentSoundUrl == null ? null : await _uriResolver.Resolve(Request.GetAbsoluteRootUri(), storeBlob.PaymentSoundUrl),
                 SupportUrl = storeBlob.StoreSupportUrl,
@@ -271,10 +268,7 @@ namespace BTCPayServer.Controllers.Greenfield
             blob.LightningDescriptionTemplate = restModel.LightningDescriptionTemplate;
             blob.PaymentTolerance = restModel.PaymentTolerance.Value;
             blob.PayJoinEnabled = restModel.PayJoinEnabled.Value;
-            blob.BrandColor = restModel.BrandColor;
-            blob.ApplyBrandColorToBackend = restModel.ApplyBrandColorToBackend.Value;
             blob.LogoUrl = restModel.LogoUrl is null ? null : UnresolvedUri.Create(restModel.LogoUrl);
-            blob.CssUrl = restModel.CssUrl is null ? null : UnresolvedUri.Create(restModel.CssUrl);
             blob.RefundBOLT11Expiration = restModel.RefundBOLT11Expiration.Value;
             blob.PaymentSoundUrl = restModel.PaymentSoundUrl is null ? null : UnresolvedUri.Create(restModel.PaymentSoundUrl);
             if (restModel.AutoDetectLanguage.HasValue)
@@ -328,14 +322,6 @@ namespace BTCPayServer.Controllers.Greenfield
             if (!string.IsNullOrEmpty(request.LogoUrl) && !Uri.TryCreate(request.LogoUrl, UriKind.Absolute, out _))
             {
                 ModelState.AddModelError(nameof(request.LogoUrl), "Logo is not a valid url");
-            }
-            if (!string.IsNullOrEmpty(request.CssUrl) && !Uri.TryCreate(request.CssUrl, UriKind.Absolute, out _))
-            {
-                ModelState.AddModelError(nameof(request.CssUrl), "CSS is not a valid url");
-            }
-            if (!string.IsNullOrEmpty(request.BrandColor) && !ColorPalette.IsValid(request.BrandColor))
-            {
-                ModelState.AddModelError(nameof(request.BrandColor), "Brand color is not a valid HEX Color (e.g. #F7931A)");
             }
             if (request.InvoiceExpiration < TimeSpan.FromMinutes(1) && request.InvoiceExpiration > TimeSpan.FromMinutes(60 * 24 * 24))
                 ModelState.AddModelError(nameof(request.InvoiceExpiration), "InvoiceExpiration can only be between 1 and 34560 mins");

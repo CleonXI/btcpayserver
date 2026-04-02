@@ -1314,12 +1314,10 @@ namespace BTCPayServer.Tests
             Assert.Equal("A", newStore.Name);
 
             // validate
-            await AssertValidationError(["CssUrl", "LogoUrl", "BrandColor"], async () =>
+            await AssertValidationError(["LogoUrl"], async () =>
                 await client.UpdateStore(newStore.Id, new UpdateStoreRequest
                 {
-                    CssUrl = "style.css",
-                    LogoUrl = "logo.svg",
-                    BrandColor = "invalid"
+                    LogoUrl = "logo.svg"
                 }));
 
             //update store
@@ -1328,10 +1326,7 @@ namespace BTCPayServer.Tests
             var updatedStore = await client.UpdateStore(newStore.Id, new UpdateStoreRequest
             {
                 Name = "B",
-                CssUrl = "https://example.org/style.css",
                 LogoUrl = "https://example.org/logo.svg",
-                BrandColor = "#003366",
-                ApplyBrandColorToBackend = true,
                 PaymentMethodCriteria = new List<PaymentMethodCriteriaData>
             {
                 new()
@@ -1344,10 +1339,7 @@ namespace BTCPayServer.Tests
              }
             });
             Assert.Equal("B", updatedStore.Name);
-            Assert.Equal("https://example.org/style.css", updatedStore.CssUrl);
             Assert.Equal("https://example.org/logo.svg", updatedStore.LogoUrl);
-            Assert.Equal("#003366", updatedStore.BrandColor);
-            Assert.True(updatedStore.ApplyBrandColorToBackend);
             var s = (await client.GetStore(newStore.Id));
             Assert.Equal("B", s.Name);
             var pmc = Assert.Single(s.PaymentMethodCriteria);

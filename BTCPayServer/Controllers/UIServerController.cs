@@ -1082,9 +1082,6 @@ namespace BTCPayServer.Controllers
                 ServerName = server.ServerName,
                 BaseUrl = server.BaseUrl,
                 ContactUrl = server.ContactUrl,
-                CustomTheme = theme.CustomTheme,
-                CustomThemeExtension = theme.CustomThemeExtension,
-                CustomThemeCssUrl = await _uriResolver.Resolve(Request.GetAbsoluteRootUri(), theme.CustomThemeCssUrl),
                 LogoUrl = await _uriResolver.Resolve(Request.GetAbsoluteRootUri(), theme.LogoUrl)
             };
             return View(vm);
@@ -1094,7 +1091,6 @@ namespace BTCPayServer.Controllers
         public async Task<IActionResult> Branding(
             BrandingViewModel vm,
             [FromForm] bool RemoveLogoFile,
-            [FromForm] bool RemoveCustomThemeFile,
             [FromForm] string? command = null)
         {
             if (command is "SetBaseUrl")
@@ -1122,7 +1118,6 @@ namespace BTCPayServer.Controllers
                 return NotFound();
 
             vm.LogoUrl = await _uriResolver.Resolve(this.Request.GetAbsoluteRootUri(), theme.LogoUrl);
-            vm.CustomThemeCssUrl = await _uriResolver.Resolve(this.Request.GetAbsoluteRootUri(), theme.CustomThemeCssUrl);
 
             if (server.ServerName != vm.ServerName)
             {
@@ -1146,37 +1141,6 @@ namespace BTCPayServer.Controllers
             if (settingsChanged)
             {
                 await _SettingsRepository.UpdateSetting(server);
-            }
-
-            if (vm.CustomThemeFile != null)
-            {
-                if (vm.CustomThemeFile.ContentType.Equals("text/css", StringComparison.InvariantCulture))
-                {
-                    // add new file
-                    try
-                    {
-                        var storedFile = await _fileService.AddFile(vm.CustomThemeFile, userId);
-                        theme.CustomThemeCssUrl = new UnresolvedUri.FileIdUri(storedFile.Id);
-                        vm.CustomThemeCssUrl = await _uriResolver.Resolve(Request.GetAbsoluteRootUri(), theme.CustomThemeCssUrl);
-                        settingsChanged = true;
-                    }
-                    catch (Exception e)
-                    {
-                        ModelState.AddModelError(nameof(vm.CustomThemeFile), StringLocalizer["Could not save CSS file: {0}", e.Message]);
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError(nameof(vm.CustomThemeFile), StringLocalizer["The uploaded file needs to be a CSS file"]);
-                }
-            }
-            else if (RemoveCustomThemeFile && theme.CustomThemeCssUrl is not null)
-            {
-                vm.CustomThemeCssUrl = null;
-                theme.CustomThemeCssUrl = null;
-                theme.CustomTheme = false;
-                theme.CustomThemeExtension = ThemeExtension.Custom;
-                settingsChanged = true;
             }
 
             if (vm.LogoFile != null)
@@ -1218,26 +1182,6 @@ namespace BTCPayServer.Controllers
             {
                 vm.LogoUrl = null;
                 theme.LogoUrl = null;
-                settingsChanged = true;
-            }
-
-            if (vm.CustomTheme && theme.CustomThemeExtension != vm.CustomThemeExtension)
-            {
-                // Require a custom theme to be defined in that case
-                if (string.IsNullOrEmpty(vm.CustomThemeCssUrl) && theme.CustomThemeCssUrl is null)
-                {
-                    ModelState.AddModelError(nameof(vm.CustomThemeCssUrl), "Please provide a custom theme");
-                }
-                else
-                {
-                    theme.CustomThemeExtension = vm.CustomThemeExtension;
-                    settingsChanged = true;
-                }
-            }
-
-            if (theme.CustomTheme != vm.CustomTheme && !RemoveCustomThemeFile)
-            {
-                theme.CustomTheme = vm.CustomTheme;
                 settingsChanged = true;
             }
 

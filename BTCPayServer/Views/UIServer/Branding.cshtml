@@ -1,13 +1,10 @@
 @using BTCPayServer.Abstractions.Contracts
-@using BTCPayServer.Services
 @model BrandingViewModel;
 @inject IFileService FileService
 @{
     ViewData.SetLayoutModel(new LayoutModel(nameof(ServerNavPages.Branding), StringLocalizer["Branding"])
         .SetCategory(WellKnownCategories.Server));
     var canUpload = await FileService.IsAvailable();
-    var themeExtension = ((ThemeExtension[])Enum.GetValues(typeof(ThemeExtension))).Select(t =>
-        new SelectListItem(typeof(ThemeExtension).DisplayName(t.ToString()), t.ToString()));
 }
 
 @section PageFootContent {
@@ -73,58 +70,6 @@
                     <input asp-for="LogoFile" type="file" class="form-control" disabled>
                     <div class="form-text">@ViewLocalizer["In order to upload, a {0} must be configured.", Html.ActionLink(StringLocalizer["file storage"], "Files", "UIServer")]</div>
                 }
-            </div>
-
-			<h3 class="mt-12 mb-4" text-translate="true">Theme</h3>
-            <p text-translate="true">Use the default Light or Dark Themes, or provide a custom CSS theme file below.</p>
-
-            <div x-data="{ expanded: @(Model.CustomTheme ? "true" : "false") }">
-            <div class="flex items-center mb-6">
-                <input asp-for="CustomTheme" type="checkbox" class="btcpay-toggle me-4" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="CustomThemeSettings" />
-                <div>
-                    <label asp-for="CustomTheme" class="form-check-label"></label>
-                    <div class="text-btcpay-body-text-muted">
-                        <span text-translate="true">Adjust the design of your BTCPay Server instance to your needs.</span>
-                        <a href="https://docs.btcpayserver.org/Development/Theme/" target="_blank" rel="noreferrer noopener">
-                            <vc:icon symbol="info" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div x-show="expanded" x-collapse id="CustomThemeSettings">
-                <div class="form-group pt-2">
-                    <label asp-for="CustomThemeExtension" class="form-label" data-required></label>
-                    <select asp-for="CustomThemeExtension" asp-items="@themeExtension" class="form-select w-auto"></select>
-                </div>
-                <div class="form-group mb-0">
-                    <div class="flex-between-gap-2">
-                        <label asp-for="CustomThemeFile" class="form-label" data-required></label>
-                        @if (!string.IsNullOrEmpty(Model.CustomThemeCssUrl))
-                        {
-                            <button type="submit" class="btn btn-action-danger" name="RemoveCustomThemeFile" value="true">
-                                <vc:icon symbol="cross" />
-                                <span text-translate="true">Remove</span>
-                            </button>
-                        }
-                    </div>
-                    @if (canUpload)
-                    {
-                        <div class="flex items-center gap-6">
-                            <input asp-for="CustomThemeFile" type="file" class="form-control flex-grow">
-                            @if (!string.IsNullOrEmpty(Model.CustomThemeCssUrl))
-                            {
-                                <a href="@Model.CustomThemeCssUrl" target="_blank" rel="noreferrer noopener" class="whitespace-nowrap" text-translate="true">Custom CSS</a>
-                            }
-                        </div>
-                        <span asp-validation-for="CustomThemeFile" class="text-danger"></span>
-                    }
-                    else
-                    {
-                        <input asp-for="CustomThemeFile" type="file" class="form-control" disabled>
-                        <div class="form-text">@ViewLocalizer["In order to upload, a {0} must be configured.", Html.ActionLink(StringLocalizer["file storage"], "Files", "UIServer")]</div>
-                    }
-                </div>
-            </div>
             </div>
         </div>
     </div>

@@ -32,9 +32,6 @@ public partial class UIStoresController
             StoreName = store.StoreName,
             StoreWebsite = store.StoreWebsite,
             LogoUrl = await _uriResolver.Resolve(Request.GetAbsoluteRootUri(), storeBlob.LogoUrl),
-            CssUrl = await _uriResolver.Resolve(Request.GetAbsoluteRootUri(), storeBlob.CssUrl),
-            BrandColor = storeBlob.BrandColor,
-            ApplyBrandColorToBackend = storeBlob.ApplyBrandColorToBackend,
             NetworkFeeMode = storeBlob.NetworkFeeMode,
             AnyoneCanCreateInvoice = storeBlob.AnyoneCanInvoice,
             PaymentTolerance = storeBlob.PaymentTolerance,
@@ -56,8 +53,7 @@ public partial class UIStoresController
     [Authorize(Policy = Policies.CanModifyStoreSettings, AuthenticationSchemes = AuthenticationSchemes.Cookie)]
     public async Task<IActionResult> GeneralSettings(
         GeneralSettingsViewModel model,
-        [FromForm] bool RemoveLogoFile = false,
-        [FromForm] bool RemoveCssFile = false)
+        [FromForm] bool RemoveLogoFile = false)
     {
         bool needUpdate = false;
         if (CurrentStore.StoreName != model.StoreName)
@@ -89,14 +85,6 @@ public partial class UIStoresController
         blob.InvoiceExpiration = TimeSpan.FromMinutes(model.InvoiceExpiration);
         blob.RefundBOLT11Expiration = TimeSpan.FromDays(model.BOLT11Expiration);
         blob.MonitoringExpiration = TimeSpan.FromMinutes(model.MonitoringExpiration);
-        if (!string.IsNullOrEmpty(model.BrandColor) && !ColorPalette.IsValid(model.BrandColor))
-        {
-            ModelState.AddModelError(nameof(model.BrandColor), StringLocalizer["The brand color needs to be a valid hex color code"]);
-            return View(model);
-        }
-        blob.BrandColor = model.BrandColor;
-        blob.ApplyBrandColorToBackend = model.ApplyBrandColorToBackend && !string.IsNullOrEmpty(model.BrandColor);
-
         var userId = GetUserId();
         if (userId is null)
             return NotFound();
@@ -125,39 +113,6 @@ public partial class UIStoresController
             needUpdate = true;
         }
 
-        if (model.CssFile != null)
-        {
-            if (model.CssFile.Length > 1_000_000)
-            {
-                ModelState.AddModelError(nameof(model.CssFile), StringLocalizer["The uploaded file should be less than {0}", "1MB"]);
-            }
-            else if (!model.CssFile.ContentType.Equals("text/css", StringComparison.InvariantCulture))
-            {
-                ModelState.AddModelError(nameof(model.CssFile), StringLocalizer["The uploaded file needs to be a CSS file"]);
-            }
-            else if (!model.CssFile.FileName.EndsWith(".css", StringComparison.OrdinalIgnoreCase))
-            {
-                ModelState.AddModelError(nameof(model.CssFile), StringLocalizer["The uploaded file needs to be a CSS file"]);
-            }
-            else
-            {
-                // add new file
-                try
-                {
-                    var storedFile = await _fileService.AddFile(model.CssFile, userId);
-                    blob.CssUrl = new UnresolvedUri.FileIdUri(storedFile.Id);
-                }
-                catch (Exception e)
-                {
-                    ModelState.AddModelError(nameof(model.CssFile), StringLocalizer["Could not save CSS file: {0}", e.Message]);
-                }
-            }
-        }
-        else if (RemoveCssFile && blob.CssUrl is not null)
-        {
-            blob.CssUrl = null;
-            needUpdate = true;
-        }
         if (!ModelState.IsValid)
             return View(model);
 

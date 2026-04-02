@@ -1,15 +1,7 @@
 @using BTCPayServer.Services
 @inject PoliciesSettings PoliciesSettings
-@inject UriResolver UriResolver
 @{
     ViewData.TryGetValue("StoreBranding", out var storeBranding);
-    var store = Context.GetStoreDataOrNull();
-    var storeBlob = store?.GetStoreBlob();
-    var isBackend = store != null && storeBranding == null; 
-    if (isBackend && storeBlob.ApplyBrandColorToBackend)
-    {
-        storeBranding = await StoreBrandingViewModel.CreateAsync(Context.Request, UriResolver, storeBlob);
-    }
 }
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />

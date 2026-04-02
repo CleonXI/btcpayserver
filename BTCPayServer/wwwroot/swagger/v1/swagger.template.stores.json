@@ -478,28 +478,11 @@
                         "description": "Absolute URL to a logo file or a reference to an uploaded file id with `fileid:ID`",
                         "format": "uri"
                     },
-                    "cssUrl": {
-                        "type": "string",
-                        "nullable": true,
-                        "description": "Absolute URL to CSS file to customize the public/customer-facing pages of the store. (Invoice, Payment Request, Pull Payment, etc.) or a reference to an uploaded file id with `fileid:ID`",
-                        "format": "uri"
-                    },
                     "paymentSoundUrl": {
                         "type": "string",
                         "nullable": true,
                         "description": "Absolute URL to a sound file or a reference to an uploaded file id with `fileid:ID`",
                         "format": "uri"
-                    },
-                    "brandColor": {
-                        "type": "string",
-                        "description": "The brand color of the store in HEX format",
-                        "nullable": true,
-                        "example": "#F7931A"
-                    },
-                    "applyBrandColorToBackend": {
-                        "type": "boolean",
-                        "default": false,
-                        "description": "Apply the brand color to the store's backend as well"
                     },
                     "defaultCurrency": {
                         "type": "string",

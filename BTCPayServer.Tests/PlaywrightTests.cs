@@ -2126,17 +2126,6 @@ namespace BTCPayServer.Tests
             await s.FindAlertMessage();
             Assert.True(await s.Page.Locator("#AnyoneCanCreateInvoice").IsCheckedAsync());
 
-            // Store settings: Set and unset brand color
-            await s.GoToStore(storeId);
-            await s.Page.Locator("#BrandColor").FillAsync("#f7931a");
-            await s.ClickPagePrimary();
-            Assert.Contains("Store successfully updated", await (await s.FindAlertMessage()).InnerTextAsync());
-            Assert.Equal("#f7931a", await s.Page.Locator("#BrandColor").InputValueAsync());
-            await s.Page.Locator("#BrandColor").FillAsync("");
-            await s.ClickPagePrimary();
-            Assert.Contains("Store successfully updated", await (await s.FindAlertMessage()).InnerTextAsync());
-            Assert.Equal(string.Empty, await s.Page.Locator("#BrandColor").InputValueAsync());
-
             // Alice should be able to delete the store
             await s.GoToStore(storeId);
             await s.Page.Locator("#DeleteStore").ClickAsync();

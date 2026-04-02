@@ -8,11 +8,8 @@ namespace BTCPayServer.Models;
 
 public class StoreBrandingViewModel
 {
-    public string BrandColor { get; set; }
-    public bool ApplyBrandColorToBackend { get; set; }
     public string LogoUrl { get; set; }
-    public string CssUrl { get; set; }
-    
+
     public StoreBrandingViewModel()
     {
     }
@@ -20,16 +17,9 @@ public class StoreBrandingViewModel
     {
         if (storeBlob == null)
             return new StoreBrandingViewModel();
-        var result = new StoreBrandingViewModel(storeBlob)
+        return new StoreBrandingViewModel
         {
-            LogoUrl = await uriResolver.Resolve(request.GetAbsoluteRootUri(), storeBlob.LogoUrl),
-            CssUrl = await uriResolver.Resolve(request.GetAbsoluteRootUri(), storeBlob.CssUrl)
+            LogoUrl = await uriResolver.Resolve(request.GetAbsoluteRootUri(), storeBlob.LogoUrl)
         };
-        return result;
-    }
-    private StoreBrandingViewModel(StoreBlob storeBlob)
-    {
-        BrandColor = storeBlob.BrandColor;
-        ApplyBrandColorToBackend = storeBlob.ApplyBrandColorToBackend;
     }
 }
