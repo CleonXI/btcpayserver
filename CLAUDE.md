@@ -16,9 +16,10 @@ dotnet run --project BTCPayServer
 ## Architecture
 
 - **Backend:** ASP.NET Core MVC with Razor Views
-- **Frontend:** No bundler (no webpack/vite). All JS/CSS served as static files from `wwwroot/`
+- **Frontend:** Vite build for CSS/JS bundling
 - **Vendor libs:** Committed directly to `wwwroot/vendor/` (no npm/yarn)
-- **Theming:** CSS custom properties (`--btcpay-*`) in `wwwroot/main/themes/`
+- **Theming:** Tailwind `@theme` tokens in `Styles/theme.css`, dark mode via `[data-btcpay-theme="dark"]` selector
+- **Interactive JS:** Alpine.js components in `wwwroot/js/alpine-components.js` (Modal, Dropdown, Offcanvas, Collapse, Tooltip, Toast, Tabs)
 - **Real-time:** SignalR + Blazor Server (authenticated users only)
 
 ## Workflow
@@ -29,27 +30,19 @@ dotnet run --project BTCPayServer
 
 ### General
 - Do not add code comments. Code should be self-explanatory.
-- Do not repeat yourself (DRY). Extract shared logic into reusable utilities.
-- Do not add Co-Authored-By or AI attribution lines to commit messages.
 
-### Commits
-- Group related changes into separate, focused commits.
-- Each commit should represent a single logical change.
-- Use conventional commit prefixes: `fix:`, `feat:`, `refactor:`, `chore:`.
-- Write concise commit messages that explain "why", not "what".
 
 ### JavaScript
 - Use `const`/`let` only. Never use `var`.
 - Use the `delegate()` utility from `wwwroot/main/utils.js` for event handling.
-- Do not modify built-in prototypes (String, Number, Array, etc.).
 - Prefer native DOM APIs over jQuery. jQuery is only kept for Summernote.
 - Use native `Intl` APIs and Date utilities from `utils.js` for date/time formatting.
 - Shared utility functions go in `wwwroot/main/utils.js`.
 
 ### CSS
 - Use Tailwind CSS utility classes when possible.
-- Bootstrap component classes (`.btn`, `.form-control`, `.card`, `.alert`, `.table`, `.modal`, etc.) are redefined via `@layer components` in `Styles/tailwind.css`.
-- Use `--btcpay-*` CSS custom properties for theming.
+- Component classes (`.btn`, `.form-control`, `.table`, `.modal`, etc.) use Tailwind `@apply` in `Styles/components/`.
+- Theme values are defined in `Styles/theme.css` via `@theme` and `@layer base`.
 - Tailwind breakpoints are aligned with Bootstrap: sm=576px, md=768px, lg=992px, xl=1200px, 2xl=1400px.
 - Avoid `!important` unless overriding third-party styles or print media.
 
@@ -71,8 +64,8 @@ dotnet run --project BTCPayServer
 - `Views/Shared/LayoutHead.cshtml` - CSS loading
 - `wwwroot/main/utils.js` - Shared JS utilities (delegate, debounce, noExponents, date helpers)
 - `wwwroot/main/site.js` - Main site JavaScript
-- `Styles/tailwind.css` - Tailwind source config + component layer
-- `wwwroot/main/tailwind-output.css` - Generated Tailwind output (git-ignored)
-- `wwwroot/js/btcpay-components.js` - Vanilla JS replacements for Bootstrap JS (Modal, Toast, Tooltip, etc.)
-- `wwwroot/main/themes/default.css` - Light theme
-- `wwwroot/main/themes/default-dark.css` - Dark theme
+- `Styles/tailwind.css` - Tailwind entry point (imports components, theme, utilities)
+- `Styles/theme.css` - Theme tokens (`@theme`) + light/dark variable definitions (`@layer base`)
+- `Styles/components/` - Component CSS files (buttons, forms, tables, modals, dropdowns, navigation, accordion, toast, offcanvas, collapse)
+- `Styles/site/misc.css` - Site-specific styles (validation, print, clipboard, mass actions, vendor overrides)
+- `wwwroot/js/alpine-components.js` - Alpine.js interactive components (Modal, Dropdown, Offcanvas, Collapse, Tooltip, Toast, Tabs)

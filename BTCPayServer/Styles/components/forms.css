@@ -1,0 +1,330 @@
+@layer components {
+  .form-control,
+  .form-select {
+    @apply block w-full appearance-none;
+    font-size: 0.875rem;
+    font-weight: var(--btcpay-font-weight-normal);
+    line-height: 1.6;
+    color: var(--btcpay-form-text);
+    background-color: var(--btcpay-form-bg);
+    border: var(--btcpay-border-width) solid var(--btcpay-form-border);
+    border-radius: var(--btcpay-border-radius);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .form-control {
+    padding: 0.5rem 1rem;
+    background-clip: padding-box;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: var(--btcpay-form-border-focus);
+    outline: 0;
+    box-shadow: 0 0 0 1px var(--btcpay-form-border-focus) inset;
+  }
+
+  .form-control:focus {
+    color: var(--btcpay-form-text);
+    background-color: var(--btcpay-form-bg);
+  }
+
+  .form-control::placeholder {
+    color: var(--btcpay-body-text-muted);
+    @apply opacity-100;
+  }
+
+  .form-control:disabled,
+  .form-control[readonly],
+  .form-select:disabled {
+    background-color: var(--btcpay-form-bg-disabled);
+    border-color: var(--btcpay-form-border-disabled);
+  }
+
+  .form-control:disabled,
+  .form-control[readonly] {
+    @apply opacity-100;
+  }
+
+  .form-control-plaintext {
+    @apply block w-full;
+    padding: 0.5rem 0;
+    margin-bottom: 0;
+    line-height: 1.6;
+    color: var(--btcpay-body-text);
+    background-color: transparent;
+    border: solid transparent;
+    border-width: var(--btcpay-border-width) 0;
+  }
+
+  .form-control-plaintext:focus {
+    outline: 0;
+  }
+
+  .form-control-sm {
+    min-height: calc(1.6em + 1rem + calc(var(--btcpay-border-width) * 2));
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    border-radius: var(--btcpay-border-radius-sm);
+  }
+
+  .form-control-lg {
+    min-height: calc(1.6em + 2rem + calc(var(--btcpay-border-width) * 2));
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    border-radius: var(--btcpay-border-radius-lg);
+  }
+
+  .form-select {
+    --btcpay-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%236E7681' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    padding: 0.5rem 3rem 0.5rem 1rem;
+    background-image: var(--btcpay-form-select-bg-img), var(--btcpay-form-select-bg-icon, none);
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px 12px;
+  }
+
+  .form-select[multiple], .form-select[size]:not([size="1"]) {
+    padding-right: 1rem;
+    background-image: none;
+  }
+
+  .form-label {
+    margin-bottom: 0.5rem;
+    color: var(--btcpay-form-text-label);
+  }
+
+  .form-text {
+    margin-top: 0.25rem;
+    font-size: var(--btcpay-font-size-base);
+    color: var(--btcpay-body-text-muted);
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-check {
+    @apply block;
+    min-height: 1.4rem;
+    padding-left: 2em;
+    margin-bottom: 1rem;
+  }
+
+  .form-check .form-check-input {
+    @apply float-left;
+    margin-left: -2em;
+  }
+
+  .form-check-input {
+    --btcpay-form-check-bg: transparent;
+    @apply shrink-0 appearance-none;
+    width: 1.25em;
+    height: 1.25em;
+    margin-top: 0.175em;
+    vertical-align: top;
+    background-color: var(--btcpay-form-check-bg);
+    background-image: var(--btcpay-form-check-bg-image);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 2px solid var(--btcpay-form-border-check);
+    print-color-adjust: exact;
+  }
+
+  .form-check-input[type="checkbox"] {
+    border-radius: 0.25em;
+  }
+
+  .form-check-input[type="radio"] {
+    border-radius: 50%;
+  }
+
+  .form-check-input:active {
+    filter: brightness(90%);
+  }
+
+  .form-check-input:focus {
+    border-color: var(--btcpay-form-border-focus);
+    outline: 0;
+    box-shadow: 0 0 0 2px var(--btcpay-form-shadow-focus);
+  }
+
+  .form-check-input:checked,
+  .form-check-input[type="checkbox"]:indeterminate {
+    background-color: var(--btcpay-primary);
+    border-color: var(--btcpay-primary-border);
+  }
+
+  .form-check-input:checked[type="checkbox"] {
+    --btcpay-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+  }
+
+  .form-check-input:checked[type="radio"] {
+    --btcpay-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+  }
+
+  .form-check-input[type="checkbox"]:indeterminate {
+    --btcpay-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
+  }
+
+  .form-check-input:disabled {
+    @apply pointer-events-none;
+    filter: none;
+    opacity: 0.5;
+  }
+
+  .form-check-input[disabled] ~ .form-check-label, .form-check-input:disabled ~ .form-check-label {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  .form-check-label {
+    color: var(--btcpay-body-text);
+  }
+
+  .form-floating {
+    @apply relative;
+  }
+
+  .form-floating > .form-control,
+  .form-floating > .form-control-plaintext,
+  .form-floating > .form-select {
+    height: calc(3.5rem + calc(var(--btcpay-border-width) * 2));
+    min-height: calc(3.5rem + calc(var(--btcpay-border-width) * 2));
+    line-height: 1.25;
+  }
+
+  .form-floating > label {
+    @apply absolute pointer-events-none whitespace-nowrap;
+    color: var(--btcpay-form-text-addon);
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+    padding: 1rem 1rem;
+    overflow: hidden;
+    text-align: start;
+    text-overflow: ellipsis;
+    border: var(--btcpay-border-width) solid transparent;
+    transform-origin: 0 0;
+    transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+  }
+
+  .form-floating > .form-control,
+  .form-floating > .form-control-plaintext {
+    padding: 1rem 1rem;
+  }
+
+  .form-floating > .form-control::placeholder,
+  .form-floating > .form-control-plaintext::placeholder {
+    color: transparent;
+  }
+
+  .form-floating > .form-control:focus,
+  .form-floating > .form-control:not(:placeholder-shown),
+  .form-floating > .form-control-plaintext:focus,
+  .form-floating > .form-control-plaintext:not(:placeholder-shown),
+  .form-floating > .form-control:-webkit-autofill,
+  .form-floating > .form-control-plaintext:-webkit-autofill,
+  .form-floating > .form-select {
+    padding-top: 1.625rem;
+    padding-bottom: 0.625rem;
+  }
+
+  .form-floating > .form-control:focus ~ label,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label,
+  .form-floating > .form-control-plaintext ~ label,
+  .form-floating > .form-select ~ label,
+  .form-floating > .form-control:-webkit-autofill ~ label {
+    color: rgba(var(--btcpay-body-text-rgb), 0.65);
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  }
+
+  .form-floating > .form-control:focus ~ label::after,
+  .form-floating > .form-control:not(:placeholder-shown) ~ label::after,
+  .form-floating > .form-control-plaintext ~ label::after,
+  .form-floating > .form-select ~ label::after {
+    @apply absolute;
+    inset: 1rem 0.5rem;
+    z-index: -1;
+    height: 1.5em;
+    content: "";
+    background-color: var(--btcpay-form-bg);
+    border-radius: var(--btcpay-border-radius);
+  }
+
+  .form-floating > .form-control-plaintext ~ label {
+    border-width: var(--btcpay-border-width) 0;
+  }
+
+  .form-floating > :disabled ~ label,
+  .form-floating > .form-control:disabled ~ label {
+    color: var(--btcpay-secondary);
+  }
+
+  .form-floating > :disabled ~ label::after,
+  .form-floating > .form-control:disabled ~ label::after {
+    background-color: var(--btcpay-form-bg-disabled);
+  }
+
+  .input-group {
+    @apply relative flex flex-wrap items-stretch w-full;
+  }
+
+  .input-group > .form-control,
+  .input-group > .form-select,
+  .input-group > .form-floating {
+    @apply relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+  }
+
+  .input-group > .form-control:focus,
+  .input-group > .form-select:focus,
+  .input-group > .form-floating:focus-within {
+    z-index: 5;
+  }
+
+  .input-group .btn {
+    @apply relative;
+    z-index: 2;
+  }
+
+  .input-group .btn:focus {
+    z-index: 5;
+  }
+
+  .input-group-text {
+    @apply flex items-center whitespace-nowrap;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: var(--btcpay-font-weight-normal);
+    line-height: 1.6;
+    color: var(--btcpay-form-text-addon);
+    text-align: center;
+    background-color: var(--btcpay-form-bg-addon);
+    border: var(--btcpay-border-width) solid var(--btcpay-form-bg-addon);
+    border-radius: var(--btcpay-border-radius);
+  }
+
+  .input-group > :not(:last-child):not(.dropdown-toggle):not(.dropdown-menu):not(.form-floating),
+  .input-group > .form-floating:not(:last-child) > .form-control,
+  .input-group > .form-floating:not(:last-child) > .form-select {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .input-group > :not(:first-child):not(.dropdown-menu):not(.invalid-feedback) {
+    margin-left: calc(var(--btcpay-border-width) * -1);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .input-group > .form-floating:not(:first-child) > .form-control,
+  .input-group > .form-floating:not(:first-child) > .form-select {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

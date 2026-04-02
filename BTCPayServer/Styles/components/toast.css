@@ -1,0 +1,70 @@
+@layer components {
+  .toast {
+    --btcpay-toast-zindex: 1090;
+    --btcpay-toast-padding-x: 0.75rem;
+    --btcpay-toast-padding-y: 0.5rem;
+    --btcpay-toast-spacing: 1.5rem;
+    --btcpay-toast-max-width: 350px;
+    --btcpay-toast-font-size: 0.875rem;
+    --btcpay-toast-color: var(--btcpay-body-text);
+    --btcpay-toast-bg: var(--btcpay-bg-tile);
+    --btcpay-toast-border-width: var(--btcpay-border-width);
+    --btcpay-toast-border-color: var(--btcpay-body-border-medium);
+    --btcpay-toast-border-radius: var(--btcpay-border-radius);
+    --btcpay-toast-box-shadow: var(--btcpay-box-shadow);
+    --btcpay-toast-header-color: var(--btcpay-body-text-muted);
+    --btcpay-toast-header-bg: var(--btcpay-body-bg-light);
+    --btcpay-toast-header-border-color: var(--btcpay-body-bg-light);
+    @apply pointer-events-auto;
+    width: var(--btcpay-toast-max-width);
+    max-width: 100%;
+    font-size: var(--btcpay-toast-font-size);
+    color: var(--btcpay-toast-color);
+    background-color: var(--btcpay-toast-bg);
+    background-clip: padding-box;
+    border: var(--btcpay-toast-border-width) solid var(--btcpay-toast-border-color);
+    box-shadow: var(--btcpay-toast-box-shadow);
+    border-radius: var(--btcpay-toast-border-radius);
+  }
+
+  .toast.showing {
+    @apply opacity-0;
+  }
+
+  .toast:not(.show) {
+    @apply hidden;
+  }
+
+  .toast-container {
+    --btcpay-toast-zindex: 1090;
+    @apply absolute pointer-events-none;
+    z-index: var(--btcpay-toast-zindex);
+    width: max-content;
+    max-width: 100%;
+  }
+
+  .toast-container > :not(:last-child) {
+    margin-bottom: var(--btcpay-toast-spacing);
+  }
+
+  .toast-header {
+    @apply flex items-center;
+    padding: var(--btcpay-toast-padding-y) var(--btcpay-toast-padding-x);
+    color: var(--btcpay-toast-header-color);
+    background-color: var(--btcpay-toast-header-bg);
+    background-clip: padding-box;
+    border-bottom: var(--btcpay-toast-border-width) solid var(--btcpay-toast-header-border-color);
+    border-top-left-radius: calc(var(--btcpay-toast-border-radius) - var(--btcpay-toast-border-width));
+    border-top-right-radius: calc(var(--btcpay-toast-border-radius) - var(--btcpay-toast-border-width));
+  }
+
+  .toast-header .btn-close {
+    margin-right: calc(-.5 * var(--btcpay-toast-padding-x));
+    margin-left: var(--btcpay-toast-padding-x);
+  }
+
+  .toast-body {
+    padding: var(--btcpay-toast-padding-x);
+    word-wrap: break-word;
+  }
+}

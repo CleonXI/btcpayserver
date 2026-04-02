@@ -1,0 +1,309 @@
+@layer components {
+  @media (min-width: 1400px) {
+    .content-constrain-xxl { max-width: 984px; }
+  }
+
+  .btn {
+    --btcpay-btn-padding-x: 1.5rem;
+    --btcpay-btn-padding-y: 0.5rem;
+    --btcpay-btn-font-family: ;
+    --btcpay-btn-font-size: 0.875rem;
+    --btcpay-btn-font-weight: var(--btcpay-font-weight-semibold);
+    --btcpay-btn-line-height: 1.6;
+    --btcpay-btn-color: var(--btcpay-body-text);
+    --btcpay-btn-bg: transparent;
+    --btcpay-btn-border-width: var(--btcpay-border-width);
+    --btcpay-btn-border-color: transparent;
+    --btcpay-btn-border-radius: var(--btcpay-border-radius);
+    --btcpay-btn-hover-border-color: transparent;
+    --btcpay-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+    --btcpay-btn-disabled-opacity: 0.65;
+    --btcpay-btn-focus-box-shadow: 0 0 0 2px rgba(var(--btcpay-btn-focus-shadow-rgb), .5);
+    --btcpay-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    @apply inline-block text-center align-middle cursor-pointer select-none;
+    padding: var(--btcpay-btn-padding-y) var(--btcpay-btn-padding-x);
+    font-family: var(--btcpay-btn-font-family);
+    font-size: var(--btcpay-btn-font-size);
+    font-weight: var(--btcpay-btn-font-weight);
+    line-height: var(--btcpay-btn-line-height);
+    color: var(--btcpay-btn-color);
+    border: var(--btcpay-btn-border-width) solid var(--btcpay-btn-border-color);
+    border-radius: var(--btcpay-btn-border-radius);
+    background-color: var(--btcpay-btn-bg);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .btn:hover {
+    color: var(--btcpay-btn-hover-color);
+    background-color: var(--btcpay-btn-hover-bg);
+    border-color: var(--btcpay-btn-hover-border-color);
+  }
+
+  .btn:focus-visible {
+    color: var(--btcpay-btn-hover-color);
+    background-color: var(--btcpay-btn-hover-bg);
+    border-color: var(--btcpay-btn-hover-border-color);
+    outline: 0;
+    box-shadow: var(--btcpay-btn-focus-box-shadow);
+  }
+
+  .btn-check:focus-visible + .btn {
+    border-color: var(--btcpay-btn-hover-border-color);
+    outline: 0;
+    box-shadow: var(--btcpay-btn-focus-box-shadow);
+  }
+
+  .btn-check + .btn:hover {
+    color: var(--btcpay-btn-color);
+    background-color: var(--btcpay-btn-bg);
+    border-color: var(--btcpay-btn-border-color);
+  }
+
+  .btn-check:checked + .btn,
+  :not(.btn-check) + .btn:active,
+  .btn:first-child:active,
+  .btn.active,
+  .btn.show {
+    color: var(--btcpay-btn-active-color);
+    background-color: var(--btcpay-btn-active-bg);
+    border-color: var(--btcpay-btn-active-border-color);
+  }
+
+  .btn-check:checked + .btn:focus-visible,
+  :not(.btn-check) + .btn:active:focus-visible,
+  .btn:first-child:active:focus-visible,
+  .btn.active:focus-visible,
+  .btn.show:focus-visible {
+    box-shadow: var(--btcpay-btn-focus-box-shadow);
+  }
+
+  .btn:disabled, .btn.disabled,
+  fieldset:disabled .btn {
+    color: var(--btcpay-btn-disabled-color);
+    @apply pointer-events-none;
+    background-color: var(--btcpay-btn-disabled-bg);
+    border-color: var(--btcpay-btn-disabled-border-color);
+    opacity: var(--btcpay-btn-disabled-opacity);
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-success,
+  .btn-danger,
+  .btn-warning,
+  .btn-info,
+  .btn-light {
+    --btcpay-btn-disabled-color: var(--btcpay-btn-color);
+    --btcpay-btn-disabled-bg: var(--btcpay-btn-bg);
+    --btcpay-btn-disabled-border-color: var(--btcpay-btn-border-color);
+  }
+
+  .btn-primary   { --_c: var(--btcpay-primary);   --_c-text: var(--btcpay-primary-text);   --_c-text-hover: var(--btcpay-primary-text-hover);   --_c-text-active: var(--btcpay-primary-text-active);   --_c-border: var(--btcpay-primary-border);   --_c-border-hover: var(--btcpay-primary-border-hover);   --_c-border-active: var(--btcpay-primary-border-active);   --_c-bg-hover: var(--btcpay-primary-bg-hover);   --_c-bg-active: var(--btcpay-primary-bg-active);   --_c-shadow: var(--btcpay-primary-shadow); }
+  .btn-secondary { --_c: var(--btcpay-secondary); --_c-text: var(--btcpay-secondary-text); --_c-text-hover: var(--btcpay-secondary-text-hover); --_c-text-active: var(--btcpay-secondary-text-active); --_c-border: var(--btcpay-secondary-border); --_c-border-hover: var(--btcpay-secondary-border-hover); --_c-border-active: var(--btcpay-secondary-border-active); --_c-bg-hover: var(--btcpay-secondary-bg-hover); --_c-bg-active: var(--btcpay-secondary-bg-active); --_c-shadow: var(--btcpay-secondary-shadow); }
+  .btn-success   { --_c: var(--btcpay-success);   --_c-text: var(--btcpay-success-text);   --_c-text-hover: var(--btcpay-success-text-hover);   --_c-text-active: var(--btcpay-success-text-active);   --_c-border: var(--btcpay-success-border);   --_c-border-hover: var(--btcpay-success-border-hover);   --_c-border-active: var(--btcpay-success-border-active);   --_c-bg-hover: var(--btcpay-success-bg-hover);   --_c-bg-active: var(--btcpay-success-bg-active);   --_c-shadow: var(--btcpay-success-shadow); }
+  .btn-danger    { --_c: var(--btcpay-danger);    --_c-text: var(--btcpay-danger-text);    --_c-text-hover: var(--btcpay-danger-text-hover);    --_c-text-active: var(--btcpay-danger-text-active);    --_c-border: var(--btcpay-danger-border);    --_c-border-hover: var(--btcpay-danger-border-hover);    --_c-border-active: var(--btcpay-danger-border-active);    --_c-bg-hover: var(--btcpay-danger-bg-hover);    --_c-bg-active: var(--btcpay-danger-bg-active);    --_c-shadow: var(--btcpay-danger-shadow); }
+  .btn-warning   { --_c: var(--btcpay-warning);   --_c-text: var(--btcpay-warning-text);   --_c-text-hover: var(--btcpay-warning-text-hover);   --_c-text-active: var(--btcpay-warning-text-active);   --_c-border: var(--btcpay-warning-border);   --_c-border-hover: var(--btcpay-warning-border-hover);   --_c-border-active: var(--btcpay-warning-border-active);   --_c-bg-hover: var(--btcpay-warning-bg-hover);   --_c-bg-active: var(--btcpay-warning-bg-active);   --_c-shadow: var(--btcpay-warning-shadow); }
+  .btn-info      { --_c: var(--btcpay-info);      --_c-text: var(--btcpay-info-text);      --_c-text-hover: var(--btcpay-info-text-hover);      --_c-text-active: var(--btcpay-info-text-active);      --_c-border: var(--btcpay-info-border);      --_c-border-hover: var(--btcpay-info-border-hover);      --_c-border-active: var(--btcpay-info-border-active);      --_c-bg-hover: var(--btcpay-info-bg-hover);      --_c-bg-active: var(--btcpay-info-bg-active);      --_c-shadow: var(--btcpay-info-shadow); }
+  .btn-light     { --_c: var(--btcpay-light);     --_c-text: var(--btcpay-light-text);     --_c-text-hover: var(--btcpay-light-text-hover);     --_c-text-active: var(--btcpay-light-text-active);     --_c-border: var(--btcpay-light-border);     --_c-border-hover: var(--btcpay-light-border-hover);     --_c-border-active: var(--btcpay-light-border-active);     --_c-bg-hover: var(--btcpay-light-bg-hover);     --_c-bg-active: var(--btcpay-light-bg-active);     --_c-shadow: var(--btcpay-light-shadow); }
+
+  .btn-primary, .btn-secondary, .btn-success,
+  .btn-danger, .btn-warning, .btn-info, .btn-light {
+    --btcpay-btn-color: var(--_c-text);
+    --btcpay-btn-bg: var(--_c);
+    --btcpay-btn-border-color: var(--_c-border);
+    --btcpay-btn-hover-color: var(--_c-text-hover);
+    --btcpay-btn-hover-bg: var(--_c-bg-hover);
+    --btcpay-btn-hover-border-color: var(--_c-border-hover);
+    --btcpay-btn-focus-shadow-rgb: var(--_c-shadow);
+    --btcpay-btn-active-color: var(--_c-text-active);
+    --btcpay-btn-active-bg: var(--_c-bg-active);
+    --btcpay-btn-active-border-color: var(--_c-border-active);
+  }
+
+  .btn-outline-primary   { --_c: var(--btcpay-primary);   --_c-text: var(--btcpay-primary-text);   --_c-text-hover: var(--btcpay-primary-text-hover);   --_c-text-active: var(--btcpay-primary-text-active);   --_c-border: var(--btcpay-primary-border);   --_c-bg-active: var(--btcpay-primary-bg-active);   --_c-rgb: var(--btcpay-primary-rgb); }
+  .btn-outline-secondary { --_c: var(--btcpay-secondary); --_c-text: var(--btcpay-secondary-text); --_c-text-hover: var(--btcpay-secondary-text-hover); --_c-text-active: var(--btcpay-secondary-text-active); --_c-border: var(--btcpay-secondary-border); --_c-bg-active: var(--btcpay-secondary-bg-active); --_c-rgb: var(--btcpay-secondary-rgb); }
+  .btn-outline-danger    { --_c: var(--btcpay-danger);    --_c-text: var(--btcpay-danger-text);    --_c-text-hover: var(--btcpay-danger-text-hover);    --_c-text-active: var(--btcpay-danger-text-active);    --_c-border: var(--btcpay-danger-border);    --_c-bg-active: var(--btcpay-danger-bg-active);    --_c-rgb: var(--btcpay-danger-rgb); }
+  .btn-outline-info      { --_c: var(--btcpay-info);      --_c-text: var(--btcpay-info-text);      --_c-text-hover: var(--btcpay-info-text-hover);      --_c-text-active: var(--btcpay-info-text-active);      --_c-border: var(--btcpay-info-border);      --_c-bg-active: var(--btcpay-info-bg-active);      --_c-rgb: var(--btcpay-info-rgb); }
+  .btn-outline-warning   { --_c: var(--btcpay-warning);   --_c-text: var(--btcpay-warning-text);   --_c-text-hover: var(--btcpay-warning-text-hover);   --_c-text-active: var(--btcpay-warning-text-active);   --_c-border: var(--btcpay-warning-border);   --_c-bg-active: var(--btcpay-warning-bg-active);   --_c-rgb: var(--btcpay-warning-rgb); }
+  .btn-outline-success   { --_c: var(--btcpay-success);   --_c-text: var(--btcpay-success-text);   --_c-text-hover: var(--btcpay-success-text-hover);   --_c-text-active: var(--btcpay-success-text-active);   --_c-border: var(--btcpay-success-border);   --_c-bg-active: var(--btcpay-success-bg-active);   --_c-rgb: var(--btcpay-success-rgb); }
+
+  .btn-outline-primary, .btn-outline-secondary, .btn-outline-danger,
+  .btn-outline-info, .btn-outline-warning, .btn-outline-success {
+    --btcpay-btn-color: var(--_c);
+    --btcpay-btn-border-color: var(--_c-border);
+    --btcpay-btn-hover-color: var(--_c-text-hover);
+    --btcpay-btn-hover-bg: var(--_c);
+    --btcpay-btn-hover-border-color: var(--_c-border);
+    --btcpay-btn-focus-shadow-rgb: var(--_c-rgb);
+    --btcpay-btn-active-color: var(--_c-text-active);
+    --btcpay-btn-active-bg: var(--_c-bg-active);
+    --btcpay-btn-active-border-color: var(--_c-border);
+    --btcpay-btn-disabled-color: var(--_c-text);
+    --btcpay-btn-disabled-bg: var(--_c);
+    --btcpay-btn-disabled-border-color: var(--_c-border);
+  }
+
+
+  .btn-close {
+    --btcpay-btn-close-color: var(--btcpay-body-text);
+    --btcpay-btn-close-bg: none;
+    --btcpay-btn-close-opacity: 0.5;
+    --btcpay-btn-close-hover-opacity: 0.75;
+    --btcpay-btn-close-focus-shadow: 0 0 0 0.25rem rgba(var(--btcpay-primary-rgb), 0.25);
+    --btcpay-btn-close-focus-opacity: 1;
+    --btcpay-btn-close-disabled-opacity: 0.25;
+    box-sizing: content-box;
+    width: 1em;
+    height: 1em;
+    padding: 0.25em 0.25em;
+    color: var(--btcpay-btn-close-color);
+    background: transparent var(--btcpay-btn-close-bg) center/1em auto no-repeat;
+    border: 0;
+    border-radius: var(--btcpay-border-radius);
+    opacity: var(--btcpay-btn-close-opacity);
+  }
+
+  .btn-close:hover {
+    color: var(--btcpay-btn-close-color);
+    @apply no-underline;
+    opacity: var(--btcpay-btn-close-hover-opacity);
+  }
+
+  .btn-close:focus {
+    outline: 0;
+    box-shadow: var(--btcpay-btn-close-focus-shadow);
+    opacity: var(--btcpay-btn-close-focus-opacity);
+  }
+
+  .btn-close:disabled, .btn-close.disabled {
+    @apply pointer-events-none select-none;
+    opacity: var(--btcpay-btn-close-disabled-opacity);
+  }
+
+  .btn-sm, .btn-group-sm > .btn {
+    --btcpay-btn-padding-y: 0.5rem;
+    --btcpay-btn-padding-x: 1.5rem;
+    --btcpay-btn-font-size: 0.75rem;
+    --btcpay-btn-border-radius: var(--btcpay-border-radius-sm);
+  }
+
+  .btn-lg {
+    --btcpay-btn-padding-y: 1rem;
+    --btcpay-btn-padding-x: 2rem;
+    --btcpay-btn-font-size: 1rem;
+    --btcpay-btn-border-radius: var(--btcpay-border-radius-lg);
+  }
+
+  .btn-group {
+    @apply relative inline-flex align-middle;
+    border-radius: var(--btcpay-border-radius);
+  }
+
+  .btn-group > .btn {
+    @apply relative flex-auto;
+  }
+
+  .btn-group > .btn-check:checked + .btn,
+  .btn-group > .btn-check:focus + .btn,
+  .btn-group > .btn:hover,
+  .btn-group > .btn:focus,
+  .btn-group > .btn:active,
+  .btn-group > .btn.active {
+    z-index: 1;
+  }
+
+  .btn-group > :not(.btn-check:first-child) + .btn,
+  .btn-group > .btn-group:not(:first-child) {
+    margin-left: calc(var(--btcpay-border-width) * -1);
+  }
+
+  .btn-group > .btn:not(:last-child):not(.dropdown-toggle),
+  .btn-group > .btn-group:not(:last-child) > .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .btn-group > .btn:nth-child(n + 3),
+  .btn-group > :not(.btn-check) + .btn,
+  .btn-group > .btn-group:not(:first-child) > .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .btn-check {
+    @apply absolute pointer-events-none;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .btn-check[disabled] + .btn, .btn-check:disabled + .btn {
+    @apply pointer-events-none;
+    filter: none;
+    opacity: 0.65;
+  }
+
+  .btn-link,
+  .btn-action,
+  .btn-action-danger {
+    --btcpay-btn-font-weight: var(--btcpay-font-weight-normal);
+    --btcpay-btn-color: var(--btcpay-body-link);
+    --btcpay-btn-bg: transparent;
+    --btcpay-btn-border-color: transparent;
+    --btcpay-btn-hover-color: var(--btcpay-body-link-accent);
+    --btcpay-btn-hover-border-color: transparent;
+    --btcpay-btn-active-color: var(--btcpay-body-link-accent);
+    --btcpay-btn-active-border-color: transparent;
+    --btcpay-btn-disabled-color: var(--btcpay-body-text-muted);
+    --btcpay-btn-disabled-border-color: transparent;
+    --btcpay-btn-box-shadow: 0 0 0 var(--btcpay-black);
+    --btcpay-btn-focus-shadow-rgb: var(--btcpay-primary-shadow);
+    @apply no-underline;
+  }
+
+  .btn-link:hover, .btn-link:focus-visible,
+  .btn-action:hover, .btn-action:focus-visible,
+  .btn-action-danger:hover, .btn-action-danger:focus-visible {
+    @apply no-underline;
+  }
+
+  .btn-link:focus-visible,
+  .btn-action:focus-visible {
+    color: var(--btcpay-btn-color);
+  }
+
+  .btn-link:hover,
+  .btn-action:hover {
+    color: var(--btcpay-btn-hover-color);
+  }
+
+  .btn-action,
+  .btn-action-danger {
+    --btcpay-btn-padding-x: 0;
+    --btcpay-btn-padding-y: 0;
+  }
+
+  .btn-action-danger {
+    --btcpay-btn-color: var(--btcpay-danger);
+    --btcpay-btn-hover-color: var(--btcpay-danger);
+    --btcpay-btn-active-color: var(--btcpay-danger);
+  }
+
+  .btn .icon-scan-qr {
+    --icon-size: 1.1875rem;
+  }
+  .btn .icon-qr-code {
+    --icon-size: 1.5rem;
+  }
+  .blazor-status .btn-close .icon {
+    --icon-size: .75rem;
+  }
+
+  .btn .icon {
+    --icon-size: 1.25rem;
+    @apply align-text-bottom;
+    margin-left: calc(var(--icon-size) / -2);
+  }
+
+  .btn.btn-lg .icon {
+    --icon-size: 1.75rem;
+  }
+}

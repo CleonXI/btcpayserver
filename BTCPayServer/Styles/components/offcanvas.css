@@ -1,0 +1,58 @@
+@layer components {
+  .offcanvas {
+    --btcpay-offcanvas-zindex: 1045;
+    --btcpay-offcanvas-width: 400px;
+    --btcpay-offcanvas-height: auto;
+    --btcpay-offcanvas-padding-x: 0;
+    --btcpay-offcanvas-padding-y: 0.5rem;
+    --btcpay-offcanvas-color: var(--btcpay-body-text);
+    --btcpay-offcanvas-bg: var(--btcpay-bg-tile);
+    --btcpay-offcanvas-border-width: var(--btcpay-border-width);
+    --btcpay-offcanvas-border-color: var(--btcpay-border-color);
+    --btcpay-offcanvas-box-shadow: none;
+    --btcpay-offcanvas-transition: transform var(--btcpay-transition-duration-default) ease-in-out;
+    --btcpay-offcanvas-title-line-height: 1.6;
+    @apply fixed bottom-0 flex flex-col max-w-full invisible outline-0;
+    z-index: var(--btcpay-offcanvas-zindex);
+    color: var(--btcpay-offcanvas-color);
+    background-color: var(--btcpay-offcanvas-bg);
+    background-clip: padding-box;
+    transition: var(--btcpay-offcanvas-transition);
+  }
+
+  .offcanvas.offcanvas-end {
+    top: 0;
+    right: 0;
+    width: var(--btcpay-offcanvas-width);
+    border-left: var(--btcpay-offcanvas-border-width) solid var(--btcpay-offcanvas-border-color);
+    transform: translateX(100%);
+  }
+
+  .offcanvas.showing, .offcanvas.show:not(.hiding) {
+    transform: none;
+  }
+
+  .offcanvas.showing, .offcanvas.hiding, .offcanvas.show {
+    @apply visible;
+  }
+
+  .offcanvas-header {
+    @apply flex items-center;
+    padding: var(--btcpay-offcanvas-padding-y) var(--btcpay-offcanvas-padding-x);
+  }
+
+  .offcanvas-header .btn-close {
+    padding: calc(var(--btcpay-offcanvas-padding-y) * .5) calc(var(--btcpay-offcanvas-padding-x) * .5);
+    margin: calc(-.5 * var(--btcpay-offcanvas-padding-y)) calc(-.5 * var(--btcpay-offcanvas-padding-x)) calc(-.5 * var(--btcpay-offcanvas-padding-y)) auto;
+  }
+
+  .offcanvas-title {
+    @apply mb-0;
+    line-height: var(--btcpay-offcanvas-title-line-height);
+  }
+
+  .offcanvas-body {
+    @apply grow overflow-y-auto;
+    padding: var(--btcpay-offcanvas-padding-y) var(--btcpay-offcanvas-padding-x);
+  }
+}

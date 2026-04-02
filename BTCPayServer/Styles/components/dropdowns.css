@@ -1,0 +1,109 @@
+@layer components {
+  .dropup,
+  .dropdown {
+    @apply relative;
+  }
+
+  .dropdown-toggle {
+    @apply whitespace-nowrap;
+  }
+
+  .dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+  }
+
+  .dropdown-toggle:empty::after {
+    margin-left: 0;
+  }
+
+  .dropdown-menu {
+    --btcpay-dropdown-zindex: 1000;
+    --btcpay-dropdown-min-width: 10rem;
+    --btcpay-dropdown-padding-x: 0;
+    --btcpay-dropdown-padding-y: 0.5rem;
+    --btcpay-dropdown-spacer: 0.125rem;
+    --btcpay-dropdown-font-size: 0.875rem;
+    --btcpay-dropdown-color: var(--btcpay-body-text);
+    --btcpay-dropdown-bg: var(--btcpay-body-bg);
+    --btcpay-dropdown-border-color: var(--btcpay-body-border-medium);
+    --btcpay-dropdown-border-radius: var(--btcpay-border-radius);
+    --btcpay-dropdown-border-width: var(--btcpay-border-width);
+    --btcpay-dropdown-inner-border-radius: calc(var(--btcpay-border-radius) - var(--btcpay-border-width));
+    --btcpay-dropdown-divider-bg: var(--btcpay-body-border-medium);
+    --btcpay-dropdown-divider-margin-y: 0.5rem;
+    --btcpay-dropdown-box-shadow: var(--btcpay-box-shadow);
+    --btcpay-dropdown-link-color: var(--btcpay-body-text);
+    --btcpay-dropdown-link-hover-color: var(--btcpay-body-text);
+    --btcpay-dropdown-link-hover-bg: var(--btcpay-body-bg-hover);
+    --btcpay-dropdown-link-active-color: var(--btcpay-body-text-active);
+    --btcpay-dropdown-link-active-bg: var(--btcpay-body-bg-active);
+    --btcpay-dropdown-link-disabled-color: var(--btcpay-body-text-muted);
+    --btcpay-dropdown-item-padding-x: 1rem;
+    --btcpay-dropdown-item-padding-y: 0.25rem;
+    --btcpay-dropdown-header-color: var(--btcpay-body-text-muted);
+    --btcpay-dropdown-header-padding-x: 1rem;
+    --btcpay-dropdown-header-padding-y: 0.5rem;
+    @apply hidden absolute list-none m-0 text-left;
+    z-index: var(--btcpay-dropdown-zindex);
+    min-width: var(--btcpay-dropdown-min-width);
+    padding: var(--btcpay-dropdown-padding-y) var(--btcpay-dropdown-padding-x);
+    font-size: var(--btcpay-dropdown-font-size);
+    color: var(--btcpay-dropdown-color);
+    background-color: var(--btcpay-dropdown-bg);
+    background-clip: padding-box;
+    border: var(--btcpay-dropdown-border-width) solid var(--btcpay-dropdown-border-color);
+    border-radius: var(--btcpay-dropdown-border-radius);
+  }
+
+  .dropdown-menu[data-bs-popper] {
+    top: 100%;
+    left: 0;
+    margin-top: var(--btcpay-dropdown-spacer);
+  }
+
+  .dropdown-menu.show {
+    @apply block;
+  }
+
+  .dropdown-item {
+    @apply block w-full bg-transparent border-0;
+    padding: var(--btcpay-dropdown-item-padding-y) var(--btcpay-dropdown-item-padding-x);
+    clear: both;
+    font-weight: var(--btcpay-font-weight-normal);
+    color: var(--btcpay-dropdown-link-color);
+    text-align: inherit;
+    white-space: nowrap;
+    border-radius: var(--btcpay-dropdown-item-border-radius, 0);
+  }
+
+  .dropdown-item:hover, .dropdown-item:focus {
+    color: var(--btcpay-dropdown-link-hover-color);
+    background-color: var(--btcpay-dropdown-link-hover-bg);
+  }
+
+  .dropdown-item.active, .dropdown-item:active {
+    color: var(--btcpay-dropdown-link-active-color);
+    text-decoration: none;
+    background-color: var(--btcpay-dropdown-link-active-bg);
+  }
+
+  .dropdown-item.disabled, .dropdown-item:disabled {
+    @apply pointer-events-none bg-transparent;
+    color: var(--btcpay-dropdown-link-disabled-color);
+  }
+
+  .dropdown-divider {
+    height: 0;
+    margin: var(--btcpay-dropdown-divider-margin-y) 0;
+    overflow: hidden;
+    border-top: 1px solid var(--btcpay-dropdown-divider-bg);
+    opacity: 1;
+  }
+}

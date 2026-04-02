@@ -1,0 +1,165 @@
+@layer components {
+  .nav {
+    --btcpay-nav-link-padding-x: 1rem;
+    --btcpay-nav-link-padding-y: 0.5rem;
+    --btcpay-nav-link-font-weight: ;
+    --btcpay-nav-link-color: var(--btcpay-nav-link);
+    --btcpay-nav-link-hover-color: var(--btcpay-nav-link-accent);
+    --btcpay-nav-link-disabled-color: var(--btcpay-body-text-muted);
+    @apply flex flex-wrap list-none pl-0 mb-0;
+  }
+
+  .nav-link {
+    @apply block;
+    padding: var(--btcpay-nav-link-padding-y) var(--btcpay-nav-link-padding-x);
+    font-size: var(--btcpay-nav-link-font-size);
+    font-weight: var(--btcpay-nav-link-font-weight);
+    color: var(--btcpay-nav-link-color);
+    background: none;
+    border: 0;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  }
+
+  .nav-link:hover, .nav-link:focus {
+    color: var(--btcpay-nav-link-hover-color);
+  }
+
+  .nav-link:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(var(--btcpay-primary-rgb), 0.25);
+  }
+
+  .nav-link.disabled, .nav-link:disabled {
+    @apply pointer-events-none cursor-default;
+    color: var(--btcpay-nav-link-disabled-color);
+  }
+
+  .nav-tabs {
+    --btcpay-nav-tabs-border-width: var(--btcpay-border-width);
+    --btcpay-nav-tabs-border-color: var(--btcpay-body-border-medium);
+    --btcpay-nav-tabs-border-radius: var(--btcpay-border-radius);
+    --btcpay-nav-tabs-link-hover-border-color: var(--btcpay-body-border-medium);
+    --btcpay-nav-tabs-link-active-color: var(--btcpay-body-text-active);
+    --btcpay-nav-tabs-link-active-bg: var(--btcpay-body-bg-active);
+    --btcpay-nav-tabs-link-active-border-color: var(--btcpay-body-border-medium);
+    border-bottom: var(--btcpay-nav-tabs-border-width) solid var(--btcpay-nav-tabs-border-color);
+  }
+
+  .nav-tabs .nav-link {
+    margin-bottom: calc(-1 * var(--btcpay-nav-tabs-border-width));
+    border: var(--btcpay-nav-tabs-border-width) solid transparent;
+    border-top-left-radius: var(--btcpay-nav-tabs-border-radius);
+    border-top-right-radius: var(--btcpay-nav-tabs-border-radius);
+  }
+
+  .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+    isolation: isolate;
+    border-color: var(--btcpay-nav-tabs-link-hover-border-color);
+  }
+
+  .nav-tabs .nav-link.active,
+  .nav-tabs .nav-item.show .nav-link {
+    color: var(--btcpay-nav-tabs-link-active-color);
+    background-color: var(--btcpay-nav-tabs-link-active-bg);
+    border-color: var(--btcpay-nav-tabs-link-active-border-color);
+  }
+
+  .nav-pills {
+    --btcpay-nav-pills-border-radius: var(--btcpay-border-radius);
+    --btcpay-nav-pills-link-active-color: var(--btcpay-primary-text);
+    --btcpay-nav-pills-link-active-bg: var(--btcpay-primary);
+  }
+
+  .nav-pills .nav-link {
+    border-radius: var(--btcpay-nav-pills-border-radius);
+  }
+
+  .nav-pills .nav-link.active,
+  .nav-pills .show > .nav-link {
+    color: var(--btcpay-nav-pills-link-active-color);
+    background-color: var(--btcpay-nav-pills-link-active-bg);
+  }
+
+  .nav-underline {
+    gap: 1rem;
+  }
+
+  .nav-underline .nav-link {
+    padding-right: 0;
+    padding-left: 0;
+    border-bottom: var(--btcpay-border-width) solid transparent;
+  }
+
+  .nav-underline .nav-link:hover,
+  .nav-underline .nav-link:focus-visible {
+    border-bottom-color: currentColor;
+  }
+
+  .nav-underline .nav-link.active,
+  .nav-underline .show > .nav-link {
+    font-weight: var(--btcpay-font-weight-bold, 700);
+    color: var(--btcpay-nav-link-active);
+    border-bottom-color: currentColor;
+  }
+
+  .tab-content > .tab-pane {
+    @apply hidden;
+  }
+
+  .tab-content > .active {
+    @apply block;
+  }
+
+  .navbar {
+    --btcpay-navbar-padding-x: 0;
+    --btcpay-navbar-padding-y: 1rem;
+    --btcpay-navbar-color: rgba(var(--btcpay-primary-rgb), 0.65);
+    --btcpay-navbar-hover-color: rgba(var(--btcpay-primary-rgb), 0.8);
+    --btcpay-navbar-disabled-color: rgba(var(--btcpay-primary-rgb), 0.3);
+    --btcpay-navbar-active-color: rgba(var(--btcpay-primary-rgb), 1);
+    --btcpay-navbar-brand-padding-y: 0.4rem;
+    --btcpay-navbar-brand-margin-end: 1rem;
+    --btcpay-navbar-brand-font-size: 1rem;
+    --btcpay-navbar-brand-color: rgba(var(--btcpay-primary-rgb), 1);
+    --btcpay-navbar-brand-hover-color: rgba(var(--btcpay-primary-rgb), 1);
+    --btcpay-navbar-nav-link-padding-x: 0.5rem;
+    @apply relative flex flex-wrap items-center justify-between;
+    padding: var(--btcpay-navbar-padding-y) var(--btcpay-navbar-padding-x);
+  }
+
+  .navbar > .container,
+  .navbar > .container-fluid {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-brand {
+    @apply whitespace-nowrap no-underline;
+    padding-top: var(--btcpay-navbar-brand-padding-y);
+    padding-bottom: var(--btcpay-navbar-brand-padding-y);
+    margin-right: var(--btcpay-navbar-brand-margin-end);
+    font-size: var(--btcpay-navbar-brand-font-size);
+    color: var(--btcpay-navbar-brand-color);
+  }
+
+  .navbar-brand:hover, .navbar-brand:focus {
+    color: var(--btcpay-navbar-brand-hover-color);
+    text-decoration: none;
+  }
+
+  .navbar-nav {
+    --btcpay-nav-link-padding-x: 0;
+    --btcpay-nav-link-padding-y: 0.5rem;
+    --btcpay-nav-link-font-weight: ;
+    --btcpay-nav-link-color: var(--btcpay-navbar-color);
+    --btcpay-nav-link-hover-color: var(--btcpay-navbar-hover-color);
+    --btcpay-nav-link-disabled-color: var(--btcpay-navbar-disabled-color);
+    @apply flex flex-col list-none pl-0 mb-0;
+  }
+
+  .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    color: var(--btcpay-navbar-active-color);
+  }
+}

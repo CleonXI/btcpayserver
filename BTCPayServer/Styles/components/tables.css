@@ -1,0 +1,54 @@
+@layer components {
+  .table {
+    --btcpay-table-color-type: initial;
+    --btcpay-table-bg-type: initial;
+    --btcpay-table-color-state: initial;
+    --btcpay-table-bg-state: initial;
+    --btcpay-table-color: var(--btcpay-body-text);
+    --btcpay-table-bg: transparent;
+    --btcpay-table-border-color: var(--btcpay-border-color);
+    --btcpay-table-accent-bg: transparent;
+    --btcpay-table-striped-color: var(--btcpay-body-text);
+    --btcpay-table-striped-bg: var(--btcpay-body-bg-striped);
+    --btcpay-table-active-color: var(--btcpay-body-text-active);
+    --btcpay-table-active-bg: var(--btcpay-body-bg-active);
+    --btcpay-table-hover-color: var(--btcpay-body-text-hover);
+    --btcpay-table-hover-bg: var(--btcpay-body-bg-hover);
+    @apply w-full align-top;
+    margin-bottom: 1rem;
+    border-color: var(--btcpay-table-border-color);
+  }
+
+  .table > :not(caption) > * > * {
+    padding: 0.5rem 0.5rem;
+    color: var(--btcpay-table-color-state, var(--btcpay-table-color-type, var(--btcpay-table-color)));
+    background-color: var(--btcpay-table-bg);
+    border-bottom-width: var(--btcpay-border-width);
+    box-shadow: inset 0 0 0 9999px var(--btcpay-table-bg-state, var(--btcpay-table-bg-type, var(--btcpay-table-accent-bg)));
+  }
+
+  .table > tbody {
+    vertical-align: inherit;
+  }
+
+  .table > thead {
+    @apply align-bottom;
+  }
+
+  .table-sm > :not(caption) > * > * {
+    padding: 0.25rem 0.25rem;
+  }
+
+  .table-borderless > :not(caption) > * > * {
+    border-bottom-width: 0;
+  }
+
+  .table-borderless > :not(:first-child) {
+    border-top-width: 0;
+  }
+
+  .table-hover > tbody > tr:hover > * {
+    --btcpay-table-color-state: var(--btcpay-table-hover-color);
+    --btcpay-table-bg-state: var(--btcpay-table-hover-bg);
+  }
+}

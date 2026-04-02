@@ -12,5 +12,15 @@
 
 @import "./base.css";
 @import "./theme.css";
-@import "./site-components.css";
+@import "./components/buttons.css";
+@import "./components/forms.css";
+@import "./components/tables.css";
+@import "./components/modals.css";
+@import "./components/dropdowns.css";
+@import "./components/navigation.css";
+@import "./components/accordion.css";
+@import "./components/toast.css";
+@import "./components/offcanvas.css";
+@import "./components/collapse.css";
+@import "./site/misc.css";
 @import "./utilities.css";
