@@ -17,15 +17,7 @@
     ViewData.SetLayoutModel(new(nameof(StoreNavPages.PullPayments), StringLocalizer["Pull Payments"]));
 }
 
-@section PageHeadContent {
-    <style>
-        .tooltip-inner { text-align: left; }
-        .btn[data-clipboard] { color: var(--btcpay-body-link); }
-        .btn[data-clipboard]:hover { color: var(--btcpay-body-link-accent); }
-    </style>
-}
-
-<div x-data="{ expanded: false }">
+<div class="pull-payments-list" x-data="{ expanded: false }">
 <div class="sticky-header">
     <h2>
         @ViewData["Title"]

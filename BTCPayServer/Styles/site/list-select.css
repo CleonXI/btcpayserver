@@ -1,0 +1,53 @@
+@layer components {
+    .btcpay-list-select {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--btcpay-space-s);
+    }
+    .btcpay-list-select > input {
+        display: none;
+    }
+    .btcpay-list-select-item {
+        display: flex;
+        flex-wrap: wrap;
+        flex: 1 1 45%;
+        align-items: center;
+        padding: .75rem var(--btcpay-space-s);
+        cursor: pointer;
+    }
+    label.btcpay-list-select-item {
+        border: 1px solid var(--btcpay-form-border);
+        background-color: var(--btcpay-form-bg);
+        border-radius: var(--btcpay-border-radius);
+        transition: border-color 0.15s ease-in-out;
+    }
+    label.btcpay-list-select-item:hover {
+        border-color: var(--btcpay-form-border-hover);
+        background-color: var(--btcpay-form-bg-hover);
+    }
+    :disabled label.btcpay-list-select-item {
+        border-color: var(--btcpay-form-border-disabled);
+        background-color: var(--btcpay-form-bg-disabled);
+        pointer-events: none;
+    }
+    @media (max-width: 575.98px) {
+        .btcpay-list-select-item {
+            flex-basis: 100%;
+        }
+    }
+    .btcpay-list-select-item .icon {
+        --icon-size: 1.5rem;
+        margin: 0 var(--btcpay-space-s);
+    }
+    input:checked + label.btcpay-list-select-item {
+        border-color: var(--btcpay-form-border-focus);
+    }
+    .btcpay-list-select-item .note {
+        color: var(--btcpay-body-text-muted);
+        flex-basis: 100%;
+        margin-left: 2.5rem;
+    }
+    .btcpay-list-select-item:active {
+        background-color: var(--btcpay-form-bg-hover);
+    }
+}

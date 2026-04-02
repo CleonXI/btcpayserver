@@ -1,0 +1,161 @@
+@layer components {
+    #posData td > table:last-child {
+        margin-bottom: 0 !important;
+    }
+
+    #posData table > tbody > tr:first-child > td > h4 {
+        margin-top: 0 !important;
+    }
+
+    .invoice-information {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--btcpay-space-xl) var(--btcpay-space-xxl);
+    }
+
+    .invoice-information > div {
+        max-width: 540px;
+    }
+
+    .invoice-information > div table th {
+        width: 200px;
+        font-weight: var(--btcpay-font-weight-semibold);
+    }
+
+    .invoiceId-col {
+        min-width: 8rem;
+    }
+
+    .invoice-details-row > td {
+        padding: 1.5rem 1rem 0 2.65rem;
+    }
+
+    .dropdown > .dropdown-toggle-custom-caret {
+        min-width: 7rem;
+        padding-left: 1rem;
+        text-align: left;
+    }
+
+    #SearchText {
+        flex-shrink: 0;
+        min-width: 200px;
+        max-width: 300px;
+    }
+
+    @media (max-width: 568px) {
+        #SearchText {
+            width: 100%;
+        }
+    }
+
+    .invoice-receipt-print h1 {
+        margin: 0;
+    }
+
+    .invoice-receipt-print .qr-code {
+        width: 128px;
+    }
+
+    @media print {
+        .invoice-receipt-print {
+            width: 58mm;
+            margin: 0;
+            padding: 0;
+        }
+
+        .invoice-receipt-print .p-1 {
+            padding: 1mm !important;
+        }
+
+        .invoice-receipt-print .m-1 {
+            margin: 1mm !important;
+        }
+    }
+
+    @page {
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .store-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--btcpay-space-m);
+        margin-top: auto;
+        padding: 1.5rem 1.5rem 0;
+    }
+
+    a.store-powered-by {
+        display: flex;
+        align-items: center;
+        gap: var(--btcpay-space-s);
+    }
+
+    a.store-powered-by svg {
+        height: 2rem;
+        width: 4rem;
+    }
+
+    .additional-options {
+        display: none;
+    }
+
+    [name="SelectedRefundOption"]:checked ~ .additional-options {
+        display: block;
+    }
+
+    @media (min-width: 576px) {
+        #Role {
+            width: auto !important;
+        }
+    }
+
+    .version-switch .nav-link {
+        display: inline;
+    }
+
+    .version-switch .nav-link.active {
+        display: none;
+    }
+
+    input[type="checkbox"] ~ div > .info-note,
+    input[type="checkbox"] ~ div > .subsettings {
+        display: none;
+    }
+
+    input[type="checkbox"]:checked ~ div > .info-note {
+        display: flex;
+        max-width: 44em;
+    }
+
+    input[type="checkbox"]:checked ~ div > .subsettings {
+        display: block;
+    }
+
+    .subsettings > :last-child {
+        margin-bottom: 0 !important;
+    }
+
+    #app .overflow-x-auto {
+        max-height: 80vh;
+    }
+
+    #app #charts {
+        gap: var(--btcpay-space-l) var(--btcpay-space-xxl);
+    }
+
+    #app #charts article {
+        flex: 1 1 450px;
+    }
+
+    main .dropdown-menu.show {
+        z-index: 99999;
+    }
+
+    #checkout-cheating form + form {
+        margin-top: var(--btcpay-space-l);
+    }
+}

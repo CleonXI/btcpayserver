@@ -30,16 +30,6 @@
             <vc:icon symbol="cross" />
         </a>
     }
-    @section PageHeadContent {
-        <style>
-            #FirstStore, [role="alert"] { max-width: 26.5rem; margin: var(--btcpay-space-l) auto; text-align: center; }
-            #FirstStore .main-logo { height: 4.5rem; max-width: 18rem; }
-            #FirstStore .main-logo-btcpay .main-logo-btcpay--large { display: none; }
-            #FirstStore .form-control, #FirstStore .form-select { width: 100%; }
-            #FirstStore .form-text { font-size: var(--btcpay-font-size-s); }
-            #FirstStore .form-group:last-of-type { text-align: center; }
-        </style>
-    }
     <div id="FirstStore">
         <a asp-controller="UIHome" asp-action="Index" tabindex="-1" class="inline-block mb-6">
             <vc:main-logo />

@@ -24,33 +24,6 @@
         Model.Search.ContainsFilter("startdate") && Model.Search.ContainsFilter("enddate");
 }
 
-@section PageHeadContent
-{
-    <style>
-        .invoiceId-col {
-            min-width: 8rem;
-        }
-        .invoice-details-row > td {
-            padding: 1.5rem 1rem 0 2.65rem;
-        }
-        .dropdown > .btn {
-            min-width: 7rem;
-            padding-left: 1rem;
-            text-align: left;
-        }
-        #SearchText {
-            flex-shrink: 0;
-            min-width: 200px;
-            max-width: 300px;
-        }
-        @@media (max-width: 568px) {
-            #SearchText {
-                width: 100%;
-            }
-        }
-    </style>
-}
-
 @section PageFootContent {
     @*Script must be async to ensure proper page loading*@
     <script src="~/modal/btcpay.js" asp-append-version="true" async></script>

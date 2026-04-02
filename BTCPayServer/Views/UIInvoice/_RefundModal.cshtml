@@ -45,11 +45,6 @@
             <input type="hidden" asp-for="CryptoCode"/>
             <input type="hidden" asp-for="InvoiceCurrency"/>
             <input type="hidden" asp-for="InvoiceDivisibility"/>
-            <style>
-                .additional-options { display: none; }
-                [name="SelectedRefundOption"]:checked ~ .additional-options { display: block; }
-            </style>
-                           
             <span asp-validation-for="SelectedRefundOption" class="text-btcpay-danger w-full"></span>
             @if (Model.OverpaidAmount is not null)
             {

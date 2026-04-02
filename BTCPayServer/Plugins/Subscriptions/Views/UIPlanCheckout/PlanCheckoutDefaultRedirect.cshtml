@@ -12,54 +12,8 @@
 <head>
     <partial name="LayoutHead" />
     <link href="~/vendor/font-awesome/css/font-awesome.min.css" asp-append-version="true" rel="stylesheet" />
-    <style>
-        body {
-            background-color: var(--btcpay-body-bg);
-            color: var(--btcpay-body-text);
-        }
-
-        .success-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 1rem;
-        }
-
-        .success-card {
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            padding: 3rem;
-            text-align: center;
-            max-width: 500px;
-            width: 100%;
-        }
-
-        .success-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--btcpay-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            animation: pulse 2s infinite;
-        }
-
-        @@keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .success-icon i {
-            color: white;
-            font-size: 2rem;
-        }
-    </style>
 </head>
-<body>
+<body class="plan-checkout-redirect">
     <div class="success-container">
         <div class="success-card">
             <div class="success-icon">

@@ -4,26 +4,11 @@
     ViewData["Title"] = "Your recovery phrase";
 }
 
-@section PageHeadContent {
-    <style>
-        main { max-width: 800px; margin: 0 auto; text-align: center;}
-
-        form#RecoveryConfirmation button { position: absolute; bottom:0; left:50%; width:200px; margin-left:-100px; }
-        form#RecoveryConfirmation button:not([disabled]) { display: none; }
-        form#RecoveryConfirmation input:checked ~ button[disabled] { display: none; }
-        form#RecoveryConfirmation input:checked + button:not([disabled]) { display: inline-block; }
-
-        .icon.icon-warning {
-            --icon-size: 2.5rem;
-        }
-    </style>
-}
-
 @section PageFootContent {
     <partial name="_ValidationScriptsPartial" />
 }
 
-<main>
+<main class="recovery-seed-page">
     <partial name="_StatusMessage" />
     <div class="inline-flex flex-col items-center justify-center">
         <div class="text-btcpay-warning mb-3">

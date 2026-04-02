@@ -3,14 +3,6 @@
     ViewData.SetLayoutModel(new LayoutModel("LightningAddress", StringLocalizer["Lightning Address"]).SetCategory(WellKnownCategories.Store));
 }
 
-@section PageHeadContent {
-    <style>
-        .settings-holder span:not(:last-child):after{
-            content: " / ";
-        }
-    </style>
-}
-
 @section PageFootContent {
     <script>
         delegate('click', '.remove', event => {

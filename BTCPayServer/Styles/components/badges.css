@@ -1,0 +1,27 @@
+@layer components {
+    .badge {
+        --btcpay-badge-padding-x: 0.75em;
+        --btcpay-badge-padding-y: 0.5em;
+        --btcpay-badge-font-size: var(--btcpay-font-size-s);
+        --btcpay-badge-font-weight: var(--btcpay-font-weight-semibold);
+        --btcpay-badge-color: var(--btcpay-white);
+        --btcpay-badge-border-radius: var(--btcpay-border-radius);
+        display: inline-block;
+        padding: var(--btcpay-badge-padding-y) var(--btcpay-badge-padding-x);
+        font-size: var(--btcpay-badge-font-size);
+        font-weight: var(--btcpay-badge-font-weight);
+        line-height: 1;
+        color: var(--btcpay-badge-color);
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: var(--btcpay-badge-border-radius);
+    }
+    .badge:empty {
+        display: none;
+    }
+    .btn .badge {
+        position: relative;
+        top: -1px;
+    }
+}

@@ -10,16 +10,6 @@
     var linkProviders = TransactionLinkProviders.ToArray();
 }
 
-@section PageHeadContent {
-    <style>
-        input[type="checkbox"] ~ div > .info-note,
-        input[type="checkbox"] ~ div > .subsettings { display: none; }
-        input[type="checkbox"]:checked ~ div > .info-note { display: flex; max-width: 44em; }
-        input[type="checkbox"]:checked ~ div > .subsettings { display: block; }
-        .subsettings > :last-child { margin-bottom: 0 !important; }
-    </style>
-}
-
 <form method="post">
     <div class="sticky-header">
         <h2>@ViewData["Title"]</h2>

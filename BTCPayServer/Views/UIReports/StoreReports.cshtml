@@ -8,29 +8,6 @@
     Csp.UnsafeEval();
 }
 
-@section PageHeadContent
-{
-    @* Set a height for the responsive table container to make it work with the fixed table headers.
-       Details described here: thttps://uxdesign.cc/position-stuck-96c9f55d9526 *@
-    <style>
-        #app .overflow-x-auto {
-            max-height: 80vh;
-        }
-
-        #app #charts {
-            gap: var(--btcpay-space-l) var(--btcpay-space-xxl);
-        }
-
-        #app #charts article {
-            flex: 1 1 450px;
-        }
-
-        main .dropdown-menu.show {
-            z-index: 99999;
-        }
-    </style>
-}
-
 
 <div class="sticky-header">
     <h2>

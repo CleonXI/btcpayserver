@@ -21,73 +21,7 @@
 @section PageHeadContent {
     <script src="~/vendor/tom-select/tom-select.complete.min.js" asp-append-version="true"></script>
     <link href="~/vendor/tom-select/tom-select.css" asp-append-version="true" rel="stylesheet">
-    <style>
-        .smMaxWidth {
-            max-width: 125px;
-        }
 
-        @@media (min-width: 990px) {
-            .smMaxWidth {
-                max-width: 200px;
-            }
-        }
-
-        #LabelDropdownMenu {
-            max-height: 480px;
-            overflow-y: auto;
-            scrollbar-width: thin;
-        }
-        #LabelDropdownMenu #LabelSearchContainer .input-group:focus-within {
-            border-color: var(--btcpay-form-border-focus) !important;
-        }
-        #LabelDropdownMenu #LabelSearchContainer {
-            position: sticky;
-            top: 0;
-            z-index: 1;
-            background: var(--btcpay-dropdown-bg);
-            border-bottom: var(--bs-border-width, 1px) solid var(--bs-border-color, rgba(0,0,0,.175));
-        }
-        #LabelDropdownMenu .label-filter-divider {
-            display: none;
-        }
-        #LabelDropdownMenu .label-filter-clear {
-            position: sticky;
-            bottom: 0;
-            background: var(--btcpay-dropdown-bg);
-            border-top: var(--bs-border-width, 1px) solid var(--bs-border-color, rgba(0,0,0,.175));
-        }
-        #LabelDropdownMenu .label-filter-clear .dropdown-item {
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-        }
-        #LabelDropdownMenu .label-filter-item .label-filter-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
-        }
-        #LabelDropdownMenu .label-filter-item .label-filter-count {
-            margin-left: auto;
-            text-align: right;
-            opacity: 0.75;
-        }
-
-        /* pull actions area, so that it is besides the search form */
-        @@media (min-width: 1200px) {
-            #Filter + #Dropdowns {
-                margin-top: -4rem;
-                float: right;
-            }
-
-            #Filter + #Dropdowns #Actions {
-                order: 1;
-            }
-        }
-
-        #LoadingIndicator {
-            margin-bottom: 1.5rem;
-        }
-    </style>
 }
 
 @section PageFootContent {

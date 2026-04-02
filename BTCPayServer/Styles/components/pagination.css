@@ -1,0 +1,75 @@
+@layer components {
+    .pagination {
+        --btcpay-pagination-padding-x: var(--btcpay-space-s);
+        --btcpay-pagination-padding-y: var(--btcpay-space-s);
+        --btcpay-pagination-font-size: 0.875rem;
+        --btcpay-pagination-color: var(--btcpay-body-text-muted);
+        --btcpay-pagination-bg: var(--btcpay-body-bg);
+        --btcpay-pagination-border-width: var(--btcpay-border-width);
+        --btcpay-pagination-border-color: transparent;
+        --btcpay-pagination-border-radius: var(--btcpay-border-radius);
+        --btcpay-pagination-hover-color: var(--btcpay-body-text);
+        --btcpay-pagination-hover-bg: var(--btcpay-body-bg);
+        --btcpay-pagination-hover-border-color: transparent;
+        --btcpay-pagination-focus-color: var(--btcpay-body-text);
+        --btcpay-pagination-focus-bg: var(--btcpay-body-bg);
+        --btcpay-pagination-focus-box-shadow: none;
+        --btcpay-pagination-active-color: var(--btcpay-body-text-active);
+        --btcpay-pagination-active-bg: var(--btcpay-body-bg-active);
+        --btcpay-pagination-active-border-color: transparent;
+        --btcpay-pagination-disabled-color: var(--btcpay-body-text-muted);
+        --btcpay-pagination-disabled-bg: var(--btcpay-body-bg);
+        --btcpay-pagination-disabled-border-color: transparent;
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+    }
+    .page-link {
+        position: relative;
+        display: block;
+        padding: var(--btcpay-pagination-padding-y) var(--btcpay-pagination-padding-x);
+        font-size: var(--btcpay-pagination-font-size);
+        color: var(--btcpay-pagination-color);
+        background-color: var(--btcpay-pagination-bg);
+        border: var(--btcpay-pagination-border-width) solid var(--btcpay-pagination-border-color);
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .page-link:hover {
+        z-index: 2;
+        color: var(--btcpay-pagination-hover-color);
+        background-color: var(--btcpay-pagination-hover-bg);
+        border-color: var(--btcpay-pagination-hover-border-color);
+    }
+    .page-link:focus {
+        z-index: 3;
+        color: var(--btcpay-pagination-focus-color);
+        background-color: var(--btcpay-pagination-focus-bg);
+        outline: 0;
+        box-shadow: var(--btcpay-pagination-focus-box-shadow);
+    }
+    .page-link.active,
+    .active > .page-link {
+        z-index: 3;
+        color: var(--btcpay-pagination-active-color);
+        background-color: var(--btcpay-pagination-active-bg);
+        border-color: var(--btcpay-pagination-active-border-color);
+    }
+    .page-link.disabled,
+    .disabled > .page-link {
+        color: var(--btcpay-pagination-disabled-color);
+        pointer-events: none;
+        background-color: var(--btcpay-pagination-disabled-bg);
+        border-color: var(--btcpay-pagination-disabled-border-color);
+    }
+    .page-item:not(:first-child) .page-link {
+        margin-left: calc(var(--btcpay-border-width) * -1);
+    }
+    .page-item:first-child .page-link {
+        border-top-left-radius: var(--btcpay-pagination-border-radius);
+        border-bottom-left-radius: var(--btcpay-pagination-border-radius);
+    }
+    .page-item:last-child .page-link {
+        border-top-right-radius: var(--btcpay-pagination-border-radius);
+        border-bottom-right-radius: var(--btcpay-pagination-border-radius);
+    }
+}

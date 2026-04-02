@@ -36,14 +36,12 @@
   }
 
   p {
-    margin-bottom: 1.5rem;
+    @apply mb-6;
   }
 
   hr.primary {
-    width: 50px;
-    height: 3px;
+    @apply w-[50px] h-[3px] inline-block;
     background: var(--btcpay-primary);
-    display: inline-block;
   }
 
   .hide-when-js,
@@ -68,20 +66,19 @@
 
   @media (min-width: 768px) {
     .text-md-nowrap {
-      white-space: nowrap;
+      @apply whitespace-nowrap;
     }
     .smMaxWidth {
-      max-width: 300px;
+      @apply max-w-[300px];
     }
   }
 
   .smMaxWidth {
-    max-width: 150px;
+    @apply max-w-[150px];
   }
 
   a.unobtrusive-link {
-    color: inherit;
-    text-decoration: inherit;
+    @apply text-inherit no-underline;
   }
 
   [aria-expanded] > .icon-caret-down {
@@ -97,22 +94,20 @@
   [v-cloak] { display: none !important; }
 
   .list-group-item a:not(.btn) {
-    color: inherit;
+    @apply text-inherit;
   }
 
   .list-group-item .icon-caret-right {
-    flex: 0 0 24px;
-    height: 24px;
-    align-self: center;
+    @apply flex-[0_0_24px] h-6 self-center;
   }
 
   .content-wrapper {
-    padding: 50px 0;
+    @apply py-[50px];
   }
 
   @media screen and (min-width: 768px) {
     .content-wrapper {
-      padding: 75px 0;
+      @apply py-[75px];
     }
   }
 
@@ -121,13 +116,13 @@
     margin-top: .5rem;
   }
 
-  .no-marker > ul { list-style-type: none; padding-left: 0; }
+  .no-marker > ul { @apply list-none pl-0; }
   .profile-picture {
     @apply rounded-full object-cover;
     height: var(--profile-picture-size, 2.1rem);
     width: var(--profile-picture-size, 2.1rem);
   }
-  .switch-time-format { line-height: 1; }
+  .switch-time-format { @apply leading-none; }
 
   @media print {
     section,
@@ -346,9 +341,7 @@
   }
 
   .page-subtitle {
-    max-width: 36em;
-    margin: 1rem auto 2.5rem;
-    color: var(--btcpay-body-text-muted);
+    @apply max-w-[36em] mx-auto mt-4 mb-10 text-btcpay-body-text-muted;
   }
 
   .page-subtitle :last-child {
@@ -363,9 +356,7 @@
   }
 
   .th-muted-end {
-    font-weight: var(--btcpay-font-weight-normal);
-    color: var(--btcpay-body-text-muted);
-    text-align: end;
+    @apply font-btcpay-normal text-btcpay-body-text-muted text-end;
   }
 
   .tile-card,
@@ -380,14 +371,12 @@
   }
 
   .tile-section {
-    height: 100%;
-    margin: 0;
-    padding: 1rem;
+    @apply h-full m-0 p-4;
   }
 
   @media (min-width: 576px) {
     .tile-section {
-      padding: 3rem;
+      @apply p-12;
     }
   }
 

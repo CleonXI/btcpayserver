@@ -29,70 +29,8 @@
 <head>
     <partial name="LayoutHead"/>
     <link href="~/vendor/vue-qrcode-reader/vue-qrcode-reader.css" rel="stylesheet" asp-append-version="true"/>
-    <style>
-        .store-footer {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--btcpay-space-m);
-            margin-top: auto;
-            padding: 1.5rem 1.5rem 0;
-        }
-        .store-footer,
-        .store-footer a {
-            color: var(--btcpay-body-text-muted);
-        }
-        a.store-powered-by {
-            display: flex;
-            align-items: center;
-            gap: var(--btcpay-space-s);
-            transition-duration: unset;
-        }
-        a.store-powered-by svg {
-            height: 2rem;
-            width: 4rem;
-        }
-        .store-footer a:hover,
-        a.store-powered-by:hover {
-            color: var(--btcpay-body-text-hover);
-        }
-        a.store-powered-by:hover .logo-brand-light {
-            color: var(--btcpay-brand-secondary);
-        }
-        a.store-powered-by:hover .logo-brand-medium {
-            color: var(--btcpay-brand-primary);
-        }
-        a.store-powered-by:hover .logo-brand-dark {
-            color: var(--btcpay-brand-tertiary);
-        }
-        .badge {
-            --btcpay-badge-padding-x: 0.75em;
-            --btcpay-badge-padding-y: 0.5em;
-            --btcpay-badge-font-size: var(--btcpay-font-size-s);
-            --btcpay-badge-font-weight: var(--btcpay-font-weight-semibold);
-            --btcpay-badge-color: var(--btcpay-white);
-            --btcpay-badge-border-radius: var(--btcpay-border-radius);
-            display: inline-block;
-            padding: var(--btcpay-badge-padding-y) var(--btcpay-badge-padding-x);
-            font-size: var(--btcpay-badge-font-size);
-            font-weight: var(--btcpay-badge-font-weight);
-            line-height: 1;
-            color: var(--btcpay-badge-color);
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: baseline;
-            border-radius: var(--btcpay-badge-border-radius);
-        }
-        .badge:empty {
-            display: none;
-        }
-        .btcpay-header {
-            color: var(--btcpay-header-text);
-            background: var(--btcpay-header-bg);
-        }
-    </style>
 </head>
-<body class="min-h-screen">
+<body class="pull-payment-page min-h-screen">
     <div id="app" class="flex flex-col min-h-screen pb-l">
         @if (Model.IsPending)
         {

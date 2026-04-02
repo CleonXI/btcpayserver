@@ -1,0 +1,197 @@
+@layer components {
+    #event-selector {
+        display: none;
+    }
+
+    #Everything[data-value='false'] + #event-selector {
+        display: block;
+    }
+
+    @media screen {
+        .public-page-wrap {
+            --wrap-max-width: none;
+            --wrap-padding-vertical: var(--btcpay-space-l);
+            --wrap-padding-horizontal: var(--btcpay-space-m);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: var(--wrap-max-width);
+            margin: 0 auto;
+            padding: var(--wrap-padding-vertical) var(--wrap-padding-horizontal);
+            min-height: 100dvh;
+        }
+
+        .tile {
+            --tile-padding: 1.5rem;
+            --tile-border-radius: var(--btcpay-border-radius-l);
+            padding: var(--tile-padding);
+            background: var(--btcpay-bg-tile);
+            border-radius: var(--tile-border-radius);
+            box-shadow: var(--btcpay-box-shadow-lg);
+        }
+
+        .tile > :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        .public-page-wrap {
+            --wrap-padding-horizontal: 0;
+        }
+
+        .tile {
+            --tile-padding: 1rem;
+            --tile-border-radius: none;
+        }
+    }
+
+    .store-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--btcpay-space-s);
+    }
+
+    .store-logo {
+        --logo-size: 3rem;
+        --logo-bg: transparent;
+        --logo-radius: 0;
+        max-height: var(--logo-size);
+        background: var(--logo-bg);
+        border-radius: var(--logo-radius);
+    }
+
+    .store-name {
+        font-size: 1.3rem;
+    }
+
+    .store-footer,
+    .store-footer a {
+        color: var(--btcpay-body-text-muted);
+    }
+
+    a.store-powered-by {
+        transition-duration: unset;
+    }
+
+    .store-footer a:hover,
+    a.store-powered-by:hover {
+        color: var(--btcpay-body-text-hover);
+    }
+
+    a.store-powered-by:hover .logo-brand-light {
+        color: var(--btcpay-brand-secondary);
+    }
+
+    a.store-powered-by:hover .logo-brand-medium {
+        color: var(--btcpay-brand-primary);
+    }
+
+    a.store-powered-by:hover .logo-brand-dark {
+        color: var(--btcpay-brand-tertiary);
+    }
+
+    #FormView {
+        --wrap-max-width: 576px;
+    }
+
+    .flatpickr-wrapper {
+        flex-grow: 1;
+    }
+
+    body.plan-checkout-redirect {
+        background-color: var(--btcpay-body-bg);
+        color: var(--btcpay-body-text);
+    }
+
+    .success-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+    }
+
+    .success-card {
+        border-radius: 12px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        padding: 3rem;
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--btcpay-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    .success-icon i {
+        color: white;
+        font-size: 2rem;
+    }
+
+    .offering-card h6 {
+        font-weight: var(--btcpay-font-weight-semibold);
+        color: var(--btcpay-body-text-btcpay-body-text-muted);
+    }
+
+    .pull-payment-page .badge {
+        --btcpay-badge-padding-x: 0.75em;
+        --btcpay-badge-padding-y: 0.5em;
+        --btcpay-badge-font-size: var(--btcpay-font-size-s);
+        --btcpay-badge-font-weight: var(--btcpay-font-weight-semibold);
+        --btcpay-badge-color: var(--btcpay-white);
+        --btcpay-badge-border-radius: var(--btcpay-border-radius);
+        display: inline-block;
+        padding: var(--btcpay-badge-padding-y) var(--btcpay-badge-padding-x);
+        font-size: var(--btcpay-badge-font-size);
+        font-weight: var(--btcpay-badge-font-weight);
+        line-height: 1;
+        color: var(--btcpay-badge-color);
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: var(--btcpay-badge-border-radius);
+    }
+
+    .pull-payment-page .badge:empty {
+        display: none;
+    }
+
+    .btcpay-header {
+        color: var(--btcpay-header-text);
+        background: var(--btcpay-header-bg);
+    }
+
+    .pull-payments-list .tooltip-inner {
+        text-align: left;
+    }
+
+    .pull-payments-list .btn[data-clipboard] {
+        color: var(--btcpay-body-link);
+    }
+
+    .pull-payments-list .btn[data-clipboard]:hover {
+        color: var(--btcpay-body-link-accent);
+    }
+
+    #Payouts .badge.rounded-pill {
+        font-size: var(--btcpay-font-size-s);
+        color: inherit;
+    }
+}

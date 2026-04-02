@@ -15,22 +15,6 @@
         Model.Search.ContainsFilter(type) && (key is null || Model.Search.GetFilterArray(type).Contains(key));
 }
 
-@section PageHeadContent
-{
-    <style>
-        .dropdown > .btn {
-            min-width: 7rem;
-            padding-left: 1rem;
-            text-align: left;
-        }
-        @@media (max-width: 568px) {
-            #SearchText {
-                width: 100%;
-            }
-        }
-    </style>
-}
-
 <div class="sticky-header">
 	<h2 class="my-1">@ViewData["Title"]</h2>
     <a id="NotificationSettings" asp-controller="UIManage" asp-action="NotificationSettings" class="btn btn-secondary flex items-center">
@@ -206,21 +190,6 @@ else
         There are no notifications.
     </p>
 }
-
-<style>
-    .notification-row.loading {
-        cursor: wait;
-        pointer-events: none;
-    }
-
-    tr td {
-        font-weight: bold;
-    }
-
-    tr.seen td {
-        font-weight: normal;
-    }
-</style>
 
 @section PageFootContent {
     <script type="text/javascript">

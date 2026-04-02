@@ -1,8 +1,5 @@
 @model CheckoutModel
 
-<style>
-    #checkout-cheating form + form { margin-top: var(--btcpay-space-l); }
-</style>
 <main id="checkout-cheating" class="tile" v-cloak v-if="display">
     <section>
         <p id="CheatSuccessMessage" class="relative p-3 mb-4 border rounded text-[var(--btcpay-success-text)] bg-[var(--btcpay-success)] border-[var(--btcpay-success-border)] text-break" v-if="successMessage" v-text="successMessage"></p>

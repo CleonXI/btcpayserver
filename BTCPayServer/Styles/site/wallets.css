@@ -1,0 +1,125 @@
+@layer components {
+  .smMaxWidth {
+    max-width: 125px;
+  }
+
+  @media (min-width: 990px) {
+    .smMaxWidth {
+      max-width: 200px;
+    }
+  }
+
+  #LabelDropdownMenu {
+    max-height: 480px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  #LabelDropdownMenu #LabelSearchContainer .input-group:focus-within {
+    border-color: var(--btcpay-form-border-focus) !important;
+  }
+
+  #LabelDropdownMenu #LabelSearchContainer {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--btcpay-dropdown-bg);
+    border-bottom: var(--bs-border-width, 1px) solid var(--bs-border-color, rgba(0, 0, 0, .175));
+  }
+
+  #LabelDropdownMenu .label-filter-divider {
+    display: none;
+  }
+
+  #LabelDropdownMenu .label-filter-clear {
+    position: sticky;
+    bottom: 0;
+    background: var(--btcpay-dropdown-bg);
+    border-top: var(--bs-border-width, 1px) solid var(--bs-border-color, rgba(0, 0, 0, .175));
+  }
+
+  #LabelDropdownMenu .label-filter-clear .dropdown-item {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  #LabelDropdownMenu .label-filter-item .label-filter-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  #LabelDropdownMenu .label-filter-item .label-filter-count {
+    margin-left: auto;
+    text-align: right;
+    opacity: 0.75;
+  }
+
+  @media (min-width: 1200px) {
+    #Filter + #Dropdowns {
+      margin-top: -4rem;
+      float: right;
+    }
+
+    #Filter + #Dropdowns #Actions {
+      order: 1;
+    }
+  }
+
+  #LoadingIndicator {
+    margin-bottom: 1.5rem;
+  }
+
+  .crypto-fee-link {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .btn-group > .crypto-fee-link:last-of-type {
+    border-top-right-radius: .2rem !important;
+    border-bottom-right-radius: .2rem !important;
+  }
+
+  .buttons .btn {
+    flex: 1 0 45%;
+  }
+
+  #scanqrcode .icon {
+    margin-left: 0;
+  }
+
+  .nav-pills .nav-link.active {
+    color: var(--btcpay-secondary-text-active);
+    background-color: var(--btcpay-secondary-bg-active);
+  }
+
+  #coin-selection-app .btn-link {
+    --btcpay-btn-color: var(--btcpay-body-text-muted);
+  }
+
+  #coin-selection-app .btn-link:hover {
+    --btcpay-btn-color: var(--btcpay-body-link-accent);
+  }
+
+  #coin-selection-app .btn-link.active {
+    --btcpay-btn-active-color: var(--btcpay-body-link);
+  }
+
+  #reserved-addresses .table td,
+  #reserved-addresses .table th {
+    vertical-align: middle;
+  }
+
+  #reserved-addresses .btn-link.active {
+    --btcpay-btn-active-color: var(--btcpay-body-link);
+  }
+
+  #reserved-addresses .btn-link {
+    --btcpay-btn-color: var(--btcpay-body-text-muted);
+  }
+
+  #reserved-addresses .btn-link:hover {
+    --btcpay-btn-color: var(--btcpay-body-link-accent);
+  }
+}

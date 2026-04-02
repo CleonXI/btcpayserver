@@ -28,36 +28,6 @@
         </div>
     </div>
 
-    <style>
-        #syncModal {
-            --btcpay-modal-border-color: var(--btcpay-body-border-light);
-            --outer-margin-horizontal: var(--content-padding-horizontal);
-            --outer-margin-vertical: 50px;
-            display: unset;
-            z-index: 1040;
-            height: auto;
-            top: auto;
-            left: auto;
-            bottom: 0;
-            right: 0;
-            margin: var(--outer-margin-vertical) var(--outer-margin-horizontal);
-            width: 500px;
-            overflow: hidden;
-            max-width: calc(100% - var(--outer-margin-horizontal) * 2);
-        }
-        #syncModal .modal-dialog {
-            margin: 0;
-        }
-        #syncModal .modal-body {
-            /* 92px is so that the header is still displayed */
-            max-height: min(360px, calc(100vh - 92px - var(--outer-margin-vertical) * 2));
-            overflow-y: scroll;
-        }
-        #syncModal .modal-body ul {
-            padding-left: 2em;
-        }
-    </style>
-
     <script>
         const $syncModalContent = document.getElementById('syncModalContent');
         const $syncModal = document.getElementById('syncModal');
