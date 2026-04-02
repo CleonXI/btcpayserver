@@ -32,7 +32,7 @@
 }
 
 
-<div id="mainMenuHead">
+<div id="mainMenuHead" class="flex items-center justify-between">
     <button id="mainMenuToggle" class="mainMenuButton" type="button" data-bs-toggle="offcanvas" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
         <span>Menu</span>
     </button>
@@ -451,3 +451,116 @@
         if (activeEl) activeEl.scrollIntoView({ block: 'center', inline: 'center' })
     })()
 </script>
+<style>
+    #mainMenuHead .mainMenuButton {
+        --button-width: 40px;
+        --button-height: 40px;
+        --button-padding: 7px;
+        --icon-size: 1.5rem;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--button-width);
+        height: var(--button-height);
+        padding: var(--button-padding);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        color: var(--btcpay-body-text-muted);
+    }
+    #mainMenuToggle span {
+        display: block;
+        position: relative;
+        width: calc(var(--icon-size) - 4px);
+        height: 2px;
+        background: currentColor;
+        font-size: 0;
+        transition: background 0.2s;
+    }
+    #mainMenuToggle span::before,
+    #mainMenuToggle span::after {
+        content: '';
+        display: block;
+        width: var(--icon-size);
+        height: 2px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        background: currentColor;
+        transition-duration: 0.2s, 0.2s;
+        transition-delay: 0.2s, 0s;
+    }
+    #mainMenuToggle span::before {
+        top: -7px;
+        transition-property: top, transform;
+    }
+    #mainMenuToggle span::after {
+        bottom: -7px;
+        transition-property: bottom, transform;
+    }
+    #mainMenuToggle[aria-expanded="true"] span {
+        background: transparent;
+    }
+    #mainMenuToggle[aria-expanded="true"] span::before,
+    #mainMenuToggle[aria-expanded="true"] span::after {
+        transition-delay: 0s, 0.2s;
+    }
+    #mainMenuToggle[aria-expanded="true"] span::before {
+        top: 0;
+        transform: translateX(-50%) rotate(45deg);
+    }
+    #mainMenuToggle[aria-expanded="true"] span::after {
+        bottom: 0;
+        transform: translateX(-50%) rotate(-45deg);
+    }
+    #mainNav {
+        --btcpay-scrollbar-color: var(--btcpay-neutral-400);
+        overflow-y: auto;
+        padding-top: var(--btcpay-space-m);
+    }
+    #mainNavSettings {
+        margin-top: auto;
+    }
+    .navbar-brand,
+    .navbar-brand:hover,
+    .navbar-brand:focus {
+        color: inherit;
+    }
+    @@media (max-width: 991px) {
+        #mainMenuToggle {
+            order: -1;
+        }
+        #mainNav {
+            --menu-border: 1px solid var(--btcpay-body-border-light);
+            position: fixed;
+            top: var(--mobile-header-height);
+            bottom: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: calc(100vh - var(--mobile-header-height));
+            z-index: 1032;
+            background: var(--btcpay-header-bg);
+            color: var(--btcpay-header-text);
+            border-right: var(--menu-border);
+            transform: translateX(-100%);
+            transition: transform 0.2s ease-in-out;
+        }
+        #mainNav.show {
+            transform: translateX(0);
+        }
+    }
+    @@media (min-width: 992px) {
+        #mainMenuHead {
+            padding: var(--btcpay-space-m) var(--btcpay-space-l);
+            flex-wrap: wrap;
+        }
+        #mainMenuToggle {
+            display: none;
+        }
+        #mainNav {
+            height: calc(100vh - var(--desktop-header-height));
+        }
+    }
+</style>

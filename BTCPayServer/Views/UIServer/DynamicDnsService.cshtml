@@ -14,14 +14,14 @@
 <form method="post">
     <div class="sticky-header">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
+            <ol class="flex flex-wrap mb-[var(--btcpay-space-m)] list-none">
+                <li class="breadcrumb-chevron">
                     <a asp-action="Services" text-translate="true">Services</a>
                 </li>
-                <li class="breadcrumb-item">
+                <li class="breadcrumb-chevron">
                     <a asp-action="DynamicDnsService" text-translate="true">Dynamic DNS Settings</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+                <li class="breadcrumb-chevron" aria-current="page">@ViewData["Title"]</li>
             </ol>
             <h2>
                 <span>@ViewData["Title"]</span>

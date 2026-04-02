@@ -1,0 +1,145 @@
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-grow {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes progress-bar-stripes {
+  0% { background-position: 1rem 0; }
+  100% { background-position: 0 0; }
+}
+
+@utility min-w-date-col {
+  min-width: 8rem;
+}
+
+@utility max-w-input-12ch {
+  max-width: 12ch;
+}
+
+@utility max-w-input-10ch {
+  max-width: 10ch;
+}
+
+@utility max-w-input-14ch {
+  max-width: 14ch;
+}
+
+@utility max-w-input-16ch {
+  max-width: 16ch;
+}
+
+@utility max-w-logo {
+  max-width: 10.5rem;
+}
+
+@utility max-w-form-narrow {
+  max-width: 540px;
+}
+
+@utility h-logo {
+  height: 2.1rem;
+}
+
+@utility flex-row-gap-2 {
+  @apply flex items-center gap-2;
+}
+
+@utility flex-row-gap-4 {
+  @apply flex items-center gap-4;
+}
+
+@utility inline-flex-row-gap-2 {
+  @apply inline-flex items-center gap-2;
+}
+
+@utility inline-flex-row-gap-4 {
+  @apply inline-flex items-center gap-4;
+}
+
+@utility flex-between-gap-2 {
+  @apply flex items-center justify-between gap-2;
+}
+
+@utility progress-bar-striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+@utility progress-bar-animated {
+  animation: progress-bar-stripes 1s linear infinite;
+}
+
+.info .spinner-border {
+  width: var(--btcpay-font-size-s);
+  height: var(--btcpay-font-size-s);
+  color: var(--btcpay-body-text-muted);
+  margin-inline-end: var(--btcpay-space-xs);
+  animation-duration: 1s;
+}
+
+@utility spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: -0.125em;
+  border-radius: 50%;
+  border: 0.25em solid currentcolor;
+  border-right-color: transparent;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+@utility spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: 0.2em;
+}
+
+@utility spinner-grow {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: -0.125em;
+  border-radius: 50%;
+  background-color: currentcolor;
+  opacity: 0;
+  animation: spinner-grow 0.75s linear infinite;
+}
+
+@utility spinner-grow-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+@utility sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1021;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--btcpay-space-m);
+  align-items: center;
+  justify-content: space-between;
+  background: var(--btcpay-body-bg);
+  margin: calc(-1 * var(--content-padding-top)) calc(-1 * var(--content-padding-horizontal)) var(--btcpay-space-l);
+  padding: var(--btcpay-space-l) var(--content-padding-horizontal);
+}

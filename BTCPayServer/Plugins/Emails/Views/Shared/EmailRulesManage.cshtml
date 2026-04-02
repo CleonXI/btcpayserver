@@ -23,8 +23,8 @@
 <form id="save-form" method="post">
     <div class="sticky-header">
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
+            <ol class="flex flex-wrap mb-[var(--btcpay-space-m)] list-none">
+                <li class="breadcrumb-chevron">
                     @if (storeId is not null)
                     {
                         <a asp-controller="UIStoresEmail" asp-action="StoreEmailSettings" asp-route-storeId="@storeId" text-translate="true">Emails</a>
@@ -34,7 +34,7 @@
                         <a asp-controller="UIServerEmail" asp-action="ServerEmailSettings" text-translate="true">Server Emails</a>
                     }
                 </li>
-                <li class="breadcrumb-item">
+                <li class="breadcrumb-chevron">
                     @if (storeId is not null)
                     {
                         <a asp-action="StoreEmailRulesList" asp-route-storeId="@storeId" text-translate="true">Email Rules</a>
@@ -44,7 +44,7 @@
                         <a asp-action="ServerEmailRulesList" text-translate="true">Email Rules</a>
                     }
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">@ViewData.GetTitle()</li>
+                <li class="breadcrumb-chevron" aria-current="page">@ViewData.GetTitle()</li>
             </ol>
             <h2>@ViewData.GetTitle()</h2>
         </nav>

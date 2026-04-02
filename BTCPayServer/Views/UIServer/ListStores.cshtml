@@ -29,7 +29,7 @@
                         </a>
                         @if (store.Archived)
                         {
-                            <span class="badge bg-info ms-2" text-translate="true">archived</span>
+                            <span class="badge bg-btcpay-info ms-2" text-translate="true">archived</span>
                         }
                     </td>
                     <td>@store.Users.Count User@(store.Users.Count == 1 ? "" : "s")</td>
@@ -53,7 +53,7 @@
                                         <span class="badge bg-light">@user.StoreRoleId</span>
                                         @if (store.Archived)
                                         {
-                                            <span class="badge bg-info" text-translate="true">archived</span>
+                                            <span class="badge bg-btcpay-info" text-translate="true">archived</span>
                                         }
                                     </li>
                                 }

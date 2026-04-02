@@ -47,12 +47,160 @@
     <script src="~/payment-request/services/listener.js" asp-append-version="true"></script>
     <script src="~/modal/btcpay.js" asp-append-version="true"></script>
     <style>
+        @@media screen {
+            .public-page-wrap {
+                --wrap-max-width: none;
+                --wrap-padding-vertical: var(--btcpay-space-l);
+                --wrap-padding-horizontal: var(--btcpay-space-m);
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                max-width: var(--wrap-max-width);
+                margin: 0 auto;
+                padding: var(--wrap-padding-vertical) var(--wrap-padding-horizontal);
+                min-height: 100dvh;
+            }
+            .tile {
+                --tile-padding: 1.5rem;
+                --tile-border-radius: var(--btcpay-border-radius-l);
+                padding: var(--tile-padding);
+                background: var(--btcpay-bg-tile);
+                border-radius: var(--tile-border-radius);
+                box-shadow: var(--btcpay-box-shadow-lg);
+            }
+            .tile .buttons {
+                display: flex;
+                flex-direction: column;
+                gap: var(--btcpay-space-m);
+            }
+            .tile > :last-child {
+                margin-bottom: 0;
+            }
+        }
+        @@media screen and (max-width: 400px) {
+            .public-page-wrap {
+                --wrap-padding-horizontal: 0;
+            }
+            .tile {
+                --tile-padding: 1rem;
+                --tile-border-radius: none;
+            }
+        }
+        .store-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--btcpay-space-m);
+            margin-top: auto;
+            padding: 1.5rem 1.5rem 0;
+        }
+        .store-footer,
+        .store-footer a {
+            color: var(--btcpay-body-text-muted);
+        }
+        a.store-powered-by {
+            display: flex;
+            align-items: center;
+            gap: var(--btcpay-space-s);
+            transition-duration: unset;
+        }
+        a.store-powered-by svg {
+            height: 2rem;
+            width: 4rem;
+        }
+        .store-footer a:hover,
+        a.store-powered-by:hover {
+            color: var(--btcpay-body-text-hover);
+        }
+        a.store-powered-by:hover .logo-brand-light {
+            color: var(--btcpay-brand-secondary);
+        }
+        a.store-powered-by:hover .logo-brand-medium {
+            color: var(--btcpay-brand-primary);
+        }
+        a.store-powered-by:hover .logo-brand-dark {
+            color: var(--btcpay-brand-tertiary);
+        }
+        .badge {
+            --btcpay-badge-padding-x: 0.75em;
+            --btcpay-badge-padding-y: 0.5em;
+            --btcpay-badge-font-size: var(--btcpay-font-size-s);
+            --btcpay-badge-font-weight: var(--btcpay-font-weight-semibold);
+            --btcpay-badge-color: var(--btcpay-white);
+            --btcpay-badge-border-radius: var(--btcpay-border-radius);
+            display: inline-block;
+            padding: var(--btcpay-badge-padding-y) var(--btcpay-badge-padding-x);
+            font-size: var(--btcpay-badge-font-size);
+            font-weight: var(--btcpay-badge-font-weight);
+            line-height: 1;
+            color: var(--btcpay-badge-color);
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: var(--btcpay-badge-border-radius);
+        }
+        .badge:empty {
+            display: none;
+        }
+        .truncate-center {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--btcpay-space-s);
+            max-width: 100%;
+        }
+        .truncate-center--elastic .truncate-center-start {
+            flex: 0 1 auto;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .truncate-center-end,
+        .truncate-center-start {
+            white-space: nowrap;
+        }
+        .truncate-center-id {
+            font-family: var(--btcpay-font-monospace);
+            font-size: .875em;
+        }
+        .truncate-center-text {
+            word-wrap: break-word;
+        }
+        .truncate-center a,
+        .truncate-center button {
+            line-height: 1;
+        }
+        .truncate-center-truncated {
+            text-align: left;
+            display: inline-flex;
+            max-width: 100%;
+        }
+        .truncate-center button.btn .icon {
+            --icon-size: 1em;
+        }
+        .truncate-center--elastic .truncate-center-truncated {
+            max-width: 100%;
+        }
+        .truncate-center--elastic.truncate-center--copy .truncate-center-truncated {
+            max-width: calc(100% - 2em);
+        }
+        @@media screen {
+            .truncate-center-id {
+                background: var(--btcpay-neutral-100);
+                border: 1px solid var(--btcpay-neutral-200);
+                border-radius: var(--btcpay-border-radius-l);
+                padding: var(--btcpay-space-xs) var(--btcpay-space-s);
+            }
+            .truncate-center-text {
+                color: transparent;
+                position: absolute;
+                pointer-events: none;
+            }
+        }
         .invoice { margin-top: var(--btcpay-space-s); }
         .invoice + .invoice { margin-top: var(--btcpay-space-m); }
         .invoice .badge { font-size: var(--btcpay-font-size-s); }
         #app { --wrap-max-width: 720px; }
         #InvoiceDescription > :last-child { margin-bottom: 0; }
-
         @@media print {
             @* This is to avoid table header showing up twice: https://github.com/btcpayserver/btcpayserver/issues/4341 *@
             thead { display: table-row-group; }
@@ -117,11 +265,11 @@
                         }
                     </p>
                     <dl class="-mt-1 mb-6" v-if="srvModel.amountCollected > 0 && srvModel.amountDue > 0">
-                        <div class="progress bg-light flex mb-4 print:hidden h-progress-sm">
+                        <div class="flex mb-4 print:hidden h-[5px] overflow-hidden bg-[var(--btcpay-secondary-bg)] rounded-[var(--btcpay-border-radius)]">
                             @{
                                 var prcnt = Model.Amount == 0? 100:  Model.AmountCollected / Model.Amount * 100;
                             }
-                            <div class="progress-bar bg-primary" role="progressbar" style="width:@prcnt%" v-bind:style="{ width: (srvModel.amountCollected/srvModel.amount*100) + '%' }"></div>
+                            <div class="bg-[var(--btcpay-primary)] transition-[width] duration-[0.6s] ease-[ease]" role="progressbar" style="width:@prcnt%" v-bind:style="{ width: (srvModel.amountCollected/srvModel.amount*100) + '%' }"></div>
                         </div>
                         <div class="flex flex-wrap gap-4 items-center justify-between">
                             <div class="flex print:inline-block flex-col gap-1">

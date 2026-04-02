@@ -6,7 +6,7 @@
 @if (invoice.Overpaid)
 {
     var usedPaymentMethods = invoice.CryptoPayments.Count(p => p.Paid != null);
-    <p class="info-note text-warning">
+    <p class="info-note text-btcpay-warning">
         <vc:icon symbol="warning"/>
         <span text-translate="true">This invoice got overpaid.</span>
         @if (usedPaymentMethods > 1)

@@ -30,6 +30,131 @@
         </script>
     }
     <style>
+        @@media screen {
+            .public-page-wrap {
+                --wrap-max-width: none;
+                --wrap-padding-vertical: var(--btcpay-space-l);
+                --wrap-padding-horizontal: var(--btcpay-space-m);
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                max-width: var(--wrap-max-width);
+                margin: 0 auto;
+                padding: var(--wrap-padding-vertical) var(--wrap-padding-horizontal);
+                min-height: 100dvh;
+            }
+            .tile {
+                --tile-padding: 1.5rem;
+                --tile-border-radius: var(--btcpay-border-radius-l);
+                padding: var(--tile-padding);
+                background: var(--btcpay-bg-tile);
+                border-radius: var(--tile-border-radius);
+                box-shadow: var(--btcpay-box-shadow-lg);
+            }
+            .tile > :last-child {
+                margin-bottom: 0;
+            }
+        }
+        @@media screen and (max-width: 400px) {
+            .public-page-wrap {
+                --wrap-padding-horizontal: 0;
+            }
+            .tile {
+                --tile-padding: 1rem;
+                --tile-border-radius: none;
+            }
+        }
+        .store-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--btcpay-space-s);
+        }
+        .store-logo {
+            --logo-size: 3rem;
+            --logo-bg: transparent;
+            --logo-radius: 0;
+            max-height: var(--logo-size);
+            background: var(--logo-bg);
+            border-radius: var(--logo-radius);
+        }
+        .store-name {
+            font-size: 1.3rem;
+        }
+        .store-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--btcpay-space-m);
+            margin-top: auto;
+            padding: 1.5rem 1.5rem 0;
+        }
+        .store-footer,
+        .store-footer a {
+            color: var(--btcpay-body-text-muted);
+        }
+        a.store-powered-by {
+            display: flex;
+            align-items: center;
+            gap: var(--btcpay-space-s);
+            transition-duration: unset;
+        }
+        a.store-powered-by svg {
+            height: 2rem;
+            width: 4rem;
+        }
+        .store-footer a:hover,
+        a.store-powered-by:hover {
+            color: var(--btcpay-body-text-hover);
+        }
+        .truncate-center {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--btcpay-space-s);
+            max-width: 100%;
+        }
+        .truncate-center--elastic .truncate-center-start {
+            flex: 0 1 auto;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .truncate-center-end,
+        .truncate-center-start {
+            white-space: nowrap;
+        }
+        .truncate-center-id {
+            font-family: var(--btcpay-font-monospace);
+            font-size: .875em;
+        }
+        .truncate-center-text {
+            word-wrap: break-word;
+        }
+        .truncate-center a,
+        .truncate-center button {
+            line-height: 1;
+        }
+        .truncate-center-truncated {
+            text-align: left;
+            display: inline-flex;
+            max-width: 100%;
+        }
+        .truncate-center button.btn .icon {
+            --icon-size: 1em;
+        }
+        @@media screen {
+            .truncate-center-id {
+                background: var(--btcpay-neutral-100);
+                border: 1px solid var(--btcpay-neutral-200);
+                border-radius: var(--btcpay-border-radius-l);
+                padding: var(--btcpay-space-xs) var(--btcpay-space-s);
+            }
+            .truncate-center-text {
+                color: transparent;
+                position: absolute;
+                pointer-events: none;
+            }
+        }
         #InvoiceReceipt { --wrap-max-width: 768px; }
         #InvoiceSummary { gap: var(--btcpay-space-l); }
         #PaymentDetails table tbody tr:first-child td { padding-top: 1rem; }

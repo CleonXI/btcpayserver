@@ -6,6 +6,219 @@
     var store = ViewContext.HttpContext.GetStoreDataOrNull();
 }
 
+@section PageHeadContent {
+    <style>
+        #Dashboard {
+            display: grid;
+            gap: var(--btcpay-space-m);
+            grid-template-columns: repeat(12, 1fr);
+        }
+        .widget {
+            --widget-padding: var(--btcpay-space-m);
+            --widget-chart-width: 100vw;
+            border: 1px solid var(--btcpay-body-border-light);
+            border-radius: var(--btcpay-border-radius-l);
+            padding: var(--widget-padding);
+            background: var(--btcpay-bg-tile);
+            grid-column-start: 1;
+            grid-column-end: 13;
+        }
+        .widget header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--btcpay-space-s);
+            gap: var(--btcpay-space-s);
+            line-height: 1.2;
+        }
+        .widget header a,
+        .widget header .btn-link {
+            margin-top: 0;
+            font-weight: var(--btcpay-font-weight-semibold);
+        }
+        .widget h3,
+        .widget .h3 {
+            margin-bottom: 0;
+        }
+        .widget h6,
+        .widget .h6 {
+            font-weight: var(--btcpay-font-weight-semibold);
+            color: var(--btcpay-body-text-muted);
+            margin-bottom: 0;
+        }
+        .widget .currency-toggle .btn {
+            background-color: var(--btcpay-bg-tile);
+            border-color: var(--btcpay-body-border-light);
+        }
+        .widget .currency-toggle input:not(:checked) + .btn {
+            color: var(--btcpay-body-text-muted);
+        }
+        .widget .btn-group {
+            display: inline-flex;
+            gap: var(--btcpay-space-m);
+            align-items: center;
+            justify-content: space-between;
+        }
+        .widget .btn-link {
+            color: var(--btcpay-body-text-muted);
+            padding: 0;
+            font-weight: var(--btcpay-font-weight-semibold);
+            box-shadow: none;
+            text-decoration: none;
+        }
+        .widget input:checked + .btn-link {
+            color: var(--btcpay-body-link-accent);
+        }
+        .widget.store-lightning-balance .balances {
+            gap: 1.5rem 2.25rem;
+        }
+        .widget.store-lightning-services .services-list {
+            gap: var(--btcpay-space-m);
+        }
+        .widget.store-lightning-services .services-list .service {
+            --service-width: 3rem;
+        }
+        .widget.store-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: var(--btcpay-space-l) var(--btcpay-space-xl);
+        }
+        .widget.store-numbers header {
+            justify-content: space-between;
+        }
+        .widget.store-numbers header h6 {
+            margin-right: var(--btcpay-space-s);
+        }
+        .widget .store-number {
+            flex: 0 1 calc(50% - var(--btcpay-space-xl) / 2);
+        }
+        .widget *:not([class*='table-responsive']) > .table {
+            margin-left: -.5rem;
+            margin-right: -.5rem;
+            width: calc(100% + 1rem);
+        }
+        .widget .table th {
+            color: var(--btcpay-body-text-muted);
+            font-weight: var(--btcpay-font-weight-semibold);
+        }
+        .widget.app-top-items .ct-chart,
+        .widget.app-top-items .ct-chart .ct-chart-bar {
+            height: 30px;
+        }
+        .widget.app-top-items .ct-chart .ct-chart-bar {
+            margin-left: -.4rem;
+            margin-right: -.5rem;
+            width: calc(100% + 1rem) !important;
+        }
+        .widget.app-top-items .ct-bar {
+            stroke-linecap: round;
+            stroke-width: 10px;
+        }
+        .widget.app-top-items .ct-grids,
+        .widget.app-top-items .ct-labels {
+            display: none;
+        }
+        .widget.app-top-items .app-items {
+            display: flex;
+            flex-direction: column;
+            gap: var(--btcpay-space-s);
+        }
+        .widget.app-top-items .app-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--btcpay-space-xs);
+            align-items: center;
+            justify-content: space-between;
+        }
+        .widget.app-top-items .app-item-point {
+            display: inline-block;
+            width: var(--btcpay-space-s);
+            height: var(--btcpay-space-s);
+            margin-right: var(--btcpay-space-s);
+            border-radius: 50%;
+        }
+        .widget.app-top-items .app-item-value {
+            font-weight: var(--btcpay-font-weight-semibold);
+        }
+        @@media (max-width: 575.98px) {
+            .widget.store-lightning-services .services-list .service {
+                --service-width: 3rem;
+            }
+            .widget .store-number {
+                flex: 0 1 100%;
+            }
+        }
+        @@media (min-width: 576px) {
+            .widget {
+                --widget-padding: var(--btcpay-space-l);
+            }
+        }
+        @@media (min-width: 576px) and (max-width: 1199.98px) {
+            .widget.store-lightning-services .services-list {
+                gap: 1.5rem;
+            }
+            .widget.store-lightning-services .services-list .service {
+                --service-width: 4rem;
+            }
+        }
+        @@media (max-width: 1199.98px) {
+            .widget.store-wallet-balance {
+                order: -3;
+            }
+            .widget.store-lightning-balance {
+                order: -2;
+            }
+            .widget.store-lightning-services {
+                order: -1;
+            }
+        }
+        @@media (min-width: 1200px) {
+            .widget.app-sales,
+            .widget.setup-guide,
+            .widget.store-wallet-balance,
+            .widget.store-lightning-balance {
+                --widget-chart-width: 80vw;
+                grid-column-start: 1;
+                grid-column-end: 9;
+            }
+            .widget.store-lightning-services,
+            .widget.app-top-items,
+            .widget.store-numbers {
+                grid-column-start: 9;
+                grid-column-end: 13;
+            }
+            .widget.store-numbers {
+                flex-direction: column;
+                justify-content: start;
+            }
+            .widget .store-number {
+                flex: 0 1;
+                width: 100%;
+            }
+            .widget.store-numbers header {
+                justify-content: space-between;
+            }
+            .widget.store-numbers header h6 {
+                margin-right: 0;
+            }
+        }
+        #SetupGuide {
+            max-width: 30em;
+        }
+        #SetupGuide .list-group-item .icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin: 1rem;
+        }
+        #SetupGuide .list-group-item .content {
+            flex: 1;
+            padding: 1rem 0;
+        }
+    </style>
+}
+
 <partial name="_StatusMessage" />
 
 @if (Model.IsSetUp)

@@ -124,12 +124,12 @@
                     </td>
                     <td>@pp.AutoApproveClaims</td>
                     <td class="align-middle">
-                        <div class="progress ppProgress" data-pp="@pp.Id" data-bs-toggle="tooltip" data-bs-html="true">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="@pp.Progress.CompletedPercent"
-                                 aria-valuemin="0" aria-valuemax="100" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:@(pp.Progress.CompletedPercent)%;">
+                        <div class="flex h-4 overflow-hidden text-[0.65625rem] bg-[var(--btcpay-secondary-bg)] rounded-[var(--btcpay-border-radius)] ppProgress" data-pp="@pp.Id" data-bs-toggle="tooltip" data-bs-html="true">
+                            <div class="flex flex-col justify-center overflow-hidden text-[var(--btcpay-white)] text-center whitespace-nowrap bg-[var(--btcpay-primary)] transition-[width] duration-[0.6s] ease-[ease]" role="progressbar" aria-valuenow="@pp.Progress.CompletedPercent"
+                                 aria-valuemin="0" aria-valuemax="100" style="text-overflow: ellipsis; width:@(pp.Progress.CompletedPercent)%;">
                             </div>
-                            <div class="progress-bar" role="progressbar" aria-valuenow="@pp.Progress.AwaitingPercent"
-                                 aria-valuemin="0" aria-valuemax="100" style="background-color:orange; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width:@(pp.Progress.AwaitingPercent)%;">
+                            <div class="flex flex-col justify-center overflow-hidden text-[var(--btcpay-white)] text-center whitespace-nowrap bg-[var(--btcpay-primary)] transition-[width] duration-[0.6s] ease-[ease]" role="progressbar" aria-valuenow="@pp.Progress.AwaitingPercent"
+                                 aria-valuemin="0" aria-valuemax="100" style="background-color:orange; text-overflow: ellipsis; width:@(pp.Progress.AwaitingPercent)%;">
                             </div>
                         </div>
                     </td>

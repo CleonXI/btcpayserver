@@ -82,7 +82,7 @@
                         <span class="user-email">@user.Email</span>
                         @foreach (var role in user.Roles)
                         {
-                            <span class="badge bg-info">@Model.Roles[role]</span>
+                            <span class="badge bg-btcpay-info">@Model.Roles[role]</span>
                         }
                     </div>
                 </td>
@@ -146,7 +146,7 @@
                                         <span class="badge bg-light">@store.StoreRoleId</span>
                                         @if (store.StoreData.Archived)
                                         {
-                                            <span class="badge bg-info" text-translate="true">archived</span>
+                                            <span class="badge bg-btcpay-info" text-translate="true">archived</span>
                                         }
                                     </li>
                                 }

@@ -70,8 +70,8 @@
         @if (!line.Status.IsFullySynched && line.Status.BitcoinStatus != null)
         {
             var percent = (int)(line.Status.BitcoinStatus.VerificationProgress * 100);
-            <div class="progress mb-4">
-                <div class="progress-bar" role="progressbar" aria-valuenow="@percent"
+            <div class="flex h-4 overflow-hidden text-[0.65625rem] bg-[var(--btcpay-secondary-bg)] rounded-[var(--btcpay-border-radius)] mb-4">
+                <div class="flex flex-col justify-center overflow-hidden text-[var(--btcpay-white)] text-center whitespace-nowrap bg-[var(--btcpay-primary)] transition-[width] duration-[0.6s] ease-[ease]" role="progressbar" aria-valuenow="@percent"
                      aria-valuemin="0" aria-valuemax="100" style="width:@(percent)%">
                     @percent %
                 </div>

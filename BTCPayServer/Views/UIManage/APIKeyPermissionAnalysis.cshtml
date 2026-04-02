@@ -9,11 +9,11 @@
 
 <div class="sticky-header">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+        <ol class="flex flex-wrap mb-[var(--btcpay-space-m)] list-none">
+            <li class="breadcrumb-chevron">
                 <a asp-action="APIKeys" text-translate="true">API Keys</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+            <li class="breadcrumb-chevron" aria-current="page">@ViewData["Title"]</li>
         </ol>
         <h2>@ViewData["Title"]</h2>
     </nav>
@@ -28,8 +28,8 @@
                     <i class="bi bi-key fs-5 text-btcpay-body-text-muted"></i>
                 </div>
                 <div class="display-6 font-bold mb-2">@Model.TotalPermissions</div>
-                <div class="progress" style="height:4px">
-                    <div class="progress-bar" style="width:100%"></div>
+                <div class="flex h-[4px] overflow-hidden bg-[var(--btcpay-secondary-bg)] rounded-[var(--btcpay-border-radius)]">
+                    <div class="bg-[var(--btcpay-primary)] transition-[width] duration-[0.6s] ease-[ease]" style="width:100%"></div>
                 </div>
             </div>
         </div>
@@ -43,8 +43,8 @@
                 </div>
                 <div class="display-6 font-bold mb-1">@Model.UsedPermissions.Count</div>
                 <div class="small text-btcpay-body-text-muted mb-2">@usedPermissionsPercentage% of total</div>
-                <div class="progress" style="height:4px">
-                    <div class="progress-bar" style="width:@usedPermissionsPercentage%"></div>
+                <div class="flex h-[4px] overflow-hidden bg-[var(--btcpay-secondary-bg)] rounded-[var(--btcpay-border-radius)]">
+                    <div class="bg-[var(--btcpay-primary)] transition-[width] duration-[0.6s] ease-[ease]" style="width:@usedPermissionsPercentage%"></div>
                 </div>
             </div>
         </div>
@@ -58,8 +58,8 @@
                 </div>
                 <div class="display-6 font-bold mb-1">@Model.UnusedPermissions.Count</div>
                 <div class="small text-btcpay-body-text-muted mb-2">@(100 - usedPermissionsPercentage)% of total</div>
-                <div class="progress" style="height:4px">
-                    <div class="progress-bar" style="width:@(100 - usedPermissionsPercentage)%"></div>
+                <div class="flex h-[4px] overflow-hidden bg-[var(--btcpay-secondary-bg)] rounded-[var(--btcpay-border-radius)]">
+                    <div class="bg-[var(--btcpay-primary)] transition-[width] duration-[0.6s] ease-[ease]" style="width:@(100 - usedPermissionsPercentage)%"></div>
                 </div>
             </div>
         </div>
@@ -132,7 +132,7 @@
                                     <td>
                                         @if (!isUsed)
                                         {
-                                            <span class="badge bg-secondary" text-translate="true">Never Used</span>
+                                            <span class="badge bg-btcpay-secondary" text-translate="true">Never Used</span>
                                         }
                                         else if (isStale)
                                         {
@@ -140,7 +140,7 @@
                                         }
                                         else
                                         {
-                                            <span class="badge bg-success" text-translate="true">Active</span>
+                                            <span class="badge bg-btcpay-success" text-translate="true">Active</span>
                                         }
                                     </td>
                                 </tr>
@@ -184,7 +184,7 @@
                                         }
                                         else
                                         {
-                                            <span class="badge bg-success" text-translate="true">Active</span>
+                                            <span class="badge bg-btcpay-success" text-translate="true">Active</span>
                                         }
                                     </td>
                                 </tr>
@@ -216,7 +216,7 @@
                             {
                                 <tr>
                                     <td><code>@permission</code></td>
-                                    <td><span class="badge bg-secondary" text-translate="true">Never Used</span></td>
+                                    <td><span class="badge bg-btcpay-secondary" text-translate="true">Never Used</span></td>
                                 </tr>
                             }
                         </tbody>

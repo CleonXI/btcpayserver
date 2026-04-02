@@ -10,11 +10,11 @@
 
 <div class="sticky-header">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+        <ol class="flex flex-wrap mb-[var(--btcpay-space-m)] list-none">
+            <li class="breadcrumb-chevron">
                 <a asp-action="GetPaymentRequests" asp-controller="UIPaymentRequest" asp-route-storeId="@Model.StoreId" text-translate="true">Payment Requests</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Labels</li>
+            <li class="breadcrumb-chevron" aria-current="page">Labels</li>
         </ol>
         <h2>@ViewData["Title"]</h2>
     </nav>

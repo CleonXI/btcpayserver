@@ -6,14 +6,14 @@
 
 <div class="sticky-header">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+        <ol class="flex flex-wrap mb-[var(--btcpay-space-m)] list-none">
+            <li class="breadcrumb-chevron">
                 <a asp-action="Files" text-translate="true">Files</a>
             </li>
-            <li class="breadcrumb-item">
+            <li class="breadcrumb-chevron">
                 <a asp-action="Storage" text-translate="true">Storage Provider</a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page" text-translate="true">Provider</li>
+            <li class="breadcrumb-chevron" aria-current="page" text-translate="true">Provider</li>
         </ol>
         <h2>@ViewData["Title"]</h2>
     </nav>
