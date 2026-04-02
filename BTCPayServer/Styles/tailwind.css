@@ -4780,6 +4780,11 @@
     --btcpay-spinner-border-width: 0.2em;
   }
 
+  .spinner-grow-sm {
+    --btcpay-spinner-width: 1rem;
+    --btcpay-spinner-height: 1rem;
+  }
+
   .toast {
     --btcpay-toast-zindex: 1090;
     --btcpay-toast-padding-x: 0.75rem;
