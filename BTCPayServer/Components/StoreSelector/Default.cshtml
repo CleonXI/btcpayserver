@@ -31,8 +31,8 @@ else
 @if (Model.Options.Any() || Model.ArchivedCount > 0)
 {
     <div id="StoreSelector" class="flex items-center flex-1" style="z-index: 2000;">
-        <div id="StoreSelectorDropdown" class="dropdown only-for-js">
-            <button id="StoreSelectorToggle" class="btn btn-secondary dropdown-toggle rounded-full px-4 @(Model.CurrentStoreId == null ? "empty-state" : "")" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div id="StoreSelectorDropdown" class="dropdown only-for-js" x-data="btcDropdown">
+            <button id="StoreSelectorToggle" class="btn btn-secondary dropdown-toggle rounded-full px-4 @(Model.CurrentStoreId == null ? "empty-state" : "")" type="button" @@click="toggle()" :aria-expanded="isOpen">
                 @if (!string.IsNullOrEmpty(Model.CurrentStoreLogoUrl))
                 {
                     <img class="logo" src="@Model.CurrentStoreLogoUrl" alt="@Model.CurrentDisplayName" />
@@ -44,7 +44,7 @@ else
                 <span>@(Model.CurrentStoreId == null ? StringLocalizer["Select Store"] : Model.CurrentDisplayName)</span>
                 <vc:icon symbol="caret-down"/>
             </button>
-            <ul id="StoreSelectorMenu" class="dropdown-menu" aria-labelledby="StoreSelectorToggle">
+            <ul id="StoreSelectorMenu" class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition aria-labelledby="StoreSelectorToggle">
                 @foreach (var option in Model.Options)
                 {
                     <li>

@@ -241,20 +241,20 @@
                     {
                         <span v-if="srvModel.resetEvery !== 'Never'"
                               class="h5 ms-2"
-                              data-bs-toggle="tooltip"
+                              x-data x-tooltip="'Goal resets every ' + srvModel.resetEveryAmount + ' ' + srvModel.resetEvery + ((srvModel.resetEveryAmount>1)?'s': '')"
                               :title="'Goal resets every ' + srvModel.resetEveryAmount + ' ' + srvModel.resetEvery + ((srvModel.resetEveryAmount>1)?'s': '')" text-translate="true">
                             Dynamic
                         </span>
                     }
                     @if (Model.EnforceTargetAmount)
                     {
-                        <span v-if="srvModel.enforceTargetAmount" class="h5 ms-2" data-bs-toggle="tooltip" title=@StringLocalizer["No contributions allowed after the goal has been reached"] text-translate="true">
+                        <span v-if="srvModel.enforceTargetAmount" class="h5 ms-2" x-data x-tooltip="'@StringLocalizer["No contributions allowed after the goal has been reached"]'" title=@StringLocalizer["No contributions allowed after the goal has been reached"] text-translate="true">
                             Hardcap Goal
                         </span>
                     }
                     else
                     {
-                        <span v-if="!srvModel.enforceTargetAmount" class="h5 ms-2" data-bs-toggle="tooltip" title=@StringLocalizer["Contributions allowed even after goal is reached"] text-translate="true">
+                        <span v-if="!srvModel.enforceTargetAmount" class="h5 ms-2" x-data x-tooltip="'@StringLocalizer["Contributions allowed even after goal is reached"]'" title=@StringLocalizer["Contributions allowed even after goal is reached"] text-translate="true">
                             Softcap Goal
                         </span>
                     }
@@ -262,19 +262,19 @@
             }
             @if (!Model.Started && Model.StartDate.HasValue)
             {
-                <h6 class="text-btcpay-body-text-muted fst-italic mt-4" v-if="!started && srvModel.startDate" data-bs-toggle="tooltip" :title="startDate" v-text="`Starts in ${startDiff}`" data-test="time-state">
+                <h6 class="text-btcpay-body-text-muted fst-italic mt-4" v-if="!started && srvModel.startDate" x-data x-tooltip="startDate" :title="startDate" v-text="`Starts in ${startDiff}`" data-test="time-state">
                     @StringLocalizer["Starts {0}", TimeZoneInfo.ConvertTimeFromUtc(Model.StartDate.Value, TimeZoneInfo.Local)]
                 </h6>
             }
             else if (Model.Started && !Model.Ended && Model.EndDate.HasValue)
             {
-                <h6 class="text-btcpay-body-text-muted fst-italic mt-4" v-if="started && !ended && srvModel.endDate" data-bs-toggle="tooltip" :title="endDate" v-text="`Ends in ${endDiff}`" data-test="time-state">
+                <h6 class="text-btcpay-body-text-muted fst-italic mt-4" v-if="started && !ended && srvModel.endDate" x-data x-tooltip="endDate" :title="endDate" v-text="`Ends in ${endDiff}`" data-test="time-state">
                     @StringLocalizer["Ends {0}", TimeZoneInfo.ConvertTimeFromUtc(Model.EndDate.Value, TimeZoneInfo.Local)]
                 </h6>
             }
             else if (Model.Started && !Model.Ended && !Model.EndDate.HasValue)
             {
-                <h6 class="text-btcpay-body-text-muted fst-italic mt-4" v-if="started && !ended && !srvModel.endDate" data-bs-toggle="tooltip" title="No set end date" data-test="time-state" text-translate="true">
+                <h6 class="text-btcpay-body-text-muted fst-italic mt-4" v-if="started && !ended && !srvModel.endDate" x-data x-tooltip="'No set end date'" title="No set end date" data-test="time-state" text-translate="true">
                     Currently active!
                 </h6>
             }
@@ -290,7 +290,7 @@
                      v-bind:style="{ width: srvModel.info.progressPercentage + '%' }"
                      aria-valuemin="0"
                      id="crowdfund-progress-bar-confirmed-bar"
-                     data-bs-toggle="tooltip"
+                     x-data x-tooltip="parseFloat(srvModel.info.progressPercentage).toFixed(2) + '% contributions'"
                      :title="parseFloat(srvModel.info.progressPercentage).toFixed(2) + '% contributions'"
                      aria-valuemax="100">
                 </div>
@@ -300,7 +300,7 @@
                      style="width:@(Model.Info.PendingProgressPercentage + "%")"
                      :aria-valuenow="srvModel.info.pendingProgressPercentage"
                      v-bind:style="{ width: srvModel.info.pendingProgressPercentage + '%' }"
-                     data-bs-toggle="tooltip"
+                     x-data x-tooltip="parseFloat(srvModel.info.pendingProgressPercentage).toFixed(2) + '% contributions pending confirmation'"
                      :title="parseFloat(srvModel.info.pendingProgressPercentage).toFixed(2) + '% contributions pending confirmation'"
                      aria-valuemin="0"
                      aria-valuemax="100">
@@ -411,12 +411,12 @@
                 </div>
             </div>
         </noscript>
-        <div class="modal fade" id="contributeModal" tabindex="-1" aria-labelledby="contributeModalLabel" aria-hidden="true" ref="modalContribute">
+        <div class="modal" id="contributeModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" aria-labelledby="contributeModalLabel" ref="modalContribute">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="contributeModalLabel" text-translate="true">Contribute</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@StringLocalizer["Close"]"></button>
+                        <button type="button" class="btn-close" @@click="close()" aria-label="@StringLocalizer["Close"]"></button>
                     </div>
                     <div class="modal-body">
                         <contribute v-if="contributeModalOpen"
@@ -428,7 +428,7 @@
                         </contribute>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@StringLocalizer["Close"]</button>
+                        <button type="button" class="btn btn-secondary" @@click="close()">@StringLocalizer["Close"]</button>
                     </div>
                 </div>
             </div>

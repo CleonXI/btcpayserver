@@ -25,10 +25,11 @@
     </style>
 }
 
+<div x-data="{ expanded: false }">
 <div class="sticky-header">
     <h2>
         @ViewData["Title"]
-        <a href="#descriptor" data-bs-toggle="collapse">
+        <a href="#descriptor" @@click.prevent="expanded = !expanded">
             <vc:icon symbol="info" />
         </a>
     </h2>
@@ -37,16 +38,17 @@
     </a>
 </div>
 
-<div id="descriptor" class="collapse">
+<div id="descriptor" x-show="expanded" x-collapse>
     <div class="tile-card">
         <div class="flex-1">
             <p class="mb-4" text-translate="true">Pull Payments allow receivers to claim specified funds from your wallet at their convenience. Once submitted and approved, the funds will be released.</p>
             <a href="https://docs.btcpayserver.org/PullPayments/" target="_blank" rel="noreferrer noopener" text-translate="true">Learn More</a>
         </div>
-        <button type="button" class="btn-close ms-auto" data-bs-toggle="collapse" data-bs-target="#descriptor" aria-expanded="false" aria-label="@StringLocalizer["Close"]">
+        <button type="button" class="btn-close ms-auto" @@click="expanded = false" aria-expanded="false" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close" />
         </button>
     </div>
+</div>
 </div>
 
 <partial name="_StatusMessage" />
@@ -124,7 +126,7 @@
                     </td>
                     <td>@pp.AutoApproveClaims</td>
                     <td class="align-middle">
-                        <div class="flex h-4 overflow-hidden text-[0.65625rem] bg-[var(--btcpay-secondary-bg)] rounded-[var(--btcpay-border-radius)] ppProgress" data-pp="@pp.Id" data-bs-toggle="tooltip" data-bs-html="true">
+                        <div class="flex h-4 overflow-hidden text-[0.65625rem] bg-[var(--btcpay-secondary-bg)] rounded-[var(--btcpay-border-radius)] ppProgress" data-pp="@pp.Id" x-data x-tooltip data-bs-html="true">
                             <div class="flex flex-col justify-center overflow-hidden text-[var(--btcpay-white)] text-center whitespace-nowrap bg-[var(--btcpay-primary)] transition-[width] duration-[0.6s] ease-[ease]" role="progressbar" aria-valuenow="@pp.Progress.CompletedPercent"
                                  aria-valuemin="0" aria-valuemax="100" style="text-overflow: ellipsis; width:@(pp.Progress.CompletedPercent)%;">
                             </div>
@@ -163,8 +165,7 @@
                                    permission="@Policies.CanArchivePullPayments"
                                    asp-route-storeId="@storeId"
                                    asp-route-pullPaymentId="@pp.Id"
-                                   data-bs-toggle="modal"
-                                   data-bs-target="#ConfirmModal"
+                                   onclick="openModal('#ConfirmModal', this); return false;"
                                    data-description="Do you really want to archive the pull payment <strong>@Html.Encode(pp.Name)</strong>?"
                                    text-translate="true">
                                     Archive

@@ -1,6 +1,6 @@
 @using BTCPayServer.Plugins.Emails
 <div class="alert alert-warning alert-dismissible">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@StringLocalizer["Close"]">
+    <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
         <vc:icon symbol="close" />
     </button>
     <span text-translate="true">The Email settings have not been configured on this server or store yet. Setting this field will not send emails until then.</span>

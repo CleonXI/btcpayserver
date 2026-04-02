@@ -20,7 +20,7 @@
 @if (Model.ShowQR)
 {
     <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@StringLocalizer["Close"]">
+        <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close" />
         </button>
         <span text-translate="true">CONFIDENTIAL: This QR Code is confidential, close this window as soon as you don't need it anymore.</span>

@@ -24,7 +24,7 @@
                         <vc:icon symbol="pos-cart" />
                         <span id="CartBadge" class="badge rounded-full bg-btcpay-danger p-1 ms-1" v-text="cartCount" v-if="cartCount !== 0"></span>
                     </button>
-                    <button type="button" class="btn btn-link p-1" data-bs-toggle="modal" data-bs-target="#RecentTransactions" id="RecentTransactionsToggle" permission="@Policies.CanViewInvoices">
+                    <button type="button" class="btn btn-link p-1" onclick="openModal('#RecentTransactions', this)" id="RecentTransactionsToggle" permission="@Policies.CanViewInvoices">
                         <vc:icon symbol="nav-invoice"/>
                     </button>
                 </div>

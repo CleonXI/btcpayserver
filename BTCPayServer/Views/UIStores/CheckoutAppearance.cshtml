@@ -106,11 +106,11 @@
 
 			<h3 class="mb-4 flex gap-4 items-center">
 				<span text-translate="true">Checkout</span>
-				<div id="Presets" name="Presets" class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle btn-sm px-4" type="button" id="ActionsDropdownToggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" text-translate="true">
+				<div id="Presets" name="Presets" class="dropdown" x-data="btcDropdown">
+					<button class="btn btn-secondary dropdown-toggle btn-sm px-4" type="button" id="ActionsDropdownToggle" @@click="toggle()" aria-haspopup="true" :aria-expanded="isOpen" text-translate="true">
 						Select a preset
 					</button>
-					<div class="dropdown-menu" aria-labelledby="ActionsDropdownToggle">
+					<div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition aria-labelledby="ActionsDropdownToggle">
 						<div id="Presets_Online" class="btcpay-list-select-item dropdown-item">
 							<vc:icon symbol="pos-cart" />
 							<span text-translate="true">Online</span>
@@ -142,12 +142,12 @@
                         <label asp-for="CelebratePayment" class="form-check-label"></label>
                     </div>
                 </div>
-                <div class="my-4">
+                <div class="my-4" x-data="{ expanded: @(Model.PlaySoundOnPayment ? "true" : "false") }">
                     <div class="flex">
-                        <input asp-for="PlaySoundOnPayment" type="checkbox" class="btcpay-toggle me-4" data-bs-toggle="collapse" data-bs-target="#PlaySoundOnPaymentOptions" aria-expanded="@Model.PlaySoundOnPayment" aria-controls="PlaySoundOnPaymentOptions" />
+                        <input asp-for="PlaySoundOnPayment" type="checkbox" class="btcpay-toggle me-4" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="PlaySoundOnPaymentOptions" />
                         <label asp-for="PlaySoundOnPayment" class="form-check-label"></label>
                     </div>
-                    <div class="collapse @(Model.PlaySoundOnPayment ? "show" : "")" id="PlaySoundOnPaymentOptions">
+                    <div id="PlaySoundOnPaymentOptions" x-show="expanded" x-collapse>
                         <div class="form-group mb-0 py-4">
                             <div class="flex-between-gap-2">
                                 <label asp-for="SoundFile" class="form-label"></label>

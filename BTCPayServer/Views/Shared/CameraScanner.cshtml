@@ -4,7 +4,7 @@
 }
 
 <template id="camera-qr-scanner-wrap">
-	<div v-if="modalId" :id="modalId" class="modal fade" data-bs-backdrop="static">
+	<div v-if="modalId" :id="modalId" class="modal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" data-bs-backdrop="static">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">

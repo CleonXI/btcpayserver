@@ -417,7 +417,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6" x-data="{ expanded: false }">
                     <h6 class="mb-2">Payment Method</h6>
                     <div class="flex justify-between items-center mb-4">
                         <div class="flex items-center">
@@ -425,14 +425,12 @@
                             <span
                                 class="ms-2 font-semibold credit-balance">@creditBalance</span>
                         </div>
-                        <button id="add-credit" class="btn btn-action" type="button" data-bs-toggle="collapse" data-bs-target="#credit-input"
-                                aria-expanded="false"
-                                aria-controls="credit-input">
+                        <button id="add-credit" class="btn btn-action" type="button" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="credit-input">
                             <i class="fa fa-credit-card"></i>
                             Add credit
                         </button>
                     </div>
-                    <div class="collapse" id="credit-input">
+                    <div x-show="expanded" x-collapse id="credit-input">
                         <form method="post">
                             <div class="input-group">
                                 <button type="submit" name="command" value="add-credit" class="btn btn-primary">Proceed to payment</button>
@@ -620,13 +618,13 @@
     }
 
 
-     <div class="modal fade" id="changePlanModal" tabindex="-1" aria-hidden="true">
+     <div class="modal" id="changePlanModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title upgrade-mode">Upgrade</h4>
                     <h4 class="modal-title downgrade-mode">Downgrade</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@StringLocalizer["Close"]">
+                    <button type="button" class="btn-close" @@click="close()" aria-label="@StringLocalizer["Close"]">
                         <vc:icon symbol="close" />
                     </button>
                 </div>

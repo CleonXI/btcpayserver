@@ -49,16 +49,16 @@
 
 <partial name="_StatusMessage" />
 
-<div class="alert alert-warning alert-dismissible mb-6" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@StringLocalizer["Close"]">
+<div class="alert alert-warning alert-dismissible mb-6" role="alert" x-data="{ expanded: false }">
+    <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
         <vc:icon symbol="close" />
     </button>
     <h5 class="alert-heading" text-translate="true">Important notice about plugins</h5>
     <p class="mb-0">
         <span text-translate="true">Plugins are developed by third parties. They need to be updated and maintained regularly in addition to BTCPay Server. Use plugins at your own risk.</span>
-        <a href="#warning-details" data-bs-toggle="collapse" class="alert-link" text-translate="true">Read more</a>
+        <a href="#warning-details" @@click.prevent="expanded = !expanded" class="alert-link" text-translate="true">Read more</a>
     </p>
-    <div class="collapse" id="warning-details">
+    <div x-show="expanded" x-collapse id="warning-details">
         <p class="my-6"><strong>Use at Your Own Risk:</strong> Plugins in this store are developed by independent third parties. These plugins have not undergone review by the BTCPay Server team.</p>
         <p class="mb-6"><strong>Disclaimer of Responsibility:</strong> BTCPay Server contributors or Foundation are not liable for any harm, loss, or damage resulting from the installation or use of the plugins. Users assume full responsibility for their installation, use, familiarity with licensing and terms of service and maintenance.</p>
         <p class="mb-6"><strong>No Official Endorsement:</strong> Inclusion in the list of BTCPay Server plugins does not constitute an endorsement or guarantee of quality, safety, or compatibility.</p>
@@ -121,7 +121,7 @@
                                     }
                                     else
                                     {
-                                        <button title="Schedule upgrade for when the dependencies have been met to ensure a smooth update" data-bs-toggle="tooltip" type="submit" class="btn btn-sm btn-primary" text-translate="true">Schedule update</button>
+                                        <button title="Schedule upgrade for when the dependencies have been met to ensure a smooth update" x-data x-tooltip="'Schedule upgrade for when the dependencies have been met to ensure a smooth update'" type="submit" class="btn btn-sm btn-primary" text-translate="true">Schedule update</button>
                                     }
                                 </form>
                             }
@@ -169,7 +169,7 @@
                 <div class="card h-full" id="@plugin.Identifier">
                     <div class="card-body">
                         <div class="flex flex-wrap items-baseline justify-between gap-2 mb-6">
-                            <h4 class="card-title mb-0" data-bs-toggle="tooltip" title="@plugin.Identifier">@plugin.Name</h4>
+                            <h4 class="card-title mb-0" x-data x-tooltip="'@plugin.Identifier'" title="@plugin.Identifier">@plugin.Name</h4>
                             @if (!string.IsNullOrEmpty(downloadInfo?.Author))
                             {
                                 <span class="text-btcpay-body-text-muted whitespace-nowrap">
@@ -212,7 +212,7 @@
                                                 @dependency
                                                 @if (!PluginManager.DependencyMet(dependency, installed))
                                                 {
-                                                    <span title="Dependency not met." data-bs-toggle="tooltip" class="text-btcpay-danger">
+                                                    <span title="Dependency not met." x-data x-tooltip="'Dependency not met.'" class="text-btcpay-danger">
                                                         <vc:icon symbol="warning" />
                                                     </span>
                                                 }
@@ -236,7 +236,7 @@
                                                     @dependency
                                                     @if (!PluginManager.DependencyMet(dependency, installed))
                                                     {
-                                                        <span title="Dependency not met." data-bs-toggle="tooltip" class="text-btcpay-danger">
+                                                        <span title="Dependency not met." x-data x-tooltip="'Dependency not met.'" class="text-btcpay-danger">
                                                             <vc:icon symbol="warning" />
                                                         </span>
                                                     }
@@ -316,7 +316,7 @@
                                 else
                                 {
                                     <form asp-action="InstallPlugin" asp-route-plugin="@plugin.Identifier" asp-route-version="@x.Version" class="me-6">
-                                        <button title="Schedule upgrade for when the dependencies have been met to ensure a smooth update" data-bs-toggle="tooltip" type="submit" class="btn btn-secondary" text-translate="true">Schedule update</button>
+                                        <button title="Schedule upgrade for when the dependencies have been met to ensure a smooth update" x-data x-tooltip="'Schedule upgrade for when the dependencies have been met to ensure a smooth update'" type="submit" class="btn btn-secondary" text-translate="true">Schedule update</button>
                                     </form>
                                 }
                             }
@@ -324,7 +324,7 @@
                             
                             @if (DependentOn(plugin.Identifier))
                             {
-                                <button type="button" class="btn btn-outline-danger flex items-center gap-6" data-bs-toggle="tooltip" title="This plugin cannot be uninstalled as it is depended on by other plugins.">
+                                <button type="button" class="btn btn-outline-danger flex items-center gap-6" x-data x-tooltip="'This plugin cannot be uninstalled as it is depended on by other plugins.'" title="This plugin cannot be uninstalled as it is depended on by other plugins.">
                                     <span text-translate="true">Uninstall</span>
                                     <vc:icon symbol="warning"/>
                                 </button>
@@ -394,7 +394,7 @@ else
                 <div class="card h-full" id="@plugin.Identifier">
                     <div class="card-body">
                         <div class="flex flex-wrap items-baseline justify-between gap-2 mb-6">
-                            <h4 class="card-title mb-0" data-bs-toggle="tooltip" title="@plugin.Identifier">@plugin.Name</h4>
+                            <h4 class="card-title mb-0" x-data x-tooltip="'@plugin.Identifier'" title="@plugin.Identifier">@plugin.Name</h4>
                             @if (!string.IsNullOrEmpty(plugin.Author))
                             {
                                 <span class="text-btcpay-body-text-muted whitespace-nowrap">
@@ -417,7 +417,7 @@ else
                             }
                             else if (recommended)
                             {
-                                <div class="badge bg-light whitespace-nowrap" data-bs-toggle="tooltip" title="This plugin has been recommended to be installed by your deployment method.">
+                                <div class="badge bg-light whitespace-nowrap" x-data x-tooltip="'This plugin has been recommended to be installed by your deployment method.'" title="This plugin has been recommended to be installed by your deployment method.">
                                     <span text-translate="true">Recommended</span>
                                     <vc:icon symbol="info" />
                                 </div>
@@ -434,7 +434,7 @@ else
                                         @dependency
                                         @if (!PluginManager.DependencyMet(dependency, installed))
                                         {
-                                            <span title="Dependency not met." data-bs-toggle="tooltip" class="text-btcpay-danger">
+                                            <span title="Dependency not met." x-data x-tooltip="'Dependency not met.'" class="text-btcpay-danger">
                                                 <vc:icon symbol="warning" />
                                             </span>
                                         }
@@ -516,7 +516,7 @@ else
                             else
                             {
                                 <form asp-action="InstallPlugin" asp-route-plugin="@plugin.Identifier" asp-route-version="@plugin.Version">
-                                    <button title="Schedule install for when the dependencies have been met to ensure a smooth update" data-bs-toggle="tooltip" type="submit" class="btn btn-primary" text-translate="true">Schedule install</button>
+                                    <button title="Schedule install for when the dependencies have been met to ensure a smooth update" x-data x-tooltip="'Schedule install for when the dependencies have been met to ensure a smooth update'" type="submit" class="btn btn-primary" text-translate="true">Schedule install</button>
                                 </form>
                             }
                         }
@@ -535,10 +535,10 @@ else
 
 <div class="mb-6">
     <h3 class="mb-6" text-translate="true">Upload Plugin</h3>
-    <button class="btn btn-secondary mb-6" type="button" data-bs-toggle="collapse" data-bs-target="#manual-upload" text-translate="true">
+    <button class="btn btn-secondary mb-6" type="button" @@click="expanded = false" text-translate="true">
         Upload Plugin
     </button>
-    <div class="row collapse" id="manual-upload">
+    <div class="row" x-show="expanded" x-collapse id="manual-upload">
         <div class="col col-xl-6 mb-6">
             <div class="card">
                 <div class="card-body">
@@ -561,10 +561,10 @@ else
 {
     <div class="mb-6">
         <h3 class="mb-6" text-translate="true">Pending Action</h3>
-        <button class="btn btn-secondary mb-6" type="button" data-bs-toggle="collapse" data-bs-target="#pending-actions" text-translate="true">
+        <button class="btn btn-secondary mb-6" type="button" @@click="expanded = false" text-translate="true">
             Pending Actions
         </button>
-        <div class="row collapse" id="pending-actions">
+        <div class="row" x-show="expanded" x-collapse id="pending-actions">
             <div class="col col-12 col-lg-6 mb-6">
                 <div class="card">
                     <div class="card-body">

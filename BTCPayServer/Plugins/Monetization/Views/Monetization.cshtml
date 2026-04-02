@@ -15,8 +15,7 @@
     {
         <a id="@(primary ? "page-primary" : null)"
            class="btn btn-primary"
-           data-bs-toggle="modal"
-           data-bs-target="#activateMonetization"
+           onclick="openModal('#activateMonetization', this); return false;"
            data-is-new="true"
            role="button" text-translate="true">
             Create a new offering
@@ -65,11 +64,10 @@
 
 <div class="content-constrain-xxl col-xl-8">
     <div class="accordion" id="accordion">
-        <div class="accordion-item">
+        <div class="accordion-item" x-data="{ expanded: false }">
             <h2 class="accordion-header" id="activate-header">
                 <button class="accordion-button @(Model.Step == MonetizationViewModel.InstallStatus.SetOffering ? "" : "collapsed")"
-                        type="button" data-bs-toggle="collapse" data-bs-target="#activate-collapse"
-                        aria-expanded="@(Model.Step == MonetizationViewModel.InstallStatus.SetOffering)" aria-controls="activate-collapse">
+                        type="button" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="activate-collapse">
                     <h5 class="flex content-center gap-4">
                         @{ await PrintStatus(Model.Step != MonetizationViewModel.InstallStatus.SetOffering); }
                         <span>Set up the offering</span>
@@ -77,7 +75,7 @@
                     <vc:icon symbol="caret-down" />
                 </button>
             </h2>
-            <div id="activate-collapse" class="accordion-collapse collapse @(Model.Step == MonetizationViewModel.InstallStatus.SetOffering ? "show" : "")"
+            <div id="activate-collapse" class="accordion-collapse" x-show="expanded" x-collapse
                  aria-labelledby="activate-header" data-bs-parent="#accordion">
                 <div class="accordion-body">
                     @if (Model is { Offering: not null, DefaultPlan: not null })
@@ -95,12 +93,11 @@
                         <div class="flex gap-4">
                             <a id="demonetize-button"
                                class="btn btn-outline-danger" role="button"
-                               data-bs-toggle="modal" data-bs-target="#ConfirmModal" text-translate="true">Demonetize</a>
+                               onclick="openModal('#ConfirmModal', this); return false;" text-translate="true">Demonetize</a>
                             <a id="migrate-users-button"
                                class="btn btn-secondary"
                                role="button"
-                               data-bs-toggle="modal"
-                               data-bs-target="#migrateUsers"
+                               onclick="openModal('#migrateUsers', this); return false;"
                                text-translate="true">
                                 Migrate existing non-admin users
                             </a>
@@ -115,8 +112,7 @@
                             {
                                 <a class="btn btn-secondary"
                                    role="button"
-                                   data-bs-toggle="modal"
-                                   data-bs-target="#selectExistingOffering"
+                                   onclick="openModal('#selectExistingOffering', this); return false;"
                                    text-translate="true">
                                     Select existing offering
                                 </a>
@@ -126,11 +122,10 @@
                 </div>
             </div>
         </div>
-        <div class="accordion-item">
+        <div class="accordion-item" x-data="{ expanded: false }">
             <h2 class="accordion-header" id="server-email-header">
                 <button class="accordion-button @(Model.Step == MonetizationViewModel.InstallStatus.ConfigureServerEmail ? "" : "collapsed")"
-                        type="button" data-bs-toggle="collapse" data-bs-target="#server-email-collapse"
-                        aria-expanded="@(Model.Step == MonetizationViewModel.InstallStatus.ConfigureServerEmail)" aria-controls="server-email-collapse">
+                        type="button" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="server-email-collapse">
                     <h5 class="flex content-center gap-4">
                         @{ await PrintStatus(Model.EmailServerConfigured); }
                         <span>Configure server email settings</span>
@@ -139,7 +134,7 @@
                 </button>
             </h2>
             <div id="server-email-collapse"
-                 class="accordion-collapse collapse @(Model.Step == MonetizationViewModel.InstallStatus.ConfigureServerEmail ? "show" : "")"
+                 class="accordion-collapse" x-show="expanded" x-collapse
                  aria-labelledby="server-email-header" data-bs-parent="#accordion">
                 <div class="accordion-body">
                     <p>When a new user registers without password or has been invited, an email will be sent using those settings.</p>
@@ -156,11 +151,10 @@
                 </div>
             </div>
         </div>
-        <div class="accordion-item">
+        <div class="accordion-item" x-data="{ expanded: false }">
             <h2 class="accordion-header" id="store-email-header">
                 <button class="accordion-button @(Model.Step == MonetizationViewModel.InstallStatus.ConfigureStoreEmail ? "" : "collapsed")"
-                        type="button" data-bs-toggle="collapse" data-bs-target="#store-email-collapse"
-                        aria-expanded="@(Model.Step == MonetizationViewModel.InstallStatus.ConfigureStoreEmail)" aria-controls="store-email-collapse">
+                        type="button" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="store-email-collapse">
                     <h5 class="flex content-center gap-4">
                         @{ await PrintStatus(Model.EmailStoreConfigured); }
                         <span>Configure store email settings</span>
@@ -169,7 +163,7 @@
                 </button>
             </h2>
             <div id="store-email-collapse"
-                 class="accordion-collapse collapse @(Model.Step == MonetizationViewModel.InstallStatus.ConfigureStoreEmail ? "show" : "")"
+                 class="accordion-collapse" x-show="expanded" x-collapse
                  aria-labelledby="store-email-header" data-bs-parent="#accordion">
                 <div class="accordion-body">
                     <p>Events related to the subscription such as payment reminder or subscription state changes will be using the store email settings.</p>

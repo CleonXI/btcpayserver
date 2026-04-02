@@ -186,11 +186,11 @@
         <a class="btn btn-secondary" asp-route-payReqId="@Model.Id" asp-action="ClonePaymentRequest" id="ClonePaymentRequest"  permission="@Policies.CanModifyPaymentRequests" text-translate="true">Clone</a>
         @if (!Model.Archived)
         {
-            <a class="btn btn-secondary" data-bs-toggle="tooltip" title="@StringLocalizer["Archive this payment request so that it does not appear in the payment request list by default"]" asp-controller="UIPaymentRequest" asp-action="TogglePaymentRequestArchival" asp-route-payReqId="@Model.Id" id="ArchivePaymentRequest" permission="@Policies.CanModifyPaymentRequests" text-translate="true">Archive</a>
+            <a class="btn btn-secondary" x-data x-tooltip="'@StringLocalizer["Archive this payment request so that it does not appear in the payment request list by default"]'" title="@StringLocalizer["Archive this payment request so that it does not appear in the payment request list by default"]" asp-controller="UIPaymentRequest" asp-action="TogglePaymentRequestArchival" asp-route-payReqId="@Model.Id" id="ArchivePaymentRequest" permission="@Policies.CanModifyPaymentRequests" text-translate="true">Archive</a>
         }
         else
         {
-            <a class="btn btn-secondary" data-bs-toggle="tooltip" title="@StringLocalizer["Unarchive this payment request"]" asp-controller="UIPaymentRequest" asp-action="TogglePaymentRequestArchival" asp-route-payReqId="@Model.Id" id="UnarchivePaymentRequest" permission="@Policies.CanModifyPaymentRequests" text-translate="true">Unarchive</a>
+            <a class="btn btn-secondary" x-data x-tooltip="'@StringLocalizer["Unarchive this payment request"]'" title="@StringLocalizer["Unarchive this payment request"]" asp-controller="UIPaymentRequest" asp-action="TogglePaymentRequestArchival" asp-route-payReqId="@Model.Id" id="UnarchivePaymentRequest" permission="@Policies.CanModifyPaymentRequests" text-translate="true">Unarchive</a>
         }
     </div>
 }

@@ -12,13 +12,13 @@
     {
         <span class="badge bg-btcpay-warning" text-translate="true">archived</span>
     }
-    <div class="badge badge-@badgeClass" data-invoice-state-badge="@Model.InvoiceId">
+    <div class="badge badge-@badgeClass" data-invoice-state-badge="@Model.InvoiceId" x-data="btcDropdown">
         @if (canMark)
         {
-            <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="dropdown-toggle" @@click="toggle()" aria-haspopup="true" :aria-expanded="isOpen">
                 @state
             </span>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition>
                 @if (Model.State.CanMarkInvalid())
                 {
                     <button type="button" class="dropdown-item lh-base" data-invoice-id="@Model.InvoiceId" data-new-state="invalid" text-translate="true">

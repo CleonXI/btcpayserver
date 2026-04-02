@@ -64,8 +64,8 @@
         </a>
     </div>
 
-    <div class="dropdown col-12 col-md-auto mb-4 md:mb-0">
-        <button id="StatusOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret w-full md:w-auto" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="dropdown col-12 col-md-auto mb-4 md:mb-0" x-data="btcDropdown">
+        <button id="StatusOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret w-full md:w-auto" type="button" @@click="toggle()" :aria-expanded="isOpen">
             @if (statusFilterCount > 0)
             {
                 <span>@statusFilterCount Type</span>
@@ -75,7 +75,7 @@
                 <span text-translate="true">All Type</span>
             }
         </button>
-        <div class="dropdown-menu" aria-labelledby="StatusOptionsToggle">
+        <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition aria-labelledby="StatusOptionsToggle">
             <a asp-action="Index" asp-route-count="@Model.Count" asp-route-status="@Model.Status" asp-route-searchTerm="@Model.Search.Toggle("type", "invoicestate")" class="dropdown-item @(HasArrayFilter("type", "invoicestate") ? "custom-active" : "")" text-translate="true">Invoice</a>
             <a asp-action="Index" asp-route-count="@Model.Count" asp-route-status="@Model.Status" asp-route-searchTerm="@Model.Search.Toggle("type", "payout")" class="dropdown-item @(HasArrayFilter("type", "payout") ? "custom-active" : "")" text-translate="true">Payouts</a>
             <a asp-action="Index" asp-route-count="@Model.Count" asp-route-status="@Model.Status" asp-route-searchTerm="@Model.Search.Toggle("type", "newversion")" class="dropdown-item @(HasArrayFilter("type", "newversion") ? "custom-active" : "")" text-translate="true">New Version</a>
@@ -84,8 +84,8 @@
         </div>
     </div>
 
-    <div class="dropdown col-12 col-md-auto">
-        <button id="StoresOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret w-full md:w-auto" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="dropdown col-12 col-md-auto" x-data="btcDropdown">
+        <button id="StoresOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret w-full md:w-auto" type="button" @@click="toggle()" :aria-expanded="isOpen">
             @if (storesFilterCount > 0)
             {
                 <span>@(storesFilterCount == 1 ? StringLocalizer["{0} Store", storesFilterCount] : StringLocalizer["{0} Stores", storesFilterCount])</span>
@@ -95,7 +95,7 @@
                 <span text-translate="true">All Stores</span>
             }
         </button>
-        <div class="dropdown-menu" aria-labelledby="StoresOptionsToggle">
+        <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition aria-labelledby="StoresOptionsToggle">
             @foreach (var store in Model.StoreFilterOptions)
             {
                 <a asp-action="Index"

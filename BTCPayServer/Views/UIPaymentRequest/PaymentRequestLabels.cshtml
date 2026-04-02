@@ -53,7 +53,7 @@
                         </button>
                         <form method="post" asp-action="DeletePaymentRequestLabel" asp-route-storeId="@Model.StoreId" asp-route-id="@label.Label"
                               class="inline">
-                            <button class="btn btn-link btn-delete p-0 me-4" type="submit" data-bs-toggle="modal" data-bs-target="#ConfirmModal"
+                            <button class="btn btn-link btn-delete p-0 me-4" type="submit" onclick="openModal('#ConfirmModal', this)"
                                     data-description="@StringLocalizer["The label {0} will be deleted from all payment requests.", Html.Encode(label.Label)]"
                                     data-confirm-input="@StringLocalizer["DELETE"]" text-translate="true">Delete
                             </button>
@@ -68,13 +68,13 @@
              model="@(new ConfirmModel(StringLocalizer["Delete label"],
     StringLocalizer["This label will be deleted from all payment requests."], StringLocalizer["Delete"]))" />
     
-    <div class="modal fade" id="EditLabelModal" tabindex="-1" aria-labelledby="EditLabelModalLabel" aria-hidden="true">
+    <div class="modal" id="EditLabelModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" aria-labelledby="EditLabelModalLabel">
         <div class="modal-dialog">
             <form method="post" asp-action="EditPaymentRequestLabel" asp-route-storeId="@Model.StoreId">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="EditLabelModalLabel" text-translate="true">Edit Label</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" @@click="close()" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <input type="hidden" id="OldLabel" name="id" />
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" text-translate="true">Cancel</button>
+                        <button type="button" class="btn btn-secondary" @@click="close()" text-translate="true">Cancel</button>
                         <button type="submit" class="btn btn-primary" text-translate="true">Save</button>
                     </div>
                 </div>

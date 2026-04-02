@@ -220,8 +220,8 @@
 <div class="flex flex-wrap items-center justify-between gap-4" id="Dropdowns">
     @if (Model.Labels.Any())
     {
-        <div class="btn-group" id="Filter">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="btn-group" id="Filter" x-data="btcDropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle" @@click="toggle()" :aria-expanded="isOpen">
                 @if (string.IsNullOrEmpty(labelFilter))
                 {
                     <span class="text-btcpay-body-text-muted" text-translate="true">Filter by label</span>
@@ -235,7 +235,7 @@
             @{
                 var visibleLabels = initialLabels;
             }
-            <ul class="dropdown-menu mt-1 py-0" id="LabelDropdownMenu" style="min-width:280px">
+            <ul class="dropdown-menu mt-1 py-0" id="LabelDropdownMenu" x-show="isOpen" @@click.outside="close()" x-transition style="min-width:280px">
                 <li class="px-2 pt-2 pb-2@(sortedLabels.Count() > maxVisibleLabels ? "" : " hidden")" id="LabelSearchContainer">
                     <div class="input-group border rounded">
                         <span class="input-group-text border-0 text-btcpay-body-text-muted px-2" style="background:transparent">
@@ -272,7 +272,7 @@
         </div>
     }
 
-    <div class="dropdown inline-flex-row-gap-4 ms-auto" id="Export">
+    <div class="dropdown inline-flex-row-gap-4 ms-auto" id="Export" x-data="btcDropdown">
         <a
             id="view-report"
             permission="@Policies.CanViewReports"
@@ -284,10 +284,10 @@
             <vc:icon symbol="nav-reporting" />
             <span text-translate="true">Reporting</span>
         </a>
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="ExportDropdownToggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" text-translate="true">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="ExportDropdownToggle" @@click="toggle()" aria-haspopup="true" :aria-expanded="isOpen" text-translate="true">
             Export
         </button>
-        <div class="dropdown-menu" aria-labelledby="ExportDropdownToggle">
+        <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition aria-labelledby="ExportDropdownToggle">
             <a asp-action="Export" asp-route-walletId="@walletId" asp-route-format="csv" asp-route-labelFilter="@labelFilter" class="dropdown-item export-link" target="_blank" id="ExportCSV" text-translate="true">CSV</a>
             <a asp-action="Export" asp-route-walletId="@walletId" asp-route-format="json" asp-route-labelFilter="@labelFilter" class="dropdown-item export-link" target="_blank" id="ExportJSON" text-translate="true">JSON</a>
             <a asp-action="Export" asp-route-walletId="@walletId" asp-route-format="bip329" asp-route-labelFilter="@labelFilter" class="dropdown-item export-link" target="_blank" id="ExportBIP329" text-translate="true">Wallet Labels (BIP-329)</a>

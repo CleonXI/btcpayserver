@@ -102,14 +102,14 @@
             <h4 class="mt-12 mb-2" text-translate="true">Additional Options</h4>
             <div class="form-group">
                 <div class="accordion" id="additional">
-                    <div class="accordion-item">
+                    <div class="accordion-item" x-data="{ expanded: false }">
                         <h2 class="accordion-header" id="additional-pos-data-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-pos-data" aria-expanded="false" aria-controls="additional-pos-data">
+                            <button class="accordion-button collapsed" type="button" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="additional-pos-data">
                                 <span text-translate="true">Metadata</span>
                                 <vc:icon symbol="caret-down" />
                             </button>
                         </h2>
-                        <div id="additional-pos-data" class="accordion-collapse collapse" aria-labelledby="additional-pos-data-header">
+                        <div id="additional-pos-data" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="additional-pos-data-header">
                             <p html-translate="true">Custom data to expand the invoice. This data is a JSON object, e.g. <code>{ "orderId": 615, "product": "Pizza" }</code></p>
                             <div class="form-group">
                                 <label asp-for="Metadata" class="form-label"></label>
@@ -118,14 +118,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    <div class="accordion-item" x-data="{ expanded: false }">
                         <h2 class="accordion-header" id="additional-notifications-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#additional-notifications" aria-expanded="false" aria-controls="additional-notifications">
+                            <button class="accordion-button collapsed" type="button" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="additional-notifications">
                                 <span text-translate="true">Invoice Notifications</span>
                                 <vc:icon symbol="caret-down" />
                             </button>
                         </h2>
-                        <div id="additional-notifications" class="accordion-collapse collapse" aria-labelledby="additional-notifications-header">
+                        <div id="additional-notifications" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="additional-notifications-header">
                             <div class="accordion-body">
                                 <div class="form-group">
                                     <label asp-for="NotificationUrl" class="form-label"></label>

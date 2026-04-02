@@ -23,7 +23,7 @@
     }
     else if (Model.Balance != null)
     {
-        <div class="balances flex flex-wrap">
+        <div class="balances flex flex-wrap" x-data="{ expanded: false }">
             @if (Model.Balance.OffchainBalance != null)
             {
                 <div class="balance">
@@ -34,7 +34,7 @@
                         </span>
                     </div>
 
-                    <div class="balance-details collapse" id="balanceDetailsOffchain">
+                    <div class="balance-details" x-show="expanded" x-collapse id="balanceDetailsOffchain">
                         @if (Model.Balance.OffchainBalance.Opening != null)
                         {
                             <div class="mt-2 flex items-baseline gap-1">
@@ -91,7 +91,7 @@
                             @ViewLocalizer["<span class=\"currency\">{0}</span> on-chain", Model.CryptoCode]
                         </span>
                     </div>
-                    <div class="balance-details collapse" id="balanceDetailsOnchain">
+                    <div class="balance-details" x-show="expanded" x-collapse id="balanceDetailsOnchain">
                         @if (Model.Balance.OnchainBalance.Confirmed != null)
                         {
                             <div class="mt-2 flex items-baseline gap-1">
@@ -132,7 +132,7 @@
         <div class="flex flex-wrap items-center justify-between gap-4 @(Model.Series != null ? "my-4" : "mt-4")">
             @if (Model.Balance.OffchainBalance != null && Model.Balance.OnchainBalance != null)
             {
-                <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0 -ml-1" type="button" data-bs-toggle="collapse" data-bs-target=".balance-details" aria-expanded="false" aria-controls="balanceDetailsOffchain balanceDetailsOnchain">
+                <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0 -ml-1" type="button" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="balanceDetailsOffchain balanceDetailsOnchain">
                     <vc:icon symbol="caret-down" />
                     <span class="ml-1" text-translate="true">Details</span>
                 </button>

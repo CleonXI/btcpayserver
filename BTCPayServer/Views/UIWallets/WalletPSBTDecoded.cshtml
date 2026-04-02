@@ -139,9 +139,9 @@ else
 }
 
 <div class="accordion" id="PSBTOptions">
-    <div class="accordion-item">
+    <div class="accordion-item" x-data="{ expanded: false }">
         <h2 class="accordion-header" id="PSBTOptionsExportHeader">
-            <button type="button" class="accordion-button @(needsExport ? "" : "collapsed")" data-bs-toggle="collapse" data-bs-target="#PSBTOptionsExportContent" aria-controls="PSBTOptionsExportContent" aria-expanded="@(needsExport ? "true" : "false")">
+            <button type="button" class="accordion-button @(needsExport ? "" : "collapsed")" @@click="expanded = false" aria-controls="PSBTOptionsExportContent" aria-expanded="@(needsExport ? "true" : "false")">
                 <span class="h5">Export PSBT @(isReady ? "" : "for signing")</span>
                 <vc:icon symbol="caret-down" />
             </button>
@@ -155,11 +155,11 @@ else
                     <input type="hidden" asp-for="BackUrl" />
                     <div class="flex flex-col sm:flex-row flex-wrap sm:items-center">
                         <button name="command" type="submit" class="btn btn-primary mb-4 sm:mb-0 sm:me-2" value="save-psbt" text-translate="true">Download PSBT file</button>
-                        <button name="command" type="button" class="btn btn-primary mb-4 sm:mb-0 sm:me-2 only-for-js" data-bs-toggle="modal" data-bs-target="#scan-qr-modal" text-translate="true">Show QR for wallet camera</button>
-                        <a id="ShowRawVersion" href="#ExportOptions" data-bs-toggle="collapse" class="btn btn-link text-btcpay-body-text-muted" text-translate="true">Show raw versions</a>
+                        <button name="command" type="button" class="btn btn-primary mb-4 sm:mb-0 sm:me-2 only-for-js" onclick="openModal('#scan-qr-modal', this)" text-translate="true">Show QR for wallet camera</button>
+                        <a id="ShowRawVersion" href="#ExportOptions" @@click.prevent="expanded = !expanded" class="btn btn-link text-btcpay-body-text-muted" text-translate="true">Show raw versions</a>
                     </div>
                 </form>
-                <div id="ExportOptions" class="collapse">
+                <div id="ExportOptions" x-show="expanded" x-collapse>
                     <div class="pt-6">
                         <ul class="nav mb-3" id="export-tab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -190,14 +190,14 @@ else
     </div>
     @if (!isReady)
     {
-        <div class="accordion-item">
+        <div class="accordion-item" x-data="{ expanded: false }">
             <h2 class="accordion-header" id="PSBTOptionsImportHeader">
-                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#PSBTOptionsImportContent" aria-controls="PSBTOptionsImportContent" aria-expanded="false">
+                <button type="button" class="accordion-button collapsed" @@click="expanded = false" aria-controls="PSBTOptionsImportContent" aria-expanded="false">
                     <span class="h5" text-translate="true">Provide updated PSBT</span>
                     <vc:icon symbol="caret-down" />
                 </button>
             </h2>
-            <div id="PSBTOptionsImportContent" class="accordion-collapse collapse" aria-labelledby="PSBTOptionsImportHeader" data-bs-parent="#PSBTOptions">
+            <div id="PSBTOptionsImportContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="PSBTOptionsImportHeader" data-bs-parent="#PSBTOptions">
                 <div class="accordion-body">
                     <form method="post" asp-action="WalletPSBT" asp-route-walletId="@walletId" enctype="multipart/form-data" class="mb-2">
                         <input type="hidden" asp-for="ReturnUrl" />
@@ -220,21 +220,21 @@ else
                             {
                                 <button type="submit" name="command" value="decode" class="btn btn-primary mb-4 sm:mb-0 sm:me-2 camera-submit" id="Decode" text-translate="true">Decode PSBT</button>
                             }
-                            <button type="button" id="scanqrcode" class="btn btn-primary only-for-js" data-bs-toggle="modal" data-bs-target="#scanModal" text-translate="true">Scan wallet QR with camera</button>
+                            <button type="button" id="scanqrcode" class="btn btn-primary only-for-js" onclick="openModal('#scanModal', this)" text-translate="true">Scan wallet QR with camera</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     }
-    <div class="accordion-item">
+    <div class="accordion-item" x-data="{ expanded: false }">
         <h2 class="accordion-header" id="PSBTOptionsAdvancedHeader">
-            <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#PSBTOptionsAdvancedContent" aria-controls="PSBTOptionsAdvancedContent" aria-expanded="false">
+            <button type="button" class="accordion-button collapsed" @@click="expanded = false" aria-controls="PSBTOptionsAdvancedContent" aria-expanded="false">
                 <span class="h5">Add metadata to PSBT (advanced)</span>
                 <vc:icon symbol="caret-down" />
             </button>
         </h2>
-        <div id="PSBTOptionsAdvancedContent" class="accordion-collapse collapse" aria-labelledby="PSBTOptionsAdvancedHeader" data-bs-parent="#PSBTOptions">
+        <div id="PSBTOptionsAdvancedContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="PSBTOptionsAdvancedHeader" data-bs-parent="#PSBTOptions">
             <div class="accordion-body">
                 <form method="post" asp-action="WalletPSBT" asp-route-walletId="@walletId" class="mb-2">
                     <input type="hidden" asp-for="PSBT" />

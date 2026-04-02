@@ -97,19 +97,19 @@
         </template>
     </button>
     <partial name="/Plugins/PointOfSale/Views/Public/RecentTransactions.cshtml" model="Model" />
-    <button type="button" class="btn btn-light rounded-full" data-bs-toggle="modal" data-bs-target="#RecentTransactions" id="RecentTransactionsToggle"
+    <button type="button" class="btn btn-light rounded-full" onclick="openModal('#RecentTransactions', this)" id="RecentTransactionsToggle"
             permission="@Policies.CanViewInvoices">
         <vc:icon symbol="nav-transactions" />
     </button>
-    <button type="button" class="btn btn-light rounded-full" data-bs-toggle="offcanvas" data-bs-target="#ItemsListOffcanvas" id="ItemsListToggle"
+    <button type="button" class="btn btn-light rounded-full" onclick="openOffcanvas('#ItemsListOffcanvas')" id="ItemsListToggle"
             aria-controls="ItemsList" v-if="showItems">
         <vc:icon symbol="nav-products" />
     </button>
-    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="ItemsListOffcanvas" aria-labelledby="ItemsListToggle" v-if="showItems">
+    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="ItemsListOffcanvas" x-data="btcOffcanvas" x-show="isOpen" x-cloak :class="isOpen && 'show'" aria-labelledby="ItemsListToggle" v-if="showItems">
         <div class="offcanvas-header justify-between flex-wrap p-4">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">Products</h5>
             <button type="button" class="btn btn-sm rounded-full" :class="{ 'btn-primary': cart.length > 0, 'btn-outline-secondary': cart.length === 0}"
-                    data-bs-dismiss="offcanvas" v-text="cart.length > 0 ? 'Apply' : 'Close'"></button>
+                    @@click="close()" v-text="cart.length > 0 ? 'Apply' : 'Close'"></button>
             @if (Model.ShowSearch)
             {
                 <div class="w-full mt-4">

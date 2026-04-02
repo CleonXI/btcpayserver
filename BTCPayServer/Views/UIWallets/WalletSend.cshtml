@@ -95,7 +95,7 @@
                     </div>
                     <div class="input-group">
                         <input asp-for="Outputs[index].DestinationAddress" class="form-control font-btcpay-mono grow" autocomplete="off" autofocus="@(index == Model.Outputs.Count - 1 ? "autofocus" : null)"/>
-                        <button type="button" id="scanqrcode" class="btn btn-secondary px-3 flex items-center justify-center only-for-js" data-bs-toggle="modal" data-bs-target="#scanModal" title="@StringLocalizer["Scan with camera"]" data-index="@index">
+                        <button type="button" id="scanqrcode" class="btn btn-secondary px-3 flex items-center justify-center only-for-js" onclick="openModal('#scanModal', this)" title="@StringLocalizer["Scan with camera"]" data-index="@index">
                             <vc:icon symbol="scan-qr" />
                         </button>
                     </div>
@@ -177,7 +177,7 @@
                     @for (var index = 0; index < Model.RecommendedSatoshiPerByte.Count; index++)
                     {
                         var feeRateOption = Model.RecommendedSatoshiPerByte[index];
-                        <button type="button" class="btn btn-sm btn-secondary crypto-fee-link" value="@feeRateOption.FeeRate" data-bs-toggle="tooltip" title="@feeRateOption.FeeRate sat/b">
+                        <button type="button" class="btn btn-sm btn-secondary crypto-fee-link" value="@feeRateOption.FeeRate" x-data x-tooltip="'@feeRateOption.FeeRate sat/b'" title="@feeRateOption.FeeRate sat/b">
                             @feeRateOption.Target.TimeString()
                         </button>
                         <input type="hidden" asp-for="RecommendedSatoshiPerByte[index].Target" />
@@ -195,11 +195,11 @@
     </div>
 
     <div class="my-6">
-        <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="AdvancedSettingsButton" data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
+        <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="AdvancedSettingsButton" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="AdvancedSettings">
             <vc:icon symbol="caret-down"/>
             <span class="ms-1" text-translate="true">Advanced settings</span>
         </button>
-        <div id="AdvancedSettings" class="collapse">
+        <div id="AdvancedSettings" x-show="expanded" x-collapse>
             <div class="pt-4">
                 <div class="flex mb-4">
                     <input asp-for="NoChange" class="btcpay-toggle me-4" />

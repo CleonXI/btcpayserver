@@ -42,7 +42,7 @@
             </td>
         }
         <td class="align-middle text-end">
-            <div class="inline-flex gap-4 items-center">
+            <div class="inline-flex gap-4 items-center" x-data="btcDropdown">
 				@if (transaction.CanBumpFee)
 				{
 					<a asp-action="WalletBumpFee" asp-route-walletId="@Context.GetRouteValue("walletId")" asp-route-transactionId="@transaction.Id" class="btn btn-action bumpFee-btn">
@@ -50,10 +50,10 @@
 						<span text-translate="true">Bump fee</span>
 					</a>
 				}
-                <button class="btn btn-action @(!string.IsNullOrEmpty(transaction.Comment) ? "text-btcpay-primary" : "text-btcpay-body-text-muted")" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-action @(!string.IsNullOrEmpty(transaction.Comment) ? "text-btcpay-primary" : "text-btcpay-body-text-muted")" type="button" @@click="toggle()" aria-haspopup="true" :aria-expanded="isOpen">
                     <vc:icon symbol="actions-comment" />
                 </button>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition>
                     <form asp-action="ModifyTransaction" method="post" style="width:260px;" asp-route-walletId="@Context.GetRouteValue("walletId")">
                         <input type="hidden" name="transactionId" value="@transaction.Id" />
                         <div class="input-group p-2">

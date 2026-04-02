@@ -78,8 +78,9 @@
 			<h3 class="mt-12 mb-4" text-translate="true">Theme</h3>
             <p text-translate="true">Use the default Light or Dark Themes, or provide a custom CSS theme file below.</p>
 
+            <div x-data="{ expanded: @(Model.CustomTheme ? "true" : "false") }">
             <div class="flex items-center mb-6">
-                <input asp-for="CustomTheme" type="checkbox" class="btcpay-toggle me-4" data-bs-toggle="collapse" data-bs-target="#CustomThemeSettings" aria-expanded="@(Model.CustomTheme)" aria-controls="CustomThemeSettings" />
+                <input asp-for="CustomTheme" type="checkbox" class="btcpay-toggle me-4" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="CustomThemeSettings" />
                 <div>
                     <label asp-for="CustomTheme" class="form-check-label"></label>
                     <div class="text-btcpay-body-text-muted">
@@ -90,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <div class="collapse @(Model.CustomTheme ? "show" : "")" id="CustomThemeSettings">
+            <div x-show="expanded" x-collapse id="CustomThemeSettings">
                 <div class="form-group pt-2">
                     <label asp-for="CustomThemeExtension" class="form-label" data-required></label>
                     <select asp-for="CustomThemeExtension" asp-items="@themeExtension" class="form-select w-auto"></select>
@@ -123,6 +124,7 @@
                         <div class="form-text">@ViewLocalizer["In order to upload, a {0} must be configured.", Html.ActionLink(StringLocalizer["file storage"], "Files", "UIServer")]</div>
                     }
                 </div>
+            </div>
             </div>
         </div>
     </div>

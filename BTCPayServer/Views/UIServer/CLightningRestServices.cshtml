@@ -39,7 +39,7 @@
     <span text-translate="true">This QR Code is only valid for 10 minutes</span>
 </p>
 
-<div class="form-group">
+<div class="form-group" x-data="{ expanded: false }">
     @if (Model.QRCode == null)
     {
         <div class="form-group">
@@ -54,8 +54,8 @@
             <div id="qrCode"></div>
             <div id="qrCodeData" data-url="@Model.QRCode"></div>
         </div>
-        <p text-translate="true">See QR Code information by clicking <a href="#detailsQR" data-bs-toggle="collapse" text-translate="true">here</a></p>
-        <div id="detailsQR" class="collapse"><h4 class="mt-6 mb-4">QR Code connection</h4>
+        <p text-translate="true">See QR Code information by clicking <a href="#detailsQR" @@click.prevent="expanded = !expanded" text-translate="true">here</a></p>
+        <div id="detailsQR" x-show="expanded" x-collapse><h4 class="mt-6 mb-4">QR Code connection</h4>
             <div class="form-group">
                 <label class="form-label" text-translate="true">QR Code data</label>
                 <input asp-for="QRCode" readonly class="form-control" />
@@ -68,9 +68,9 @@
 
     <div class="form-group">
         <h5 text-translate="true">More details...</h5>
-        <p>Alternatively, you can see the settings by clicking <a href="#details" data-bs-toggle="collapse" text-translate="true">here</a></p>
+        <p x-data="{ expanded: false }">Alternatively, you can see the settings by clicking <a href="#details" @@click.prevent="expanded = !expanded" text-translate="true">here</a></p>
     </div>
-    <div id="details" class="collapse">
+    <div id="details" x-show="expanded" x-collapse>
         @if (Model.Uri == null)
         {
             <div class="form-group">

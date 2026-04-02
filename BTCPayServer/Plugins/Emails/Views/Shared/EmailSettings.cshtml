@@ -65,9 +65,8 @@
             {
                 @if (Model.IsFallbackSetup)
                 {
-                    <label class="flex items-center mb-6">
-                        <input type="checkbox" asp-for="IsCustomSMTP" class="btcpay-toggle me-4" data-bs-toggle="collapse" data-bs-target="#SmtpSettings"
-                               aria-expanded="@Model.IsCustomSMTP" aria-controls="SmtpSettings" />
+                    <label class="flex items-center mb-6" x-data="{ expanded: @(Model.IsCustomSMTP ? "true" : "false") }">
+                        <input type="checkbox" asp-for="IsCustomSMTP" class="btcpay-toggle me-4" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="SmtpSettings" />
                         <div>
                             <span text-translate="true">Use custom SMTP settings for this store</span>
                             <div class="form-text" text-translate="true">Otherwise, the server's SMTP settings will be used to send emails.</div>
@@ -80,16 +79,16 @@
                 }
             }
 
-            <div class="collapse @(Model.IsCustomSMTP || Model.StoreId is null ? "show" : "")" id="SmtpSettings">
+            <div x-show="expanded" x-collapse id="SmtpSettings">
                 <div class="form-group">
                     <div class="flex flex-wrap gap-2 items-center justify-between">
                         <label asp-for="Settings.Server" class="form-label" text-translate="true">SMTP Server</label>
-                        <div class="dropdown only-for-js mt-n2" id="quick-fill">
-                            <button class="btn btn-action dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        <div class="dropdown only-for-js mt-n2" id="quick-fill" x-data="btcDropdown">
+                            <button class="btn btn-action dropdown-toggle" type="button" @@click="toggle()" aria-haspopup="true" :aria-expanded="isOpen"
                                     id="QuickFillDropdownToggle" text-translate="true">
                                 Quick Fill
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="QuickFillDropdownToggle">
+                            <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition aria-labelledby="QuickFillDropdownToggle">
                                 <a class="dropdown-item" href="" data-server="smtp.gmail.com" data-port="587">Gmail.com</a>
                                 <a class="dropdown-item" href="" data-server="mail.yahoo.com" data-port="587">Yahoo.com</a>
                                 <a class="dropdown-item" href="" data-server="smtp.mailgun.org" data-port="587">Mailgun</a>
@@ -134,13 +133,13 @@
                     }
                 </div>
                 <input asp-for="PasswordSet" type="hidden" />
-                <div class="my-6">
+                <div class="my-6" x-data="{ expanded: false }">
                     <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="AdvancedSettingsButton"
-                            data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
+                            @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="AdvancedSettings">
                         <vc:icon symbol="caret-down" />
                         <span class="ms-1" text-translate="true">Advanced settings</span>
                     </button>
-                    <div id="AdvancedSettings" class="collapse">
+                    <div id="AdvancedSettings" x-show="expanded" x-collapse>
                         <div class="pt-4 pb-1">
                             <div class="flex">
                                 <input asp-for="Settings.EnabledCertificateCheck" type="checkbox" class="btcpay-toggle me-4" />

@@ -84,11 +84,11 @@
 
                     <h3 class="mt-12 mb-4" id="ln-url" text-translate="true">LNURL</h3>
                     <div class="form-group flex items-center">
-                        <input asp-for="LNURLEnabled" type="checkbox" class="btcpay-toggle me-4" data-bs-toggle="collapse" data-bs-target="#LNURLSettings" aria-expanded="@Model.LNURLEnabled" aria-controls="LNURLSettings"/>
+                        <input asp-for="LNURLEnabled" type="checkbox" class="btcpay-toggle me-4" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="LNURLSettings"/>
                         <label asp-for="LNURLEnabled" class="form-check-label"></label>
                     </div>
 
-                    <div class="collapse @(Model.LNURLEnabled ? "show" : "")" id="LNURLSettings">
+                    <div x-show="expanded" x-collapse id="LNURLSettings">
                         <div class="form-group">
                             <label class="form-group flex items-center">
                                 <input type="checkbox" asp-for="LNURLBech32Mode" class="btcpay-toggle me-4" />

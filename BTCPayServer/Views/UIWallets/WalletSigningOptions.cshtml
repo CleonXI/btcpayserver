@@ -82,7 +82,7 @@
                     <h4 text-translate="true">Private key or seed</h4>
                     <p class="mb-0 text-btcpay-body-text-muted" text-translate="true">Provide the 12 or 24 word recovery seed</p>
                 </div>
-                <small class="block text-btcpay-danger mt-2 lg:mt-0" data-bs-toggle="tooltip" data-bs-placement="top" title="@StringLocalizer["You really should not type your seed into a device that is connected to the internet."]">
+                <small class="block text-btcpay-danger mt-2 lg:mt-0" x-data x-tooltip="'@StringLocalizer["You really should not type your seed into a device that is connected to the internet."]'" data-bs-placement="top" title="@StringLocalizer["You really should not type your seed into a device that is connected to the internet."]">
                     <span text-translate="true">Not recommended</span> <vc:icon symbol="info" />
                 </small>
             </div>

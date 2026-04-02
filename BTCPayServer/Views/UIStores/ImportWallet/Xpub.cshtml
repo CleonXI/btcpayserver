@@ -37,6 +37,7 @@
     #AddressTypes .additional { display: none; }
     #AddressTypes.expanded .additional { display: table-row; }
 </style>
+<div x-data="{ expanded: false }">
 <table id="AddressTypes" class="table">
     <thead>
     <tr>
@@ -92,7 +93,7 @@
         </tr>
     }
     </tbody>
-    <tbody id="MultiSigExamples" class="collapse">
+    <tbody id="MultiSigExamples" x-show="expanded" x-collapse>
     <tr>
         <td class="whitespace-nowrap" rowspan="2">Multi-sig P2WSH</td>
         <td class="font-btcpay-mono">2-of-xpub1…-xpub2…</td>
@@ -117,7 +118,8 @@
     </tbody>
 </table>
 
-<button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="ToggleAdditional" data-bs-toggle="collapse" data-bs-target="#MultiSigExamples" aria-expanded="false" aria-controls="MultiSigExamples">
+<button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="ToggleAdditional" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="MultiSigExamples">
     <vc:icon symbol="caret-down"/>
     <span class="ms-1" text-translate="true">Show multi-sig examples</span>
 </button>
+</div>

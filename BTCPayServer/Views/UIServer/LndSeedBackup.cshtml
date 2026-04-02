@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group collapse">
                     <form method="get" asp-action="RemoveLndSeed" asp-route-serviceName="@Context.GetRouteValue("serviceName")" asp-route-cryptoCode="@Context.GetRouteValue("cryptoCode")">
-                        <button id="delete" class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#ConfirmModal" data-confirm-input="@StringLocalizer["DELETE"]" text-translate="true">Delete LND seed from server</button>
+                        <button id="delete" class="btn btn-primary" type="submit" onclick="openModal('#ConfirmModal', this)" data-confirm-input="@StringLocalizer["DELETE"]" text-translate="true">Delete LND seed from server</button>
                     </form>
                 </div>
             }

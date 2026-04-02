@@ -227,15 +227,15 @@
             <button type="submit" class="btn btn-outline-secondary" id="btn-archive-toggle">
                 @if (Model.Archived)
                 {
-					<span class="whitespace-nowrap" data-bs-toggle="tooltip" title="@StringLocalizer["Unarchive this store"]" text-translate="true">Unarchive this store</span>
+					<span class="whitespace-nowrap" x-data x-tooltip="'@StringLocalizer["Unarchive this store"]'" title="@StringLocalizer["Unarchive this store"]" text-translate="true">Unarchive this store</span>
                 }
                 else
                 {
-					<span class="whitespace-nowrap" data-bs-toggle="tooltip" title="@StringLocalizer["Archive this store so that it does not appear in the stores list by default"]" text-translate="true">Archive this store</span>
+					<span class="whitespace-nowrap" x-data x-tooltip="'@StringLocalizer["Archive this store so that it does not appear in the stores list by default"]'" title="@StringLocalizer["Archive this store so that it does not appear in the stores list by default"]" text-translate="true">Archive this store</span>
                 }
             </button>
         </form>
-		<a id="DeleteStore" class="btn btn-outline-danger" asp-action="DeleteStore" asp-route-storeId="@Model.Id" data-bs-toggle="modal" data-bs-target="#ConfirmModal" data-description="@ViewLocalizer["The store <strong>{0}</strong> will be permanently deleted. This action will also delete all invoices, apps and data associated with the store.", Html.Encode(Model.StoreName)]" data-confirm-input="@StringLocalizer["DELETE"]" text-translate="true">Delete this store</a>
+		<a id="DeleteStore" class="btn btn-outline-danger" asp-action="DeleteStore" asp-route-storeId="@Model.Id" onclick="openModal('#ConfirmModal', this); return false;" data-description="@ViewLocalizer["The store <strong>{0}</strong> will be permanently deleted. This action will also delete all invoices, apps and data associated with the store.", Html.Encode(Model.StoreName)]" data-confirm-input="@StringLocalizer["DELETE"]" text-translate="true">Delete this store</a>
     </div>
 </div>
 

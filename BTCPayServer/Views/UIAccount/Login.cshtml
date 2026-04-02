@@ -37,7 +37,7 @@
         <div class="form-group mt-6">
             <div class="btn-group w-full">
                 <button type="submit" class="btn btn-primary btn-lg w-full" id="LoginButton"><span class="ps-4" text-translate="true">Sign in</span></button>
-                <button type="button" class="btn btn-outline-primary btn-lg w-auto only-for-js" data-bs-toggle="modal" data-bs-target="#scanModal" title="@StringLocalizer["Scan Login code with camera"]">
+                <button type="button" class="btn btn-outline-primary btn-lg w-auto only-for-js" onclick="openModal('#scanModal', this)" title="@StringLocalizer["Scan Login code with camera"]">
                     <vc:icon symbol="scan-qr" />
                 </button>
             </div>

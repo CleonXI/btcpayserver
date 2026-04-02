@@ -1,5 +1,9 @@
 @model BTCPayServer.Abstractions.Models.ConfirmModel
-<div class="modal fade" id="@Html.Id("ConfirmModal")" tabindex="-1" aria-labelledby="@Html.Id("ConfirmTitle")" aria-hidden="true">
+<div class="modal" id="@Html.Id("ConfirmModal")" x-data="btcModal" x-cloak aria-labelledby="@Html.Id("ConfirmTitle")"
+     x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()"
+     :aria-hidden="!isOpen"
+     :class="isOpen && 'show'"
+     :style="isOpen ? 'display:block' : 'display:none'">
     <partial name="ConfirmModal" model="Model" />
 </div>
 
@@ -13,7 +17,7 @@
         }
         const modal = document.getElementById(fullId('ConfirmModal'))
         modal.addEventListener('show.bs.modal', event => {
-            const $target = event.relatedTarget
+            const $target = event.relatedTarget || (event.detail && event.detail.relatedTarget)
             const $form = document.getElementById(fullId('ConfirmForm'))
             const $text = document.getElementById(fullId('ConfirmText'))
             const $title = document.getElementById(fullId('ConfirmTitle'))
@@ -57,7 +61,7 @@
             }
         })
         modal.addEventListener('shown.bs.modal', event => {
-            const $target = event.relatedTarget
+            const $target = event.relatedTarget || (event.detail && event.detail.relatedTarget)
             const $input = document.getElementById(fullId('ConfirmInput'))
             const { confirmInput } = $target.dataset
             if (confirmInput) {

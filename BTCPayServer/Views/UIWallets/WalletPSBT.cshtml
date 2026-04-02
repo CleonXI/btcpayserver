@@ -67,7 +67,7 @@
     @if (Model.Errors != null && Model.Errors.Count != 0)
     {
         <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@StringLocalizer["Close"]">
+            <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
                 <vc:icon symbol="close" />
             </button>
             @foreach (var error in Model.Errors)
@@ -99,7 +99,7 @@
             {
                 <button type="submit" name="command" value="decode" class="btn btn-primary mt-2" id="Decode" text-translate="true">Decode PSBT</button>
             }
-            <button type="button" id="scanqrcode" class="btn btn-secondary only-for-js ms-3 mt-2" data-bs-toggle="modal" data-bs-target="#scanModal" text-translate="true">Scan wallet QR with camera</button>
+            <button type="button" id="scanqrcode" class="btn btn-secondary only-for-js ms-3 mt-2" onclick="openModal('#scanModal', this)" text-translate="true">Scan wallet QR with camera</button>
         </div>
     </form>
 </div>

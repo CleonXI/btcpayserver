@@ -88,12 +88,12 @@
         }
     }
     
-    <div class="mb-6">
-        <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="AdvancedSettingsButton" data-bs-toggle="collapse" data-bs-target="#AdvancedSettings" aria-expanded="false" aria-controls="AdvancedSettings">
+    <div class="mb-6" x-data="{ expanded: @(string.IsNullOrEmpty(Model.Passphrase) && !Model.ImportKeysToRPC ? "false" : "true") }">
+        <button class="inline-flex items-center btn btn-link text-btcpay-primary font-semibold p-0" type="button" id="AdvancedSettingsButton" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="AdvancedSettings">
             <vc:icon symbol="caret-down"/>
             <span class="ms-1" text-translate="true">Advanced settings</span>
         </button>
-        <div id="AdvancedSettings" class="collapse @(string.IsNullOrEmpty(Model.Passphrase) && !Model.ImportKeysToRPC ? "" : "show")">
+        <div id="AdvancedSettings" x-show="expanded" x-collapse>
             <div class="pt-4">
                 @if (isImport) // hide account option when creating a wallet
                 {

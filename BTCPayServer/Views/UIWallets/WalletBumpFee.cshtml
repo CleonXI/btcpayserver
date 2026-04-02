@@ -108,7 +108,7 @@
 					@for (var index = 0; index < Model.RecommendedSatoshiPerByte.Count; index++)
 					{
 						var feeRateOption = Model.RecommendedSatoshiPerByte[index];
-						<button type="button" class="btn btn-sm btn-secondary crypto-fee-link" value="@feeRateOption.FeeRate" data-bs-toggle="tooltip" title="@feeRateOption.FeeRate sat/b">
+						<button type="button" class="btn btn-sm btn-secondary crypto-fee-link" value="@feeRateOption.FeeRate" x-data x-tooltip="'@feeRateOption.FeeRate sat/b'" title="@feeRateOption.FeeRate sat/b">
 							@feeRateOption.Target.TimeString()
 						</button>
 						<input type="hidden" asp-for="RecommendedSatoshiPerByte[index].Target" />

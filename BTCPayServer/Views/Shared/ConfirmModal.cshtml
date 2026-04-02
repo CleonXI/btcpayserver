@@ -14,7 +14,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <h4 class="modal-title" id="@Html.Id("ConfirmTitle")">@Model.Title</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@StringLocalizer["Close"]">
+            <button type="button" class="btn-close" @@click="close()" aria-label="@StringLocalizer["Close"]">
                 <vc:icon symbol="close" />
             </button>
         </div>
@@ -65,7 +65,7 @@
                         <input id="@Html.Id("ConfirmInput")" class="form-control"/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary only-for-js" data-bs-dismiss="modal" id="@Html.Id("ConfirmCancel")">Cancel</button>
+                        <button type="button" class="btn btn-secondary only-for-js" @@click="close()" id="@Html.Id("ConfirmCancel")">Cancel</button>
                         <button type="submit" class="btn modal-confirm @Model.ButtonClass" id="@Html.Id("ConfirmContinue")">@Model.Action</button>
                     </div>
                 }

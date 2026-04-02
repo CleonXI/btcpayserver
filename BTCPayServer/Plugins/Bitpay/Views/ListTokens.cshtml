@@ -8,7 +8,7 @@
 @if (Model.StoreNotConfigured)
 {
     <div class="alert alert-warning alert-dismissible mb-12" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@StringLocalizer["Close"]">
+        <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close" />
         </button>
         <span text-translate="true">Warning: No wallet has been linked to your BTCPay Server Store.</span><br/>
@@ -62,7 +62,7 @@
                         <td>@token.Label</td>
                         <td class="text-end" permission="@Policies.CanModifyStoreSettings">
                             <a asp-action="ShowToken" asp-route-storeId="@Context.GetRouteValue("storeId")" asp-route-tokenId="@token.Id" text-translate="true">See information</a> -
-                            <a asp-action="RevokeToken" asp-route-storeId="@Context.GetRouteValue("storeId")" asp-route-tokenId="@token.Id" data-bs-toggle="modal" data-bs-target="#ConfirmModal" data-description="The access token with the label <strong>@Html.Encode(token.Label)</strong> will be revoked." data-confirm-input="REVOKE" text-translate="true">Revoke</a>
+                            <a asp-action="RevokeToken" asp-route-storeId="@Context.GetRouteValue("storeId")" asp-route-tokenId="@token.Id" onclick="openModal('#ConfirmModal', this); return false;" data-description="The access token with the label <strong>@Html.Encode(token.Label)</strong> will be revoked." data-confirm-input="REVOKE" text-translate="true">Revoke</a>
                         </td>
                     </tr>
                     }

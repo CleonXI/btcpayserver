@@ -95,10 +95,11 @@
 
 @Html.HiddenFor(a => a.Count)
 
+<div x-data="{ descriptorOpen: false }">
 <div class="sticky-header">
     <h2>
         <span>@ViewData["Title"]</span>
-        <a href="#descriptor" data-bs-toggle="collapse">
+        <a href="#descriptor" @@click.prevent="descriptorOpen = !descriptorOpen">
             <vc:icon symbol="info" />
         </a>
     </h2>
@@ -126,7 +127,7 @@
     </div>
 </div>
 
-<div id="descriptor" class="collapse">
+<div id="descriptor" x-show="descriptorOpen" x-collapse>
     <div class="tile-card">
         <div class="flex-1">
             <p text-translate="true" class="mb-2">Invoices are documents issued by the seller to a buyer to collect payment.</p>
@@ -138,21 +139,22 @@
             </ul>
             <a href="https://docs.btcpayserver.org/Invoices/" target="_blank" rel="noreferrer noopener" text-translate="true">Learn More</a>
         </div>
-        <button type="button" class="btn-close ms-auto" data-bs-toggle="collapse" data-bs-target="#descriptor" aria-expanded="false" aria-label="@StringLocalizer["Close"]">
+        <button type="button" class="btn-close ms-auto" @@click="descriptorOpen = false" aria-expanded="false" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close" />
         </button>
     </div>
+</div>
 </div>
 
 <partial name="_StatusMessage" />
 
 @* Custom Range Modal *@
-<div class="modal fade" id="customRangeModal" tabindex="-1" role="dialog" aria-labelledby="customRangeModalTitle" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal" id="customRangeModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" role="dialog" aria-labelledby="customRangeModalTitle" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 550px;">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="customRangeModalTitle" text-translate="true">Filter invoices by Custom Range</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@StringLocalizer["Close"]">
+                <button type="button" class="btn-close" @@click="close()" aria-label="@StringLocalizer["Close"]">
                     <vc:icon symbol="close" />
                 </button>
             </div>
@@ -196,8 +198,8 @@
     <input asp-for="TimezoneOffset" type="hidden" />
     <input asp-for="SearchTerm" type="hidden" value="@Model.Search.WithoutSearchText()"/>
     <input asp-for="SearchText" class="form-control" placeholder="@StringLocalizer["Search…"]" />
-    <div class="dropdown">
-        <button id="StatusOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="dropdown" x-data="btcDropdown">
+        <button id="StatusOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret" type="button" @@click="toggle()" :aria-expanded="isOpen">
             @if (statusFilterCount > 0)
             {
                 <span>@StringLocalizer["{0} Status", statusFilterCount]</span>
@@ -207,7 +209,7 @@
                 <span text-translate="true">All Status</span>
             }
         </button>
-        <div class="dropdown-menu" aria-labelledby="StatusOptionsToggle">
+        <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition aria-labelledby="StatusOptionsToggle">
             <a asp-action="ListInvoices" asp-route-storeId="@Model.StoreId" asp-route-count="@Model.Count" asp-route-searchTerm="@Model.Search.Toggle("status", "settled")" class="dropdown-item @(HasArrayFilter("status", "settled") ? "custom-active" : "")" text-translate="true">Settled</a>
             <a asp-action="ListInvoices" asp-route-storeId="@Model.StoreId" asp-route-count="@Model.Count" asp-route-searchTerm="@Model.Search.Toggle("status", "processing")" class="dropdown-item @(HasArrayFilter("status", "processing") ? "custom-active" : "")" text-translate="true">Processing</a>
             <a asp-action="ListInvoices" asp-route-storeId="@Model.StoreId" asp-route-count="@Model.Count" asp-route-searchTerm="@Model.Search.Toggle("status", "expired")" class="dropdown-item @(HasArrayFilter("status", "expired") ? "custom-active" : "")" text-translate="true">Expired</a>
@@ -223,8 +225,8 @@
     </div>
     @if (Model.Apps.Any())
     {
-        <div class="dropdown">
-            <button id="AppOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="dropdown" x-data="btcDropdown">
+            <button id="AppOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret" type="button" @@click="toggle()" :aria-expanded="isOpen">
                 @if (appFilterCount > 0)
                 {
                     <span>@appFilterCount Plugin@(appFilterCount > 1 ? "s" : "")</span>
@@ -234,7 +236,7 @@
                     <span text-translate="true">All Plugins</span>
                 }
             </button>
-            <div class="dropdown-menu" aria-labelledby="AppOptionsToggle">
+            <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition aria-labelledby="AppOptionsToggle">
                 @foreach (var app in Model.Apps)
                 {
                     <a asp-action="ListInvoices" asp-route-storeId="@Model.StoreId" asp-route-count="@Model.Count" asp-route-searchTerm="@Model.Search.Toggle("appid", app.Id)" class="dropdown-item @(HasArrayFilter("appid", app.Id) ? "custom-active" : "")">@app.AppName</a>
@@ -242,8 +244,8 @@
             </div>
         </div>
     }
-    <div class="dropdown">
-        <button id="DateOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="dropdown" x-data="btcDropdown">
+        <button id="DateOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret" type="button" @@click="toggle()" :aria-expanded="isOpen">
             @if (hasDateFilter)
             {
                 if (HasArrayFilter("startdate", "-1d"))
@@ -268,11 +270,11 @@
                 <span text-translate="true">All Time</span>
             }
         </button>
-        <div class="dropdown-menu" aria-labelledby="DateOptionsToggle">
+        <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition aria-labelledby="DateOptionsToggle">
             <a asp-action="ListInvoices" asp-route-storeId="@Model.StoreId" asp-route-count="@Model.Count" asp-route-searchTerm="@Model.Search.Toggle("startdate", "-1d")" class="dropdown-item @(HasArrayFilter("startdate", "-1d") ? "custom-active" : "")" text-translate="true">Last 24 hours</a>
             <a asp-action="ListInvoices" asp-route-storeId="@Model.StoreId" asp-route-count="@Model.Count" asp-route-searchTerm="@Model.Search.Toggle("startdate", "-3d")" class="dropdown-item @(HasArrayFilter("startdate", "-3d") ? "custom-active" : "")" text-translate="true">Last 3 days</a>
             <a asp-action="ListInvoices" asp-route-storeId="@Model.StoreId" asp-route-count="@Model.Count" asp-route-searchTerm="@Model.Search.Toggle("startdate", "-7d")" class="dropdown-item @(HasArrayFilter("startdate", "-7d") ? "custom-active" : "")" text-translate="true">Last 7 days</a>
-            <button type="button" class="dropdown-item @(HasCustomDateFilter() ? "custom-active" : "")" data-bs-toggle="modal" data-bs-target="#customRangeModal" text-translate="true">Custom Range</button>
+            <button type="button" class="dropdown-item @(HasCustomDateFilter() ? "custom-active" : "")" onclick="openModal('#customRangeModal', this)" text-translate="true">Custom Range</button>
         </div>
     </div>
     @if (statusFilterCount > 0 || appFilterCount > 0 || hasDateFilter || !string.IsNullOrEmpty(Model.SearchText))
@@ -362,10 +364,10 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
                     @foreach (var invoice in Model.Invoices)
                     {
                         var detailsId = $"invoice_details_{invoice.InvoiceId}";
+                    <tbody x-data="{ expanded: false }">
                         <tr id="invoice_@invoice.InvoiceId" class="mass-action-row">
                             <td class="only-for-js align-middle">
                                 <input name="selectedItems" type="checkbox" class="form-check-input mass-action-select" value="@invoice.InvoiceId" />
@@ -394,20 +396,20 @@
                             </td>
                             <td class="align-middle text-end">
                                 <div class="inline-flex-row-gap-2">
-                                    <button class="accordion-button collapsed only-for-js ms-0 inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#@detailsId" aria-expanded="false" aria-controls="@detailsId">
+                                    <button class="accordion-button collapsed only-for-js ms-0 inline-block" type="button" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="@detailsId">
                                         <vc:icon symbol="caret-down" />
                                     </button>
                                 </div>
                             </td>
                         </tr>
-                        <tr id="@detailsId" class="invoice-details-row collapse">
+                        <tr id="@detailsId" class="invoice-details-row" x-show="expanded" x-collapse>
                             <td colspan="7" class="border-top-0">
                                 @* Leaving this as partial because it abstracts complexity of Invoice Payments *@
                                 <partial name="ListInvoicesPaymentsPartial" model="(invoice.Details, true)" />
                             </td>
                         </tr>
+                    </tbody>
                     }
-                </tbody>
             </table>
         </div>
 

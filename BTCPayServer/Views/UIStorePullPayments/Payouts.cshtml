@@ -62,13 +62,13 @@
 <div class="sticky-header">
     <h2 class="my-1">
         @ViewData["Title"]
-        <a href="#descriptor" data-bs-toggle="collapse">
+        <a href="#descriptor" @@click.prevent="expanded = !expanded">
             <vc:icon symbol="info" />
         </a>
     </h2>
 </div>
 
-<div id="descriptor" class="collapse">
+<div id="descriptor" x-show="expanded" x-collapse>
     <div class="tile-card">
         <div class="flex-1">
             <p class="mb-4">
@@ -77,10 +77,11 @@
             </p>
             <a href="https://docs.btcpayserver.org/Payouts/" target="_blank" rel="noreferrer noopener" text-translate="true">Learn More</a>
         </div>
-        <button type="button" class="btn-close ms-auto" data-bs-toggle="collapse" data-bs-target="#descriptor" aria-expanded="false" aria-label="@StringLocalizer["Close"]">
+        <button type="button" class="btn-close ms-auto" @@click="expanded = false" aria-expanded="false" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close" />
         </button>
     </div>
+</div>
 </div>
 
 <partial name="_StatusMessage" />

@@ -35,11 +35,11 @@ else
     <label class="flex items-center">
         @if (Model.ShowScripting)
         {
-            <button type="submit" id="@Html.IdFor(o => o.ShowScripting)_submit" class="btcpay-toggle me-4 btcpay-toggle--active" value="scripting-toggle-@(Model.IsFallback ? "fallback" : "primary")" name="command" data-bs-toggle="modal" data-bs-target="#@Html.Id("ScriptingConfirm_ConfirmModal")" permission="@Policies.CanModifyStoreSettings" text-translate="true">Enable advanced rate rule scripting</button>
+            <button type="submit" id="@Html.IdFor(o => o.ShowScripting)_submit" class="btcpay-toggle me-4 btcpay-toggle--active" value="scripting-toggle-@(Model.IsFallback ? "fallback" : "primary")" name="command" onclick="openModal('#@Html.Id("ScriptingConfirm_ConfirmModal")', this)" permission="@Policies.CanModifyStoreSettings" text-translate="true">Enable advanced rate rule scripting</button>
         }
         else
         {
-            <button type="submit" id="@Html.IdFor(o => o.ShowScripting)_submit" class="btcpay-toggle me-4" value="scripting-toggle-@(Model.IsFallback ? "fallback" : "primary")" name="command" data-bs-toggle="modal" permission="@Policies.CanModifyStoreSettings" text-translate="true">Enable advanced rate rule scripting</button>
+            <button type="submit" id="@Html.IdFor(o => o.ShowScripting)_submit" class="btcpay-toggle me-4" value="scripting-toggle-@(Model.IsFallback ? "fallback" : "primary")" name="command" permission="@Policies.CanModifyStoreSettings" text-translate="true">Enable advanced rate rule scripting</button>
         }
 
         <div>

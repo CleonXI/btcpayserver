@@ -1,10 +1,10 @@
 <div id="scan-qr-modal-app">
-    <div class="modal" tabindex="-1" role="dialog" :id="modalId">
+    <div class="modal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" role="dialog" :id="modalId">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{title}} <template v-if="fragments && fragments.length > 1">({{index+1}}/{{fragments.length}})</template></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@StringLocalizer["Close"]">
+                    <button type="button" class="btn-close" @@click="close()" aria-label="@StringLocalizer["Close"]">
                         <vc:icon symbol="close"/>
                     </button>
                 </div>
@@ -36,7 +36,7 @@
                     <div v-if="note" v-html="note" class="text-btcpay-body-text-muted mt-4" id="scan-qr-modal-note"></div>
                 </div>
                 <div class="mb-6 text-center" v-if="continueCallback">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-on:click="continueCallback()">{{ continueTitle || 'Continue' }}</button>
+                    <button type="button" class="btn btn-secondary" @@click="close()" v-on:click="continueCallback()">{{ continueTitle || 'Continue' }}</button>
                 </div>
             </div>
         </div>

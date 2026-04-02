@@ -77,7 +77,7 @@
         var policy = permission.Definition.Policy;
         <div class="form-check mb-0">
             <input type="checkbox" class="form-check-input policy-cb" checked="@isChecked" value="@policy" id="Policy-@policy.Replace(".", "_")" />
-            <label class="h5 font-semibold form-check-label mb-1" for="Policy-@policy.Replace(".", "_")" data-bs-toggle="tooltip" title="@policy">
+            <label class="h5 font-semibold form-check-label mb-1" for="Policy-@policy.Replace(".", "_")" x-data x-tooltip="'@policy'" title="@policy">
                 @permission.Definition.Display.Title
             </label>
             <p class="text-btcpay-body-text-muted">@permission.Definition.Display.Description</p>

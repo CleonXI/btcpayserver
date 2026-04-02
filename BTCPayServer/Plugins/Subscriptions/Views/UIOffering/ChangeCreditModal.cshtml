@@ -1,11 +1,11 @@
 ﻿
-<div class="modal fade" id="updateCreditModal" tabindex="-1" aria-hidden="true">
+<div class="modal" id="updateCreditModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title charge-mode" text-translate="true">Charge user</h4>
                 <h4 class="modal-title credit-mode" text-translate="true">Credit user</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@StringLocalizer["Close"]">
+                <button type="button" class="btn-close" @@click="close()" aria-label="@StringLocalizer["Close"]">
                     <vc:icon symbol="close" />
                 </button>
             </div>

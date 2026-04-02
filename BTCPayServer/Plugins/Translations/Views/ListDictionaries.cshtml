@@ -8,7 +8,7 @@
 <div class="sticky-header">
 	<h2>@ViewData["Title"]</h2>
 	<div class="flex gap-2">
-		<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#downloadLanguagePackModal" text-translate="true">
+		<button type="button" class="btn btn-secondary" onclick="openModal('#downloadLanguagePackModal', this)" text-translate="true">
 			Download language pack
 		</button>
 		<a id="page-primary" asp-action="CreateDictionary" class="btn btn-primary" role="button" text-translate="true">
@@ -72,7 +72,7 @@
 							}
 							@if (v.Editable && !v.IsSelected)
 							{
-								<a id="Delete-@v.DictionaryName" asp-action="DeleteDictionary" asp-route-dictionary="@v.DictionaryName" data-bs-toggle="modal" data-bs-target="#ConfirmModal" data-description="The dictionary <b>@Html.Encode(v.DictionaryName)</b> will be removed from this server." data-confirm-input="@StringLocalizer["Delete"]" text-translate="true">Remove</a>
+								<a id="Delete-@v.DictionaryName" asp-action="DeleteDictionary" asp-route-dictionary="@v.DictionaryName" onclick="openModal('#ConfirmModal', this); return false;" data-description="The dictionary <b>@Html.Encode(v.DictionaryName)</b> will be removed from this server." data-confirm-input="@StringLocalizer["Delete"]" text-translate="true">Remove</a>
 							}
 						</div>
 					</td>
@@ -84,13 +84,13 @@
 </div>
 
 @* Download Language Pack Modal *@
-<div class="modal fade" id="downloadLanguagePackModal" tabindex="-1" role="dialog" aria-labelledby="downloadLanguagePackModalTitle" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal" id="downloadLanguagePackModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" role="dialog" aria-labelledby="downloadLanguagePackModalTitle" data-bs-backdrop="static">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<form method="post" asp-action="DownloadLanguagePack">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="downloadLanguagePackModalTitle" text-translate="true">Download Language Pack</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+					<button type="button" class="btn-close" @@click="close()" aria-label="Close">
 						<vc:icon symbol="close" />
 					</button>
 				</div>
@@ -112,7 +112,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" text-translate="true">Cancel</button>
+					<button type="button" class="btn btn-secondary" @@click="close()" text-translate="true">Cancel</button>
 					<button type="submit" class="btn btn-primary" text-translate="true">Download</button>
 				</div>
 			</div>

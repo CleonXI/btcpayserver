@@ -35,7 +35,7 @@
                     <td>@store.Users.Count User@(store.Users.Count == 1 ? "" : "s")</td>
                     <td class="text-end">
                         <div class="inline-flex-row-gap-2">
-                            <button class="accordion-button collapsed only-for-js ms-0 inline-block" type="button" data-bs-toggle="collapse" data-bs-target="#@detailsId" aria-expanded="false" aria-controls="@detailsId">
+                            <button class="accordion-button collapsed only-for-js ms-0 inline-block" type="button" @@click="expanded = !expanded" :aria-expanded="expanded" aria-controls="@detailsId">
                                 <vc:icon symbol="caret-down" />
                             </button>
                         </div>

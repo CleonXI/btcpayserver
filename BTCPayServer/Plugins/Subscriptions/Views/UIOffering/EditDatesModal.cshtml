@@ -1,9 +1,9 @@
-<div class="modal fade" id="editDatesModal" tabindex="-1" aria-hidden="true">
+<div class="modal" id="editDatesModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" text-translate="true">Edit Subscription Dates</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@StringLocalizer["Close"]">
+                <button type="button" class="btn-close" @@click="close()" aria-label="@StringLocalizer["Close"]">
                     <vc:icon symbol="close" />
                 </button>
             </div>
@@ -35,7 +35,7 @@
                     <div class="text-btcpay-danger edit-dates-error" style="display:none"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" text-translate="true">Cancel</button>
+                    <button type="button" class="btn btn-secondary" @@click="close()" text-translate="true">Cancel</button>
                     <button type="submit" class="btn btn-primary edit-dates-save" name="command" value="edit-dates" text-translate="true">Save</button>
                 </div>
             </form>

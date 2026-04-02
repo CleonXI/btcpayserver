@@ -21,11 +21,11 @@
         <form asp-action="SubscriberSuspend"
               asp-route-offeringId="@subscriber.OfferingId"
               asp-route-storeId="@subscriber.Offering.App.StoreDataId"
-              asp-route-customerId="@subscriber.CustomerId" method="post" class="dropdown">
-        <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              asp-route-customerId="@subscriber.CustomerId" method="post" class="dropdown" x-data="btcDropdown">
+        <span class="dropdown-toggle" @@click="toggle()" aria-haspopup="true" :aria-expanded="isOpen">
             <span>@label</span>
         </span>
-        <div class="dropdown-menu">
+        <div class="dropdown-menu" x-show="isOpen" @@click.outside="close()" x-transition>
             @if (subscriber.IsActive)
             {
                 @* <button type="submit" name="command" value="suspend" class="dropdown-item lh-base" text-translate="true"> *@
@@ -35,8 +35,7 @@
                     href="#"
                    text-translate="true"
                    class="suspend-subscriber-link dropdown-item lh-base"
-                   data-bs-toggle="modal"
-                   data-bs-target="#suspendSubscriberModal"
+                   onclick="openModal('#suspendSubscriberModal', this); return false;"
                    data-subscriber-id="@subscriber.CustomerId"
                    data-subscriber-email="@subscriber.Customer.Email.Get()">
                     Suspend Access

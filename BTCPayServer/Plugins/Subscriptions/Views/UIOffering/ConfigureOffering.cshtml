@@ -102,7 +102,7 @@
         }
 
         <div class="grid sm:flex flex-wrap gap-4 mt-4">
-            <a id="DeleteApp" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#ConfirmModal"
+            <a id="DeleteApp" class="btn btn-outline-danger" onclick="openModal('#ConfirmModal', this); return false;"
                data-description="The app <strong>@Html.Encode(Model.Name)</strong> and its settings will be permanently deleted."
                data-confirm-input="@StringLocalizer["Delete"]"
                permission="@Policies.CanModifyStoreSettings">Delete this offering</a>

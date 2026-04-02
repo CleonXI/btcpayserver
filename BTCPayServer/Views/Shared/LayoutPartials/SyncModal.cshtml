@@ -2,14 +2,14 @@
 @inject IEnumerable<ISyncSummaryProvider> SyncSummaryProviders;
 @if (SyncSummaryProviders.Any(provider => !provider.AllAvailable()))
 {
-    <div id="syncModal" class="modal" tabindex="-1">
+    <div id="syncModal" class="modal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'">
         <div class="modal-dialog">
             <div class="modal-content">
-                <a class="modal-header btn-link border-0 no-underline cursor-pointer items-center" data-bs-toggle="collapse" data-bs-target="#syncModalContent">
+                <a class="modal-header btn-link border-0 no-underline cursor-pointer items-center" @@click="expanded = false">
                     <h4 class="modal-title h5 font-semibold">Your nodes are syncing …</h4>
                     <vc:icon symbol="caret-down"/>
                 </a>
-                <div id="syncModalContent" class="collapse show">
+                <div id="syncModalContent" x-show="expanded" x-collapse>
                     <div class="modal-body pt-0">
                         <p>Your node is syncing the entire blockchain and validating the consensus rules.</p>
                         @foreach (var provider in SyncSummaryProviders)

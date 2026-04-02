@@ -20,7 +20,7 @@
 @if (Model.ShowQR)
 {
     <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="@StringLocalizer["Close"]">
+        <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close" />
         </button>
         <span text-translate="true">CONFIDENTIAL: This QR Code is confidential, close this window as soon as you don't need it anymore.</span>
@@ -51,7 +51,7 @@
 <h4 class="mt-6 mb-4" text-translate="true">QR Code connection</h4>
 <p>@StringLocalizer["You can use QR Code to connect to {0} with compatible wallets.", Model.WalletName]</p>
 
-<div class="form-group">
+<div class="form-group" x-data="{ expanded: false }">
     @if (!Model.ShowQR)
     {
         <div class="form-group">
@@ -67,8 +67,8 @@
             <div id="qrCode"></div>
             <div id="qrCodeData" data-url="@Model.ServiceLink"></div>
         </div>
-        <p text-translate="true">See QR Code information by clicking <a href="#detailsQR" data-bs-toggle="collapse" text-translate="true">here</a></p>
-        <div id="detailsQR" class="collapse">
+        <p text-translate="true">See QR Code information by clicking <a href="#detailsQR" @@click.prevent="expanded = !expanded" text-translate="true">here</a></p>
+        <div id="detailsQR" x-show="expanded" x-collapse>
             <div class="form-group">
                 <label asp-for="ServiceLink" class="form-label" text-translate="true">QR Code data</label>
                 <input asp-for="ServiceLink" class="form-control" readonly />
