@@ -8,17 +8,17 @@
     {
         var hasCount = vm.PerkCount.ContainsKey(item.Id);
         var hasValue = vm.PerkValue.ContainsKey(item.Id);
-        <div class="card mb-6 perk expanded" id="@item.Id">
+        <div class="relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg mb-6 perk expanded" id="@item.Id">
             @if (vm.DisplayPerksRanking && hasCount)
             {
                 <span class="btn btn-sm rounded-full px-0 btn-primary perk-badge">#@(Array.IndexOf(vm.Perks, item) + 1)</span>
             }
             @if (!string.IsNullOrEmpty(item.Image))
             {
-                <img class="card-img-top" src="@item.Image" alt="@item.Title" asp-append-version="true" loading="lazy" />
+                <img class="w-full rounded-t-lg" src="@item.Image" alt="@item.Title" asp-append-version="true" loading="lazy" />
             }
-            <div class="card-body">
-                <div class="card-title flex items-center justify-between mb-1">
+            <div class="flex-1 p-4">
+                <div class="mb-2 flex items-center justify-between mb-1">
                     <label class="h5 flex items-center">
                         @if (vm.Started && !vm.Ended )
                         {
@@ -47,11 +47,11 @@
                         }
                     </span>
                 </div>
-                <p class="card-text overflow-hidden">@Safe.Raw(item.Description)</p>
+                <p class="overflow-hidden">@Safe.Raw(item.Description)</p>
             </div>
             @if (hasCount || hasValue || item.Inventory.HasValue)
             {
-                <div class="card-footer flex flex-wrap justify-between">
+                <div class="px-4 py-2 bg-[var(--btcpay-body-bg-light)] border-t border-[var(--btcpay-body-border-medium)] flex flex-wrap justify-between">
                     @switch (item.Inventory)
                     {
                         case null:

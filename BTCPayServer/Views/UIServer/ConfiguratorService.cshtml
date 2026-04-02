@@ -1,4 +1,4 @@
-﻿@model LightningWalletServices
+@model LightningWalletServices
 @{
     ViewData.SetLayoutModel(new(nameof(ServerNavPages.Services), StringLocalizer["BTCPay Server Configurator"]));
 }
@@ -23,8 +23,8 @@
     <div asp-validation-summary="All"></div>
 }
 
-<div class="row">
-    <div class="col-md-8">
+<div class="flex flex-wrap gap-6">
+    <div class="md:w-2/3">
         <div class="form-group">
             <p text-translate="true">This page exposes information to use the configured BTCPay Server Configurator to modify this setup.</p>
         </div>

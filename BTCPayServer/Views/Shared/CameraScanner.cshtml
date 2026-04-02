@@ -4,7 +4,7 @@
 }
 
 <template id="camera-qr-scanner-wrap">
-	<div v-if="modalId" :id="modalId" class="modal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" data-bs-backdrop="static">
+	<div v-if="modalId" :id="modalId" class="modal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -36,13 +36,13 @@
             <qrcode-capture v-if="noStreamApiSupport" v-on:decode="onDecode" :camera="cameraOff? 'off': cameras[camera]" :device-id="cameras[camera]"/>
         </div>
         <div v-if="isLoaded">
-            <div v-if="errorMessage" class="alert alert-danger mt-4" role="alert">
+            <div v-if="errorMessage" class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)] mt-4" role="alert">
                 {{errorMessage}}
             </div>
-            <div v-if="successMessage" class="alert alert-success mt-4" role="alert">
+            <div v-if="successMessage" class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-success-text)] bg-[var(--btcpay-success)] border-[var(--btcpay-success-border)] mt-4" role="alert">
                 {{successMessage}}
             </div>
-            <div v-else-if="qrData" class="alert alert-info font-btcpay-mono truncate mt-4">
+            <div v-else-if="qrData" class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-info-text)] bg-[var(--btcpay-info)] border-[var(--btcpay-info-border)] font-btcpay-mono truncate mt-4">
                 {{qrData}}
             </div>
             <div v-else-if="decoder">
@@ -147,8 +147,7 @@ function initCameraScanningApp(title, onDataSubmit, modalId, submitOnScan = fals
 			close() {
                 this.reset();
                 if (this.modalId) {
-                    const modal = bootstrap.Modal.getInstance(document.getElementById(this.modalId));
-                    modal.hide();
+                    window.closeModal('#' + this.modalId);
                 }
 			},
 			onDecode(content) {

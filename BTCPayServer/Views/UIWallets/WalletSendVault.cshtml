@@ -28,8 +28,8 @@
 
 @if (maxPSBTSize >= Model.SigningContext.PSBT.Length)
 {
-    <div class="row mt-12 mb-6">
-        <div class="col-md-8 mx-auto">
+    <div class="flex flex-wrap gap-6 mt-12 mb-6">
+        <div class="md:w-2/3 mx-auto">
             <component type="typeof(VaultBridgeUI)"
                        param-Controller="@(new SignHWIController()
                                          {
@@ -43,7 +43,7 @@
 }
 else
 {
-    <div class="alert alert-danger my-6" role="alert">
+    <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)] my-6" role="alert">
         <span>@StringLocalizer["PSBT too large to be signed by Vault. (Max: {0} bytes)", maxPSBTSize]</span>
     </div>
 }

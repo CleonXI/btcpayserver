@@ -52,7 +52,7 @@
     {
         @if (!Model.Stores.Any())
         {
-            <div class="alert alert-warning mb-6" text-translate="true">
+            <div class="relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)] mb-6" text-translate="true">
                 You currently have no stores configured.
             </div>
             <button class="btn btn-secondary" name="command" id="consent-no" type="submit" value="Cancel" text-translate="true">Cancel</button>
@@ -76,7 +76,7 @@
 
         @if (Model.RedirectUrl != null)
         {
-            <p class="alert alert-info mb-6">
+            <p class="relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-info-text)] bg-[var(--btcpay-info)] border-[var(--btcpay-info-border)] mb-6">
                 <span text-translate="true">If authorized, the generated API key will be provided to</span> <strong>@Model.RedirectUrl.AbsoluteUri</strong>
             </p>
         }

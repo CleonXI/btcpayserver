@@ -15,8 +15,8 @@
     <p class="page-subtitle" text-translate="true">Using an HD private key or mnemonic seed</p>
 </header>
 
-<div class="alert alert-warning alert-dismissible my-6" role="alert">
-    <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
+<div class="relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)] pr-12 my-6" role="alert">
+    <button type="button" class="btn-close absolute top-0 right-0 z-2 p-[0.9375rem_1rem]" onclick="this.parentElement.remove()" aria-label="@StringLocalizer["Close"]">
         <vc:icon symbol="close" />
     </button>
     <p text-translate="true">Before you proceed, please understand the following:</p>

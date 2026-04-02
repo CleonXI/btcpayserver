@@ -188,7 +188,7 @@ app = createApp({
 
             if (this.hasPerks) {
                 this.contributeModalOpen = true;
-                if (this._contributeModal) this._contributeModal.show();
+                window.openModal('#' + this.$refs.modalContribute.id);
             } else {
                 if (this.srvModel.formUrl) {
                     window.location.href = this.srvModel.formUrl;
@@ -202,7 +202,6 @@ app = createApp({
     mounted: function () {
         const modalEl = this.$refs.modalContribute;
         if (modalEl) {
-            this._contributeModal = new bootstrap.Modal(modalEl);
             modalEl.addEventListener('hidden.bs.modal', () => { this.contributeModalOpen = false; });
         }
         hubListener.connect();
@@ -213,7 +212,7 @@ app = createApp({
             btcpay.appendAndShowInvoiceFrame(invoiceId);
 
             self.contributeModalOpen = false;
-            if (self._contributeModal) self._contributeModal.hide();
+            window.closeModal('#' + self.$refs.modalContribute.id);
             self.setLoading(false);
         });
 

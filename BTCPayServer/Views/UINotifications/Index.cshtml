@@ -38,16 +38,16 @@
     </a>
 </div>
 <partial name="_StatusMessage" />
-<form asp-route-status="@Model.Status" class="flex flex-wrap items-center md:gap-6 sm:gap-0 mb-6 col-xxl-8" asp-action="Index" method="get">
+<form asp-route-status="@Model.Status" class="flex flex-wrap items-center md:gap-6 sm:gap-0 mb-6 2xl:w-2/3" asp-action="Index" method="get">
     <input asp-for="Count" type="hidden" />
     <input asp-for="TimezoneOffset" type="hidden" />
     <input type="hidden" asp-for="Status" value="@Model.Status" />
 
-    <div class="col-12 col-md-6 col-lg-4 mb-4 md:mb-0">
+    <div class="w-full md:w-1/2 lg:w-1/3 mb-4 md:mb-0">
         <input asp-for="SearchText" class="form-control" placeholder="@StringLocalizer["Search…"]" />
     </div>
 
-    <div class="btn-group col-12 col-md-auto mb-4 md:mb-0" role="group" aria-label="View Notification">
+    <div class="btn-group w-full md:w-auto mb-4 md:mb-0" role="group" aria-label="View Notification">
         <a class="btn @((status == "All") ? "btn-primary" : "btn-outline-secondary")"
            asp-controller="UINotifications"
            asp-action="Index"
@@ -64,7 +64,7 @@
         </a>
     </div>
 
-    <div class="dropdown col-12 col-md-auto mb-4 md:mb-0" x-data="btcDropdown">
+    <div class="dropdown w-full md:w-auto mb-4 md:mb-0" x-data="btcDropdown">
         <button id="StatusOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret w-full md:w-auto" type="button" @@click="toggle()" :aria-expanded="isOpen">
             @if (statusFilterCount > 0)
             {
@@ -84,7 +84,7 @@
         </div>
     </div>
 
-    <div class="dropdown col-12 col-md-auto" x-data="btcDropdown">
+    <div class="dropdown w-full md:w-auto" x-data="btcDropdown">
         <button id="StoresOptionsToggle" class="btn btn-secondary dropdown-toggle dropdown-toggle-custom-caret w-full md:w-auto" type="button" @@click="toggle()" :aria-expanded="isOpen">
             @if (storesFilterCount > 0)
             {
@@ -115,7 +115,7 @@
     <form method="post" asp-action="MassAction">
         @if (Model.Items.Any())
         {
-            <div class="table-responsive">
+            <div class="overflow-x-auto">
                 <table class="table table-hover mass-action">
                     <thead class="mass-action-head">
                         <tr>

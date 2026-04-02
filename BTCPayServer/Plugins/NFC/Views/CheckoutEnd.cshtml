@@ -1,7 +1,7 @@
 <template id="lnurl-withdraw-template">
     <div v-if="display" class="mt-6" id="NFC">
-        <div v-if="nfcErrorMessage" class="alert alert-danger" v-text="nfcErrorMessage"></div>
-        <div v-if="nfcWarningMessage" class="alert alert-warning" v-text="nfcWarningMessage"></div>
+        <div v-if="nfcErrorMessage" class="relative p-3 mb-4 border rounded text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)]" v-text="nfcErrorMessage"></div>
+        <div v-if="nfcWarningMessage" class="relative p-3 mb-4 border rounded text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)]" v-text="nfcWarningMessage"></div>
         <button class="btn btn-secondary rounded-full w-full" type="button" id="PayByNFC"
                 :disabled="nfcScanning || submitting" v-on:click="handleClick">{{btnText}}</button>
     </div>

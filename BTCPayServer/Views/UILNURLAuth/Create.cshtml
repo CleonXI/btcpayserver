@@ -21,7 +21,7 @@
             var mode = formats.ElementAt(i);
             <li class="nav-item">
                 <a class="btcpay-pill @(i == 0 ? "active" : "")"
-                   data-bs-toggle="tab" data-bs-target="#@mode.Key" role="tab"
+                   @@click="tab = '@mode.Key'" :class="tab === '@mode.Key' && 'active'" role="tab"
                    href="#">
                     @mode.Key
                 </a>

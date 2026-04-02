@@ -22,7 +22,7 @@
 	Dictionaries enable you to translate the BTCPay Server backend into different languages.
 </p>
 
-<div class="table-responsive">
+<div class="overflow-x-auto">
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -84,7 +84,7 @@
 </div>
 
 @* Download Language Pack Modal *@
-<div class="modal" id="downloadLanguagePackModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" role="dialog" aria-labelledby="downloadLanguagePackModalTitle" data-bs-backdrop="static">
+<div class="modal" id="downloadLanguagePackModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" role="dialog" aria-labelledby="downloadLanguagePackModalTitle">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<form method="post" asp-action="DownloadLanguagePack">
 			<div class="modal-content">

@@ -1,4 +1,4 @@
-﻿@model ChargeServiceViewModel
+@model ChargeServiceViewModel
 @{
     ViewData.SetLayoutModel(new LayoutModel(nameof(ServerNavPages.Services), StringLocalizer["Lightning Charge Service"])
         .SetCategory(WellKnownCategories.Server));
@@ -17,8 +17,8 @@
 </div>
 <partial name="_StatusMessage" />
 
-<div class="row">
-    <div class="col-md-8">
+<div class="flex flex-wrap gap-6">
+    <div class="md:w-2/3">
         @if (!ViewContext.ModelState.IsValid)
         {
             <div asp-validation-summary="All"></div>
@@ -38,8 +38,8 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-8">
+<div class="flex flex-wrap gap-6">
+    <div class="md:w-2/3">
         <h4 text-translate="true">Credentials</h4>
         @if (Model.Uri != null)
         {

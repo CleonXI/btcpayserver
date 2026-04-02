@@ -15,8 +15,8 @@
     </a>
 </div>
 <partial name="_StatusMessage" />
-<div class="row">
-    <div class="col-xl-10 content-constrain-xxl">
+<div class="flex flex-wrap gap-6">
+    <div class="xl:w-5/6 content-constrain-xxl">
         <p>
             @ViewLocalizer["The {0} offers programmatic access to your instance. You can manage your BTCPay Server (e.g. stores, invoices, users) as well as automate workflows and integrations (see {1}). For that you need the API keys, which can be generated here. Find more information in the {2}.",
                 Html.ActionLink(StringLocalizer["Greenfield API"], "SwaggerDocs", "UIHome", new { }, new { target = "_blank",  rel = "noreferrer noopener" }),

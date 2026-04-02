@@ -1,4 +1,4 @@
-﻿@inject BTCPayServer.Services.BTCPayServerEnvironment Env
+@inject BTCPayServer.Services.BTCPayServerEnvironment Env
 @inject DisplayFormatter DisplayFormatter
 @inject LinkGenerator LinkGenerator
 @using BTCPayServer.Plugins.Subscriptions
@@ -196,11 +196,11 @@
 </head>
 <body>
 <div class="checkout-container">
-    <div class="container">
+    <div class="mx-auto px-6">
         <partial name="_StatusMessage" />
-        <div class="row">
+        <div class="flex flex-wrap gap-6">
             <!-- Left Column - Subscription Details -->
-            <div class="col-lg-7 col-md-6">
+            <div class="lg:w-[58.33%] md:w-1/2">
                 <div class="subscription-details">
                     @if (Model.StoreBranding.LogoUrl is not null || Model.StoreName is not null)
                     {
@@ -255,7 +255,7 @@
             </div>
 
             <!-- Right Column - Checkout Form -->
-            <div class="col-lg-5 col-md-6">
+            <div class="lg:w-[41.67%] md:w-1/2">
                 <div class="checkout-form">
                     <div class="checkout-header">
                         <h4 class="checkout-title">Complete Your Order</h4>

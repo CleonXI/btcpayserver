@@ -19,11 +19,11 @@
     </div>
     <partial name="_StatusMessage" />
 
-    <div class="row">
-        <div class="col-xl-10 content-constrain-xxl">
+    <div class="flex flex-wrap gap-6">
+        <div class="xl:w-5/6 content-constrain-xxl">
             @if (Model.ShowChangeWarning)
             {
-                <div class="alert alert-danger mb-6" text-translate="true">
+                <div class="relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)] mb-6" text-translate="true">
                     If you change your configured storage provider, your current files will become inaccessible.
                 </div>
             }

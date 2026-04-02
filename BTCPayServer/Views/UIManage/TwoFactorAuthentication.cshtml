@@ -7,8 +7,8 @@
 	<h2 class="my-1">@ViewData["Title"]</h2>
 </div>
 <partial name="_StatusMessage" />
-<div class="row">
-    <div class="col-xl-8 content-constrain-xxl">
+<div class="flex flex-wrap gap-6">
+    <div class="xl:w-2/3 content-constrain-xxl">
         <p text-translate="true">Two-Factor Authentication (2FA) is an additional measure to protect your account. In addition to your password you will be asked for a second proof on login. This can be provided by an app (such as Google or Microsoft Authenticator) or a security device (like a Yubikey or your hardware wallet supporting FIDO2).</p>
 
         <h4 class="mb-4" text-translate="true">App-based 2FA</h4>
@@ -17,32 +17,32 @@
         {
             if (Model.RecoveryCodesLeft == 0)
             {
-                <div class="alert alert-danger">
-                    <h4 class="alert-heading mb-4">
+                <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)]">
+                    <h4 class="mb-4">
                         <vc:icon symbol="warning" />
                         <span text-translate="true">You have no recovery codes left.</span>
                     </h4>
-                    <p class="mb-0">You must <a asp-action="GenerateRecoveryCodes" class="alert-link">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
+                    <p class="mb-0">You must <a asp-action="GenerateRecoveryCodes" class="font-normal">generate a new set of recovery codes</a> before you can log in with a recovery code.</p>
                 </div>
             }
             else if (Model.RecoveryCodesLeft == 1)
             {
-                <div class="alert alert-danger">
-                    <h4 class="alert-heading mb-4">
+                <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)]">
+                    <h4 class="mb-4">
                         <vc:icon symbol="warning" />
                         <span text-translate="true">You only have 1 recovery code left.</span>
                     </h4>
-                    <p class="mb-0">You can <a asp-action="GenerateRecoveryCodes" class="alert-link">generate a new set of recovery codes</a>.</p>
+                    <p class="mb-0">You can <a asp-action="GenerateRecoveryCodes" class="font-normal">generate a new set of recovery codes</a>.</p>
                 </div>
             }
             else if (Model.RecoveryCodesLeft <= 3)
             {
-                <div class="alert alert-warning">
-                    <h4 class="alert-heading mb-4">
+                <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)]">
+                    <h4 class="mb-4">
                         <vc:icon symbol="warning" />
                         You only have @Model.RecoveryCodesLeft recovery codes left.
                     </h4>
-                    <p class="mb-0">You should <a asp-action="GenerateRecoveryCodes" class="alert-link">generate a new set of recovery codes</a>.</p>
+                    <p class="mb-0">You should <a asp-action="GenerateRecoveryCodes" class="font-normal">generate a new set of recovery codes</a>.</p>
                 </div>
             }
         }

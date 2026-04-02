@@ -27,22 +27,22 @@
 
 @if (supported is null)
 {
-    <div class="alert alert-warning text-center sticky-top mb-0 rounded-none" role="alert">
+    <div class="relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)] text-center sticky-top mb-0 rounded-none" role="alert">
         LNURL is not enabled on your store, which this print feature relies on.
-        <a asp-controller="UIStores" asp-action="LightningSettings" asp-route-cryptoCode="BTC"  asp-route-storeId="@store.Id" class="alert-link p-0">
+        <a asp-controller="UIStores" asp-action="LightningSettings" asp-route-cryptoCode="BTC"  asp-route-storeId="@store.Id" class="font-normal p-0">
             Enable LNURL
         </a>
     </div>
 }
 else
 {
-    <div class="alert alert-info alert-dismissible flex items-center justify-center sticky-top mb-0 rounded-none print:hidden fade show" role="alert">
+    <div class="relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-info-text)] bg-[var(--btcpay-info)] border-[var(--btcpay-info-border)] pr-12 flex items-center justify-center sticky-top mb-0 rounded-none print:hidden fade show" role="alert">
         <button type="button" class="btn btn-info me-6 border border-light" onclick="window.print()">
             <vc:icon symbol="pos-print" />&nbsp;Print
         </button>
         This view is intended for printing only —
 
-        <a asp-route-viewType="static" class="alert-link">Regular version</a>
+        <a asp-route-viewType="static" class="font-normal">Regular version</a>
     </div>
 }
 <div id="PosPrint" class="public-page-wrap">
@@ -76,9 +76,9 @@ else
                 var formatted = DisplayFormatter.Currency(item.Price ?? 0, Model.CurrencyCode, DisplayFormatter.CurrencyFormat.Symbol);
                 if (item.PriceType == AppItemPriceType.Fixed && item.Price == 0) continue;
                 <div class="flex flex-wrap">
-                    <div class="tile card w-full" data-id="@x">
-                        <div class="card-body pt-0 flex flex-col gap-2">
-                            <h5 class="card-title m-0">@Safe.Raw(item.Title)</h5>
+                    <div class="tile relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg w-full" data-id="@x">
+                        <div class="flex-1 p-4 pt-0 flex flex-col gap-2">
+                            <h5 class="mb-2 m-0">@Safe.Raw(item.Title)</h5>
                             <div class="flex-row-gap-2">
                                 <span class="font-semibold">
                                     @switch (item.PriceType)
@@ -112,7 +112,7 @@ else
                             </div>
                             @if (!string.IsNullOrWhiteSpace(item.Description))
                             {
-                                <p class="card-text">@Safe.Raw(item.Description)</p>
+                                <p>@Safe.Raw(item.Description)</p>
                             }
                         </div>
                         @if (item.Inventory is null or > 0)
@@ -126,7 +126,7 @@ else
                                     ItemCode = item.Id
                                 }, Context.Request.Scheme, Context.Request.Host.ToString())!);
                                 var lnUrl = LNURL.EncodeUri(lnurlEndpoint, "payRequest", supported.UseBech32Scheme);
-                                <a href="@lnUrl" rel="noreferrer noopener" class="card-img-bottom">
+                                <a href="@lnUrl" rel="noreferrer noopener" class="w-full rounded-b-lg">
                                     <vc:qr-code data="@lnUrl.ToString().ToUpperInvariant()" />
                                 </a>
                             }

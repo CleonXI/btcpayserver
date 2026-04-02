@@ -373,7 +373,7 @@
                         <p class="text-btcpay-body-text-muted mb-0" text-translate="true">No payments have been made yet.</p>
                     </template>
                     <template v-else>
-                        <div class="table-responsive my-0">
+                        <div class="overflow-x-auto my-0">
                             <table v-for="invoice of srvModel.invoices" :key="invoice.id" class="invoice table table-borderless">
                                 <thead>
                                 <tr>
@@ -421,7 +421,7 @@
                         {
                             @foreach (var invoice in Model.Invoices)
                             {
-                                <div class="table-responsive my-0">
+                                <div class="overflow-x-auto my-0">
                                     <table class="invoice table table-borderless">
                                         <thead>
                                         <tr>

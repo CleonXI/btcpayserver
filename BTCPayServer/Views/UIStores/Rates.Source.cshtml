@@ -6,7 +6,7 @@
     <input type="hidden" asp-for="ShowScripting" />
     <div class="form-group">
         <label asp-for="Script" class="form-label"></label>
-        <a href="#help" data-bs-toggle="collapse" title="@StringLocalizer["More information..."]">
+        <a href="#help" onclick="document.querySelector('#help')._x_dataStack[0].toggle(); return false;" title="@StringLocalizer["More information..."]">
             <vc:icon symbol="info" />
         </a>
         <textarea asp-for="Script" rows="20" cols="80" class="form-control"></textarea>

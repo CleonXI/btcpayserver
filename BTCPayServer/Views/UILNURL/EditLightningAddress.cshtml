@@ -35,7 +35,7 @@
 
 @if (Context.Request.PathBase.ToString() != string.Empty)
 {
-    <div class="alert alert-warning" role="alert">
+    <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)]" role="alert">
         Your BTCPay Server installation is using the root path <span class="font-bold">@Context.Request.PathBase</span>.<br /><br />
         This is incompatible with wallets attempting to resolve <span class="font-bold">@Context.Request.GetAbsoluteUriNoPathBase(new Uri("/.well-known/lnurlp/{username}", UriKind.Relative))</span> rather than <span class="font-bold">@Context.Request.GetAbsoluteUri("/.well-known/lnurlp/{username}")</span>.<br /><br />
         If the LN Address doesn't work, ask your integrator to redirect queries from <span class="font-bold">@Context.Request.GetAbsoluteUriNoPathBase(new Uri("/.well-known/lnurlp/{username}", UriKind.Relative))</span> to <span class="font-bold">@Context.Request.GetAbsoluteUri("/.well-known/lnurlp/{username}")</span>.
@@ -63,29 +63,29 @@
             <span class="ms-1" text-translate="true">Advanced settings</span>
         </button>
         <div id="AdvancedSettings" x-show="expanded" x-collapse>
-            <div class="row">
-                <div class="col-12 col-sm-auto">
+            <div class="flex flex-wrap gap-6">
+                <div class="w-full sm:w-auto">
                     <div class="form-group" title="@StringLocalizer["The currency to generate the invoice in when generated through this lightning address"]">
                         <label asp-for="Add.CurrencyCode" class="form-label"></label>
                         <input asp-for="Add.CurrencyCode" class="form-control w-auto max-w-input-16ch" currency-selection />
                         <span asp-validation-for="Add.CurrencyCode" class="text-btcpay-danger"></span>
                     </div>
                 </div>
-                <div class="col-12 col-sm-auto">
+                <div class="w-full sm:w-auto">
                     <div class="form-group" title="@StringLocalizer["Minimum amount of sats to allow to be sent to this ln address"]">
                         <label asp-for="Add.Min" class="form-label"></label>
                         <input asp-for="Add.Min" class="form-control max-w-input-16ch" type="number" inputmode="numeric" min="1" />
                         <span asp-validation-for="Add.Min" class="text-btcpay-danger"></span>
                     </div>
                 </div>
-                <div class="col-12 col-sm-auto">
+                <div class="w-full sm:w-auto">
                     <div class="form-group" title="@StringLocalizer["Maximum amount of sats to allow to be sent to this ln address"]">
                         <label asp-for="Add.Max" class="form-label"></label>
                         <input asp-for="Add.Max" class="form-control max-w-input-16ch" type="number" inputmode="numeric" min="1" max="@int.MaxValue" />
                         <span asp-validation-for="Add.Max" class="text-btcpay-danger"></span>
                     </div>
                 </div>
-                <div class="col-12 col-sm-auto">
+                <div class="w-full sm:w-auto">
                     <div class="form-group" title="Metadata (in JSON) to add to the invoice when created through this lightning address.">
                         <label asp-for="Add.InvoiceMetadata" class="form-label"></label>
 						<a href="https://docs.btcpayserver.org/Development/InvoiceMetadata/" target="_blank" rel="noreferrer noopener">

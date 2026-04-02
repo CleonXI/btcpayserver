@@ -21,19 +21,19 @@
     <vc:main-nav />
 </header>
 <template id="badUrl">
-	<div class="alert alert-danger alert-dismissible m-4" role="alert">
-        <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
+	<div class="relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)] pr-12 m-4" role="alert">
+        <button type="button" class="btn-close absolute top-0 right-0 z-2 p-[0.9375rem_1rem]" onclick="this.parentElement.remove()" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close"/>
         </button>
         <span html-translate="true">BTCPay is expecting you to access this website from <strong>@(expectedScheme)://@(expectedHost)/</strong>. If you use a reverse proxy, please set the <strong>X-Forwarded-Proto</strong> header to <strong id="browserScheme">@(expectedScheme)</strong></span>
-        (<a href="https://docs.btcpayserver.org/FAQ/Deployment/#cause-3-btcpay-is-expecting-you-to-access-this-website-from" target="_blank" class="alert-link" rel="noreferrer noopener" text-translate="true">More information</a>)
+        (<a href="https://docs.btcpayserver.org/FAQ/Deployment/#cause-3-btcpay-is-expecting-you-to-access-this-website-from" target="_blank" class="font-normal" rel="noreferrer noopener" text-translate="true">More information</a>)
     </div>
 </template>
 <main id="mainContent" class="flex-1 flex flex-col">
     @if (!_env.IsSecure(_context.HttpContext))
     {
-        <div id="insecureEnv" class="alert alert-danger alert-dismissible" style="position:absolute; top:75px;" role="alert">
-            <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
+        <div id="insecureEnv" class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)] pr-12" style="position:absolute; top:75px;" role="alert">
+            <button type="button" class="btn-close absolute top-0 right-0 z-2 p-[0.9375rem_1rem]" onclick="this.parentElement.remove()" aria-label="@StringLocalizer["Close"]">
                 <vc:icon symbol="close"/>
             </button>
             <span text-translate="true">Your access to BTCPay Server is over an unsecured network. If you are using the docker deployment method with NGINX and HTTPS is not available, you probably did not configure your DNS settings correctly. We disabled the register and login link so you don't leak your credentials.</span>

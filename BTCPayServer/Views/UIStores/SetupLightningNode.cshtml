@@ -30,15 +30,18 @@
 <h1 class="text-center mb-12">@ViewData["Title"]</h1>
 
 <form method="post" class="mt-n2 text-center">
-    <div id="LightningNodeTypeTablist" class="nav btcpay-pills items-center justify-center mb-4" role="tablist">
+    <div id="LightningNodeTypeTablist" class="nav btcpay-pills items-center justify-center mb-4" role="tablist"
+         x-data="{ activeTab: '@(Model.LightningNodeType == LightningNodeType.Internal ? "Internal" : "Custom")' }">
         <input asp-for="LightningNodeType" value="@LightningNodeType.Internal" type="radio" id="LightningNodeType-@LightningNodeType.Internal"
-               data-bs-toggle="pill" data-bs-target="#InternalSetup" role="tab" aria-controls="InternalSetup"
+               @@click="activeTab = 'Internal'; document.querySelectorAll('#LightningNodeTypeTabs .tab-pane').forEach(p => p.classList.remove('show', 'active')); document.querySelector('#InternalSetup').classList.add('show', 'active')"
+               role="tab" aria-controls="InternalSetup"
                aria-selected="@(Model.LightningNodeType == LightningNodeType.Internal ? "true" : "false")"
                class="@(Model.LightningNodeType == LightningNodeType.Internal ? "active" : "")" disabled="@(!Model.CanUseInternalNode)">
         <label asp-for="LightningNodeType" for="@($"LightningNodeType-{LightningNodeType.Internal}")" text-translate="true">Use internal node</label>
 
-        <input asp-for="LightningNodeType" value="@LightningNodeType.Custom" type="radio" id="LightningNodeType-@LightningNodeType.Custom" data-bs-toggle="pill"
-               data-bs-target="#CustomSetup" role="tab" aria-controls="CustomSetup"
+        <input asp-for="LightningNodeType" value="@LightningNodeType.Custom" type="radio" id="LightningNodeType-@LightningNodeType.Custom"
+               @@click="activeTab = 'Custom'; document.querySelectorAll('#LightningNodeTypeTabs .tab-pane').forEach(p => p.classList.remove('show', 'active')); document.querySelector('#CustomSetup').classList.add('show', 'active')"
+               role="tab" aria-controls="CustomSetup"
                aria-selected="@(Model.LightningNodeType == LightningNodeType.Custom ? "true" : "false")"
                class="@(Model.LightningNodeType == LightningNodeType.Custom ? "active" : "")">
         <label asp-for="LightningNodeType" for="@($"LightningNodeType-{LightningNodeType.Custom}")" text-translate="true">Use custom node</label>
@@ -85,8 +88,7 @@
                             <vc:icon symbol="caret-down" />
                         </button>
                     </h2>
-                    <div id="CustomNodeCLightningContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeCLightningHeader"
-                         data-bs-parent="#CustomNodeSupport">
+                    <div id="CustomNodeCLightningContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeCLightningHeader">
                         <div class="accordion-body">
                             <ul class="mb-0">
                                 <li>
@@ -107,8 +109,7 @@
                             <vc:icon symbol="caret-down" />
                         </button>
                     </h2>
-                    <div id="CustomNodeChargeContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeChargeHeader"
-                         data-bs-parent="#CustomNodeSupport">
+                    <div id="CustomNodeChargeContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeChargeHeader">
                         <div class="accordion-body">
                             <ul class="mb-0">
                                 <li>
@@ -126,8 +127,7 @@
                             <vc:icon symbol="caret-down" />
                         </button>
                     </h2>
-                    <div id="CustomNodeEclairContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeEclairHeader"
-                         data-bs-parent="#CustomNodeSupport">
+                    <div id="CustomNodeEclairContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeEclairHeader">
                         <div class="accordion-body">
                             <ul class="pb-4">
                                 <li>
@@ -154,8 +154,7 @@
                             <vc:icon symbol="caret-down" />
                         </button>
                     </h2>
-                    <div id="CustomNodePhoenixdContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodePhoenixdHeader"
-                         data-bs-parent="#CustomNodeSupport">
+                    <div id="CustomNodePhoenixdContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodePhoenixdHeader">
                         <div class="accordion-body">
                             <ul class="pb-4">
                                 <li>
@@ -176,8 +175,7 @@
                             <vc:icon symbol="caret-down" />
                         </button>
                     </h2>
-                    <div id="CustomNodeLNDContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeLNDHeader"
-                         data-bs-parent="#CustomNodeSupport">
+                    <div id="CustomNodeLNDContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeLNDHeader">
                         <div class="accordion-body">
                             <ul class="pb-2">
                                 <li>
@@ -216,8 +214,7 @@
                             <vc:icon symbol="caret-down" />
                         </button>
                     </h2>
-                    <div id="CustomNodeLNDhubContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeLNDhubHeader"
-                         data-bs-parent="#CustomNodeSupport">
+                    <div id="CustomNodeLNDhubContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="CustomNodeLNDhubHeader">
                         <div class="accordion-body">
                             <ul class="pb-2">
                                 <li>

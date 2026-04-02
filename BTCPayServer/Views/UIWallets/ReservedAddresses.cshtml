@@ -24,7 +24,7 @@
         <input id="filter-reserved-addresses" type="text" v-model="filter" class="form-control my-3" placeholder="@StringLocalizer["Filter by address, label or date"]" />
     </div>
 
-    <div v-if="filteredItems.length > 0" class="table-responsive">
+    <div v-if="filteredItems.length > 0" class="overflow-x-auto">
         <table class="table table-hover">
             <thead>
             <tr>

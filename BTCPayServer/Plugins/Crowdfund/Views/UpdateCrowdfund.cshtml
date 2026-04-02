@@ -53,15 +53,15 @@
     {
         <div asp-validation-summary="All" class="@(ViewContext.ModelState.ErrorCount.Equals(1) ? "no-marker" : "")"></div>
     }
-    <div class="row max-w-form-narrow">
-        <div class="col-sm-6">
+    <div class="flex flex-wrap gap-6 max-w-form-narrow">
+        <div class="sm:w-1/2">
             <div class="form-group">
                 <label asp-for="AppName" class="form-label" data-required></label>
                 <input asp-for="AppName" class="form-control" required />
                 <span asp-validation-for="AppName" class="text-btcpay-danger"></span>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="sm:w-1/2">
             <div class="form-group">
                 <label asp-for="Title" class="form-label" data-required></label>
                 <input asp-for="Title" class="form-control" required />
@@ -111,7 +111,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="flex flex-wrap gap-6 mt-4">
         <div class="content-constrain-xxl">
             <div class="form-group">
                 <label asp-for="Description" class="form-label" data-required></label>
@@ -120,8 +120,8 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-xl-10 content-constrain-xxl">
+    <div class="flex flex-wrap gap-6">
+        <div class="xl:w-5/6 content-constrain-xxl">
             <h3 class="mt-12 mb-6">Goal</h3>
             <div class="flex flex-wrap gap-4 mb-4">
                 <div class="form-group w-250px mb-0">
@@ -193,13 +193,13 @@
             </div>
         </div>
     </div>
-    <div id="perks" class="row">
+    <div id="perks" class="flex flex-wrap gap-6">
         <div class="content-constrain-xxl">
             <partial name="TemplateEditor" model="@(nameof(Model.PerksTemplate), Model.PerksTemplate, "Perks", Model.TargetCurrency ?? Model.StoreDefaultCurrency)" />
         </div>
     </div>
-    <div class="row">
-        <div class="col-xl-8 content-constrain-xxl">
+    <div class="flex flex-wrap gap-6">
+        <div class="xl:w-2/3 content-constrain-xxl">
             <h3 class="mt-12 mb-6" text-translate="true">Contributions</h3>
             <div class="flex mb-4">
                 <input asp-for="SortPerksByPopularity" type="checkbox" class="btcpay-toggle me-4" />

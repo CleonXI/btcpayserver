@@ -66,8 +66,8 @@
 <div class="my-12">
     @if (Model.Errors != null && Model.Errors.Count != 0)
     {
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
+        <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)] pr-12" role="alert">
+            <button type="button" class="btn-close absolute top-0 right-0 z-2 p-[0.9375rem_1rem]" onclick="this.parentElement.remove()" aria-label="@StringLocalizer["Close"]">
                 <vc:icon symbol="close" />
             </button>
             @foreach (var error in Model.Errors)

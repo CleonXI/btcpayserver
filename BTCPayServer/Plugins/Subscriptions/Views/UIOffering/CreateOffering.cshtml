@@ -1,4 +1,4 @@
-﻿@using BTCPayServer.Plugins.Subscriptions
+@using BTCPayServer.Plugins.Subscriptions
 @model CreateOfferingViewModel
 
 @{
@@ -17,8 +17,8 @@
     </div>
 
     <partial name="_StatusMessage" />
-    <div class="row">
-        <div class="col-xl-8 content-constrain-xxl">
+    <div class="flex flex-wrap gap-6">
+        <div class="xl:w-2/3 content-constrain-xxl">
             @if (!ViewContext.ModelState.IsValid)
             {
                 <div asp-validation-summary="ModelOnly"></div>

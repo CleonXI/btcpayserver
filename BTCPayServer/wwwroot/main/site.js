@@ -148,9 +148,9 @@ async function initLabelManager (elementId) {
                             a.title = String(info.tooltip);
                         }
 
-                        a.dataset.bsHtml = 'false';
-                        a.dataset.bsToggle = 'tooltip';
-                        a.dataset.bsCustomClass = 'transaction-label-tooltip';
+                        a.dataset.tooltipHtml = 'false';
+                        a.setAttribute('data-tooltip', '');
+                        a.dataset.tooltipClass = 'transaction-label-tooltip';
 
                         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
                         svg.setAttribute('role', 'img');
@@ -362,8 +362,8 @@ document.addEventListener("DOMContentLoaded", () => {
         handleInputGroupClearButtonDisplay(clearBtn);
     });
 
-    document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
-        new bootstrap.Tooltip(el);
+    document.querySelectorAll('[data-tooltip]').forEach(el => {
+        window.btcpayTooltip(el);
     });
 
     delegate('click', '[data-toggle-password]', async e => {
@@ -585,14 +585,19 @@ if (window.Blazor) {
                 $body.innerHTML = content.innerHTML;
                 $body.classList.toggle('hidden', content.isConnected);
                 if (!isUnloading) {
-                    const toast = new bootstrap.Toast($status, { autohide: false });
                     if (content.isConnected) {
-                        if (toast.isShown())
-                            toast.hide();
-                    }
-                    else {
-                        if (!toast.isShown())
-                            toast.show();
+                        if ($status.classList.contains('show')) {
+                            $status.classList.remove('show');
+                            setTimeout(() => {
+                                $status.classList.add('hide');
+                                $status.dispatchEvent(new CustomEvent('hidden.bs.toast', { bubbles: true }));
+                            }, 300);
+                        }
+                    } else {
+                        if (!$status.classList.contains('show')) {
+                            $status.classList.add('show');
+                            $status.classList.remove('hide');
+                        }
                     }
                 }
             });

@@ -191,16 +191,16 @@ document.addEventListener('alpine:init', () => {
 
     // --- Tooltip Directive ---
     Alpine.directive('tooltip', (el, { expression }, { evaluate, cleanup }) => {
-        const title = expression ? evaluate(expression) : (el.getAttribute('data-bs-title') || el.getAttribute('title') || '');
+        const title = expression ? evaluate(expression) : (el.getAttribute('title') || '');
         if (!title) return;
 
-        const placement = el.getAttribute('data-tooltip-placement') || el.getAttribute('data-bs-placement') || 'top';
-        const isHtml = el.getAttribute('data-bs-html') === 'true';
-        const customClass = el.getAttribute('data-bs-custom-class') || '';
+        const placement = el.getAttribute('data-tooltip-placement') || 'top';
+        const isHtml = el.getAttribute('data-tooltip-html') === 'true';
+        const customClass = el.getAttribute('data-tooltip-class') || '';
         let tip = null;
 
         if (el.getAttribute('title')) {
-            el.setAttribute('data-bs-title', el.getAttribute('title'));
+            el.setAttribute('data-original-title', el.getAttribute('title'));
             el.removeAttribute('title');
         }
 
@@ -252,77 +252,49 @@ document.addEventListener('alpine:init', () => {
         });
     });
 
-    // --- Backward-compat: window.bootstrap shim ---
+    // --- Global helpers for non-Alpine contexts ---
     function getStore(el) {
         if (typeof el === 'string') el = document.querySelector(el);
         return el && el._x_dataStack ? el._x_dataStack[0] : null;
     }
 
-    const shimInstances = new WeakMap();
+    window.openModal = (selector, trigger) => {
+        window.dispatchEvent(new CustomEvent('btcpay:open-modal', { detail: { target: selector, trigger } }));
+    };
 
-    function makeShimClass(getInstanceFn) {
-        const C = function(el, opts) {
-            if (typeof el === 'string') el = document.querySelector(el);
-            this._el = el;
-            this._opts = opts || {};
-            this._store = getInstanceFn(el);
-            this._shown = false;
-            shimInstances.set(el, this);
-        };
-        C.prototype.show = function() {
-            if (this._store && this._store.open) { this._store.open(); return; }
-            if (this._store && 'isOpen' in this._store) { this._store.isOpen = true; return; }
-            this._shown = true;
-            this._el.classList.add('show');
-            this._el.style.display = 'block';
-            this._el.dispatchEvent(new CustomEvent('show.bs.' + (this._type || 'component'), { bubbles: true }));
-        };
-        C.prototype.hide = function() {
-            if (this._store && this._store.close) { this._store.close(); return; }
-            if (this._store && 'isOpen' in this._store) { this._store.isOpen = false; return; }
-            this._shown = false;
-            this._el.classList.remove('show');
-            this._el.dispatchEvent(new CustomEvent('hide.bs.' + (this._type || 'component'), { bubbles: true }));
-        };
-        C.prototype.toggle = function() {
-            if (this._store && this._store.toggle) { this._store.toggle(); return; }
-            this._shown ? this.hide() : this.show();
-        };
-        C.prototype.isShown = function() {
-            if (this._store && 'isOpen' in this._store) return this._store.isOpen;
-            return this._shown;
-        };
-        C.prototype.dispose = function() {};
-        C.getInstance = (el) => {
-            if (typeof el === 'string') el = document.querySelector(el);
-            return shimInstances.get(el) || getInstanceFn(el);
-        };
-        C.getOrCreateInstance = (el, o) => {
-            if (typeof el === 'string') el = document.querySelector(el);
-            return shimInstances.get(el) || getInstanceFn(el) || new C(el, o);
-        };
-        return C;
-    }
+    window.openOffcanvas = (selector) => {
+        window.dispatchEvent(new CustomEvent('btcpay:open-offcanvas', { detail: { target: selector } }));
+    };
 
-    const ModalShim = makeShimClass(getStore);
-    const OffcanvasShim = makeShimClass(getStore);
-    const CollapseShim = makeShimClass(getStore);
-    const DropdownShim = makeShimClass(getStore);
-    const TabShim = makeShimClass(getStore);
+    window.closeModal = (selector) => {
+        const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+        if (el && el._x_dataStack && el._x_dataStack[0] && el._x_dataStack[0].close) {
+            el._x_dataStack[0].close();
+        }
+    };
 
-    const TooltipShim = function(el, opts = {}) {
+    window.closeOffcanvas = (selector) => {
+        const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+        if (el && el._x_dataStack && el._x_dataStack[0] && el._x_dataStack[0].close) {
+            el._x_dataStack[0].close();
+        }
+    };
+
+    window.btcpayTooltip = (el, opts = {}) => {
         if (typeof el === 'string') el = document.querySelector(el);
-        this._el = el;
-        const title = opts.title || el.getAttribute('data-bs-title') || el.getAttribute('title') || '';
-        const placement = opts.placement || el.getAttribute('data-bs-placement') || 'top';
+        if (!el) return null;
+        const title = opts.title || el.getAttribute('title') || '';
+        const placement = opts.placement || el.getAttribute('data-tooltip-placement') || 'top';
         const trigger = opts.trigger || 'hover focus';
-        const isHtml = opts.html || false;
+        const isHtml = opts.html || el.getAttribute('data-tooltip-html') === 'true';
+        const customClass = el.getAttribute('data-tooltip-class') || '';
         let tip = null;
 
         const show = () => {
             if (tip) return;
             tip = document.createElement('div');
             tip.className = 'tooltip bs-tooltip-' + placement;
+            if (customClass) tip.classList.add(...customClass.split(' '));
             tip.setAttribute('role', 'tooltip');
             const arrow = document.createElement('div'); arrow.className = 'tooltip-arrow';
             const inner = document.createElement('div'); inner.className = 'tooltip-inner';
@@ -344,107 +316,35 @@ document.addEventListener('alpine:init', () => {
         if (trigger.includes('hover')) { el.addEventListener('mouseenter', show); el.addEventListener('mouseleave', hide); }
         if (trigger.includes('focus')) { el.addEventListener('focusin', show); el.addEventListener('focusout', hide); }
 
-        this.show = show;
-        this.hide = hide;
-        this.update = () => {};
-        this.dispose = () => { hide(); el.removeEventListener('mouseenter', show); el.removeEventListener('mouseleave', hide); el.removeEventListener('focusin', show); el.removeEventListener('focusout', hide); };
-    };
-    TooltipShim.getInstance = () => null;
-    TooltipShim.getOrCreateInstance = (el, o) => new TooltipShim(el, o);
-
-    const ToastShim = function(el, opts = {}) {
-        this._el = typeof el === 'string' ? document.querySelector(el) : el;
-        this._auto = opts.autohide !== false;
-        this._delay = opts.delay || 5000;
-        this._shown = false;
-    };
-    ToastShim.prototype.show = function() {
-        this._shown = true;
-        this._el.classList.add('show');
-        this._el.classList.remove('hide');
-        if (this._auto) setTimeout(() => this.hide(), this._delay);
-    };
-    ToastShim.prototype.hide = function() {
-        this._shown = false;
-        this._el.classList.remove('show');
-        setTimeout(() => { this._el.classList.add('hide'); this._el.dispatchEvent(new CustomEvent('hidden.bs.toast', { bubbles: true })); }, 300);
-    };
-    ToastShim.prototype.isShown = function() { return this._shown; };
-    ToastShim.prototype.dispose = function() { this._el.classList.remove('show'); };
-    ToastShim.getInstance = () => null;
-
-    window.bootstrap = {
-        Modal: ModalShim,
-        Toast: ToastShim,
-        Tooltip: TooltipShim,
-        Offcanvas: OffcanvasShim,
-        Collapse: CollapseShim,
-        Dropdown: DropdownShim,
-        Tab: TabShim
+        return {
+            show, hide,
+            update() {},
+            dispose() { hide(); el.removeEventListener('mouseenter', show); el.removeEventListener('mouseleave', hide); el.removeEventListener('focusin', show); el.removeEventListener('focusout', hide); }
+        };
     };
 
-    // --- Global helpers for non-Alpine contexts ---
-    window.openModal = (selector, trigger) => {
-        window.dispatchEvent(new CustomEvent('btcpay:open-modal', { detail: { target: selector, trigger } }));
-    };
-
-    window.openOffcanvas = (selector) => {
-        window.dispatchEvent(new CustomEvent('btcpay:open-offcanvas', { detail: { target: selector } }));
-    };
-
-    // --- Legacy data-bs-toggle/dismiss click delegation ---
-    function getTarget(el) {
-        const s = el.getAttribute('data-bs-target') || el.getAttribute('href');
-        return s ? document.querySelector(s) : null;
-    }
-
+    // --- Tab switching via data-tab-target (for non-Alpine contexts) ---
     document.addEventListener('click', (e) => {
-        let el;
-        if ((el = e.target.closest('[data-bs-toggle="modal"]'))) {
-            e.preventDefault();
-            const t = getTarget(el);
-            if (t) openModal('#' + t.id, el);
+        const el = e.target.closest('[data-tab-target]');
+        if (!el) return;
+        e.preventDefault();
+        const tgt = document.querySelector(el.getAttribute('data-tab-target'));
+        const list = el.closest('[role="tablist"], .nav-tabs, .nav-pills, .nav');
+        const prev = list ? list.querySelector('.nav-link.active, .btcpay-pill.active') : null;
+        const prevPane = prev ? document.querySelector(prev.getAttribute('data-tab-target')) : null;
+        if (prev && prev !== el) {
+            prev.classList.remove('active');
+            prev.setAttribute('aria-selected', 'false');
+            if (prevPane) prevPane.classList.remove('show', 'active');
         }
-        if ((el = e.target.closest('[data-bs-toggle="collapse"]'))) {
-            e.preventDefault();
-            const t = getTarget(el);
-            if (t) {
-                const store = getStore(t);
-                if (store && store.toggle) store.toggle();
-                else t.classList.toggle('show');
-            }
-        }
-        if ((el = e.target.closest('[data-bs-toggle="tab"], [data-bs-toggle="pill"]'))) {
-            e.preventDefault();
-            const tgt = getTarget(el);
-            const list = el.closest('[role="tablist"], .nav-tabs, .nav-pills, .nav');
-            const prev = list ? list.querySelector('.nav-link.active, .active > .nav-link') : null;
-            const prevPane = prev ? getTarget(prev) : null;
-            if (prev && prev !== el) {
-                prev.classList.remove('active');
-                prev.setAttribute('aria-selected', 'false');
-                if (prevPane) prevPane.classList.remove('show', 'active');
-            }
-            el.classList.add('active');
-            el.setAttribute('aria-selected', 'true');
-            if (tgt) tgt.classList.add('show', 'active');
-        }
-        if ((el = e.target.closest('[data-bs-toggle="dropdown"]'))) {
-            e.preventDefault();
-            const store = getStore(el.closest('.dropdown, .dropup'));
-            if (store && store.toggle) store.toggle();
-        }
-        if ((el = e.target.closest('[data-bs-toggle="offcanvas"]'))) {
-            e.preventDefault();
-            const t = getTarget(el);
-            if (t) openOffcanvas('#' + t.id);
-        }
+        el.classList.add('active');
+        el.setAttribute('aria-selected', 'true');
+        if (tgt) tgt.classList.add('show', 'active');
     });
 
-    // Tooltip auto-init for remaining data-bs-toggle="tooltip" elements
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
-            new TooltipShim(el);
+        document.querySelectorAll('[data-tooltip]').forEach(el => {
+            window.btcpayTooltip(el);
         });
     });
 });

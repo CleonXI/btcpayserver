@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded",function () {
         mixins: [posCommon],
         data () {
             return {
-                $cart: null,
+                _cartStore: null,
                 amount: 0,
                 persistState: true
             }
@@ -13,18 +13,21 @@ document.addEventListener("DOMContentLoaded",function () {
             cart: {
                 handler(newCart) {
                     if (!newCart || newCart.length === 0) {
-                        this.$cart.hide()
+                        if (this._cartStore && this._cartStore.close) this._cartStore.close();
                     }
                 }
             }
         },
         methods: {
             toggleCart() {
-                this.$cart.toggle()
+                if (this._cartStore && this._cartStore.toggle) this._cartStore.toggle();
             }
         },
         mounted() {
-            this.$cart = new bootstrap.Offcanvas(this.$refs.cart, { backdrop: false })
+            const el = this.$refs.cart;
+            if (el && el._x_dataStack) {
+                this._cartStore = el._x_dataStack[0];
+            }
         }
     }).mount('#PosCart');
 });

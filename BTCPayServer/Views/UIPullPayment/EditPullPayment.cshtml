@@ -41,8 +41,8 @@
 
     <partial name="_StatusMessage" />
 
-    <div class="row">
-        <div class="col-xl-8 content-constrain-xxl">
+    <div class="flex flex-wrap gap-6">
+        <div class="xl:w-2/3 content-constrain-xxl">
             @if (!ViewContext.ModelState.IsValid)
             {
                 <div asp-validation-summary="ModelOnly"></div>
@@ -55,8 +55,8 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-xl-10 content-constrain-xxl">
+    <div class="flex flex-wrap gap-6">
+        <div class="xl:w-5/6 content-constrain-xxl">
             <div class="form-group">
                 <label asp-for="Description" class="form-label"></label>
                 <textarea asp-for="Description" class="form-control richtext"></textarea>

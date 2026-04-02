@@ -57,15 +57,15 @@
     {
         <div asp-validation-summary="All" class="@(ViewContext.ModelState.ErrorCount.Equals(1) ? "no-marker" : "")"></div>
     }
-    <div class="row max-w-form-narrow">
-        <div class="col-sm-6">
+    <div class="flex flex-wrap gap-6 max-w-form-narrow">
+        <div class="sm:w-1/2">
             <div class="form-group">
                 <label asp-for="AppName" class="form-label" data-required></label>
                 <input asp-for="AppName" class="form-control" required />
                 <span asp-validation-for="AppName" class="text-btcpay-danger"></span>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="sm:w-1/2">
             <div class="form-group">
                 <label asp-for="Title" class="form-label" data-required></label>
                 <input asp-for="Title" class="form-control" required />
@@ -93,7 +93,7 @@
         </div>
     </div>
 
-    <div id="description" class="row mt-6">
+    <div id="description" class="flex flex-wrap gap-6 mt-6">
         <div class="content-constrain-xxl">
             <div class="form-group mb-0">
                 <label asp-for="Description" class="form-label"></label>
@@ -102,13 +102,13 @@
             </div>
         </div>
     </div>
-    <div id="products" class="row">
+    <div id="products" class="flex flex-wrap gap-6">
         <div class="content-constrain-xxl">
             <partial name="TemplateEditor" model="@(nameof(Model.Template), Model.Template, "Products", Model.Currency ?? Model.StoreDefaultCurrency)" />
         </div>
     </div>
-    <div class="row mt-12">
-        <div class="col-sm-10 col-md-9 col-xl-7 col-xxl-6">
+    <div class="flex flex-wrap gap-6 mt-12">
+        <div class="sm:w-5/6 md:w-3/4 xl:w-[58.33%] 2xl:w-1/2">
             <h3 class="mb-6" text-translate="true">Checkout</h3>
             <fieldset>
                 <div class="form-group" id="button-price-text">
@@ -209,8 +209,8 @@
             </fieldset>
         </div>
     </div>
-    <div class="row" style="margin-top:2.25rem;">
-        <div class="col-xl-8 content-constrain-xxl">
+    <div class="flex flex-wrap gap-6" style="margin-top:2.25rem;">
+        <div class="xl:w-2/3 content-constrain-xxl">
             <h3 class="mb-2">Additional Options</h3>
             <div class="form-group">
                 <div class="accordion" id="additional">

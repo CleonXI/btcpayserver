@@ -56,15 +56,15 @@
                     // The src resolved here is taken to rewrite `item.image`
                     <img id="@(item.Id)_image" src="@item.Image" alt="@item.Title" asp-append-version="true" style="display:none;" />
                 }
-                <div ref="posItems" class="row row-cols row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 g-4" id="PosItems">
-                        <div v-for="(item, index) in items" :id="'card_' + item.id" class="col posItem posItem--displayed" :class="{ 'posItem--inStock': inStock(index) }" :data-index="index" :data-search="item.search" :data-categories='item.categories ? JSON.stringify(item.categories) : null'>
-                            <div class="tile card" v-on:click="addToCart(index, 1)">
+                <div ref="posItems" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6" id="PosItems">
+                        <div v-for="(item, index) in items" :id="'card_' + item.id" class="flex-1 posItem posItem--displayed" :class="{ 'posItem--inStock': inStock(index) }" :data-index="index" :data-search="item.search" :data-categories='item.categories ? JSON.stringify(item.categories) : null'>
+                            <div class="tile relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg" v-on:click="addToCart(index, 1)">
                                 <div v-if="item.hasImage" class="img sm:block">
-                                    <img class="card-img-top" :src="item.image" :alt="item.title" loading="lazy" />
+                                    <img class="w-full rounded-t-lg" :src="item.image" :alt="item.title" loading="lazy" />
                                 </div>
 
-                                <div class="card-body flex flex-col gap-2 mb-auto">
-                                    <h5 class="card-title m-0">{{ item.title }}</h5>
+                                <div class="flex-1 p-4 flex flex-col gap-2 mb-auto">
+                                    <h5 class="mb-2 m-0">{{ item.title }}</h5>
                                     <div class="flex-row-gap-2">
                                         <span v-if="!item.hasPrice" class="font-semibold badge text-bg-btcpay-info">{{ item.priceFormatted }}</span>
                                         <span v-if="item.hasPrice" class="font-semibold">{{ item.priceFormatted }}</span>
@@ -72,9 +72,9 @@
                                             <span>{{ item.inventoryText }}</span>
                                         </span>
                                     </div>
-                                    <p class="card-text" v-if="item.description">{{ item.description }}</p>
+                                    <p v-if="item.description">{{ item.description }}</p>
                                 </div>
-                                <form v-if="item.inStock" class="card-footer">
+                                <form v-if="item.inStock" class="px-4 py-2 bg-[var(--btcpay-body-bg-light)] border-t border-[var(--btcpay-body-border-medium)]">
                                     <div v-if="item.priceType !== 'Fixed'" class="input-group mb-2">
                                         <span class="input-group-text" v-pre>@Model.CurrencySymbol</span>
                                         <input class="form-control" type="number" inputmode="decimal" :min="item.price ?? 0" step="@Model.Step" name="amount" placeholder="@StringLocalizer["Amount"]" :value="item.price" required v-on:click.stop>

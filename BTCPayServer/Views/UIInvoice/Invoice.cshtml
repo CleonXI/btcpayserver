@@ -40,7 +40,7 @@
             } else if (response.ok) {
                 modalBody.innerHTML = await response.text()
             } else {
-                modalBody.innerHTML = '<div class="alert alert-danger" role="alert">Failed to load refund options.</div>'
+                modalBody.innerHTML = '<div class="relative p-3 mb-4 border rounded text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)]" role="alert">Failed to load refund options.</div>'
             }
         }
 
@@ -455,7 +455,7 @@
             }
         </div>
     </div>
-    <div class="row">
+    <div class="flex flex-wrap gap-6">
         <div class="content-constrain-xxl">
             <h3 class="mb-4">Invoice Summary</h3>
             <partial name="ListInvoicesPaymentsPartial" model="(Model, true)" />
@@ -464,7 +464,7 @@
             {
                 <section class="mt-6 print:hidden">
                     <h3 class="mb-4">Webhooks</h3>
-                    <div class="table-responsive-xl">
+                    <div class="overflow-x-auto xl:overflow-visible table-responsive-xl">
                         <table class="table table-hover mb-12">
                             <thead>
                                 <tr>
@@ -527,7 +527,7 @@
                                                 var hasSignificantDelay = Math.Abs(timeDiff.TotalMinutes) > 2;
                                             }
                                             <span>
-                                                <span class="webhook-time" data-bs-html="true" x-data x-tooltip>
+                                                <span class="webhook-time" data-tooltip-html="true" x-data x-tooltip>
                                                     <template class="webhook-time-tooltip">
                                                         <div class="text-start">
                                                             <span><b text-translate="true">Created at</b>:&nbsp;@delivery.Time.ToBrowserDate()</span><br />
@@ -574,7 +574,7 @@
             {
                 <section class="mt-6">
                     <h3 class="mb-4">Refunds</h3>
-                    <div class="table-responsive-xl">
+                    <div class="overflow-x-auto xl:overflow-visible table-responsive-xl">
                         <table class="table table-hover mb-12">
                             <thead>
                                 <tr>

@@ -5,6 +5,12 @@
 {
     @foreach (var alertMessage in Model.TopMessages)
     {
-        <p class="alert alert-@alertMessage.Type.ToStringLowerInvariant()">@alertMessage.Message</p>
+        var formAlertClasses = alertMessage.Type.ToStringLowerInvariant() switch {
+            "success" => "text-[var(--btcpay-success-text)] bg-[var(--btcpay-success)] border-[var(--btcpay-success-border)]",
+            "danger" => "text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)]",
+            "warning" => "text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)]",
+            _ => "text-[var(--btcpay-info-text)] bg-[var(--btcpay-info)] border-[var(--btcpay-info-border)]"
+        };
+        <p class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 @formAlertClasses">@alertMessage.Message</p>
     }
 }

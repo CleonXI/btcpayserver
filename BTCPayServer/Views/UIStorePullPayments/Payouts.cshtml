@@ -88,10 +88,10 @@
 
 @if (!Model.HasPayoutProcessor)
 {
-    <div class="alert alert-info mb-12" role="alert" permission="@Policies.CanModifyStoreSettings">
+    <div class="relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-info-text)] bg-[var(--btcpay-info)] border-[var(--btcpay-info-border)] mb-12" role="alert" permission="@Policies.CanModifyStoreSettings">
         <span text-translate="true">Pro tip: There are supported but unconfigured Payout Processors for this payout payment method.</span><br/>
         <span text-translate="true">Payout Processors help automate payouts so that you do not need to manually handle them.</span>
-        <a class="alert-link p-0" asp-action="ConfigureStorePayoutProcessors" asp-controller="UIPayoutProcessors" asp-route-storeId="@storeId" text-translate="true">Configure now</a>
+        <a class="font-normal p-0" asp-action="ConfigureStorePayoutProcessors" asp-controller="UIPayoutProcessors" asp-route-storeId="@storeId" text-translate="true">Configure now</a>
     </div>
 }
 
@@ -142,7 +142,7 @@
     </nav>
     @if (Model.Payouts.Any())
     {
-        <div class="table-responsive">
+        <div class="overflow-x-auto">
             <table class="table table-hover mass-action">
                 <thead class="mass-action-head">
                     <tr>

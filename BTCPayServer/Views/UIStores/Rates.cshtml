@@ -15,8 +15,8 @@
         <div asp-validation-summary="All"></div>
     }
 
-    <div class="row">
-        <div class="content-constrain-xxl col-xl-8">
+    <div class="flex flex-wrap gap-6">
+        <div class="content-constrain-xxl xl:w-2/3">
             <fieldset>
                 <legend text-translate="true" class="mb-4">Rate Source</legend>
 
@@ -34,7 +34,7 @@
                                         <vc:icon symbol="caret-down" />
                                     </button>
                                 </h2>
-                                <div id="direct-content" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="direct-header" data-bs-parent="#accordion-info">
+                                <div id="direct-content" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="direct-header">
                                     <div class="accordion-body">
                                         @foreach (var exchange in Model.AvailableExchanges.Where(a => a.Source == BTCPayServer.Rating.RateSource.Direct))
                                         {
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="help" class="collapse text-start">
+                    <div id="help" class="collapse text-start" x-data="btcCollapse" x-show="expanded" x-collapse>
                         <p html-translate="true">The script language is composed of several rules composed of a currency pair and a mathematical expression. The
                             example below will use <code>kraken</code> for both <code>LTC_USD</code> and <code>BTC_USD</code> pairs.</p>
                         <pre><code class="text hljs">LTC_USD = kraken(LTC_USD);
@@ -104,8 +104,8 @@ X_X = kraken(X_X);</code></pre>
             </fieldset>
         </div>
     </div>
-    <div class="row">
-        <div class="content-constrain-xxl col-xl-8">
+    <div class="flex flex-wrap gap-6">
+        <div class="content-constrain-xxl xl:w-2/3">
             <fieldset>
                 <legend text-translate="true" class="mb-4">Rate Spread</legend>
                 <div class="form-group">
@@ -119,8 +119,8 @@ X_X = kraken(X_X);</code></pre>
             </fieldset>
         </div>
     </div>
-    <div class="row">
-        <div class="content-constrain-xxl col-xl-8">
+    <div class="flex flex-wrap gap-6">
+        <div class="content-constrain-xxl xl:w-2/3">
             <fieldset class="mb-4">
                 <legend text-translate="true">Currency Pair Testing</legend>
                 <div class="form-group">
@@ -137,7 +137,7 @@ X_X = kraken(X_X);</code></pre>
                 @if (Model.TestRateRules != null)
                 {
                     <h5 text-translate="true" id="TestResult">Test Results:</h5>
-                    <div class="table-responsive-md">
+                    <div class="overflow-x-auto md:overflow-visible table-responsive-md">
                         <table class="table table-hover">
                             <tbody>
                             @foreach (var result in Model.TestRateRules)
@@ -167,8 +167,8 @@ X_X = kraken(X_X);</code></pre>
             </fieldset>
         </div>
     </div>
-    <div class="row">
-        <div class="content-constrain-xxl col-xl-8">
+    <div class="flex flex-wrap gap-6">
+        <div class="content-constrain-xxl xl:w-2/3">
             <div class="form-group">
                 <fieldset class="mb-4">
                     <legend text-translate="true">Default Currency Pairs</legend>
@@ -188,13 +188,6 @@ X_X = kraken(X_X);</code></pre>
 
 @section PageFootContent {
     <script>
-        const modalButtons = document.querySelectorAll('button[data-bs-target]')
-        modalButtons.forEach(modalButton => {
-            modalButton.addEventListener('click', e => {
-                e.preventDefault()
-            });
-        });
-
         delegate('click', '.ResetDefaults', (e) => {
             const defaultScript = e.target.getAttribute('data-defaultScript');
             const target = e.target.getAttribute('data-target');

@@ -24,14 +24,14 @@
                 <div class="text-btcpay-danger mb-4" v-if="errors.id">{{errors.id}}</div>
                 <div class="form-text" v-else text-translate="true">Leave blank to generate ID from title.</div>
             </div>
-            <div class="form-group row">
-                <div class="col-sm-6">
+            <div class="form-group flex flex-wrap gap-6">
+                <div class="sm:w-1/2">
                     <label for="EditorPrice" class="form-label">Price</label>
                     <select id="EditorPrice" class="form-select" v-model="editingItem && editingItem.priceType" v-on:change="onPriceTypeChange">
                         <option v-for="option in customPriceOptions" :value="option.value">{{option.text}}</option>
                     </select>
                 </div>
-                <div class="col-sm-6" v-show="editingItem && editingItem.priceType !== 'Topup'">
+                <div class="sm:w-1/2" v-show="editingItem && editingItem.priceType !== 'Topup'">
                     <label for="EditorAmount" class="form-label">&nbsp;</label>
                     <div class="input-group mb-2">
                         <input class="form-control hide-number-spin"
@@ -107,7 +107,7 @@
                         <img :src="getImage(item)" :alt="item.title" :style="(item.image ? null : { opacity: 0.5 })" loading="lazy">
                     </div>
                     <div class="flex flex-col gap-2">
-                        <h5 class="card-title m-0" v-html="item.title"></h5>
+                        <h5 class="mb-2 m-0" v-html="item.title"></h5>
                         <div class="flex-row-gap-2">
                             <span class="font-semibold badge text-bg-info" v-if="item.priceType === 'Topup' || item.price == 0">{{ item.priceType === 'Topup' ? 'Any amount' : 'Free' }}</span>
                             <span class="font-semibold text-btcpay-body-text-muted" v-else>{{ item.price }} @Model.currency{{ item.priceType === 'Minimum' ? ' minimum' : '' }}</span>
@@ -141,17 +141,17 @@
     <div class="flex flex-wrap items-end justify-between gap-4 mb-4">
         <ul class="nav nav-pills gap-6" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="EditorTabButton" data-bs-toggle="pill" data-bs-target="#EditorTabPane" type="button" role="tab" aria-controls="EditorTabPane" aria-selected="true" text-translate="true">Editor</button>
+                <button class="nav-link active" id="EditorTabButton" data-tab-target="#EditorTabPane" type="button" role="tab" aria-controls="EditorTabPane" aria-selected="true" text-translate="true">Editor</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="CodeTabButton" data-bs-toggle="pill" data-bs-target="#CodeTabPane" type="button" role="tab" aria-controls="CodeTabPane" aria-selected="false" text-translate="true">Code</button>
+                <button class="nav-link" id="CodeTabButton" data-tab-target="#CodeTabPane" type="button" role="tab" aria-controls="CodeTabPane" aria-selected="false" text-translate="true">Code</button>
             </li>
         </ul>
     </div>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="EditorTabPane" role="tabpanel" aria-labelledby="EditorTabButton" tabindex="0">
-            <div class="row items-start">
-                <div class="col-12">
+            <div class="flex flex-wrap gap-6 items-start">
+                <div class="w-full">
                     <items-editor :items="items"
                                   :selected-item="selectedItem"
                                   v-on:add-item="addItem"

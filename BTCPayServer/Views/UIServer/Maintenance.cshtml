@@ -11,8 +11,8 @@
 <partial name="_StatusMessage" />
 
 <form method="post">
-    <div class="row mb-12">
-        <div class="col-xl-8 content-constrain-xxl">
+    <div class="flex flex-wrap gap-6 mb-12">
+        <div class="xl:w-2/3 content-constrain-xxl">
             <div class="form-group">
                 <label asp-for="DNSDomain" class="form-label"></label>
                 <input asp-for="DNSDomain" class="form-control" disabled="@(Model.CanUseSSH ? null : "disabled")" />

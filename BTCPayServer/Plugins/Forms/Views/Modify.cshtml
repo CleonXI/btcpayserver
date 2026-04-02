@@ -220,8 +220,8 @@
         </div>
     </div>
     <partial name="_StatusMessage" />
-    <div class="row mb-6">
-        <div class="col-12">
+    <div class="flex flex-wrap gap-6 mb-6">
+        <div class="w-full">
             @if (!ViewContext.ModelState.IsValid)
             {
                 <div asp-validation-summary="All"></div>
@@ -245,10 +245,10 @@
         <div class="flex flex-wrap items-end justify-between gap-4 mb-4">
             <ul class="nav nav-pills gap-6" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="EditorTabButton" data-bs-toggle="pill" data-bs-target="#EditorTabPane" type="button" role="tab" aria-controls="EditorTabPane" aria-selected="true" text-translate="true">Editor</button>
+                    <button class="nav-link active" id="EditorTabButton" data-tab-target="#EditorTabPane" type="button" role="tab" aria-controls="EditorTabPane" aria-selected="true" text-translate="true">Editor</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="CodeTabButton" data-bs-toggle="pill" data-bs-target="#CodeTabPane" type="button" role="tab" aria-controls="CodeTabPane" aria-selected="false" text-translate="true">Code</button>
+                    <button class="nav-link" id="CodeTabButton" data-tab-target="#CodeTabPane" type="button" role="tab" aria-controls="CodeTabPane" aria-selected="false" text-translate="true">Code</button>
                 </li>
             </ul>
             <div class="flex-row-gap-2 mb-1">
@@ -259,8 +259,8 @@
         </div>
         <div class="tab-content">
             <div class="tab-pane fade show active" id="EditorTabPane" role="tabpanel" aria-labelledby="EditorTabButton" tabindex="0">
-                <div class="row items-start">
-                    <div class="col-12">
+                <div class="flex flex-wrap gap-6 items-start">
+                    <div class="w-full">
                         <fields-editor :path="[]"
                                        :fields="fields"
                                        :selected-field="selectedField"

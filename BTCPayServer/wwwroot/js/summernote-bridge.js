@@ -3,18 +3,22 @@
 
     $.fn.modal = function (action) {
         return this.each(function () {
-            const m = bootstrap.Modal.getOrCreateInstance(this);
-            if (typeof m[action] === 'function') m[action]();
+            const el = this;
+            if (action === 'show') {
+                window.openModal('#' + el.id);
+            } else if (action === 'hide') {
+                window.closeModal(el);
+            }
         });
     };
 
     $.fn.tooltip = function (optionsOrAction) {
         return this.each(function () {
             if (typeof optionsOrAction === 'string') {
-                const t = bootstrap.Tooltip.getInstance(this);
+                const t = this._btcpayTooltip;
                 if (t && typeof t[optionsOrAction] === 'function') t[optionsOrAction]();
             } else {
-                new bootstrap.Tooltip(this, optionsOrAction || {});
+                this._btcpayTooltip = window.btcpayTooltip(this, optionsOrAction || {});
             }
         });
     };

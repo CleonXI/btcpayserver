@@ -13,7 +13,7 @@
     @* Set a height for the responsive table container to make it work with the fixed table headers.
        Details described here: thttps://uxdesign.cc/position-stuck-96c9f55d9526 *@
     <style>
-        #app .table-responsive {
+        #app .overflow-x-auto {
             max-height: 80vh;
         }
 
@@ -45,8 +45,8 @@
         <button id="page-primary" class="btn btn-primary whitespace-nowrap" type="button" data-action="exportCSV" text-translate="true">Export</button>
     </div>
 </div>
-<div class="row">
-    <div class="col-xl-8 content-constrain-xxl">
+<div class="flex flex-wrap gap-6">
+    <div class="xl:w-2/3 content-constrain-xxl">
         <nav id="SectionNav">
             <div class="nav">
                 @foreach (var v in Model.AvailableViews)
@@ -86,7 +86,7 @@
     <div v-if="srv.charts && srv.charts.some(hasChartData)" id="charts" class="flex flex-wrap mb-4">
         <article v-for="chart in srv.charts" v-if="hasChartData(chart)">
             <h3>{{ chart.name }}</h3>
-            <div class="table-responsive">
+            <div class="overflow-x-auto">
                 <table class="table table-hover w-auto">
                     <thead class="bg-body">
                     <tr>
@@ -129,7 +129,7 @@
     </div>
     <article v-if="srv.result.data">
         <h3 id="raw-data">Raw data</h3>
-        <div id="raw-data-table" class="table-responsive" v-if="srv.result.data.length">
+        <div id="raw-data-table" class="overflow-x-auto" v-if="srv.result.data.length">
             <table class="table table-hover">
                 <thead class="sticky-top bg-body">
                 <tr>

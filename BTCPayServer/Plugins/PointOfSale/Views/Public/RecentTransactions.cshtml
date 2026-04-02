@@ -1,7 +1,7 @@
 @using BTCPayServer.Client
 @model BTCPayServer.Plugins.PointOfSale.Models.ViewPointOfSaleViewModel
 
-<div class="modal" id="RecentTransactions" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" ref="RecentTransactions" data-bs-backdrop="static" data-url="@Url.Action("RecentTransactions", "UIPointOfSale", new { appId = Model.AppId })" permission="@Policies.CanViewInvoices">
+<div class="modal" id="RecentTransactions" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" ref="RecentTransactions" data-url="@Url.Action("RecentTransactions", "UIPointOfSale", new { appId = Model.AppId })" permission="@Policies.CanViewInvoices">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

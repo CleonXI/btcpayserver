@@ -147,8 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data () {
             return {
                 config,
-                selectedField: null,
-                editorOffcanvas: null
+                selectedField: null
             }
         },
         computed: {
@@ -217,19 +216,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 return fields
             },
             showOffcanvas() {
-                if (this.editorOffcanvas && window.getComputedStyle(this.$refs.editorOffcanvas).visibility === 'hidden')
-                    this.editorOffcanvas.show();
+                if (this.$refs.editorOffcanvas && window.getComputedStyle(this.$refs.editorOffcanvas).visibility === 'hidden')
+                    window.openOffcanvas('#' + this.$refs.editorOffcanvas.id);
             },
             hideOffcanvas() {
-                if (this.editorOffcanvas)
-                    this.editorOffcanvas.hide();
+                window.closeOffcanvas(this.$refs.editorOffcanvas);
             }
         },
         mounted () {
             if (!this.config.fields || this.config.fields.length === 0) {
                 this.addField(null,[])
             }
-            this.editorOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(this.$refs.editorOffcanvas);
         }
     });
 

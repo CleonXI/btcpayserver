@@ -1,4 +1,4 @@
-﻿@model BTCPayServer.Storage.Services.Providers.FileSystemStorage.Configuration.FileSystemStorageConfiguration
+@model BTCPayServer.Storage.Services.Providers.FileSystemStorage.Configuration.FileSystemStorageConfiguration
 @{
     ViewData.SetLayoutModel(new LayoutModel(nameof(ServerNavPages.Files), StringLocalizer["Local Filesystem Storage"])
         .SetCategory(WellKnownCategories.Server));
@@ -21,8 +21,8 @@
 <partial name="_StatusMessage" />
 
 <p text-translate="true">Any uploaded files are being saved on the same machine that hosts BTCPay; please pay attention to your storage space.</p>
-<div class="row">
-    <div class="col-xl-10 content-constrain-xxl">
+<div class="flex flex-wrap gap-6">
+    <div class="xl:w-5/6 content-constrain-xxl">
         <a asp-action="Storage" asp-route-forceChoice="true" text-translate="true">Change Storage provider</a>
     </div>
 </div>

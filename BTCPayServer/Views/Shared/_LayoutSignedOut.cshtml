@@ -16,7 +16,7 @@
 
 @section PageHeadContent {
     <style>
-        .alert {
+        [role="alert"] {
             max-width: 35em;
             margin: var(--btcpay-space-l) auto;
         }
@@ -41,8 +41,8 @@
     @await RenderSectionAsync("PageFootContent", false)
 }
 
-<div class="row justify-center mb-2">
-    <div class="col text-center">
+<div class="flex flex-wrap gap-6 justify-center mb-2">
+    <div class="flex-1 text-center">
         <a asp-controller="UIHome" asp-action="Index" tabindex="-1" class="inline-block navbar-brand mx-0 mb-6">
             <vc:main-logo />
         </a>
@@ -84,8 +84,8 @@
     }
 }
 
-<div class="row justify-center mt-12">
-    <div class="col">
+<div class="flex flex-wrap gap-6 justify-center mt-12">
+    <div class="flex-1">
         <partial name="_BTCPaySupporters"/>
     </div>
 </div>

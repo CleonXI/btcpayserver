@@ -1,4 +1,4 @@
-﻿@model RescanWalletModel
+@model RescanWalletModel
 @{
     var walletId = Context.GetRouteValue("walletId")!.ToString();
     var w = WalletId.Parse(walletId!);
@@ -9,8 +9,8 @@
 <h3 class="mb-4">@ViewData["Title"]</h3>
 @if (!Model.Ok)
 {
-    <div class="row">
-        <div class="col-lg-8">
+    <div class="flex flex-wrap gap-6">
+        <div class="lg:w-2/3">
             <p text-translate="true">This feature is disabled</p>
             @if (Model.IsFullySync)
             {
@@ -59,11 +59,11 @@
 }
 else if (!Model.Progress.HasValue)
 {
-    <div class="row">
+    <div class="flex flex-wrap gap-6">
         @if (Model.PreviousError != null)
         {
-            <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
+            <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)] pr-12" role="alert">
+                <button type="button" class="btn-close absolute top-0 right-0 z-2 p-[0.9375rem_1rem]" onclick="this.parentElement.remove()" aria-label="@StringLocalizer["Close"]">
                     <vc:icon symbol="close" />
                 </button>
                 <span text-translate="true">The previous scan stopped with an error:</span> @Model.PreviousError
@@ -71,22 +71,22 @@ else if (!Model.Progress.HasValue)
         }
         else if (Model.LastSuccess != null)
         {
-            <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
+            <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-success-text)] bg-[var(--btcpay-success)] border-[var(--btcpay-success-border)] pr-12" role="alert">
+                <button type="button" class="btn-close absolute top-0 right-0 z-2 p-[0.9375rem_1rem]" onclick="this.parentElement.remove()" aria-label="@StringLocalizer["Close"]">
                     <vc:icon symbol="close" />
                 </button>
                 <span>@ViewLocalizer["The previous scan completed and found <b>{0}</b> UTXOs in <b>{1}</b> (The total UTXO set size is {2})", Model.LastSuccess.Found, Model.TimeOfScan, Model.LastSuccess.TotalSizeOfUTXOSet.Value]</span>
             </div>
         }
-        <div class="col-lg-8">
+        <div class="lg:w-2/3">
             <p html-translate="true">Scanning the UTXO set allow you to restore the balance of your wallet, but not all the transaction history. This operation will scan the HD Path <b>0/*</b>, <b>1/*</b> and <b>*</b> from a starting index, until no UTXO are found in a whole gap limit.</p>
             <p text-translate="true">The batch size make sure the scan do not consume too much RAM at once by rescanning several time with smaller subset of addresses.</p>
             <p text-translate="true">If you do not understand the above, go with the defaults and start scanning.</p>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-8">
+    <div class="flex flex-wrap gap-6">
+        <div class="lg:w-2/3">
             <form method="post">
                 <div class="form-group">
                     <label asp-for="StartingIndex" class="form-label"></label>
@@ -107,8 +107,8 @@ else if (!Model.Progress.HasValue)
 }
 else
 {
-    <div class="row">
-        <div class="col-lg-8">
+    <div class="flex flex-wrap gap-6">
+        <div class="lg:w-2/3">
             <p>Scanning in progress, refresh the page to see the progress... (Estimated time: @Model.RemainingTime)</p>
             <div class="flex h-4 overflow-hidden text-[0.65625rem] bg-[var(--btcpay-secondary-bg)] rounded-[var(--btcpay-border-radius)]">
                 <div class="flex flex-col justify-center overflow-hidden text-[var(--btcpay-white)] text-center whitespace-nowrap bg-[var(--btcpay-primary)] transition-[width] duration-[0.6s] ease-[ease]" role="progressbar" aria-valuenow="@(Model.Progress.Value)"

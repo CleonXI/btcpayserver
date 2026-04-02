@@ -1,4 +1,4 @@
-﻿@model LightningWalletServices
+@model LightningWalletServices
 @{
     ViewData.SetLayoutModel(new LayoutModel(nameof(ServerNavPages.Services), Model.WalletName)
         .SetCategory(WellKnownCategories.Server));
@@ -19,8 +19,8 @@
 
 @if (Model.ShowQR)
 {
-    <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
+    <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)] pr-12" role="alert">
+        <button type="button" class="btn-close absolute top-0 right-0 z-2 p-[0.9375rem_1rem]" onclick="this.parentElement.remove()" aria-label="@StringLocalizer["Close"]">
             <vc:icon symbol="close" />
         </button>
         <span text-translate="true">CONFIDENTIAL: This QR Code is confidential, close this window as soon as you don't need it anymore.</span>
@@ -28,8 +28,8 @@
     </div>
 }
 
-<div class="row">
-    <div class="col-md-8">
+<div class="flex flex-wrap gap-6">
+    <div class="md:w-2/3">
         @if (!ViewContext.ModelState.IsValid)
         {
             <div asp-validation-summary="All"></div>

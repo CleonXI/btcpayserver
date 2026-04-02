@@ -278,7 +278,7 @@
             opacity: 0.6;
             filter: grayscale(50%);
         }
-        .posItem--disabled .card-title {
+        .posItem--disabled h5 {
             color: var(--btcpay-muted);
         }
         .posItem--disabled .btn-plus,
@@ -295,13 +295,13 @@
         .posItem--last {
             margin-right: auto;
         }
-        .posItem .card {
+        .posItem .tile {
             width: 100%;
         }
-        .posItem .card .card-body {
+        .posItem .tile > .flex-1 {
             flex-grow: 0;
         }
-        .posItem .card .card-img-top {
+        .posItem .tile > .w-full.rounded-t-lg {
             max-height: 210px;
             object-fit: scale-down;
         }
@@ -332,12 +332,7 @@
             width: 1rem;
             height: 1rem;
         }
-        .tile.card {
-            --btcpay-card-cap-bg: transparent;
-            --btcpay-card-border-width: 0;
-            --btcpay-card-spacer-x: 0;
-            --btcpay-card-cap-padding-x: 0;
-            --btcpay-card-cap-padding-y: 0;
+        .posItem .tile {
             height: 100%;
         }
         #PosCart {
@@ -452,7 +447,7 @@
             overflow: hidden;
             position: relative;
         }
-        #PosKeypad .alert {
+        #PosKeypad [role="alert"] {
             margin-top: var(--btcpay-space-xl);
         }
         #ItemsListToggle {
@@ -542,7 +537,7 @@
                 margin-top: .25em;
                 margin-bottom: .25em;
             }
-            .card {
+            .tile {
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
@@ -556,8 +551,8 @@
             width: 100%;
             min-width: auto !important;
             min-height: auto !important;
-            border-bottom-right-radius: var(--btcpay-card-inner-border-radius);
-            border-bottom-left-radius: var(--btcpay-card-inner-border-radius);
+            border-bottom-right-radius: calc(0.5rem - var(--btcpay-border-width, 1px));
+            border-bottom-left-radius: calc(0.5rem - var(--btcpay-border-width, 1px));
         }
     </style>
     @await RenderSectionAsync("PageHeadContent", false)

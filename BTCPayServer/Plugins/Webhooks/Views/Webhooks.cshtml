@@ -13,11 +13,11 @@
 <partial name="_StatusMessage" />
 <p text-translate="true">Webhooks allow BTCPay Server to send HTTP events related to your store to another server.</p>
 
-<div class="row">
-    <div class="col-xl-8 content-constrain-xxl">
+<div class="flex flex-wrap gap-6">
+    <div class="xl:w-2/3 content-constrain-xxl">
         @if (Model.Webhooks.Any())
         {
-            <div class="table-responsive-md">
+            <div class="overflow-x-auto md:overflow-visible table-responsive-md">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -43,7 +43,7 @@
                                     {
                                         <span id="delivery-status-icon"
                                               x-data x-tooltip
-                                              data-bs-html="true"
+                                              data-tooltip-html="true"
                                               title="Error: @wh.LastDeliveryErrorMessage. <br/> Delivery last attempted <span id='last-delivery-time'>@wh.LastDeliveryTimeStamp?.ToTimeAgo()</span>">
                                             <vc:icon symbol="cross" css-class="text-btcpay-danger" />
                                         </span>

@@ -11,11 +11,11 @@
 
 @if (!User.IsInRole(Roles.ServerAdmin))
 {
-    <div class="alert alert-warning">
+    <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)]">
         You are not an admin on this server. While you are able to import or generate a wallet via seed with
         your account, please understand that you are trusting the server admins not just with your
-        <a href="https://docs.btcpayserver.org/Deployment/ThirdPartyHosting/#privacy-concerns" target="_blank" class="alert-link" rel="noreferrer noopener">privacy</a>
-        but also with <a href="https://docs.btcpayserver.org/Deployment/ThirdPartyHosting/#trust-concerns" target="_blank" class="alert-link" rel="noreferrer noopener">trivial access to your funds.</a>
+        <a href="https://docs.btcpayserver.org/Deployment/ThirdPartyHosting/#privacy-concerns" target="_blank" class="font-normal" rel="noreferrer noopener">privacy</a>
+        but also with <a href="https://docs.btcpayserver.org/Deployment/ThirdPartyHosting/#trust-concerns" target="_blank" class="font-normal" rel="noreferrer noopener">trivial access to your funds.</a>
     </div>
 }
 

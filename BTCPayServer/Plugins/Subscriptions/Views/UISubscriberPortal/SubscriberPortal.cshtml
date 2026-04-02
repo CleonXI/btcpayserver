@@ -76,18 +76,18 @@
             padding: 0 1rem;
         }
 
-        .card {
+        .subscriber-card {
             border-radius: 8px;
             box-shadow: none;
             margin-bottom: 1.5rem;
         }
 
-        .card-header {
+        .subscriber-card-header {
             font-weight: 600;
             padding: 1rem 1.5rem;
         }
 
-        .card-body {
+        .subscriber-card-body {
             padding: 1.5rem;
         }
 
@@ -214,7 +214,7 @@
 <body>
 <!-- Navigation -->
 <nav class="navbar btcpay-header">
-    <div class="container-fluid">
+    <div class="w-full px-6">
         <div class="flex items-center">
             <div class="company-logo me-4">
                 <a href="@Model.Url" class="no-underline" target="_blank">
@@ -266,13 +266,13 @@
     </div>
 
     <!-- Current Subscription -->
-    <div class="card">
-        <div class="card-header">
+    <div class="relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg subscriber-card">
+        <div class="px-4 py-2 bg-[var(--btcpay-body-bg-light)] border-b border-[var(--btcpay-body-border-medium)] subscriber-card-header">
             <i class="fa fa-address-book me-2"></i>Current Subscription
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-8">
+        <div class="flex-1 p-4 subscriber-card-body">
+            <div class="flex flex-wrap gap-6">
+                <div class="md:w-2/3">
                     <h5 class="flex-row-gap-4 mb-2">
                         <span data-testid="plan-name">@Model.Subscriber.Plan.Name</span>
                         @if (Model.Subscriber.Phase == SubscriberData.PhaseTypes.Trial)
@@ -314,7 +314,7 @@
                 </div>
                 @if (Model.Subscriber.Plan.RecurringType != PlanData.RecurringInterval.Lifetime)
                 {
-                    <div class="col-md-4 text-md-end">
+                    <div class="md:w-1/3 text-md-end">
                         <h4 class="mb-1">@DisplayFormatter.Currency(Model.Plan.Price, Model.Plan.Currency, DisplayFormatter.CurrencyFormat.Symbol)</h4>
                         <p class="text-btcpay-body-text-muted mb-0">@StringLocalizer.RecurringToString(Model.Plan.RecurringType)</p>
                     </div>
@@ -411,13 +411,13 @@
         }
     }
     <!-- Billing Information -->
-    <div class="card">
-        <div class="card-header">
+    <div class="relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg subscriber-card">
+        <div class="px-4 py-2 bg-[var(--btcpay-body-bg-light)] border-b border-[var(--btcpay-body-border-medium)] subscriber-card-header">
             <i class="fa fa-credit-card me-2"></i>Billing Information
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6" x-data="{ expanded: false }">
+        <div class="flex-1 p-4 subscriber-card-body">
+            <div class="flex flex-wrap gap-6">
+                <div class="md:w-1/2" x-data="{ expanded: false }">
                     <h6 class="mb-2">Payment Method</h6>
                     <div class="flex justify-between items-center mb-4">
                         <div class="flex items-center">
@@ -476,7 +476,7 @@
                 </div>
                 @if (Model.Subscriber.Plan.RecurringType is not PlanData.RecurringInterval.Lifetime)
                 {
-                    <div class="col-md-6">
+                    <div class="md:w-1/2">
                         <h6 class="mb-2">Notification</h6>
                         <p class="text-btcpay-body-text-muted mb-0">
                             @foreach (var identity in Model.Subscriber.Customer.CustomerIdentities)
@@ -495,11 +495,11 @@
     @if (Model.Plan.PlanChanges.Any())
     {
         <!-- Plan Management -->
-        <div class="card">
-            <div class="card-header" id="plans">
+        <div class="relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg subscriber-card">
+            <div class="px-4 py-2 bg-[var(--btcpay-body-bg-light)] border-b border-[var(--btcpay-body-border-medium)] subscriber-card-header" id="plans">
                 <i class="fa fa-arrow-up me-2"></i>Plan Management
             </div>
-            <div class="card-body">
+            <div class="flex-1 p-4 subscriber-card-body">
 				@if (hasPending && Model.Subscriber.NewPlan is not null)
 				{
 					<div class="alert-translucent alert-info mb-4 scheduled-change-banner">
@@ -523,12 +523,12 @@
                 <div class="plan-comparison">
                     @foreach (var batch in Model.PlanChanges.Batch(3))
                     {
-                        <div class="row">
+                        <div class="flex flex-wrap gap-6">
                             @foreach (var plan in batch)
                             {
                                 if (plan.Current)
                                 {
-                                    <div class="col-md-4" data-plan-name="@plan.Name">
+                                    <div class="md:w-1/3" data-plan-name="@plan.Name">
                                         <div class="current-plan">
                                             <h6 class="mb-1 changeplan-title">@plan.Name</h6>
                                             <p class="text-btcpay-body-text-muted mb-2"><span>@DisplayFormatter.Currency(plan.Price, plan.Currency, DisplayFormatter.CurrencyFormat.Symbol)</span> <span>@StringLocalizer.RecurringToString(plan.RecurringType)</span></p>
@@ -538,7 +538,7 @@
                                 }
                                 else
                                 {
-                                    <div class="col-md-4 changeplan-container"
+                                    <div class="md:w-1/3 changeplan-container"
                                          data-plan-name="@plan.Name"
                                          data-plan-id="@plan.PlanId">
                                         <h6 class="mb-1 changeplan-title">@plan.Name</h6>
@@ -549,8 +549,7 @@
                                             {
 												<a href="#"
 												   class="btn btn-outline-primary btn-sm @(hasPending ? "disabled" : "")"
-												   @(hasPending ? "" : "data-bs-toggle=modal")
-												   @(hasPending ? "" : "data-bs-target=#changePlanModal")
+												   @(hasPending ? "" : "onclick=\"openModal('#changePlanModal', this); return false;\"")
 												   data-action="upgrade"
 												   title="@(hasPending ? "Cancel your scheduled change first" : "")">
 													Upgrade
@@ -560,8 +559,7 @@
                                             {
 												<a href="#"
 												   class="btn btn-outline-secondary btn-sm @(hasPending ? "disabled" : "")"
-												   @(hasPending ? "" : "data-bs-toggle=modal")
-												   @(hasPending ? "" : "data-bs-target=#changePlanModal")
+												   @(hasPending ? "" : "onclick=\"openModal('#changePlanModal', this); return false;\"")
 												   data-action="downgrade"
 												   title="@(hasPending ? "Cancel your scheduled change first" : "")">
 													Downgrade
@@ -580,12 +578,12 @@
 
     @if (Model.Transactions.Count != 0)
     {
-        <div class="card credit-history">
-            <div class="card-header">
+        <div class="relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg credit-history subscriber-card">
+            <div class="px-4 py-2 bg-[var(--btcpay-body-bg-light)] border-b border-[var(--btcpay-body-border-medium)] subscriber-card-header">
                 <i class="fa fa-file me-2"></i> History
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
+            <div class="flex-1 p-4 subscriber-card-body">
+                <div class="overflow-x-auto">
                     <table class="table table-hover mb-0">
                         <thead>
                         <tr>

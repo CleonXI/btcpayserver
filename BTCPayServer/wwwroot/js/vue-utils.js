@@ -42,20 +42,19 @@ function registerCollapsibleDirective(app) {
 
 const tooltipDirective = {
     mounted(el, binding) {
-        new bootstrap.Tooltip(el, {
+        el._btcpayTooltip = window.btcpayTooltip(el, {
             title: binding.value,
-            placement: binding.arg || "auto",
+            placement: binding.arg || 'top',
             trigger: 'hover'
         });
     },
     updated(el, binding) {
-        const tooltip = bootstrap.Tooltip.getInstance(el);
-        if (tooltip) {
-            tooltip.dispose();
+        if (el._btcpayTooltip) {
+            el._btcpayTooltip.dispose();
         }
-        new bootstrap.Tooltip(el, {
+        el._btcpayTooltip = window.btcpayTooltip(el, {
             title: binding.value,
-            placement: binding.arg || "auto",
+            placement: binding.arg || 'top',
             trigger: 'hover'
         });
     }

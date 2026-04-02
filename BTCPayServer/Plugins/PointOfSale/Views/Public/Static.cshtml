@@ -23,7 +23,7 @@
         {
             <div class="lead">@Safe.Raw(Model.Description)</div>
         }
-        <div class="row row-cols row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="PosItems">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="PosItems">
             @for (var x = 0; x < Model.Items.Length; x++)
             {
                 var item = Model.Items[x];
@@ -34,14 +34,14 @@
                     : item.BuyButtonText;
                 buttonText = buttonText.Replace("{0}", formatted).Replace("{Price}", formatted);
 
-                <div id="card_@item.Id" class="col posItem posItem--displayed@(x == 0 ? " posItem--first" : null)@(x == Model.Items.Length - 1 && !Model.ShowCustomAmount ? " posItem--last" : null)">
-                    <div class="tile card" data-id="@x">
+                <div id="card_@item.Id" class="flex-1 posItem posItem--displayed@(x == 0 ?" posItem--first" : null)@(x == Model.Items.Length - 1 && !Model.ShowCustomAmount ? " posItem--last" : null)">
+                    <div class="tile relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg" data-id="@x">
                         @if (!string.IsNullOrWhiteSpace(item.Image))
                         {
-                            <img class="card-img-top" src="@item.Image" alt="@Safe.Raw(item.Title)" asp-append-version="true" loading="lazy">
+                            <img class="w-full rounded-t-lg" src="@item.Image" alt="@Safe.Raw(item.Title)" asp-append-version="true" loading="lazy">
                         }
-                        <div class="card-body flex flex-col gap-2 mb-auto">
-                            <h5 class="card-title m-0">@Safe.Raw(item.Title)</h5>
+                        <div class="flex-1 p-4 flex flex-col gap-2 mb-auto">
+                            <h5 class="mb-2 m-0">@Safe.Raw(item.Title)</h5>
                             <div class="flex-row-gap-2">
                                 @if (item.PriceType == AppItemPriceType.Topup || item.Price == 0)
                                 {
@@ -67,10 +67,10 @@
                             </div>
                             @if (!string.IsNullOrWhiteSpace(item.Description))
                             {
-                                <p class="card-text">@Safe.Raw(item.Description)</p>
+                                <p>@Safe.Raw(item.Description)</p>
                             }
                         </div>
-                        <div class="card-footer">
+                        <div class="px-4 py-2 bg-[var(--btcpay-body-bg-light)] border-t border-[var(--btcpay-body-border-medium)]">
                             @if (inStock)
                             {
                                 <form method="post" asp-action="ViewPointOfSale" asp-route-appId="@Model.AppId" asp-antiforgery="false" autocomplete="off">
@@ -91,13 +91,13 @@
             }
             @if (Model.ShowCustomAmount)
             {
-                <div id="card_custom_amount" class="col posItem posItem--displayed posItem--last@(Model.Items.Length == 0 ? " posItem--first" : null)">
-                    <div class="card h-full px-0">
-                        <div class="card-body p-4 flex flex-col gap-2 mb-auto">
-                            <h5 class="card-title" text-translate="true">Custom Amount</h5>
-                            <p class="card-text" text-translate="true">Create invoice to pay custom amount</p>
+                <div id="card_custom_amount" class="flex-1 posItem posItem--displayed posItem--last@(Model.Items.Length == 0 ?" posItem--first" : null)">
+                    <div class="relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg h-full px-0">
+                        <div class="flex-1 p-4 flex flex-col gap-2 mb-auto">
+                            <h5 class="mb-2" text-translate="true">Custom Amount</h5>
+                            <p text-translate="true">Create invoice to pay custom amount</p>
                         </div>
-                        <div class="card-footer bg-transparent border-0 pb-4">
+                        <div class="px-4 py-2 bg-transparent border-0 pb-4">
                             <form method="post" asp-action="ViewPointOfSale" asp-route-appId="@Model.AppId" asp-antiforgery="false" autocomplete="off">
                                 <div class="input-group mb-2">
                                     <span class="input-group-text">@Model.CurrencySymbol</span>

@@ -10,7 +10,7 @@
     </form>
     <h2 class="h3 mb-4" text-translate="true">FIDO2 Authentication</h2>
     <p text-translate="true">Insert your security device and proceed.</p>
-    <div id="info-message" class="alert alert-info mb-0 hidden">
+    <div id="info-message" class="relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-info-text)] bg-[var(--btcpay-info)] border-[var(--btcpay-info-border)] mb-0 hidden">
         <div class="flex items-center">
             <div class="spinner-border spinner-border-sm me-2 fido-running" role="status">
                 <span class="sr-only" text-translate="true">Loading...</span>
@@ -19,7 +19,7 @@
         </div>
     </div>
     <button id="btn-start" class="btn btn-primary hidden" type="button" text-translate="true">Start</button>
-    <p id="error-message" class="hidden alert alert-danger mb-6"></p>
+    <p id="error-message" class="hidden relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)] mb-6"></p>
     <button id="btn-retry" class="btn btn-secondary hidden" type="button" text-translate="true">Retry</button>
     
     <script>

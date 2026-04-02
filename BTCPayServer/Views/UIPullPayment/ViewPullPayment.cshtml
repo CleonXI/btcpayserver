@@ -97,10 +97,10 @@
         @if (Model.IsPending)
         {
             <nav class="btcpay-header navbar sticky-top py-4 lg:py-6 print:hidden">
-                <div class="container gap-4">
+                <div class="mx-auto px-6 gap-4">
                     <form asp-action="ClaimPullPayment" asp-route-pullPaymentId="@Model.Id" class="flex-1">
-                        <div class="row items-center" style="width:calc(100% + 30px)">
-                            <div class="col-12 mb-4 col-lg-6 lg:mb-0">
+                        <div class="flex flex-wrap gap-6 items-center" style="width:calc(100% + 30px)">
+                            <div class="w-full mb-4 lg:w-1/2 lg:mb-0">
                                 <div class="input-group">
                                     @if (Model.LnurlEndpoint is not null)
                                     {
@@ -127,13 +127,13 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-12 mb-4 sm:mb-0 col-sm-6 col-lg-3">
+                            <div class="w-full mb-4 sm:mb-0 sm:w-1/2 lg:w-1/4">
                                 <div class="input-group">
                                     <input type="number" inputmode="decimal" class="form-control form-control-lg text-end hide-number-spin" asp-for="ClaimedAmount" max="@Model.AmountDue" min="@Model.MinimumClaim" step="any" placeholder="@StringLocalizer["Amount"]" required>
                                     <span class="input-group-text px-4">@Model.Currency.ToUpper()</span>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="w-full sm:w-1/2 lg:w-1/4">
                                 <button class="btn btn-lg btn-primary w-full whitespace-nowrap" type="submit" text-translate="true">Claim Funds</button>
                             </div>
                         </div>
@@ -142,15 +142,15 @@
             </nav>
         }
         <main class="grow py-6">
-            <div class="container">
+            <div class="mx-auto px-6">
                 <partial name="_StatusMessage" model="@(new ViewDataDictionary(ViewData){ { "Margin", "mb-6" } })" />
                 @if (!ViewContext.ModelState.IsValid)
                 {
-                    @Html.ValidationSummary(string.Empty, new { @class = $"alert alert-danger mb-6 pb-0 {(ViewContext.ModelState.ErrorCount.Equals(1) ? "no-marker" : "")}" })
+                    @Html.ValidationSummary(string.Empty, new { @class = $"relative p-3 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)] mb-6 pb-0 {(ViewContext.ModelState.ErrorCount.Equals(1) ? "no-marker" : "")}" })
                 }
 
-                <div class="row">
-                    <div class="col col-12 col-lg-6 mb-6">
+                <div class="flex flex-wrap gap-6">
+                    <div class="flex-1 w-full lg:w-1/2 mb-6">
                         <div class="tile-section">
                             @if (!string.IsNullOrWhiteSpace(Model.Title))
                             {
@@ -187,7 +187,7 @@
                             }
                         </div>
                     </div>
-                    <div class="col col-12 col-lg-6 mb-6">
+                    <div class="flex-1 w-full lg:w-1/2 mb-6">
                         <div class="tile-section">
                             <h2 class="h4 mb-4" text-translate="true">Payment Details</h2>
                             <dl class="mb-0 md:mt-6">
@@ -210,13 +210,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
+                <div class="flex flex-wrap gap-6">
+                    <div class="flex-1">
                         <div class="tile-section">
                             <h2 class="h4 mb-0" text-translate="true">Claims</h2>
                             @if (Model.Payouts.Any())
                             {
-                                <div class="table-responsive">
+                                <div class="overflow-x-auto">
                                     <table class="table my-0">
                                         <thead>
                                             <tr class="table-borderless">

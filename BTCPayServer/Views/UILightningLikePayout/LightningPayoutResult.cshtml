@@ -7,8 +7,8 @@
 <h2 class="mt-1 mb-6">@ViewData["Title"]</h2>
 @foreach (var item in Model)
 {
-    <div class="alert alert-@(item.Success is true ? "success" : "danger") mb-4" role="alert">
-        <h5 class="alert-heading">
+    <div class="relative p-3 border rounded [&>:last-child]:mb-0 @(item.Success is true ? "text-[var(--btcpay-success-text)] bg-[var(--btcpay-success)] border-[var(--btcpay-success-border)]" : "text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)]") mb-4" role="alert">
+        <h5>
             @(item.Success is true ? "Sent" : "Failed")
             @if (!string.IsNullOrEmpty(item.Message))
             {

@@ -118,8 +118,7 @@ function initQRShow(data) {
                 this.show();
             },
             show() {
-                const modalEl = document.getElementById(this.modalId);
-                bootstrap.Modal.getOrCreateInstance(modalEl).show();
+                window.openModal('#' + this.modalId);
             }
  		}
  	});

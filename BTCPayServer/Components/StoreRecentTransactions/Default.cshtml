@@ -30,7 +30,7 @@
     }
     else if (Model.Transactions.Any())
     {
-        <div class="table-responsive mt-4 mb-0">
+        <div class="overflow-x-auto mt-4 mb-0">
             <table class="table table-hover mb-0">
                 <thead>
                 <tr>
@@ -59,8 +59,8 @@
                                             @if (!string.IsNullOrEmpty(label.Link))
                                             {
                                                 <a class="transaction-label-info transaction-details-icon" href="@label.Link"
-                                                   target="_blank" rel="noreferrer noopener" title="@label.Tooltip" data-bs-html="true"
-                                                   x-data x-tooltip="'@label.Tooltip'" data-bs-custom-class="transaction-label-tooltip">
+                                                   target="_blank" rel="noreferrer noopener" title="@label.Tooltip" data-tooltip-html="true"
+                                                   x-data x-tooltip="'@label.Tooltip'" data-tooltip-class="transaction-label-tooltip">
                                                     <vc:icon symbol="info" />
                                                 </a>
                                             }

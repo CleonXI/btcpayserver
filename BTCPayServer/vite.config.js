@@ -14,7 +14,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         'tailwind': 'Styles/tailwind.css',
-        'btcpay-components': 'wwwroot/js/btcpay-components.js',
+
         'utils': 'wwwroot/main/utils.js',
         'copy-to-clipboard': 'wwwroot/js/copy-to-clipboard.js',
         'toast-utils': 'wwwroot/js/toast-utils.js',

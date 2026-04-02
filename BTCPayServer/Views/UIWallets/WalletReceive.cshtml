@@ -42,15 +42,15 @@
             <div class="form-group">
                 <input type="text" class="form-control" readonly asp-for="PaymentLink" id="payment-link"/>
             </div>
-            <div class="row mt-6">
+            <div class="flex flex-wrap gap-6 mt-6">
                 <button type="submit" name="command" value="generate-new-address" class="btn btn-primary w-full" text-translate="true">Generate another address</button>
             </div>
         </noscript>
         <div class="nav flex-wrap items-center justify-center gap-2 mb-6">
-            <a class="btcpay-pill active" data-bs-toggle="tab" href="#address-tab" text-translate="true">Address</a>
-            <a class="btcpay-pill " data-bs-toggle="tab" href="#link-tab" text-translate="true">Link</a>
+            <a class="btcpay-pill active" @@click.prevent="tab = 'address-tab'" href="#address-tab" :class="tab === 'address-tab' && 'active'" text-translate="true">Address</a>
+            <a class="btcpay-pill " @@click.prevent="tab = 'link-tab'" href="#link-tab" :class="tab === 'link-tab' && 'active'" text-translate="true">Link</a>
         </div>
-        <div class="only-for-js col-sm-10 col-xxl-8 mx-auto" id="app">
+        <div class="only-for-js sm:w-5/6 2xl:w-2/3 mx-auto" id="app">
             <div class="tab-content text-center">
                 <div class="tab-pane payment-box" id="link-tab" role="tabpanel">
                     <div class="qr-container clipboard-button" data-clipboard="@Model.PaymentLink">

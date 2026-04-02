@@ -33,8 +33,8 @@
         }
     </div>
     <partial name="_StatusMessage" />
-    <div class="row">
-        <div class="content-constrain-xxl col-xl-8">
+    <div class="flex flex-wrap gap-6">
+        <div class="content-constrain-xxl xl:w-2/3">
             <div class="form-group">
                 <label asp-for="PayloadUrl" class="form-label" text-translate="true">Payload URL</label>
                 <input asp-for="PayloadUrl" class="form-control" />
@@ -86,8 +86,8 @@
         </div>
     </div>
 </form>
-<div class="row">
-    <div class="content-constrain-xxl col-xl-8">
+<div class="flex flex-wrap gap-6">
+    <div class="content-constrain-xxl xl:w-2/3">
         @if (!Model.IsNew && Model.Deliveries.Count > 0)
         {
             <h4 class="mb-4" text-translate="true">Recent deliveries</h4>

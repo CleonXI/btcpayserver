@@ -48,8 +48,8 @@ else
             var file = Model.Files.Single(storedFile => storedFile.Id.Equals(fileId, StringComparison.InvariantCultureIgnoreCase));
             var url = Url.Action("GetFile", "UIStorage", new { fileId }, Context.Request.Scheme, Context.Request.Host.ToString());
             <div class="border border-light rounded bg-tile mt-4">
-                <div class="row">
-                    <div class="col-sm-12 col-md-4">
+                <div class="flex flex-wrap gap-6">
+                    <div class="sm:w-full md:w-1/3">
                         <div class="input-group">
                             <div class="form-floating">
                                 <input id="@fileId-name" class="form-control-plaintext" readonly value="@file.FileName">
@@ -60,7 +60,7 @@ else
                             </button>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 ">
+                    <div class="sm:w-full md:w-1/3">
                         <div class="input-group  ">
                             <div class="form-floating">
                                 <input id="@fileId" class="form-control-plaintext" readonly value="@fileId">
@@ -71,7 +71,7 @@ else
                             </button>
                         </div>
                     </div>
-                    <div class=" col-sm-12 col-md-4">
+                    <div class="sm:w-full md:w-1/3">
                         <div class="input-group">
                             <div class="form-floating">
                                 <input id="@fileId-url" class="form-control-plaintext" readonly value="@url">
@@ -92,7 +92,7 @@ else
 
     @if (Model.Files.Any())
     {
-        <div class="table-responsive">
+        <div class="overflow-x-auto">
             <table class="table table-hover">
                 <thead>
                 <tr>

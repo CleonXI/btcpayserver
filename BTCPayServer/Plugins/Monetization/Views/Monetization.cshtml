@@ -62,7 +62,7 @@
 
 <p class="mb-0" text-translate="true">Monetization allows you to get paid for sharing your BTCPay Server instance with other users.</p>
 
-<div class="content-constrain-xxl col-xl-8">
+<div class="content-constrain-xxl xl:w-2/3">
     <div class="accordion" id="accordion">
         <div class="accordion-item" x-data="{ expanded: false }">
             <h2 class="accordion-header" id="activate-header">
@@ -76,7 +76,7 @@
                 </button>
             </h2>
             <div id="activate-collapse" class="accordion-collapse" x-show="expanded" x-collapse
-                 aria-labelledby="activate-header" data-bs-parent="#accordion">
+                 aria-labelledby="activate-header">
                 <div class="accordion-body">
                     @if (Model is { Offering: not null, DefaultPlan: not null })
                     {
@@ -135,7 +135,7 @@
             </h2>
             <div id="server-email-collapse"
                  class="accordion-collapse" x-show="expanded" x-collapse
-                 aria-labelledby="server-email-header" data-bs-parent="#accordion">
+                 aria-labelledby="server-email-header">
                 <div class="accordion-body">
                     <p>When a new user registers without password or has been invited, an email will be sent using those settings.</p>
                     @if (Model.EmailServerConfigured)
@@ -164,7 +164,7 @@
             </h2>
             <div id="store-email-collapse"
                  class="accordion-collapse" x-show="expanded" x-collapse
-                 aria-labelledby="store-email-header" data-bs-parent="#accordion">
+                 aria-labelledby="store-email-header">
                 <div class="accordion-body">
                     <p>Events related to the subscription such as payment reminder or subscription state changes will be using the store email settings.</p>
                     @if (Model.Offering is not null)

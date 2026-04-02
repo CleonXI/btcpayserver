@@ -382,7 +382,7 @@ const posCommon = {
             }
         },
         hideRecentTransactions() {
-            bootstrap.Modal.getInstance(this.$refs.RecentTransactions).hide();
+            window.closeModal(this.$refs.RecentTransactions);
         },
         displayDate(val) {
             return formatShortDateTime(val);

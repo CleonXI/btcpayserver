@@ -4,10 +4,16 @@
 
 @if (parsedModel != null)
 {
-	<div class="alert alert-@parsedModel.SeverityCSS @(parsedModel.AllowDismiss? "alert-dismissible":"" ) @(ViewData["Margin"] ?? "mb-6") break-words" role="alert" v-pre>
+    var severityClasses = parsedModel.SeverityCSS switch {
+        "success" => "text-[var(--btcpay-success-text)] bg-[var(--btcpay-success)] border-[var(--btcpay-success-border)]",
+        "danger" => "text-[var(--btcpay-danger-text)] bg-[var(--btcpay-danger)] border-[var(--btcpay-danger-border)]",
+        "warning" => "text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)]",
+        _ => "text-[var(--btcpay-info-text)] bg-[var(--btcpay-info)] border-[var(--btcpay-info-border)]"
+    };
+	<div class="relative p-3 border rounded [&>:last-child]:mb-0 @severityClasses @(parsedModel.AllowDismiss ? "pr-12" : "") @(ViewData["Margin"] ?? "mb-6") break-words" role="alert" v-pre>
         @if (parsedModel.AllowDismiss)
         {
-            <button type="button" class="btn-close" onclick="this.closest('.alert').remove()" aria-label="@StringLocalizer["Close"]">
+            <button type="button" class="btn-close absolute top-0 right-0 z-2 p-[0.9375rem_1rem]" onclick="this.parentElement.remove()" aria-label="@StringLocalizer["Close"]">
                 <vc:icon symbol="close" />
             </button>
         }

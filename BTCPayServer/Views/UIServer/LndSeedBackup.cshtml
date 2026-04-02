@@ -19,8 +19,8 @@
 
 @if (Model.IsWalletUnlockPresent)
 {
-    <div class="row">
-        <div class="col-lg-8">
+    <div class="flex flex-wrap gap-6">
+        <div class="lg:w-2/3">
             <div class="form-group">
                 <p text-translate="true">The LND seed backup is useful to recover on-chain funds of your LND wallet in case of a corruption of your server.</p>
                 <p>The recovering process is documented by LND on <a href="https://github.com/lightningnetwork/lnd/blob/master/docs/recovery.md" rel="noreferrer noopener">this page</a>.</p>
@@ -29,7 +29,7 @@
             
             @if (Model.Removed)
             {
-                <div class="alert alert-light flex items-center" role="alert">
+                <div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-light-text)] bg-[var(--btcpay-light)] border-[var(--btcpay-light-border)] flex items-center" role="alert">
                     <vc:icon symbol="warning" />
                     <span class="ms-6" id="Seed">@Model.Seed</span>
                 </div>

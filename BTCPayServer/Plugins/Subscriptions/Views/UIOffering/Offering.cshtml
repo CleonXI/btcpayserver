@@ -17,7 +17,7 @@
 @section PageHeadContent {
 
     <style>
-        .card h6 {
+        .offering-card h6 {
             font-weight: var(--btcpay-font-weight-semibold);
             color: var(--btcpay-body-text-btcpay-body-text-muted);
         }
@@ -35,7 +35,7 @@
 
 <partial name="_StatusMessage" />
 
-<div class="container-fluid px-6 py-6">
+<div class="w-full px-6 px-6 py-6">
     <!-- Metrics Cards -->
     <div class="flex gap-12">
         <div>
@@ -82,7 +82,7 @@
         </div>
 
         <!-- Subscription Plans Table -->
-        <div class="table-responsive">
+        <div class="overflow-x-auto">
             <table class="table table-hover mb-0">
                 <thead>
                 <tr>
@@ -191,11 +191,11 @@
                 </a>
             }
         </div>
-        <form class="flex flex-wrap flex-sm-nowrap items-center gap-4 mb-6 col-xxl-8">
+        <form class="flex flex-wrap flex-sm-nowrap items-center gap-4 mb-6 2xl:w-2/3">
             <input asp-for="SearchTerm" class="form-control" placeholder="@StringLocalizer["Search by email, external reference, name…"]" />
         </form>
         <!-- Subscription Plans Table -->
-        <div class="table-responsive">
+        <div class="overflow-x-auto">
             <table class="table table-hover mb-0">
                 <thead>
                 <tr>
@@ -370,12 +370,12 @@
                 </div>
             </div>
 
-            <div class="row g-4">
+            <div class="flex flex-wrap gap-6">
                 @if (!Model.EmailConfigured)
                 {
-                    <div class="col-lg-6">
-                        <div class="card h-full">
-                            <div class="card-body">
+                    <div class="lg:w-1/2">
+                        <div class="relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg h-full offering-card">
+                            <div class="flex-1 p-4">
                                 <div class="flex items-center justify-between mb-2">
                                     <h5 class="mb-0" text-translate="true">Email Configuration</h5>
                                 </div>
@@ -396,9 +396,9 @@
                     </div>
                 }
                 <!-- Notifications & Alerts -->
-                <div class="col-lg-@(Model.EmailConfigured ? "12" : "6")">
-                    <div class="card h-full">
-                        <div class="card-body">
+                <div class="@(Model.EmailConfigured ? "lg:w-full" : "lg:w-1/2")">
+                    <div class="relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg h-full offering-card">
+                        <div class="flex-1 p-4">
                             <h5 class="mb-4" text-translate="true">Notifications & Alerts</h5>
                             <div class="form-group mb-6">
                                 <label asp-for="PaymentRemindersDays" class="form-label" text-translate="true">Email Reminder Days Before Due</label>
@@ -414,8 +414,8 @@
                 </div>
             </div>
 
-            <div class="card mt-6">
-                <div class="card-body">
+            <div class="relative flex flex-col min-w-0 break-words bg-[var(--btcpay-bg-tile)] border border-[var(--btcpay-body-border-medium)] rounded-lg mt-6 offering-card">
+                <div class="flex-1 p-4">
                     <div class="flex items-center gap-6 mb-4" x-data="btcDropdown">
                         <h5 class="mb-0" text-translate="true">Email rules</h5>
                         <span class="dropdown-toggle btn btn-outline-secondary" @@click="toggle()" aria-haspopup="true" :aria-expanded="isOpen">Add email rule</span>
@@ -430,7 +430,7 @@
                             }
                         </div>
                     </div>
-                    <div class="table-responsive">
+                    <div class="overflow-x-auto">
                         <table class="table table-hover">
                             <thead>
                             <tr>

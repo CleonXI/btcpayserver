@@ -27,8 +27,8 @@
     </div>
 </div>
 <partial name="_StatusMessage" />
-<div class="row">
-    <div class="col-md-8">
+<div class="flex flex-wrap gap-6">
+    <div class="md:w-2/3">
         <div class="form-group">
             <p text-translate="true">Dynamic DNS allows you to have a stable DNS name pointing to your server, even if your IP address changes regularly. This is recommended if you are hosting BTCPay Server at home and wish to have a clearnet domain to access your server.</p>
             <p>
@@ -39,7 +39,7 @@
 
         @if (Model.Any())
         {
-            <div class="table-responsive-md">
+            <div class="overflow-x-auto md:overflow-visible table-responsive-md">
                 <table class="table table-sm">
                     <thead>
                     <tr>

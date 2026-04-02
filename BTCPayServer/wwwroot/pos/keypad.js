@@ -131,9 +131,8 @@ document.addEventListener("DOMContentLoaded",function () {
         },
         mounted() {
             // Initialize Bootstrap tooltips for disabled items
-            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
+            document.querySelectorAll('[data-tooltip]').forEach(el => {
+                window.btcpayTooltip(el);
             })
         },
         created() {

@@ -83,7 +83,7 @@
 <partial name="_StatusMessage" />
 
 @* Custom Range Modal *@
-<div class="modal" id="customRangeModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" role="dialog" aria-labelledby="customRangeModalTitle" data-bs-backdrop="static">
+<div class="modal" id="customRangeModal" x-data="btcModal" x-cloak x-show="isOpen" @@keydown.escape.window="isOpen && close()" @@click.self="close()" :class="isOpen && 'show'" :style="isOpen ? 'display:block' : 'display:none'" role="dialog" aria-labelledby="customRangeModalTitle">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 550px;">
         <div class="modal-content">
             <div class="modal-header">
@@ -93,9 +93,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group row">
-                    <label for="dtpStartDate" class="col-sm-3 col-form-label">Start Date</label>
-                    <div class="col-sm-9">
+                <div class="form-group flex flex-wrap gap-6">
+                    <label for="dtpStartDate" class="sm:w-1/4 col-form-label">Start Date</label>
+                    <div class="sm:w-3/4">
                         <div class="input-group">
                             <input id="dtpStartDate" class="form-control flatdtpicker" type="datetime-local"
                                    data-fdtp='{ "enableTime": true, "enableSeconds": true, "dateFormat": "Y-m-d H:i:S", "time_24hr": true, "defaultHour": 0 }'
@@ -106,9 +106,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label" text-translate="true">End Date</label>
-                    <div class="col-sm-9">
+                <div class="form-group flex flex-wrap gap-6">
+                    <label class="sm:w-1/4 col-form-label" text-translate="true">End Date</label>
+                    <div class="sm:w-3/4">
                         <div class="input-group">
                             <input id="dtpEndDate" class="form-control flatdtpicker" type="datetime-local"
                                    data-fdtp='{ "enableTime": true, "enableSeconds": true, "dateFormat": "Y-m-d H:i:S", "time_24hr": true, "defaultHour": 0 }'
@@ -130,7 +130,7 @@
 <form asp-action="GetPaymentRequests"
       asp-route-storeId="@storeId"
       method="get"
-      class="flex flex-wrap sm:flex-nowrap items-center gap-4 mb-6 col-xxl-8">
+      class="flex flex-wrap sm:flex-nowrap items-center gap-4 mb-6 2xl:w-2/3">
     <input type="hidden" asp-for="Count" />
     <input type="hidden" asp-for="TimezoneOffset" />
     <input asp-for="SearchTerm" type="hidden" value="@Model.Search.WithoutSearchText()"/>
@@ -285,7 +285,7 @@
 
 @if (Model.Items.Any())
 {
-    <div class="table-responsive-md">
+    <div class="overflow-x-auto md:overflow-visible table-responsive-md">
         <table class="table table-hover">
             <thead>
             <tr>

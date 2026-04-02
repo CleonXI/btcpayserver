@@ -69,7 +69,7 @@
     </div>
     <div id="ModeTablist" class="nav btcpay-pills items-center justify-center mb-n2 pb-1" role="tablist" v-if="modes.length > 1">
         <template v-for="m in modes" :key="m.value">
-            <input :id="`ModeTablist-${m.type}`" name="mode" :value="m.type" type="radio" role="tab" data-bs-toggle="pill" :data-bs-target="`#Mode-${m.type}`"
+            <input :id="`ModeTablist-${m.type}`" name="mode" :value="m.type" type="radio" role="tab"
                    :disabled="m.type != 'amounts' && summary.priceTaxExcluded == 0" :aria-controls="`Mode-${m.type}`" :aria-selected="mode === m.type"
                    :checked="mode === m.type" v-on:click="mode = m.type">
             <label :for="`ModeTablist-${m.type}`">{{ m.title }}</label>
@@ -105,7 +105,7 @@
             aria-controls="ItemsList" v-if="showItems">
         <vc:icon symbol="nav-products" />
     </button>
-    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="ItemsListOffcanvas" x-data="btcOffcanvas" x-show="isOpen" x-cloak :class="isOpen && 'show'" aria-labelledby="ItemsListToggle" v-if="showItems">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="ItemsListOffcanvas" x-data="btcOffcanvas" x-show="isOpen" x-cloak :class="isOpen && 'show'" aria-labelledby="ItemsListToggle" v-if="showItems">
         <div class="offcanvas-header justify-between flex-wrap p-4">
             <h5 class="offcanvas-title" id="offcanvasExampleLabel">Products</h5>
             <button type="button" class="btn btn-sm rounded-full" :class="{ 'btn-primary': cart.length > 0, 'btn-outline-secondary': cart.length === 0}"
@@ -144,15 +144,15 @@
                     class="posItem p-4"
                     :class="{ 'posItem--inStock': inStock(index), 'posItem--displayed': item.displayed, 'posItem--disabled': item.disabled }"
                     :data-index="index" :data-search="item.search" :data-categories='item.categories ? JSON.stringify(item.categories) : null' v-show="item.displayed"
-                    :data-bs-toggle="item.disabled ? 'tooltip' : null"
-                    :data-bs-placement="item.disabled ? 'top' : null"
+                    :data-tooltip="item.disabled ? '' : null"
+                    :data-tooltip-placement="item.disabled ? 'top' : null"
                     :title="item.disabled ? notAvailable : null">
                     <div class="flex items-start w-full gap-4">
                         <div v-if="item.hasImage" class="img hidden sm:block">
                             <img :src="item.image" :alt="item.title" loading="lazy" />
                         </div>
                         <div class="flex flex-col gap-2">
-                            <h5 class="card-title m-0">{{ item.title }}</h5>
+                            <h5 class="mb-2 m-0">{{ item.title }}</h5>
                             <div class="flex-row-gap-2">
                                 <span v-if="!item.hasPrice" class="font-semibold badge text-bg-btcpay-info">{{ item.priceFormatted }}</span>
                                 <span v-if="item.hasPrice" class="font-semibold">{{ item.priceFormatted }}</span>

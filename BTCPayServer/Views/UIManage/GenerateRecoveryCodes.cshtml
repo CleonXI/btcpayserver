@@ -7,7 +7,7 @@
 <h2 class="mb-2 lg:mb-4">@ViewData["Title"]</h2>
 <partial name="_StatusMessage" />
 
-<div class="alert alert-warning" role="alert">
+<div class="relative p-3 mb-4 border rounded [&>:last-child]:mb-0 text-[var(--btcpay-warning-text)] bg-[var(--btcpay-warning)] border-[var(--btcpay-warning-border)]" role="alert">
     <h5>
         <vc:icon symbol="warning" />
         <span text-translate="true">Put these codes in a safe place</span>
@@ -16,16 +16,16 @@
         If you lose your device and don't have the recovery codes you will lose access to your account.
     </p>
 </div>
-<div class="row">
-    <div class="col-md-12">
+<div class="flex flex-wrap gap-6">
+    <div class="md:w-full">
         @for(var row = 0; row < Model.RecoveryCodes.Length; row += 2)
         {
             <code>@Model.RecoveryCodes[row]</code><text>&nbsp;</text><code>@Model.RecoveryCodes[row + 1]</code><br />
         }
     </div>
 </div>
-<div class="row mt-6">
-     <div class="col-md-12">
+<div class="flex flex-wrap gap-6 mt-6">
+     <div class="md:w-full">
         <a asp-action="TwoFactorAuthentication" class="btn btn-primary" text-translate="true">I wrote down my recovery codes</a>
     </div>
 </div>

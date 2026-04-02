@@ -146,7 +146,7 @@ else
                 <vc:icon symbol="caret-down" />
             </button>
         </h2>
-        <div id="PSBTOptionsExportContent" class="accordion-collapse collapse @(needsExport ? "show" : "")" aria-labelledby="PSBTOptionsExportHeader" data-bs-parent="#PSBTOptions">
+        <div id="PSBTOptionsExportContent" class="accordion-collapse collapse @(needsExport ? "show" : "")" aria-labelledby="PSBTOptionsExportHeader">
             <div class="accordion-body">
                 <form method="post" asp-action="WalletPSBT" asp-route-walletId="@walletId" class="mb-2">
                     <input type="hidden" asp-for="CryptoCode" />
@@ -160,26 +160,26 @@ else
                     </div>
                 </form>
                 <div id="ExportOptions" x-show="expanded" x-collapse>
-                    <div class="pt-6">
+                    <div class="pt-6" x-data="{ activeTab: 'base64' }">
                         <ul class="nav mb-3" id="export-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="btcpay-pill active" id="export-base64-tab" data-bs-toggle="pill" data-bs-target="#export-base64" type="button" role="tab" aria-controls="export-base64" aria-selected="true">Base64</button>
+                                <button class="btcpay-pill" :class="activeTab === 'base64' && 'active'" id="export-base64-tab" @@click="activeTab = 'base64'" type="button" role="tab" aria-controls="export-base64" :aria-selected="activeTab === 'base64'">Base64</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="btcpay-pill" id="export-hex-tab" data-bs-toggle="pill" data-bs-target="#export-hex" type="button" role="tab" aria-controls="export-hex" aria-selected="false">HEX</button>
+                                <button class="btcpay-pill" :class="activeTab === 'hex' && 'active'" id="export-hex-tab" @@click="activeTab = 'hex'" type="button" role="tab" aria-controls="export-hex" :aria-selected="activeTab === 'hex'">HEX</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="btcpay-pill" id="export-json-tab" data-bs-toggle="pill" data-bs-target="#export-json" type="button" role="tab" aria-controls="export-json" aria-selected="false">JSON</button>
+                                <button class="btcpay-pill" :class="activeTab === 'json' && 'active'" id="export-json-tab" @@click="activeTab = 'json'" type="button" role="tab" aria-controls="export-json" :aria-selected="activeTab === 'json'">JSON</button>
                             </li>
                         </ul>
                         <div class="tab-content" id="export-tabContent">
-                            <div class="tab-pane fade show active" id="export-base64" role="tabpanel" aria-labelledby="export-base64-tab">
+                            <div class="tab-pane fade" :class="activeTab === 'base64' && 'show active'" id="export-base64" role="tabpanel" aria-labelledby="export-base64-tab">
                                 <pre class="mb-4 text-wrap"><code class="text" id="psbt-base64">@Model.PSBT</code></pre>
                             </div>
-                            <div class="tab-pane fade" id="export-hex" role="tabpanel" aria-labelledby="export-hex-tab">
+                            <div class="tab-pane fade" :class="activeTab === 'hex' && 'show active'" id="export-hex" role="tabpanel" aria-labelledby="export-hex-tab">
                                 <pre class="mb-4 text-wrap"><code class="text">@Model.PSBTHex</code></pre>
                             </div>
-                            <div class="tab-pane fade" id="export-json" role="tabpanel" aria-labelledby="export-json-tab">
+                            <div class="tab-pane fade" :class="activeTab === 'json' && 'show active'" id="export-json" role="tabpanel" aria-labelledby="export-json-tab">
                                 <pre class="mb-0"><code class="json">@Model.Decoded</code></pre>
                             </div>
                         </div>
@@ -197,7 +197,7 @@ else
                     <vc:icon symbol="caret-down" />
                 </button>
             </h2>
-            <div id="PSBTOptionsImportContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="PSBTOptionsImportHeader" data-bs-parent="#PSBTOptions">
+            <div id="PSBTOptionsImportContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="PSBTOptionsImportHeader">
                 <div class="accordion-body">
                     <form method="post" asp-action="WalletPSBT" asp-route-walletId="@walletId" enctype="multipart/form-data" class="mb-2">
                         <input type="hidden" asp-for="ReturnUrl" />
@@ -234,7 +234,7 @@ else
                 <vc:icon symbol="caret-down" />
             </button>
         </h2>
-        <div id="PSBTOptionsAdvancedContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="PSBTOptionsAdvancedHeader" data-bs-parent="#PSBTOptions">
+        <div id="PSBTOptionsAdvancedContent" class="accordion-collapse" x-show="expanded" x-collapse aria-labelledby="PSBTOptionsAdvancedHeader">
             <div class="accordion-body">
                 <form method="post" asp-action="WalletPSBT" asp-route-walletId="@walletId" class="mb-2">
                     <input type="hidden" asp-for="PSBT" />

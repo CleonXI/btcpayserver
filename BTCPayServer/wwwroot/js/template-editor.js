@@ -227,8 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return {
                 items,
                 selectedItem: null,
-                selectedItemInitial: null,
-                editorOffcanvas: null,
+                selectedItemInitial: null
             }
         },
         computed: {
@@ -283,17 +282,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.items.splice(newIndex, 0, this.items.splice(oldIndex, 1)[0])
             },
             showOffcanvas() {
-                if (this.editorOffcanvas && window.getComputedStyle(this.$refs.editorOffcanvas).visibility === 'hidden')
-                    this.editorOffcanvas.show();
+                if (this.$refs.editorOffcanvas && window.getComputedStyle(this.$refs.editorOffcanvas).visibility === 'hidden')
+                    window.openOffcanvas('#' + this.$refs.editorOffcanvas.id);
             },
             hideOffcanvas() {
-                if (this.editorOffcanvas)
-                    this.editorOffcanvas.hide();
+                window.closeOffcanvas(this.$refs.editorOffcanvas);
             }
         },
         mounted() {
             if (!this.items) this.items = []
-            this.editorOffcanvas = bootstrap.Offcanvas.getOrCreateInstance(this.$refs.editorOffcanvas);
         }
     });
 
